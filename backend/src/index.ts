@@ -8,6 +8,9 @@ import { connectDB } from '@config/dbConnect';
 import { corsOptions } from '@config/corsOptions';
 import { logEvents, logger } from '@middleware/logger';
 import { errorHandler } from '@middleware/errorHandler';
+import commentRoutes from '@route/commentRoutes';
+import postRoutes from '@route/postRoutes';
+import userRoutes from '@route/userRoutes'
 
 interface DBError {
     no?: number;
@@ -31,6 +34,12 @@ app.use(cors(corsOptions));
 
 app.use(cookieParser());
 
+app.use('/users', userRoutes);
+
+app.use('/posts', postRoutes);
+
+app.use('/comments', commentRoutes);
+
 app.use(errorHandler);
 
 mongoose.connection.once('open', () => {
@@ -41,4 +50,4 @@ mongoose.connection.once('open', () => {
 mongoose.connection.on('error', (err: DBError) => {
     console.log(err);
     logEvents(`${err.no}: ${err.code}\t${err.syscall}\t${err.hostname}`, 'dbErrLog.log');
-})
+});

@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 
-import { logEvents, logger } from '@middleware/logger';
+import { logEvents } from '@middleware/logger';
 
 interface Error {
     name?: string;
@@ -16,4 +16,4 @@ const errorHandler = (err: Error, req: Request, res: Response, next: NextFunctio
     res.json({ message: err.message });
 }
 
-export { errorHandler };
+export { errorHandler }
