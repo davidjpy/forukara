@@ -1,0 +1,25 @@
+.nav {
+}
+
+.nav__header {
+    display: flex;
+    height: 40px;
+    background-color: #040A18;
+    padding: 0 14%;
+    align-items: center;
+    gap: 6px;
+}
+
+.nav__body {
+    color: white;
+    font-size: 0.8rem;
+}
+
+.nav__body--gray {
+    color: rgb(201, 201, 201);
+}
+
+.nav__button-wrapper {
+    display: flex;
+    gap: 16px;
+}
