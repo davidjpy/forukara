@@ -25,14 +25,20 @@
 } */
 
 .homepage__slogan {
-    text-align: center;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.185);
+    width: 1100px;
+    height: 500px;
 }
 
 .homepage__header {
     font-size: 2.4rem;
     font-weight: bolder;
     color: white;
-    margin: 20px;
 }
 
 .homepage__header--large {
@@ -57,4 +63,38 @@
 
 .homepage__icon {
     margin-left: 5px;
+}
+
+.homepage__dynamic-txts-wrapper {
+    display: flex;
+    align-items: center;
+    margin: 30px;
+}
+
+.homepage__dynamic-txts {
+    margin-left: 20px;
+}
+
+.homepage__dynamic-txts li {
+    list-style: none;
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    width: 0;
+    height: 90px;
+    animation: typing 2.5s steps(10) infinite;
+    border-right: 2px solid black;
+    white-space: nowrap;
+}
+
+@keyframes typing {
+    40%, 60% {
+        width: 100%;
+    }
+
+    100% {
+        width: 0;
+
+    }
 }
