@@ -1,0 +1,37 @@
+.test {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.dynamic-txts li {
+    list-style: none;
+    color: #FC6D6D;
+    font-size: 60px;
+    height: 90px;
+    position: relative;
+    top: 0;
+}
+
+.dynamic-txts li span {
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    width: 0px;
+    height: 90px;
+    animation: typing 2.5s steps(10) infinite;
+    border-right: 2px solid black;
+    white-space: nowrap;
+}
+
+@keyframes typing {
+    40%, 60% {
+        width: 100%;
+    }
+
+    100% {
+        width: 0;
+
+    }
+}
