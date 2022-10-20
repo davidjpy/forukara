@@ -1,42 +1,37 @@
-import { useEffect, useRef, useState } from 'react';
-import './Test.css'
-
-const Test = () => {
-
-    const textOptions = ['YouTuber', 'Programmer', 'Student', 'Construction Worker'];
-    const dynamicTxtRef = useRef();
-    const [trigger, setTrigger] = useState(0);
-    const index = useRef(0);
+    const textOptions = ['Military Personnel', 'Software Developer', 'Construction Worker', 'Medical Professional'];
+    const dynamicRef = useRef(null);
 
     useEffect(() => {
-        const test = setInterval(() => {
-            console.log('Counted')
-            setTrigger(prev => prev + 1);
-        }, 2500);
+        function changeText() {
+            let optionIndex = 0;
+            let charIndex = 0;
+            let increment = true;
 
-        return () => {
-            clearInterval(test);
+            setInterval(() => {
+                if (dynamicRef.current) {
+                    dynamicRef.current.textContent = textOptions[optionIndex].slice(0, charIndex);
+
+                    if (charIndex === textOptions[optionIndex].length) {
+                        setTimeout(() => {
+                            increment = false;
+                        }, 500);
+                    } else if (charIndex <= 0) {
+                        optionIndex++;
+                        increment = true;
+                    }
+
+                    if (increment) {
+                        charIndex++;
+                    } else {
+                        charIndex--;
+                    }
+
+                    if (optionIndex > textOptions.length - 1) {
+                        optionIndex = 0;
+                    }
+
+                }
+            }, 100)
         }
-    }, []);
-
-    useEffect(() => {
-        if (index.current < 3) {
-            index.current++;
-        } else {
-            index.current = 0;
-        }
-
-        console.log(`The current index is ${index.current}`)
-        dynamicTxtRef.current.textContent = textOptions[index.current];
-    }, [trigger]);
-
-    return (
-        <div className='test'>
-            <ul className='dynamic-txts'>
-                <li><span ref={dynamicTxtRef}></span></li>
-            </ul>
-        </div>
-    );
-}
-
-export default Test;
+        changeText();
+    }, [])
