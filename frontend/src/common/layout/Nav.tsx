@@ -1,6 +1,7 @@
+import { FC } from 'react';
 import { FaBlog } from 'react-icons/fa';
 
-const Nav = () => {
+const Nav: FC = () => {
     return (
         <header className='nav'>
             <div className='nav__bar'>
