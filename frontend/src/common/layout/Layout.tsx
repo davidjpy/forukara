@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Outlet } from 'react-router-dom';
 
-import '@common/layout/Nav.css';
+import '@common/layout/Layout.css';
 import Nav from '@common/layout/Nav';
 
 const Layout: FC = () => {

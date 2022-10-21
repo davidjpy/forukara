@@ -1,4 +1,4 @@
-.homepage {
+.SplashPage {
     width: 100%;
     height: 100vh;
     max-height: 100%;
@@ -10,7 +10,7 @@
     user-select: none;
 }
 
-.homepage__image {
+.SplashPage__image {
     position: absolute;
     background-image: url('@media/images/nav_background.jpg');
     background-size: cover;
@@ -20,7 +20,7 @@
     z-index: -1;
 }
 
-.homepage__slogan {
+.SplashPage__slogan {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -30,17 +30,17 @@
     height: 500px;
 }
 
-.homepage__header {
+.SplashPage__header {
     font-size: 2.4rem;
     font-weight: bolder;
     color: white;
 }
 
-.homepage__header--large {
+.SplashPage__header--large {
     font-size: 4rem;
 }
 
-.homepage__header--dynamic {
+.SplashPage__header--dynamic {
     margin: 0 20px;
     color: #00DE9A;
     border-right: 3px solid black;
@@ -59,7 +59,7 @@
     }
 }
 
-.homepage__button {
+.SplashPage__button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -77,19 +77,19 @@
     transition: all 0.2s ease-in-out;
 }
 
-.homepage__button:hover {
+.SplashPage__button:hover {
     background-color: #23ac83;
 }
 
-.homepage__button:active {
+.SplashPage__button:active {
     background-color: #13684e;
 }
 
-.homepage__icon {
+.SplashPage__icon {
     margin-left: 5px;
 }
 
-.homepage__dynamic-txts-wrapper {
+.SplashPage__dynamic-txts-wrapper {
     display: flex;
     align-items: center;
     margin: 30px;
