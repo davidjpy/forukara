@@ -13,6 +13,9 @@
             ],
             "@pages/*": [
                 "pages/*"
+            ],
+            "@features/*": [
+                "features/*"
             ]
         }
     }

@@ -5,17 +5,17 @@ const Nav: FC = () => {
     return (
         <header className='layout__nav'>
             <div className='layout__container'>
-                <div className='layout__logo-wrapper'>
+                <div className='splashlayout__logo-wrapper'>
                     <FaBlog />
                     <p>Forukara</p>
                 </div>
-                <div className='layout__button-wrapper'>
-                    <button className='layout__button layout__button--text'>Login</button>
-                    <button className='layout__button layout__button--slide'>&nbsp;</button>
+                <div className='splashlayout__button-wrapper'>
+                    <button className='splashlayout__button splashlayout__button--text'>Login</button>
+                    <button className='splashlayout__button splashlayout__button--slide'>&nbsp;</button>
                 </div>
             </div>
         </header>
     );
-}   
+}
 
-export default Nav; 
+export default Nav;
