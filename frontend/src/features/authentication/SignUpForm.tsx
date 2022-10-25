@@ -18,13 +18,22 @@ const SignUpForm: FC = () => {
     return (
         <>
             <div className='layout__overlay'
-                style={{ opacity: signUpFormMounted ? 1 : 0 }}
+                style={signUpFormMounted
+                    ? { opacity: 1, pointerEvents: 'all' }
+                    : { opacity: 0, pointerEvents: 'none' }}
             />
             <div ref={wrapperRef} className='layout__signupform'
                 style={signUpFormMounted
                     ? { opacity: 1, pointerEvents: 'all' }
                     : { opacity: 0, pointerEvents: 'none' }}>
                 <h1 className='layout__header'>Sign Up</h1>
+                <form className='layout__form'>
+                    <input type='text' placeholder='User ID' />
+                    <input type='email' placeholder='Email' />
+                    <input type='password' placeholder='Password' />
+                    <input type='password' placeholder='Confirm Password' />
+                    <input type='submit' value='Create Account' />
+                </form>
             </div>
         </>
     );

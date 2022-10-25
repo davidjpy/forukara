@@ -2,8 +2,9 @@ import { FC } from 'react';
 import { FaBlog } from 'react-icons/fa';
 
 import SignUpForm from '@features/authentication/SignUpForm';
+import LoginForm from '@features/authentication/LoginForm';
 import { useAppDispatch } from '@app/hooks';
-import { toggleSignUpForm } from '@features/authentication/authenticationSlice'
+import { toggleSignUpForm, toggleLoginForm } from '@features/authentication/authenticationSlice'
 
 const Nav: FC = () => {
 
@@ -11,6 +12,10 @@ const Nav: FC = () => {
 
     const handleSignUpFormMounted = (): void => {
         dispatch(toggleSignUpForm(true));
+    }
+
+    const handleLoginFormMounted = (): void => {
+        dispatch(toggleLoginForm(true));
     }
 
     return (
@@ -22,11 +27,12 @@ const Nav: FC = () => {
                         <p>Forukara</p>
                     </div>
                     <div className='splashlayout__button-wrapper'>
-                        <button className='splashlayout__button splashlayout__button--text'>Login</button>
+                        <button onClick={handleLoginFormMounted} className='splashlayout__button splashlayout__button--text'>Login</button>
                         <button onClick={handleSignUpFormMounted} className='splashlayout__button splashlayout__button--slide'>&nbsp;</button>
                     </div>
                 </div>
             </header>
+            <LoginForm />
             <SignUpForm />
         </>
     );

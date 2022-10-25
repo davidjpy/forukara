@@ -42,7 +42,7 @@
 
 .SplashPage__header--dynamic {
     margin: 0 20px;
-    color: #00DE9A;
+    color: var(--alien-green-light);
     border-right: 3px solid black;
     animation: flash 0.85s step-end infinite;
 }
@@ -65,7 +65,7 @@
     justify-content: center;
     width: 230px;
     height: 60px;
-    background-color: #00DE9A;
+    background-color: var(--alien-green-light);
     color: black;
     border: none;
     font-size: 1rem;
@@ -78,7 +78,7 @@
 }
 
 .SplashPage__button:hover {
-    background-color: #23ac83;
+    background-color: var(--alien-green-deep);
 }
 
 .SplashPage__button:active {
