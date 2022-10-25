@@ -1,0 +1,23 @@
+import nodemailer from 'nodemailer'
+
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: 'forukara.auto@gmail.com',
+        pass: 'svzrcqhvgppvdpjo'
+    }
+});
+
+send();
+
+async function send() {
+    const result = await transporter.sendMail({
+        from: 'forukara.auto@gmail.com',
+        to: 'michaelfong@hkflair.org',
+        subject: 'Hello World',
+        text: 'Hello World',
+        html: '<h1>Hello world</h1>'
+    });
+
+    console.log(JSON.stringify(result, null, 4));
+}
