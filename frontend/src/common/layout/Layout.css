@@ -152,25 +152,53 @@
     color: white;
 }
 
+.layout__text {
+    font-size: 0.9rem;
+}
+
+.layout__text--white {
+    color: white;
+}
+
+.layout__text--alien-green-light {
+    color: var(--alien-green-light);
+}
+
+.layout__text--link:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.layout__form div {
+    position: relative;
+    margin: 1.5rem 0;
+}
+
+.layout__form div:first-child {
+    margin-top: 2.6rem;
+}
+
 .layout__form input {
     width: 100%;
-    margin: 0.9rem 0;
     font-size: 1rem;
     border: none;
     background-color: rgba(255, 255, 255, 0.3);
-}
-
-.layout__form input::placeholder {
-    color: rgb(173, 173, 173);
-    font-size: 1rem;
 }
 
 .layout__form input:focus {
     outline: 2px solid var(--alien-green-light);
 }
 
-.layout__form input[type='text']:first-child {
-    margin-top: 2.6rem;
+.layout__form span {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    top: 13px;
+    left: 1rem;
+    color: rgb(140, 140, 140);
+    font-size: 1rem;
+    pointer-events: none;
 }
 
 .layout__form input[type='text'], input[type='email'], input[type='password'] {
@@ -192,4 +220,8 @@
 
 .layout__form input[type='submit']:hover {
     background-color: var(--alien-green-deep);
+}
+
+.layout__input:not(:placeholder-shown)+.layout__placeholder {
+    display: none;
 }

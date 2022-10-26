@@ -1,8 +1,15 @@
 import asyncHandler from 'express-async-handler';
 import bcrypt from 'bcrypt';
+import jwt, { Jwt, JwtPayload, Secret } from 'jsonwebtoken';
 import { Request, Response } from 'express';
 
 import User from '@model/User';
+
+interface Token {
+    tokenId: string;
+    tokenUsername: string;
+    tokenEmail: string;
+}
 
 const getAllUsers = asyncHandler(async (req: Request, res: Response): Promise<any> => {
     const users = await User.find().select('-password').lean();
@@ -15,9 +22,9 @@ const getAllUsers = asyncHandler(async (req: Request, res: Response): Promise<an
 });
 
 const createUser = asyncHandler(async (req: Request, res: Response): Promise<any> => {
-    const { username, password, email, roles } = req.body;
+    const { username, password, email }: { username: string, password: string, email: string } = req.body;
 
-    if (!username || !password || !email || !Array.isArray(roles) || !roles.length) {
+    if (!username || !password || !email) {
         return res.status(400).json({ message: 'All fields are required' });
     }
 
@@ -33,10 +40,17 @@ const createUser = asyncHandler(async (req: Request, res: Response): Promise<any
     }
 
     const hashedPwd = await bcrypt.hash(password, 10);
-    const userObj = { username, 'password': hashedPwd, email, roles }
+    const userObj = { username, 'password': hashedPwd, email }
     const user = await User.create(userObj);
 
-    if (user) {
+    const payload: { tokenId: string, tokenUsername: string, tokenEmail: string } = 
+    { tokenId: user._id.toString(), tokenUsername: user.username, tokenEmail: user.email }
+
+    const token = jwt.sign(payload, process.env.VERIFICATION_SECRET_KEY as Secret, { expiresIn: '60s' });
+
+    console.log(token)
+
+    if (user && token) {
         res.status(201).json({ message: `User ${username} created` });
     } else {
         res.status(400).json({ message: 'Invalid user data received' });
@@ -44,9 +58,9 @@ const createUser = asyncHandler(async (req: Request, res: Response): Promise<any
 });
 
 const updateUser = asyncHandler(async (req: Request, res: Response): Promise<any> => {
-    const { id, username, password, email, roles } = req.body;
+    const { id, username, password, email }: { id: string, username: string, password: string, email: string } = req.body;
 
-    if (!id || !username || !email || !Array.isArray(roles) || !roles.length) {
+    if (!id || !username || !email) {
         return res.status(400).json({ message: 'All fields are required' });
     }
 
@@ -69,7 +83,6 @@ const updateUser = asyncHandler(async (req: Request, res: Response): Promise<any
 
     user.username = username;
     user.email = email;
-    user.roles = roles;
 
     if (password) {
         user.password = await bcrypt.hash(password, 10);
@@ -81,7 +94,7 @@ const updateUser = asyncHandler(async (req: Request, res: Response): Promise<any
 });
 
 const deleteUser = asyncHandler(async (req: Request, res: Response): Promise<any> => {
-    const { id } = req.body;
+    const { id }: { id: string } = req.body;
 
     if (!id) {
         return res.status(400).json({ message: 'User ID required' });
@@ -98,9 +111,45 @@ const deleteUser = asyncHandler(async (req: Request, res: Response): Promise<any
     res.json({ message: `User ${result.username} deleted` });
 });
 
+const verifiyUser = asyncHandler(async (req: Request, res: Response): Promise<any> => {
+    const token: string = req.params.token;
+
+    try {
+        const userToken = jwt.verify(token, process.env.VERIFICATION_SECRET_KEY as Secret);
+        const { tokenId, tokenUsername, tokenEmail } = userToken as Token;
+
+        if (!tokenId || !tokenUsername || !tokenEmail) {
+            return res.status(401).json({ message: 'Invalid credentials provided' });
+        }
+
+        const user = await User.findById(tokenId).exec();
+
+        if (!user) {
+            return res.status(401).json({ message: 'Invalid credentials provided' });
+        }
+
+        if (user.status === 'Active') {
+            return res.status(404).json({ message: 'Account was already verified' });
+        }
+
+        if (tokenId === user.id && tokenUsername === user.username && tokenEmail === user.email) {
+            user.status = 'Active';
+            const updatedUser = await user.save();
+
+            res.json({ message: `Account ${updatedUser.username} verified` });
+        } else {
+            res.status(401).json({ message: 'Invalid credentials provided' });
+        }
+
+    } catch (err) {
+        return res.status(401).json({ message: 'The verification link has expired' });
+    }
+});
+
 export = {
     getAllUsers,
     createUser,
     updateUser,
-    deleteUser
+    deleteUser,
+    verifiyUser
 }

@@ -22,12 +22,12 @@ const LoginForm: FC = () => {
                     ? { opacity: 1, pointerEvents: 'all' }
                     : { opacity: 0, pointerEvents: 'none' }}
             />
-            <div ref={wrapperRef} className='layout__loginform'
+            <section ref={wrapperRef} className='layout__loginform'
                 style={loginFormMounted
                     ? { opacity: 1, pointerEvents: 'all' }
                     : { opacity: 0, pointerEvents: 'none' }}>
                 <h1 className='layout__header'>Login</h1>
-            </div>
+            </section>
         </>
     );
 }

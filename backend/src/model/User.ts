@@ -1,6 +1,13 @@
 import mongoose from 'mongoose';
 
-const userSchema = new mongoose.Schema(
+interface IUser {
+    username: string;
+    password: string;
+    email: string;
+    status: string;
+}
+
+const userSchema = new mongoose.Schema<IUser>(
     {
         username: {
             type: String,
@@ -14,14 +21,15 @@ const userSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
-        roles: [{
+        status: {
             type: String,
-            default: "User"
-        }],
+            default: "Pending",
+            required: true,
+        },
     },
     {
         timestamps: true
     }
 );
 
-export default mongoose.model('User', userSchema);
+export default mongoose.model<IUser>('User', userSchema);

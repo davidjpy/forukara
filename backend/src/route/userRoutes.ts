@@ -10,4 +10,7 @@ router.route('/')
     .patch(userController.updateUser)
     .delete(userController.deleteUser)
 
+router.route('/verifications/:token')
+    .post(userController.verifiyUser)
+
 export default router;
