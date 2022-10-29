@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 
-import { logEvents } from '@middleware/logger';
+import { logEvents } from '@middlewares/logger';
 
 interface Error {
     name?: string;

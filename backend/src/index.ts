@@ -4,13 +4,13 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
 
-import { connectDB } from '@config/dbConnect';
-import { corsOptions } from '@config/corsOptions';
-import { logEvents, logger } from '@middleware/logger';
-import { errorHandler } from '@middleware/errorHandler';
-import commentRoutes from '@route/commentRoutes';
-import postRoutes from '@route/postRoutes';
-import userRoutes from '@route/userRoutes'
+import { connectDB } from '@configs/dbConnect';
+import { corsOptions } from '@configs/corsOptions';
+import { logEvents, logger } from '@middlewares/logger';
+import { errorHandler } from '@middlewares/errorHandler';
+import commentRoutes from '@routes/commentRoutes';
+import postRoutes from '@routes/postRoutes';
+import userRoutes from '@routes/userRoutes'
 
 interface DBError {
     no?: number;

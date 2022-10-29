@@ -1,9 +1,11 @@
 import asyncHandler from 'express-async-handler';
 import bcrypt from 'bcrypt';
-import jwt, { Jwt, JwtPayload, Secret } from 'jsonwebtoken';
+import jwt, { Secret } from 'jsonwebtoken';
 import { Request, Response } from 'express';
+import path from 'path';
 
-import User from '@model/User';
+import User from '@models/User';
+import emailService from '@utilities/emailService';
 
 interface Token {
     tokenId: string;
@@ -43,10 +45,10 @@ const createUser = asyncHandler(async (req: Request, res: Response): Promise<any
     const userObj = { username, 'password': hashedPwd, email }
     const user = await User.create(userObj);
 
-    const payload: { tokenId: string, tokenUsername: string, tokenEmail: string } = 
-    { tokenId: user._id.toString(), tokenUsername: user.username, tokenEmail: user.email }
+    const payload: { tokenId: string, tokenUsername: string, tokenEmail: string } =
+        { tokenId: user._id.toString(), tokenUsername: user.username, tokenEmail: user.email }
 
-    const token = jwt.sign(payload, process.env.VERIFICATION_SECRET_KEY as Secret, { expiresIn: '60s' });
+    const token = jwt.sign(payload, process.env.VERIFICATION_SECRET_KEY as Secret, { expiresIn: '300s' });
 
     console.log(token)
 
@@ -122,7 +124,7 @@ const verifiyUser = asyncHandler(async (req: Request, res: Response): Promise<an
             return res.status(401).json({ message: 'Invalid credentials provided' });
         }
 
-        const user = await User.findById(tokenId).exec();
+        const user = await User.findOne({ _id: tokenId, username: tokenUsername, email: tokenEmail }).exec();
 
         if (!user) {
             return res.status(401).json({ message: 'Invalid credentials provided' });
@@ -132,24 +134,28 @@ const verifiyUser = asyncHandler(async (req: Request, res: Response): Promise<an
             return res.status(404).json({ message: 'Account was already verified' });
         }
 
-        if (tokenId === user.id && tokenUsername === user.username && tokenEmail === user.email) {
-            user.status = 'Active';
-            const updatedUser = await user.save();
+        user.status = 'Active';
+        user.expiredIn = null;
+        await user.save();
 
-            res.json({ message: `Account ${updatedUser.username} verified` });
-        } else {
-            res.status(401).json({ message: 'Invalid credentials provided' });
-        }
-
+        res.json({ message: `Account ${user.username} verified` });
     } catch (err) {
-        return res.status(401).json({ message: 'The verification link has expired' });
+        return res.status(401).json({ message: 'The verification link is invalid' });
     }
 });
+
+
+const testing = asyncHandler(async (req: Request, res: Response): Promise<any> => {
+    emailService('emailVerification.html', { username: 'AzCean', url: 'http://localhost:3500/users/test' }, 'david1999.hch@gmail.com', 'testing')
+    res.sendFile(path.resolve('src/views/emailVerification.html'))
+});
+
 
 export = {
     getAllUsers,
     createUser,
     updateUser,
     deleteUser,
-    verifiyUser
+    verifiyUser,
+    testing
 }

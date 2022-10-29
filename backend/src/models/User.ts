@@ -4,7 +4,8 @@ interface IUser {
     username: string;
     password: string;
     email: string;
-    status: string;
+    status: 'Pending' | 'Active';
+    expiredIn: Date | null;
 }
 
 const userSchema = new mongoose.Schema<IUser>(
@@ -26,6 +27,11 @@ const userSchema = new mongoose.Schema<IUser>(
             default: "Pending",
             required: true,
         },
+        expiredIn: {
+            type: Date,
+            default: Date.now,
+            expires: 300
+        }
     },
     {
         timestamps: true

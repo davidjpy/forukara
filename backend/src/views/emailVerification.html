@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .container {
+            background-color: rgb(235, 235, 235);
+            text-align: center;
+        }
+
+        .wrapper {
+            display: block;
+            width: 600px;
+            margin: auto;
+            background-color: white;
+        }
+
+        .header {
+            padding: 1rem 4rem;
+            background-color: rgb(7, 34, 71);
+        }
+
+        .header p {
+            color: white;
+            font-size: 2em;
+            padding: 1rem;
+            font-weight: 800;
+        }
+
+        .body {
+            padding: 2rem 4rem;
+            color: black;
+        }
+
+        .body p {
+            line-height: 24px;
+        }
+
+        .body-first-line {
+            font-weight: 700;
+            font-size: 1.2rem;
+            padding-bottom: 1rem;
+        }
+
+        .body-second-line {
+            margin-bottom: 1rem;
+        }
+
+        .body-last-line {
+            margin-top: 2rem;
+            font-weight: 700;
+        }
+
+        .body button {
+            width: 100%;
+            height: 60px;
+            margin: 2rem 0 2rem 0;
+            background-color: #00DE9A;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .body button a {
+            text-decoration: none;
+            color: black;
+        }
+
+        .footer {
+            background-color: rgb(123, 231, 172);
+            padding: 0.8rem 4rem;
+        }
+
+        .footer p {
+            color: black;
+            font-size: 0.8rem;
+            line-height: 20px;
+        }
+
+        .footer-first-line {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .copyright {
+            background-color: rgb(7, 34, 71);
+            padding: 0.6rem 4rem;
+        }
+
+        .copyright p {
+            color: white;
+            font-size: 0.8rem;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class='container'>
+        <div class='wrapper'>
+            <div class='header'>
+                <p>Welcome to Forukara</p>
+            </div>
+            <div class='body'>
+                <p class='body-first-line'>Verify Your E-mail Address</p>
+                <p class='body-second-line'>Hello, {{ username }}. You're almost there!</p>
+                <p>Click this link {{ url }} or the button below to verify your email and finish signing up in Forukara
+                </p>
+                <button><a href='https://www.google.com'>VERIFY YOUR EMAIL</a></button>
+                <p>The verification button and link expire after five minutes. If your account is not verified, it will
+                    be removed when it expires.</p>
+                <p class='body-last-line'>Thank you for your support</p>
+            </div>
+            <div class='footer'>
+                <p class='footer-first-line'>Need Help?</p>
+                <p>Contact Us: david1999.hch@gmail.com</p>
+                <p>GitHub: github.com/davidjpy | Linkedin: linkedin.com/in/davidho-web</p>
+            </div>
+            <div class='copyright'>
+                <p>Copyright &copy; 2022. All Rights Reserved</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

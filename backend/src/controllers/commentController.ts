@@ -1,7 +1,7 @@
 import asyncHandler from 'express-async-handler';
 import { Request, Response } from 'express';
 
-import Comment from '@model/Comment';
+import Comment from '@models/Comment';
 
 const getCommentByPost = asyncHandler(async (req: Request, res: Response): Promise<any> => {
     const { post } = req.body;

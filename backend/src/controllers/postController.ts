@@ -1,8 +1,7 @@
-import { ObjectId } from 'mongoose';
 import asyncHandler from 'express-async-handler';
 import { Request, Response } from 'express';
 
-import Post from '@model/Post';
+import Post from '@models/Post';
 
 const getAllPosts = asyncHandler(async (req: Request, res: Response): Promise<any> => {
     const posts = await Post.find().lean();
