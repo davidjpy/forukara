@@ -28,7 +28,7 @@ const readHTML = (HTMLTemplate: string, replacement: object): string => {
     return html;
 }
 
-const emailService = (HTMLTemplate: string, replacement: object, target: string, subject: string): void => {
+const emailService = ({ HTMLTemplate, replacement, target, subject }: EmailService): void => {
     const mailOptions = {
         from: 'forukara.auto@gmail.com',
         to: target,

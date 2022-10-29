@@ -53,24 +53,27 @@
             margin-bottom: 1rem;
         }
 
+        .body-fourth-line {
+            word-break: break-all;
+            text-align: justify;
+            margin-top: 2rem;
+        }
+
         .body-last-line {
             margin-top: 2rem;
             font-weight: 700;
         }
 
-        .body button {
+        .button {
+            display: inline-block;
             width: 100%;
-            height: 60px;
+            padding: 1rem;
             margin: 2rem 0 2rem 0;
             background-color: #00DE9A;
             border: none;
             border-radius: 6px;
-            cursor: pointer;
             font-size: 1rem;
             font-weight: 700;
-        }
-
-        .body button a {
             text-decoration: none;
             color: black;
         }
@@ -116,9 +119,9 @@
             <div class='body'>
                 <p class='body-first-line'>Verify Your E-mail Address</p>
                 <p class='body-second-line'>Hello, {{ username }}. You're almost there!</p>
-                <p>Click this link {{ url }} or the button below to verify your email and finish signing up in Forukara
-                </p>
-                <button><a href='https://www.google.com'>VERIFY YOUR EMAIL</a></button>
+                <p>Click the link or the button below to verify your email and finish signing up in Forukara</p>
+                <p class='body-fourth-line'>{{ url }}</p>
+                <a class='button' href={{ url }}>VERIFY YOUR EMAIL</a>
                 <p>The verification button and link expire after five minutes. If your account is not verified, it will
                     be removed when it expires.</p>
                 <p class='body-last-line'>Thank you for your support</p>

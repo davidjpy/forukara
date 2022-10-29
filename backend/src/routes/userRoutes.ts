@@ -11,7 +11,7 @@ router.route('/')
     .delete(userController.deleteUser)
 
 router.route('/verifications/:token')
-    .post(userController.verifiyUser)
+    .get(userController.verifiyUser)
 
 router.route('/test')
     .get(userController.testing)

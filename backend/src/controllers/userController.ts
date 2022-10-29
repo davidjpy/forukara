@@ -50,7 +50,17 @@ const createUser = asyncHandler(async (req: Request, res: Response): Promise<any
 
     const token = jwt.sign(payload, process.env.VERIFICATION_SECRET_KEY as Secret, { expiresIn: '300s' });
 
-    console.log(token)
+    const emailOptions = {
+        HTMLTemplate: 'emailVerification.html',
+        replacement: { 
+            username: username, 
+            url: `http://localhost:3500/users/verifications/${token}/` 
+        },
+        target: email, 
+        subject: 'Verify Your Forukara Account'
+    }
+
+    emailService(emailOptions);
 
     if (user && token) {
         res.status(201).json({ message: `User ${username} created` });
@@ -121,13 +131,13 @@ const verifiyUser = asyncHandler(async (req: Request, res: Response): Promise<an
         const { tokenId, tokenUsername, tokenEmail } = userToken as Token;
 
         if (!tokenId || !tokenUsername || !tokenEmail) {
-            return res.status(401).json({ message: 'Invalid credentials provided' });
+            return res.status(401).json({ message: 'The verification link is invalid' });
         }
 
         const user = await User.findOne({ _id: tokenId, username: tokenUsername, email: tokenEmail }).exec();
 
         if (!user) {
-            return res.status(401).json({ message: 'Invalid credentials provided' });
+            return res.status(401).json({ message: 'The verification link is invalid' });
         }
 
         if (user.status === 'Active') {
@@ -146,7 +156,8 @@ const verifiyUser = asyncHandler(async (req: Request, res: Response): Promise<an
 
 
 const testing = asyncHandler(async (req: Request, res: Response): Promise<any> => {
-    emailService('emailVerification.html', { username: 'AzCean', url: 'http://localhost:3500/users/test' }, 'david1999.hch@gmail.com', 'testing')
+    const testing = {HTMLTemplate: 'emailVerification.html', replacement: { username: 'AzCean', url: 'http://localhost:3500/users/test' }, target: 'david1999.hch@gmail.com', subject: 'testing'}
+    // emailService(testing)
     res.sendFile(path.resolve('src/views/emailVerification.html'))
 });
 
