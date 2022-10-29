@@ -5,10 +5,12 @@ import SignUpForm from '@features/authentication/SignUpForm';
 import LoginForm from '@features/authentication/LoginForm';
 import { useAppDispatch } from '@app/hooks';
 import { toggleSignUpForm, toggleLoginForm } from '@features/authentication/authenticationSlice'
+import { useGetUserByIdQuery } from '@features/authentication/authenticationApiSlice';
 
 const Nav: FC = () => {
 
     const dispatch = useAppDispatch();
+    const { data, isLoading, isFetching, isError } = useGetUserByIdQuery('635d52e29d72d9a119602b87');
 
     const handleSignUpFormMounted = (): void => {
         dispatch(toggleSignUpForm(true));
@@ -36,6 +38,6 @@ const Nav: FC = () => {
             <SignUpForm />
         </>
     );
-}   
+}
 
 export default Nav; 

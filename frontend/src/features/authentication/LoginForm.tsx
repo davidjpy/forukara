@@ -13,7 +13,7 @@ const LoginForm: FC = () => {
         dispatch(toggleLoginForm(false));
     }
 
-    const wrapperRef = useClickOutside(handleLoginFormUnmounted)
+    const wrapperRef = useClickOutside(handleLoginFormUnmounted);
 
     return (
         <>

@@ -13,6 +13,13 @@ interface Token {
     tokenEmail: string;
 }
 
+interface IUser {
+    id?: string;
+    username?: string;
+    email?: string;
+    password?: string;
+}
+
 const getAllUsers = asyncHandler(async (req: Request, res: Response): Promise<any> => {
     const users = await User.find().select('-password').lean();
 
@@ -23,8 +30,24 @@ const getAllUsers = asyncHandler(async (req: Request, res: Response): Promise<an
     res.json(users);
 });
 
+const getUserById = asyncHandler(async (req: Request, res: Response): Promise<any> => {
+    const id: string = req.params.id;
+
+    if (!id) {
+        return res.status(400).json({ message: 'All fields are required' });
+    }
+
+    const user = await User.findById(id).select('-password').lean();
+
+    if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.json(user);
+})
+
 const createUser = asyncHandler(async (req: Request, res: Response): Promise<any> => {
-    const { username, password, email }: { username: string, password: string, email: string } = req.body;
+    const { username, password, email }: IUser = req.body;
 
     if (!username || !password || !email) {
         return res.status(400).json({ message: 'All fields are required' });
@@ -34,11 +57,11 @@ const createUser = asyncHandler(async (req: Request, res: Response): Promise<any
     const duplicateEmail = await User.findOne({ email }).lean().exec();
 
     if (duplicateUsername) {
-        return res.status(409).json({ message: 'Username has already taken' });
+        return res.status(409).json({ message: 'Username already in use' });
     }
 
     if (duplicateEmail) {
-        return res.status(409).json({ message: 'Email has already taken' });
+        return res.status(409).json({ message: 'Email already in use' });
     }
 
     const hashedPwd = await bcrypt.hash(password, 10);
@@ -70,7 +93,7 @@ const createUser = asyncHandler(async (req: Request, res: Response): Promise<any
 });
 
 const updateUser = asyncHandler(async (req: Request, res: Response): Promise<any> => {
-    const { id, username, password, email }: { id: string, username: string, password: string, email: string } = req.body;
+    const { id, username, password, email }: IUser = req.body;
 
     if (!id || !username || !email) {
         return res.status(400).json({ message: 'All fields are required' });
@@ -106,7 +129,7 @@ const updateUser = asyncHandler(async (req: Request, res: Response): Promise<any
 });
 
 const deleteUser = asyncHandler(async (req: Request, res: Response): Promise<any> => {
-    const { id }: { id: string } = req.body;
+    const { id }: IUser = req.body;
 
     if (!id) {
         return res.status(400).json({ message: 'User ID required' });
@@ -156,14 +179,15 @@ const verifiyUser = asyncHandler(async (req: Request, res: Response): Promise<an
 
 
 const testing = asyncHandler(async (req: Request, res: Response): Promise<any> => {
-    const testing = {HTMLTemplate: 'emailVerification.html', replacement: { username: 'AzCean', url: 'http://localhost:3500/users/test' }, target: 'david1999.hch@gmail.com', subject: 'testing'}
+    // const testing = {HTMLTemplate: 'emailVerification.html', replacement: { username: 'AzCean', url: 'http://localhost:3500/users/test' }, target: 'david1999.hch@gmail.com', subject: 'testing'}
     // emailService(testing)
-    res.sendFile(path.resolve('src/views/emailVerification.html'))
+    // res.sendFile(path.resolve('src/views/emailVerification.html'))
 });
 
 
 export = {
     getAllUsers,
+    getUserById,
     createUser,
     updateUser,
     deleteUser,

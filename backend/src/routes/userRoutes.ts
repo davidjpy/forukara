@@ -10,6 +10,9 @@ router.route('/')
     .patch(userController.updateUser)
     .delete(userController.deleteUser)
 
+router.route('/id/:id')
+    .get(userController.getUserById)
+
 router.route('/verifications/:token')
     .get(userController.verifiyUser)
 
