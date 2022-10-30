@@ -10,6 +10,5 @@
     --black-opacity-deep: rgba(0, 0, 0, 0.85);
     --alien-green-deep: #23ac83;
     --alien-green-light: #00DE9A;
-    --blue: #00b;
-    --fullwidth: 100%;
+    --error-red: #cc0000;
   }

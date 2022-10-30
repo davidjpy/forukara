@@ -160,6 +160,10 @@
     color: white;
 }
 
+.layout__text--red {
+    color: var(--error-red);
+}
+
 .layout__text--alien-green-light {
     color: var(--alien-green-light);
 }
@@ -220,6 +224,11 @@
 
 .layout__form input[type='submit']:hover {
     background-color: var(--alien-green-deep);
+}
+
+.layout__form input[type='submit']:disabled {
+    background-color: gray;
+    cursor: not-allowed;
 }
 
 .layout__input:not(:placeholder-shown)+.layout__placeholder {

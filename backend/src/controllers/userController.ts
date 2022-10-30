@@ -2,7 +2,7 @@ import asyncHandler from 'express-async-handler';
 import bcrypt from 'bcrypt';
 import jwt, { Secret } from 'jsonwebtoken';
 import { Request, Response } from 'express';
-import path from 'path';
+import * as EmailValidator from 'email-validator';
 
 import User from '@models/User';
 import emailService from '@utilities/emailService';
@@ -18,13 +18,27 @@ interface IUser {
     username?: string;
     email?: string;
     password?: string;
+    confirmPassword?: string;
+}
+
+interface ErrorResponse {
+    error: string;
+    code: number;
+}
+
+enum ErrorCode {
+    Failed = 0,
+    UsernameErr = 1,
+    EmailErr = 2,
+    PasswordErr = 3,
+    ConfirmPasswordErr = 4,
 }
 
 const getAllUsers = asyncHandler(async (req: Request, res: Response): Promise<any> => {
     const users = await User.find().select('-password').lean();
 
     if (!users?.length) {
-        return res.status(400).json({ message: 'No users found' });
+        return res.status(400).json({ message: 'No users found', code: ErrorCode.Failed });
     }
 
     res.json(users);
@@ -34,37 +48,63 @@ const getUserById = asyncHandler(async (req: Request, res: Response): Promise<an
     const id: string = req.params.id;
 
     if (!id) {
-        return res.status(400).json({ message: 'All fields are required' });
+        return res.status(400).json({ message: 'All fields are required', code: ErrorCode.Failed });
     }
 
     const user = await User.findById(id).select('-password').lean();
 
     if (!user) {
-        return res.status(404).json({ message: 'User not found' });
+        return res.status(404).json({ message: 'User not found', code: ErrorCode.Failed });
     }
 
     res.json(user);
 })
 
 const createUser = asyncHandler(async (req: Request, res: Response): Promise<any> => {
-    const { username, password, email }: IUser = req.body;
+    const { username, password, confirmPassword, email }: IUser = req.body;
 
-    if (!username || !password || !email) {
-        return res.status(400).json({ message: 'All fields are required' });
+    let errorCodes: Array<ErrorResponse> = [];
+
+    if (!username) {
+        errorCodes.push({ error: 'Username is required', code: ErrorCode.UsernameErr });
+    }
+
+    if (!email) {
+        errorCodes.push({ error: 'Email is required', code: ErrorCode.EmailErr });
+    }
+
+    if (!password) {
+        errorCodes.push({ error: 'Password is required', code: ErrorCode.PasswordErr });
+    }
+
+    if (!confirmPassword) {
+        errorCodes.push({ error: 'Confirm your password', code: ErrorCode.ConfirmPasswordErr });
+    }
+
+    if (password !== confirmPassword) {
+        errorCodes.push({ error: 'Your confirmation password is incorrect', code: ErrorCode.ConfirmPasswordErr });
+    }
+
+    if (errorCodes.length > 0) {
+        return res.status(400).json({ message: errorCodes });
+    }
+
+    if (!EmailValidator.validate(email!)) {
+        return res.status(400).json({ message: [{ error: 'Invalid email address', code: ErrorCode.EmailErr }] });
     }
 
     const duplicateUsername = await User.findOne({ username }).lean().exec();
     const duplicateEmail = await User.findOne({ email }).lean().exec();
 
     if (duplicateUsername) {
-        return res.status(409).json({ message: 'Username already in use' });
+        return res.status(409).json({ message: [{ error: 'Username already in use', code: ErrorCode.UsernameErr }] });
     }
 
     if (duplicateEmail) {
-        return res.status(409).json({ message: 'Email already in use' });
+        return res.status(409).json({ message: [{ error: 'Email already in use', code: ErrorCode.EmailErr}] });
     }
 
-    const hashedPwd = await bcrypt.hash(password, 10);
+    const hashedPwd = await bcrypt.hash(password!, 10);
     const userObj = { username, 'password': hashedPwd, email }
     const user = await User.create(userObj);
 
@@ -76,10 +116,10 @@ const createUser = asyncHandler(async (req: Request, res: Response): Promise<any
     const emailOptions = {
         HTMLTemplate: 'emailVerification.html',
         replacement: { 
-            username: username, 
+            username: username!, 
             url: `http://localhost:3500/users/verifications/${token}/` 
         },
-        target: email, 
+        target: email!, 
         subject: 'Verify Your Forukara Account'
     }
 
@@ -88,7 +128,7 @@ const createUser = asyncHandler(async (req: Request, res: Response): Promise<any
     if (user && token) {
         res.status(201).json({ message: `User ${username} created` });
     } else {
-        res.status(400).json({ message: 'Invalid user data received' });
+        res.status(400).json({ message: [{ error: 'Invalid user data received', code: ErrorCode.Failed }] });
     }
 });
 
@@ -96,24 +136,24 @@ const updateUser = asyncHandler(async (req: Request, res: Response): Promise<any
     const { id, username, password, email }: IUser = req.body;
 
     if (!id || !username || !email) {
-        return res.status(400).json({ message: 'All fields are required' });
+        return res.status(400).json({ message: 'All fields are required', code: ErrorCode.Failed });
     }
 
     const user = await User.findById(id).exec();
 
     if (!user) {
-        return res.status(400).json({ message: 'User not found' });
+        return res.status(400).json({ message: 'User not found', code: ErrorCode.Failed });
     }
 
     const duplicateUsername = await User.findOne({ username }).lean().exec();
     const duplicateEmail = await User.findOne({ email }).lean().exec();
 
     if (duplicateUsername && duplicateUsername?._id.toString() !== id) {
-        return res.status(409).json({ message: 'Username has already taken' });
+        return res.status(409).json({ message: 'Username has already taken', code: ErrorCode.UsernameErr });
     }
 
     if (duplicateEmail && duplicateEmail?._id.toString() !== id) {
-        return res.status(409).json({ message: 'Email has already taken' });
+        return res.status(409).json({ message: 'Email has already taken', code: ErrorCode.EmailErr });
     }
 
     user.username = username;
@@ -132,13 +172,13 @@ const deleteUser = asyncHandler(async (req: Request, res: Response): Promise<any
     const { id }: IUser = req.body;
 
     if (!id) {
-        return res.status(400).json({ message: 'User ID required' });
+        return res.status(400).json({ message: 'User ID required', code: ErrorCode.UsernameErr });
     }
 
     const user = await User.findById(id).exec();
 
     if (!user) {
-        return res.status(400).json({ message: 'User not found' });
+        return res.status(400).json({ message: 'User not found', code: ErrorCode.Failed });
     }
 
     const result = await user.deleteOne();
@@ -154,17 +194,17 @@ const verifiyUser = asyncHandler(async (req: Request, res: Response): Promise<an
         const { tokenId, tokenUsername, tokenEmail } = userToken as Token;
 
         if (!tokenId || !tokenUsername || !tokenEmail) {
-            return res.status(401).json({ message: 'The verification link is invalid' });
+            return res.status(401).json({ message: 'The verification link is invalid', code: ErrorCode.Failed });
         }
 
         const user = await User.findOne({ _id: tokenId, username: tokenUsername, email: tokenEmail }).exec();
 
         if (!user) {
-            return res.status(401).json({ message: 'The verification link is invalid' });
+            return res.status(401).json({ message: 'The verification link is invalid', code: ErrorCode.Failed });
         }
 
         if (user.status === 'Active') {
-            return res.status(404).json({ message: 'Account was already verified' });
+            return res.status(404).json({ message: 'Account was already verified', code: ErrorCode.Failed });
         }
 
         user.status = 'Active';

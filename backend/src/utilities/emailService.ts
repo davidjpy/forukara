@@ -28,14 +28,13 @@ const readHTML = (HTMLTemplate: string, replacement: object): string => {
     return html;
 }
 
-const emailService = ({ HTMLTemplate, replacement, target, subject }: EmailService): void => {
+const emailService = async ({ HTMLTemplate, replacement, target, subject }: EmailService): Promise<any> => {
     const mailOptions = {
         from: 'forukara.auto@gmail.com',
         to: target,
         subject: subject,
         html: readHTML(HTMLTemplate, replacement)
     };
-
     transporter.sendMail(mailOptions);
 }
 
