@@ -1,4 +1,4 @@
-import { FC, FormEvent, ChangeEvent, useState, useEffect, useRef, MutableRefObject } from 'react';
+import { FC, FormEvent, ChangeEvent, useState, useEffect, useRef } from 'react';
 import { FaUser } from 'react-icons/fa';
 import { IoMdMail } from 'react-icons/io';
 import { RiLockPasswordFill } from 'react-icons/ri';
@@ -97,8 +97,8 @@ const SignUpForm: FC = () => {
         await resendEmail({
             email: emailCopy,
         });
-        counterRef.current--;
         let ref = 1;
+        counterRef.current--;
         setresendCooldown(ref++);
         const timer = setInterval(() => {
             counterRef.current--;
@@ -174,22 +174,22 @@ const SignUpForm: FC = () => {
                         <form onSubmit={handleSubmitForm} className='layout__form'>
                             <div style={{ margin: userIdErr && '1.5rem 0 0.5rem 0' }}>
                                 <input value={userId} onChange={handleChangeUserId} type='text' placeholder=' ' className='layout__input' />
-                                <span className='layout__placeholder'><FaUser style={{ fontSize: '14px', marginBottom: '1px' }} /> User ID *</span>
+                                <span className='layout__placeholder'><FaUser style={{ fontSize: '14px', marginBottom: '1px' }} /> User ID*</span>
                                 {userIdErr && <p className='layout__text layout__text--red' style={{ margin: '8px 0 0 8px', fontSize: '0.8rem' }}>{userIdErr}</p>}
                             </div>
                             <div style={{ margin: emailErr && '1.5rem 0 0.5rem 0' }}>
                                 <input value={email} onChange={handleChangeEmail} type='email' placeholder=' ' className='layout__input' />
-                                <span className='layout__placeholder'><IoMdMail style={{ fontSize: '17px' }} /> Email *</span>
+                                <span className='layout__placeholder'><IoMdMail style={{ fontSize: '17px' }} /> Email*</span>
                                 {emailErr && <p className='layout__text layout__text--red' style={{ margin: '8px 0 0 8px', fontSize: '0.8rem' }}>{emailErr}</p>}
                             </div>
                             <div style={{ margin: passwordErr && '1.5rem 0 0.5rem 0' }}>
                                 <input value={password} onChange={handleChangePassword} type='password' placeholder=' ' className='layout__input' />
-                                <span className='layout__placeholder'><RiLockPasswordFill style={{ fontSize: '16px' }} /> Password *</span>
+                                <span className='layout__placeholder'><RiLockPasswordFill style={{ fontSize: '16px' }} /> Password*</span>
                                 {passwordErr && <p className='layout__text layout__text--red' style={{ margin: '8px 0 0 8px', fontSize: '0.8rem' }}>{passwordErr}</p>}
                             </div>
                             <div style={{ margin: confirmPasswordErr && '1.5rem 0 0.5rem 0' }}>
                                 <input value={confirmPassword} onChange={handleChangeConfirmPassword} type='password' placeholder=' ' className='layout__input' />
-                                <span className='layout__placeholder'><RiLockPasswordFill style={{ fontSize: '16px' }} /> Confirm Password *</span>
+                                <span className='layout__placeholder'><RiLockPasswordFill style={{ fontSize: '16px' }} /> Confirm Password*</span>
                                 {confirmPasswordErr && <p className='layout__text layout__text--red' style={{ margin: '8px 0 0 8px', fontSize: '0.8rem' }}>{confirmPasswordErr}</p>}
                             </div>
                             {err && <p className='layout__text layout__text--red'>{err}</p>}
