@@ -16,6 +16,9 @@ router.route('/id/:id')
 router.route('/verifications/:token')
     .get(userController.verifiyUser)
 
+router.route('/verifications/resend')
+    .post(userController.resendVerification)
+
 router.route('/test')
     .get(userController.testing)
 

@@ -51,7 +51,7 @@ const getUserById = asyncHandler(async (req: Request, res: Response): Promise<an
         return res.status(400).json({ message: 'All fields are required', code: ErrorCode.Failed });
     }
 
-    const user = await User.findById(id).select('-password').lean();
+    const user = await User.findById(id).select('-password').lean().exec();
 
     if (!user) {
         return res.status(404).json({ message: 'User not found', code: ErrorCode.Failed });
@@ -108,8 +108,7 @@ const createUser = asyncHandler(async (req: Request, res: Response): Promise<any
     const userObj = { username, 'password': hashedPwd, email }
     const user = await User.create(userObj);
 
-    const payload: { tokenId: string, tokenUsername: string, tokenEmail: string } =
-        { tokenId: user._id.toString(), tokenUsername: user.username, tokenEmail: user.email }
+    const payload: Token = { tokenId: user._id.toString(), tokenUsername: user.username, tokenEmail: user.email }
 
     const token = jwt.sign(payload, process.env.VERIFICATION_SECRET_KEY as Secret, { expiresIn: '300s' });
 
@@ -213,10 +212,49 @@ const verifiyUser = asyncHandler(async (req: Request, res: Response): Promise<an
 
         res.json({ message: `Account ${user.username} verified` });
     } catch (err) {
-        return res.status(401).json({ message: 'The verification link is invalid' });
+        return res.status(401).json({ message: 'The verification link is invalid', code: ErrorCode.Failed });
     }
 });
 
+const resendVerification = asyncHandler(async (req: Request, res: Response): Promise<any> => {
+    const { email }: IUser = req.body;
+
+    if (!email) {
+        return res.status(400).json({ message: { error: 'Email not found', code: ErrorCode.EmailErr } });
+    }
+
+    const user = await User.findOne({ email: email }).select('-password').lean().exec();
+
+    if (!user) {
+        return res.status(400).json({ message: { error: 'Due to the five minute verification timer expired, the account has been deleted. Please sign up once again', code: ErrorCode.Failed } });
+    }
+
+    if (user.status === 'Active') {
+        return res.status(400).json({ message: { error: 'Account has been verified'}, code: ErrorCode.Failed });
+    }
+
+    const payload: Token = { tokenId: user._id.toString(), tokenUsername: user.username, tokenEmail: user.email }
+
+    const token = jwt.sign(payload, process.env.VERIFICATION_SECRET_KEY as Secret, { expiresIn: '300s' });
+
+    const emailOptions = {
+        HTMLTemplate: 'emailVerification.html',
+        replacement: { 
+            username: user.username, 
+            url: `http://localhost:3500/users/verifications/${token}/` 
+        },
+        target: email, 
+        subject: 'Verify Your Forukara Account'
+    }
+
+    emailService(emailOptions);
+
+    if (token) {
+        res.status(201).json({ message: 'Verification email has been sent' });
+    } else {
+        res.status(400).json({ message: { error: 'Server error', code: ErrorCode.Failed } });
+    }
+});
 
 const testing = asyncHandler(async (req: Request, res: Response): Promise<any> => {
     // const testing = {HTMLTemplate: 'emailVerification.html', replacement: { username: 'AzCean', url: 'http://localhost:3500/users/test' }, target: 'david1999.hch@gmail.com', subject: 'testing'}
@@ -232,5 +270,6 @@ export = {
     updateUser,
     deleteUser,
     verifiyUser,
+    resendVerification,
     testing
 }

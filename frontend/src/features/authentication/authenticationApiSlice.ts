@@ -18,7 +18,7 @@ export const authenticationApiSlice = apiSlice.injectEndpoints({
             query: (id) => ({
                 url: `/users/id/${id}`,
                 validateStatus: (response, result) =>
-                    (response.status === 200 || response.status === 201) && !result.isError
+                    response.status === 200 && !result.isError
             }),
         }),
         createUser: builder.mutation<IUser, Partial<IUser>>({
@@ -29,13 +29,23 @@ export const authenticationApiSlice = apiSlice.injectEndpoints({
                 validateStatus: (response, result) =>
                     (response.status === 200 || response.status === 201) && !result.isError
             })
+        }),
+        resendEmail: builder.mutation<any, Partial<IUser>>({
+            query: (data) => ({
+                url: '/users/verifications/resend',
+                method: 'POST',
+                body: data,
+                validateStatus: (response, result) => 
+                    (response.status === 200 || response.status === 201) && !result.isError
+            })
         })
     })
 });
 
 export const {
     useGetUserByIdQuery,
-    useCreateUserMutation
+    useCreateUserMutation,
+    useResendEmailMutation
 } = authenticationApiSlice;
 
 
