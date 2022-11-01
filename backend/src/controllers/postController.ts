@@ -2,6 +2,7 @@ import asyncHandler from 'express-async-handler';
 import { Request, Response } from 'express';
 
 import Post from '@models/Post';
+import { IPost } from '@utilities/types';
 
 const getAllPosts = asyncHandler(async (req: Request, res: Response): Promise<any> => {
     const posts = await Post.find().lean();
@@ -14,13 +15,13 @@ const getAllPosts = asyncHandler(async (req: Request, res: Response): Promise<an
 });
 
 const createPost = asyncHandler(async (req: Request, res: Response): Promise<any> => {
-    const { id, title, content } = req.body;
+    const { id, title, content }: IPost = req.body;
 
     if (!id || !title || !content) {
         return res.status(400).json({ message: 'All fields are required' });
     }
 
-    const postObj = { 'user': id, title, content }
+    const postObj: IPost = { 'user': id, title, content }
     const post = await Post.create(postObj);
 
     if (post) {
@@ -31,7 +32,7 @@ const createPost = asyncHandler(async (req: Request, res: Response): Promise<any
 });
 
 const updatePost = asyncHandler(async (req: Request, res: Response): Promise<any> => {
-    const { id, title, content } = req.body;
+    const { id, title, content }: IPost = req.body;
 
     if (!id || !title || !content ) {
         return res.status(400).json({ message: 'All fields are required' });
@@ -52,7 +53,7 @@ const updatePost = asyncHandler(async (req: Request, res: Response): Promise<any
 });
 
 const deletePost = asyncHandler(async (req: Request, res: Response): Promise<any> => {
-    const { id } = req.body;
+    const { id }: IPost = req.body;
 
     if (!id) {
         return res.status(400).json({ message: 'Post ID required' });

@@ -1,10 +1,6 @@
-import mongoose, { ObjectId } from 'mongoose';
+import mongoose from 'mongoose';
 
-interface IPost {
-    user: ObjectId;
-    title: string;
-    content: string;
-}
+import { IPost } from '@utilities/types';
 
 const postSchema = new mongoose.Schema<IPost>(
     {

@@ -1,12 +1,6 @@
 import mongoose from 'mongoose';
 
-interface IUser {
-    username: string;
-    password: string;
-    email: string;
-    status: 'Pending' | 'Active';
-    expiredIn: Date | null;
-}
+import { IUser } from '@utilities/types';
 
 const userSchema = new mongoose.Schema<IUser>(
     {

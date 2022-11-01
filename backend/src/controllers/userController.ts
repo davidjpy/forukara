@@ -7,32 +7,7 @@ import * as EmailValidator from 'email-validator';
 import User from '@models/User';
 import emailService from '@utilities/emailService';
 
-interface Token {
-    tokenId: string;
-    tokenUsername: string;
-    tokenEmail: string;
-}
-
-interface IUser {
-    id?: string;
-    username?: string;
-    email?: string;
-    password?: string;
-    confirmPassword?: string;
-}
-
-interface ErrorResponse {
-    error: string;
-    code: number;
-}
-
-enum ErrorCode {
-    Failed = 0,
-    UsernameErr = 1,
-    EmailErr = 2,
-    PasswordErr = 3,
-    ConfirmPasswordErr = 4,
-}
+import { IUser, IToken, IErrorResponse, ErrorCode } from '@utilities/types';
 
 const getAllUsers = asyncHandler(async (req: Request, res: Response): Promise<any> => {
     const users = await User.find().select('-password').lean();
@@ -63,7 +38,7 @@ const getUserById = asyncHandler(async (req: Request, res: Response): Promise<an
 const createUser = asyncHandler(async (req: Request, res: Response): Promise<any> => {
     const { username, password, confirmPassword, email }: IUser = req.body;
 
-    let errorCodes: Array<ErrorResponse> = [];
+    let errorCodes: Array<IErrorResponse> = [];
 
     if (!username) {
         errorCodes.push({ error: 'Username is required', code: ErrorCode.UsernameErr });
@@ -105,10 +80,10 @@ const createUser = asyncHandler(async (req: Request, res: Response): Promise<any
     }
 
     const hashedPwd = await bcrypt.hash(password!, 10);
-    const userObj = { username, 'password': hashedPwd, email }
+    const userObj = { username, 'password': hashedPwd, email };
     const user = await User.create(userObj);
 
-    const payload: Token = { tokenId: user._id.toString(), tokenUsername: user.username, tokenEmail: user.email }
+    const payload: IToken = { tokenId: user._id.toString(), tokenUsername: user.username!, tokenEmail: user.email! };
 
     const token = jwt.sign(payload, process.env.VERIFICATION_SECRET_KEY as Secret, { expiresIn: '300s' });
 
@@ -190,7 +165,7 @@ const verifiyUser = asyncHandler(async (req: Request, res: Response): Promise<an
 
     try {
         const userToken = jwt.verify(token, process.env.VERIFICATION_SECRET_KEY as Secret);
-        const { tokenId, tokenUsername, tokenEmail } = userToken as Token;
+        const { tokenId, tokenUsername, tokenEmail } = userToken as IToken;
 
         if (!tokenId || !tokenUsername || !tokenEmail) {
             return res.status(401).json({ message: 'The verification link is invalid', code: ErrorCode.Failed });
@@ -233,7 +208,7 @@ const resendVerification = asyncHandler(async (req: Request, res: Response): Pro
         return res.status(400).json({ message: { error: 'Account has been verified'}, code: ErrorCode.Failed });
     }
 
-    const payload: Token = { tokenId: user._id.toString(), tokenUsername: user.username, tokenEmail: user.email }
+    const payload: IToken = { tokenId: user._id.toString(), tokenUsername: user.username!, tokenEmail: user.email! }
 
     const token = jwt.sign(payload, process.env.VERIFICATION_SECRET_KEY as Secret, { expiresIn: '300s' });
 

@@ -11,13 +11,8 @@ import { errorHandler } from '@middlewares/errorHandler';
 import commentRoutes from '@routes/commentRoutes';
 import postRoutes from '@routes/postRoutes';
 import userRoutes from '@routes/userRoutes'
+import { IDBError } from '@utilities/types';
 
-interface DBError {
-    no?: number;
-    code?: string;
-    syscall?: string;
-    hostname?: string;
-}
 
 const app = express();
 const PORT = process.env.PORT;
@@ -45,7 +40,7 @@ mongoose.connection.once('open', () => {
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 });
 
-mongoose.connection.on('error', (err: DBError) => {
+mongoose.connection.on('error', (err: IDBError) => {
     console.log(err);
     logEvents(`${err.no}: ${err.code}\t${err.syscall}\t${err.hostname}`, 'dbErrLog.log');
 });

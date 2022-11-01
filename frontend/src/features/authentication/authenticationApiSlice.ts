@@ -16,7 +16,7 @@ export const authenticationApiSlice = apiSlice.injectEndpoints({
     endpoints: builder => ({
         getUserById: builder.query<IUser, string>({
             query: (id) => ({
-                url: `/users/id/${id}`,
+                url: `/users/${id}`,
                 validateStatus: (response, result) =>
                     response.status === 200 && !result.isError
             }),

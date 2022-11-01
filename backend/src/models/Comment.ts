@@ -1,10 +1,6 @@
-import mongoose, { ObjectId } from 'mongoose';
+import mongoose from 'mongoose';
 
-interface IComment {
-    post: ObjectId;
-    user: ObjectId;
-    content: string;
-}
+import { IComment } from '@utilities/types';
 
 const commentSchema = new mongoose.Schema<IComment>(
     {

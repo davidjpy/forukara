@@ -2,9 +2,10 @@ import asyncHandler from 'express-async-handler';
 import { Request, Response } from 'express';
 
 import Comment from '@models/Comment';
+import { IComment } from '@utilities/types';
 
 const getCommentByPost = asyncHandler(async (req: Request, res: Response): Promise<any> => {
-    const { post } = req.body;
+    const { post }: IComment = req.body;
 
     if (!post) {
         return res.status(400).json({ message: 'Post ID required' });
@@ -20,13 +21,13 @@ const getCommentByPost = asyncHandler(async (req: Request, res: Response): Promi
 });
 
 const createComment = asyncHandler(async (req: Request, res: Response): Promise<any> => {
-    const { post, user, content } = req.body;
+    const { post, user, content }: IComment = req.body;
 
     if (!post || !user || !content) {
         return res.status(400).json({ message: 'All fields are required' });
     }
 
-    const commentObj = { post, user, content }
+    const commentObj: IComment = { post, user, content }
     const comment = await Comment.create(commentObj);
 
     if (comment) {
@@ -37,7 +38,7 @@ const createComment = asyncHandler(async (req: Request, res: Response): Promise<
 });
 
 const updateComment = asyncHandler(async (req: Request, res:Response): Promise<any> => {
-    const { id, content } = req.body;
+    const { id, content }: IComment = req.body;
 
     if (!id || !content) {
         return res.status(400).json({ message: 'All fields are required' });
@@ -57,7 +58,7 @@ const updateComment = asyncHandler(async (req: Request, res:Response): Promise<a
 })
 
 const deleteComment = asyncHandler(async (req: Request, res: Response): Promise<any> => {
-    const { id } = req.body;
+    const { id }: IComment = req.body;
 
     if (!id) {
         return res.status(400).json({ message: 'Post ID required' });

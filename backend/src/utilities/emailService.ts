@@ -3,12 +3,7 @@ import handlebars from 'handlebars';
 import fs from 'fs';
 import path from 'path';
 
-interface EmailService {
-    HTMLTemplate: string;
-    replacement: object,
-    target: string;
-    subject: string;
-}
+import { IEmailService } from '@utilities/types';
 
 const absPath = path.resolve(__dirname);
 
@@ -28,7 +23,7 @@ const readHTML = (HTMLTemplate: string, replacement: object): string => {
     return html;
 }
 
-const emailService = async ({ HTMLTemplate, replacement, target, subject }: EmailService): Promise<any> => {
+const emailService = async ({ HTMLTemplate, replacement, target, subject }: IEmailService): Promise<any> => {
     const mailOptions = {
         from: 'forukara.auto@gmail.com',
         to: target,
