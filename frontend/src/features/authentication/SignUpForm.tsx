@@ -10,8 +10,9 @@ import { useCreateUserMutation, useResendEmailMutation } from '@features/authent
 
 const SignUpForm: FC = () => {
 
+    const counterTime = 5;
     const formRef = useRef<HTMLDivElement | null>(null);
-    const counterRef = useRef<number>(60);
+    const counterRef = useRef<number>(counterTime);
     const dispatch = useAppDispatch();
     const signUpFormMounted = useAppSelector((state) => state.authentication.signUpFormMounted);
     const [createUser, createUserResult] = useCreateUserMutation();
@@ -28,7 +29,7 @@ const SignUpForm: FC = () => {
     const [passwordErr, setPasswordErr] = useState<string>('');
     const [confirmPasswordErr, setConfirmPasswordErr] = useState<string>('');
     const [resendEmailErr, setResendEmailErr] = useState<string>('');
-    const [resendCooldown, setresendCooldown] = useState<number>(-1);
+    const [, setCoolDown] = useState<number>(counterTime);
 
     const submitNotAllowed: boolean = Boolean(err || userIdErr || emailErr || passwordErr || confirmPasswordErr);
 
@@ -64,7 +65,7 @@ const SignUpForm: FC = () => {
         if (createUserResult.isSuccess) {
             if (formRef.current) {
                 formRef.current.style.left = '-322px';
-            }
+            };
             handleResetInput();
         }
 
@@ -97,27 +98,31 @@ const SignUpForm: FC = () => {
         await resendEmail({
             email: emailCopy,
         });
-        let ref = 1;
+
         counterRef.current--;
-        setresendCooldown(ref++);
-        const timer = setInterval(() => {
+        setCoolDown(prev => prev - 1);
+        const counter = setInterval(() => {
             counterRef.current--;
-            setresendCooldown(ref++);
+            setCoolDown(prev => prev - 1);
 
             if (counterRef.current === 0) {
-                counterRef.current = 60;
-                clearInterval(timer);
+                clearInterval(counter);
+                setCoolDown(counterTime);
+                counterRef.current = counterTime;
             }
         }, 1000);
     }
 
     useEffect(() => {
-        console.log(resendEmailResult)
+        console.log(resendEmailResult);
         if (resendEmailResult.error && 'data' in resendEmailResult.error) {
             const { message } = resendEmailResult.error.data as { message: { error: string; code: number } };
             setResendEmailErr(message.error + '*');
+        } else {
+            setResendEmailErr('');
         }
     }, [resendEmailResult]);
+
 
     const handleResetInput = (): void => {
         setUserId('');
@@ -210,14 +215,14 @@ const SignUpForm: FC = () => {
                     <div className='layout__success-wrapper'>
                         <p className='layout__text layout__text--alien-green-light'>Congratulation!</p>
                         <p className='layout__text layout__text--white'>Your account has been successfully created. Verify your email address by checking the verification email we just delivered to your inbox</p>
-                        <p className='layout__text layout__text--white'>If the email is not reaching you. To get another email, click {counterRef?.current === 60 ? 
-                        (
-                            <span onClick={handleresendEmail} className='layout__text layout__text--alien-green-light layout__text--link'>here</span>
-                        ) : (
-                            <span className='layout__text layout__text--gray'>here ({counterRef.current})</span>
-                        )}</p>
+                        <p className='layout__text layout__text--white'>If the email is not reaching you. To get another email, click {counterRef?.current === counterTime ?
+                            (
+                                <span onClick={handleresendEmail} className='layout__text layout__text--alien-green-light layout__text--link'>here</span>
+                            ) : (
+                                <span className='layout__text layout__text--gray'>here ({counterRef?.current})</span>
+                            )}</p>
                         {resendEmailErr && <p className='layout__text layout__text--red' style={{ margin: '0 0 1rem 0' }}>{resendEmailErr}</p>}
-                        <p className='layout__text layout__text--red'>The account will be deleted in five minutes if not verified*</p>
+                        <p className='layout__text layout__text--red'>The account will be deleted in ten minutes if not verified*</p>
                     </div>
                 </div>
             </section>

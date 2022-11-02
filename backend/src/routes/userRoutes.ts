@@ -1,6 +1,7 @@
 import express from 'express';
 
 import userController from '@controllers/userController';
+import { emailLimiter } from '@middlewares/requestLimiter';
 
 const router = express.Router();
 
@@ -17,7 +18,7 @@ router.route('/verifications/:token')
     .get(userController.verifiyUser)
 
 router.route('/verifications/resend')
-    .post(userController.resendVerification)
+    .post(emailLimiter, userController.resendVerification)
 
 router.route('/test')
     .get(userController.testing)

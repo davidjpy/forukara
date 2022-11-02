@@ -201,7 +201,7 @@ const resendVerification = asyncHandler(async (req: Request, res: Response): Pro
     const user = await User.findOne({ email: email }).select('-password').lean().exec();
 
     if (!user) {
-        return res.status(400).json({ message: { error: 'Due to the five minute verification timer expired, the account has been deleted. Please sign up once again', code: ErrorCode.Failed } });
+        return res.status(400).json({ message: { error: 'Due to the ten minute verification timer expired, the account has been deleted. Please sign up once again', code: ErrorCode.Failed } });
     }
 
     if (user.status === 'Active') {
