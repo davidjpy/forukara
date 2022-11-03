@@ -3,7 +3,7 @@
 Forukara is a place where individuals from all backgrounds and occupations may congregate and exchange ideas.
 
 ## Overviews & Stacks (Things that are already done)
-Forukara is a MERN stack project with classic implementation of MVC framwork.
+Forukara is a MERN stack project with the classic implementation of MVC framwork.
 * Typescript & React.js 
   1. Vanilla javascript for animations and effects                   
   2. Redux Tookit for global states and actions
