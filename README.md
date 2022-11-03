@@ -10,3 +10,4 @@ Forukara is a place where individuals from all backgrounds and occupations may c
 
 * Node.js
   1. jwt token & bcrypt for authentication and authorization
+     1. dsadada
