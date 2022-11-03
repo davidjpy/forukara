@@ -21,3 +21,5 @@ Forukara is a MERN stack project with classic implementation of MVC framwork.
 
 * MongoDB
   1. TTL index for deleting acount without validated email
+
+## More to come! (The react & node app are probably gonna be deployed in Nelify and Vercel)
