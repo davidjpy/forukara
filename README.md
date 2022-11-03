@@ -4,7 +4,7 @@ Forukara is a place where individuals from all backgrounds and occupations may c
 
 ## Stacks
 * Typescript & React.js 
-  1. Vanilla javascript (animations and effects)                   
+  1. Vanilla javascript => animations and effects)                   
   2. Redux Tookit       (managing global states and actions)
   3. RTK query          (memorized selector and data caching)
 
