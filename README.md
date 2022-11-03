@@ -6,7 +6,7 @@ Forukara is a place where individuals from all backgrounds and occupations may c
 Forukara is a MERN stack project with the classic implementation of MVC framwork.
 * Typescript & React.js 
   1. Vanilla javascript for animations and effects                   
-  2. Redux Tookit for global states and actions
+  2. Redux Toolkit for global states and actions
   3. RTK query for memorized selector and data caching
   4. Craco for configurating webpack & babel in CRA
 
