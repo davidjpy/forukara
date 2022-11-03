@@ -4,10 +4,10 @@ Forukara is a place where individuals from all backgrounds and occupations may c
 
 ## Stacks
 * Typescript & React.js 
-  1. Vanilla javascript for animations and effects                        
-  2. Redux Tookit for managing global states and actions
-  3. RTK query for handling memorized selector and data caching
+  1. Vanilla javascript (animations and effects)                   
+  2. Redux Tookit       (managing global states and actions)
+  3. RTK query          (memorized selector and data caching)
 
 * Node.js
   1. jwt token & bcrypt for authentication and authorization
-     1. dsadada
+     1. Nodemailer for email verification
