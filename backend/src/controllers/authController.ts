@@ -26,7 +26,7 @@ const login = asyncHandler(async (req: Request, res: Response): Promise<any> => 
     const user = await User.findOne({ username }).lean().exec();
 
     if (!user) {
-        return res.status(400).json({ message: [{ error: 'User not found', code: ErrorCode.Failed }]});
+        return res.status(400).json({ message: [{ error: `The Forukara account doesn't exist`, code: ErrorCode.UsernameErr }]});
     }
 
     if (user.status !== 'Active') {
@@ -36,7 +36,7 @@ const login = asyncHandler(async (req: Request, res: Response): Promise<any> => 
     const isValidPassword = await bcrypt.compare(password!, user.password!);
 
     if (!isValidPassword) {
-        return res.status(401).json({ message: [{ error: 'Incorrect password', code: ErrorCode.PasswordErr }]});
+        return res.status(401).json({ message: [{ error: 'Your password is incorrect. Please try again', code: ErrorCode.PasswordErr }]});
     }
 
     const accessTokenPayload: IToken = { tokenId: user._id.toString(), tokenUsername: username!, tokenEmail: user.email! };

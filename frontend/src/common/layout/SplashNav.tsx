@@ -1,16 +1,16 @@
 import { FC } from 'react';
 import { FaBlog } from 'react-icons/fa';
 
-import SignUpForm from '@features/authentication/SignUpForm';
-import LoginForm from '@features/authentication/LoginForm';
+import SignUpForm from '@features/auth/SignUpForm';
+import LoginForm from '@features/auth/LoginForm';
 import { useAppDispatch } from '@app/hooks';
-import { toggleSignUpForm, toggleLoginForm } from '@features/authentication/authenticationSlice'
-import { useGetUserByIdQuery } from '@features/authentication/authenticationApiSlice';
+import { toggleSignUpForm, toggleLoginForm } from '@features/auth/authSlice'
+// import { useGetUserByIdQuery } from '@features/auth/authApiSlice';
 
 const Nav: FC = () => {
 
     const dispatch = useAppDispatch();
-    const { data, isLoading, isFetching, isError } = useGetUserByIdQuery('635d52e29d72d9a119602b87');
+    // const { data, isLoading, isFetching, isError } = useGetUserByIdQuery('635d52e29d72d9a119602b87');
 
     const handleSignUpFormMounted = (): void => {
         dispatch(toggleSignUpForm(true));

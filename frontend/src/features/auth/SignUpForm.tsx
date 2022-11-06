@@ -5,8 +5,8 @@ import { RiLockPasswordFill } from 'react-icons/ri';
 
 import { useClickOutside } from '@common/hooks/useClickOutside';
 import { useAppSelector, useAppDispatch } from '@app/hooks';
-import { toggleSignUpForm, toggleLoginForm } from '@features/authentication/authenticationSlice';
-import { useCreateUserMutation, useResendEmailMutation } from '@features/authentication/authenticationApiSlice';
+import { toggleSignUpForm, toggleLoginForm } from '@features/auth/authSlice';
+import { useCreateUserMutation, useResendEmailMutation } from '@features/auth/authApiSlice';
 
 const SignUpForm: FC = () => {
 
@@ -14,7 +14,7 @@ const SignUpForm: FC = () => {
     const formRef = useRef<HTMLDivElement | null>(null);
     const counterRef = useRef<number>(counterTime);
     const dispatch = useAppDispatch();
-    const signUpFormMounted = useAppSelector((state) => state.authentication.signUpFormMounted);
+    const signUpFormMounted = useAppSelector((state) => state.auth.signUpFormMounted);
     const [createUser, createUserResult] = useCreateUserMutation();
     const [resendEmail, resendEmailResult] = useResendEmailMutation();
     const [userId, setUserId] = useState<string>('');
@@ -60,8 +60,6 @@ const SignUpForm: FC = () => {
     }
 
     useEffect(() => {
-        console.log(createUserResult);
-
         if (createUserResult.isSuccess) {
             if (formRef.current) {
                 formRef.current.style.left = '-322px';
@@ -114,7 +112,6 @@ const SignUpForm: FC = () => {
     }
 
     useEffect(() => {
-        console.log(resendEmailResult);
         if (resendEmailResult.error && 'data' in resendEmailResult.error) {
             const { message } = resendEmailResult.error.data as { message: { error: string; code: number } };
             setResendEmailErr(message.error + '*');

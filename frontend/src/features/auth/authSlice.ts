@@ -13,8 +13,8 @@ const initialState: MountState = {
     loginFormMounted: false
 }
 
-export const authenticationSlice = createSlice({
-    name: 'authentication',
+export const authSlice = createSlice({
+    name: 'auth',
     initialState,
     reducers: {
         toggleSignUpForm: (state, action: PayloadAction<boolean>) => {
@@ -26,9 +26,9 @@ export const authenticationSlice = createSlice({
     }
 })
 
-export const { toggleSignUpForm, toggleLoginForm } = authenticationSlice.actions;
+export const { toggleSignUpForm, toggleLoginForm } = authSlice.actions;
 
-export const selectSignUpFormMounted = (state: RootState) => state.authentication.signUpFormMounted;
-export const selectLoginFormMounted = (state: RootState) => state.authentication.loginFormMounted;
+export const selectSignUpFormMounted = (state: RootState) => state.auth.signUpFormMounted;
+export const selectLoginFormMounted = (state: RootState) => state.auth.loginFormMounted;
 
-export default authenticationSlice.reducer;
+export default authSlice.reducer;

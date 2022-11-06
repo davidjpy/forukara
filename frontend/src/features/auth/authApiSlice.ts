@@ -12,7 +12,7 @@ interface IUser {
     createdAt: Date;
 }
 
-export const authenticationApiSlice = apiSlice.injectEndpoints({
+export const authApiSlice = apiSlice.injectEndpoints({
     endpoints: builder => ({
         getUserById: builder.query<IUser, string>({
             query: (id) => ({
@@ -35,7 +35,32 @@ export const authenticationApiSlice = apiSlice.injectEndpoints({
                 url: '/users/verifications/resend',
                 method: 'POST',
                 body: data,
-                validateStatus: (response, result) => 
+                validateStatus: (response, result) =>
+                    (response.status === 200 || response.status === 201) && !result.isError
+            })
+        }),
+        login: builder.mutation<string, Partial<IUser>>({
+            query: ({ ...data }) => ({
+                url: '/auth/login',
+                method: 'POST',
+                body: data,
+                validateStatus: (response, result) =>
+                    (response.status === 200 || response.status === 201) && !result.isError
+            })
+        }),
+        refresh: builder.query<string, void>({
+            query: () => ({
+                url: '/auth/refresh',
+                method: 'GET',
+                validateStatus: (response, result) =>
+                    (response.status === 200 || response.status === 201) && !result.isError
+            })
+        }),
+        logout: builder.mutation<string, void>({
+            query: () => ({
+                url: '/auth/logout',
+                method: 'POST',
+                validateStatus: (response, result) =>
                     (response.status === 200 || response.status === 201) && !result.isError
             })
         })
@@ -45,8 +70,11 @@ export const authenticationApiSlice = apiSlice.injectEndpoints({
 export const {
     useGetUserByIdQuery,
     useCreateUserMutation,
-    useResendEmailMutation
-} = authenticationApiSlice;
+    useResendEmailMutation,
+    useLoginMutation,
+    useRefreshQuery,
+    useLogoutMutation
+} = authApiSlice;
 
 
 
