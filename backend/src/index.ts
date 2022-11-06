@@ -11,6 +11,7 @@ import { errorHandler } from '@middlewares/errorHandler';
 import commentRoutes from '@routes/commentRoutes';
 import postRoutes from '@routes/postRoutes';
 import userRoutes from '@routes/userRoutes'
+import authRoutes from '@routes/authRoutes';
 import { IDBError } from '@utilities/types';
 
 
@@ -32,6 +33,8 @@ app.use('/users', userRoutes);
 app.use('/posts', postRoutes);
 
 app.use('/comments', commentRoutes);
+
+app.use('/auth', authRoutes);
 
 app.use(errorHandler);
 

@@ -39,9 +39,9 @@ export interface IComment {
 }
 
 export interface IToken {
-    tokenId: string;
-    tokenUsername: string;
-    tokenEmail: string;
+    tokenId?: string;
+    tokenUsername?: string;
+    tokenEmail?: string;
 }
 
 export interface IErrorResponse {
@@ -55,4 +55,5 @@ export enum ErrorCode {
     EmailErr = 2,
     PasswordErr = 3,
     ConfirmPasswordErr = 4,
+    AuthErr = 5
 }
