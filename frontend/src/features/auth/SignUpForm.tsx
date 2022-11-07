@@ -10,7 +10,7 @@ import { useCreateUserMutation, useResendEmailMutation } from '@features/auth/au
 
 const SignUpForm: FC = () => {
 
-    const counterTime = 5;
+    const counterTime = 30;
     const formRef = useRef<HTMLDivElement | null>(null);
     const counterRef = useRef<number>(counterTime);
     const dispatch = useAppDispatch();

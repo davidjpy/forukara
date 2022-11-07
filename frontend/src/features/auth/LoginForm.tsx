@@ -39,7 +39,7 @@ const LoginForm: FC = () => {
     }
 
     useEffect(() => {
-        console.log(loginResult)
+        console.log(loginResult);
         if (loginResult.isSuccess) {
             handleLoginFormUnmounted();
             handleResetInput();
@@ -117,7 +117,7 @@ const LoginForm: FC = () => {
                                     <div className='layout__loader' style={{ position: 'absolute' }} />
                                 </div>
                             ) : (
-                                <input type='submit' disabled={submitNotAllowed} value='Create Account' />
+                                <input type='submit' disabled={submitNotAllowed} value='Login' />
                             )}
                         </form>
                         <p className='layout__text layout__text--white' style={{ textAlign: 'center', marginTop: '30px' }}>

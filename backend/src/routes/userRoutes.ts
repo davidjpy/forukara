@@ -2,8 +2,18 @@ import express from 'express';
 
 import userController from '@controllers/userController';
 import { emailLimiter } from '@middlewares/requestLimiter';
+import verifyToken from '@middlewares/verifyToken';
 
 const router = express.Router();
+
+router.route('/verifications/:token')
+    .get(userController.verifiyUser)
+
+router.route('/verifications/resend')
+    .post(emailLimiter, userController.resendVerification)
+
+
+router.use(verifyToken);
 
 router.route('/')
     .get(userController.getAllUsers)
@@ -14,11 +24,6 @@ router.route('/')
 router.route('/:id')
     .get(userController.getUserById)
 
-router.route('/verifications/:token')
-    .get(userController.verifiyUser)
-
-router.route('/verifications/resend')
-    .post(emailLimiter, userController.resendVerification)
 
 router.route('/test')
     .get(userController.testing)

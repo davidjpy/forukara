@@ -52,7 +52,9 @@ const login = asyncHandler(async (req: Request, res: Response): Promise<any> => 
         maxAge: 5 * 60 * 1000
     });
 
-    res.json({ message: accessToken });
+    const userPayload: IUser = { id: user._id.toString(), username: user.username, email: user.email, createdAt: user.createdAt };
+
+    res.json({ message: { token: accessToken, user: userPayload } });
 });
 
 const refresh = asyncHandler(async (req: Request, res: Response): Promise<any> => {
@@ -87,7 +89,7 @@ const refresh = asyncHandler(async (req: Request, res: Response): Promise<any> =
     }
 });
 
-const logout = asyncHandler(async (req: Request, res: Response): Promise<any> => {
+const logout = (req: Request, res: Response): any => {
     const cookies = req.cookies;
 
     if (!cookies?.jwt) {
@@ -101,7 +103,7 @@ const logout = asyncHandler(async (req: Request, res: Response): Promise<any> =>
     });
 
     res.json({ message: 'Logout successful' });
-});
+};
 
 export = {
     login,

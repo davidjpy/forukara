@@ -21,6 +21,7 @@ export interface IUser {
     email?: string;
     confirmPassword?: string;
     status?: 'Pending' | 'Active';
+    createdAt?: Date;
     expiredIn?: Date | null;
 }
 
