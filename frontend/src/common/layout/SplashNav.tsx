@@ -1,17 +1,18 @@
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import { FaBlog } from 'react-icons/fa';
 
 import SignUpForm from '@features/auth/SignUpForm';
 import LoginForm from '@features/auth/LoginForm';
-import { useAppDispatch } from '@app/hooks';
+import { useAppSelector, useAppDispatch } from '@app/hooks';
 import { toggleSignUpForm, toggleLoginForm } from '@features/auth/authSlice'
-import { useGetUserByIdQuery, useLogoutMutation } from '@features/auth/authApiSlice';
+import { useLogoutMutation, useRefreshQuery } from '@features/auth/authApiSlice';
+
 
 const Nav: FC = () => {
 
     const dispatch = useAppDispatch();
     const [logout, logoutResult] = useLogoutMutation();
-    // const { data, isLoading, isFetching, isError } = useGetUserByIdQuery('635d52e29d72d9a119602b87');
+    const user = useAppSelector(state => state.auth.user);
 
     const handleSignUpFormMounted = (): void => {
         dispatch(toggleSignUpForm(true));
@@ -25,9 +26,7 @@ const Nav: FC = () => {
         await logout();
     }
 
-    useEffect(() => {
-        console.log(logoutResult);
-    }, [logoutResult])
+    useRefreshQuery();
 
     return (
         <>
@@ -35,7 +34,8 @@ const Nav: FC = () => {
                 <div className='splashlayout__container'>
                     <div className='splashlayout__logo-wrapper'>
                         <FaBlog />
-                        <p>Forukara</p>
+                        Forukara
+                        <p>{user.username}</p>
                     </div>
                     <div className='splashlayout__button-wrapper'>
                         <button onClick={handleLogout}>logout</button>

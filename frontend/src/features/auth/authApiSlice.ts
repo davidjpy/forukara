@@ -1,17 +1,15 @@
 // import { createSelector, createEntityAdapter, EntityAdapter } from '@reduxjs/toolkit';
 
 import { apiSlice } from '@app/apiSlice';
-import { setUserInfo, setcredantial } from '@features/auth/authSlice';
+import { setUserInfo, setcredantial, logout } from '@features/auth/authSlice';
 
-interface ILoginResponse {
-    message: {
-        token: string;
-        user: User;
-    }
+interface IResponse {
+    token: string;
+    user: User,
 }
 
 type User = {
-    _id: string;
+    id: string;
     username: string;
     email: string;
     password: string;
@@ -22,14 +20,6 @@ type User = {
 
 export const authApiSlice = apiSlice.injectEndpoints({
     endpoints: builder => ({
-        getUserById: builder.query<User, string>({
-            query: (id) => ({
-                url: `/users/${id}`,
-                validateStatus: (response, result) =>
-                    response.status === 200 && !result.isError
-            }),
-        }),
-
         createUser: builder.mutation<User, Partial<User>>({
             query: ({ ...data }) => ({
                 url: '/users',
@@ -50,7 +40,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
             })
         }),
 
-        login: builder.mutation<ILoginResponse, Partial<User>>({
+        login: builder.mutation<IResponse, Partial<User>>({
             query: ({ ...data }) => ({
                 url: '/auth/login/',
                 method: 'POST',
@@ -58,39 +48,62 @@ export const authApiSlice = apiSlice.injectEndpoints({
                 validateStatus: (response, result) =>
                     (response.status === 200 || response.status === 201) && !result.isError
             }),
+            transformResponse: (rawResult: { message: IResponse }) => {
+                return rawResult.message;
+            },
             async onQueryStarted(arg, { dispatch, queryFulfilled }) {
                 try {
-                    const { data: { message: { token, user } } } = await queryFulfilled;
-                    dispatch(setUserInfo(user));
-                    dispatch(setcredantial(token));
+                    const { data } = await queryFulfilled;
+                    dispatch(setcredantial(data.token));
+                    dispatch(setUserInfo(data.user));
                 } catch (err) {
                     console.error(err);
                 }
             }
         }),
 
-        refresh: builder.query<string, void>({
+        refresh: builder.query<IResponse, void>({
             query: () => ({
                 url: '/auth/refresh',
                 method: 'GET',
                 validateStatus: (response, result) =>
                     (response.status === 200 || response.status === 201) && !result.isError
-            })
+            }),
+            transformResponse: (rawResult: { message: IResponse }) => {
+                return rawResult.message;
+            },
+            async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+                try {
+                    const { data } = await queryFulfilled;
+                    dispatch(setcredantial(data.token));
+                    dispatch(setUserInfo(data.user));
+                } catch (err) {
+                    console.error(err);
+                }
+            }
         }),
         
-        logout: builder.mutation<string, void>({
+        logout: builder.mutation<void, void>({
             query: () => ({
                 url: '/auth/logout/',
                 method: 'POST',
                 validateStatus: (response, result) =>
                     (response.status === 200 || response.status === 201) && !result.isError
-            })
+            }),
+            async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+                try {
+                    await queryFulfilled;
+                    dispatch(logout());
+                    dispatch(authApiSlice.util.resetApiState());
+                } catch (err) {
+                    console.error(err);
+                }
+            }
         })
     })
 });
 
 export const {
-    useGetUserByIdQuery,
     useCreateUserMutation,
     useResendEmailMutation,
     useLoginMutation,

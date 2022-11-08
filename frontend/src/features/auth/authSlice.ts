@@ -4,27 +4,27 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '@app/store';
 
 type User = {
-    id?: string;
-    username?: string;
-    email?: string;
+    id: string | null;
+    username: string | null;
+    email: string | null;
     createdAt: Date | null;
 }
 
 interface AuthState {
     signUpFormMounted: boolean;
     loginFormMounted: boolean;
-    credantial: string;
+    credantial: string | null;
     user: User;
 }
 
 const initialState: AuthState = {
     signUpFormMounted: false,
     loginFormMounted: false,
-    credantial: '',
+    credantial: null,
     user: {
-        id: '',
-        username: '',
-        email: '',
+        id: null,
+        username: null,
+        email: null,
         createdAt: null
     }
 }
@@ -49,11 +49,14 @@ export const authSlice = createSlice({
         setcredantial: (state, action: PayloadAction<string>) => {
             const token = action.payload;
             state.credantial = token;
-        }
+        },
+
+        logout: () => initialState
+        
     }
 })
 
-export const { toggleSignUpForm, toggleLoginForm, setUserInfo, setcredantial } = authSlice.actions;
+export const { toggleSignUpForm, toggleLoginForm, setUserInfo, setcredantial, logout } = authSlice.actions;
 
 export const selectSignUpFormMounted = (state: RootState) => state.auth.signUpFormMounted;
 export const selectLoginFormMounted = (state: RootState) => state.auth.loginFormMounted;

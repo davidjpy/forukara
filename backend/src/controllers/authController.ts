@@ -52,7 +52,12 @@ const login = asyncHandler(async (req: Request, res: Response): Promise<any> => 
         maxAge: 5 * 60 * 1000
     });
 
-    const userPayload: IUser = { id: user._id.toString(), username: user.username, email: user.email, createdAt: user.createdAt };
+    const userPayload: IUser = { 
+        id: user._id.toString(), 
+        username: user.username, 
+        email: user.email, 
+        createdAt: user.createdAt 
+    };
 
     res.json({ message: { token: accessToken, user: userPayload } });
 });
@@ -74,7 +79,7 @@ const refresh = asyncHandler(async (req: Request, res: Response): Promise<any> =
             return res.status(401).json({ message: { error: 'ID missing', code: ErrorCode.AuthErr } });
         }
 
-        const user = await User.findById(tokenId).lean().exec();
+        const user = await User.findById(tokenId).select('-password').lean().exec();
 
         if (!user) {
             return res.status(404).json({ message: 'User not found', code: ErrorCode.AuthErr });
@@ -83,7 +88,14 @@ const refresh = asyncHandler(async (req: Request, res: Response): Promise<any> =
         const accessTokenPayload: IToken = { tokenId: user._id.toString(), tokenUsername: user.username, tokenEmail: user.email };
         const accessToken = jwt.sign(accessTokenPayload, process.env.ACCESS_TOKEN_SECRET as Secret, { expiresIn: '1m' });
 
-        res.json({ message: accessToken });
+        const userPayload: IUser = { 
+            id: user._id.toString(), 
+            username: user.username, 
+            email: user.email, 
+            createdAt: user.createdAt 
+        };
+
+        res.json({ message: { token: accessToken, user: userPayload } });
     } catch (err) {
         return res.status(401).json({ message: { error: 'Invalid token', code: ErrorCode.AuthErr } });
     }

@@ -39,7 +39,6 @@ const LoginForm: FC = () => {
     }
 
     useEffect(() => {
-        console.log(loginResult);
         if (loginResult.isSuccess) {
             handleLoginFormUnmounted();
             handleResetInput();
