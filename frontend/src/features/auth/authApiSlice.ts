@@ -1,11 +1,14 @@
-// import { createSelector, createEntityAdapter, EntityAdapter } from '@reduxjs/toolkit';
-
 import { apiSlice } from '@app/apiSlice';
 import { setUserInfo, setcredantial, logout } from '@features/auth/authSlice';
 
-interface IResponse {
+interface ILoginResponse {
     token: string;
     user: User,
+}
+
+interface IRefreshResponse {
+    token: string,
+    id: string
 }
 
 type User = {
@@ -20,6 +23,26 @@ type User = {
 
 export const authApiSlice = apiSlice.injectEndpoints({
     endpoints: builder => ({
+        getUserById: builder.query<User, string>({
+            query: (id) => ({
+                url: `/users/${id}`,
+                method: 'GET',
+                validateStatus: (response, result) =>
+                    (response.status === 200 || response.status === 201) && !result.isError
+            }),
+            transformResponse: (rawResult: { message: User }) => {
+                return rawResult.message;
+            },
+            async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+                try {
+                    const { data } = await queryFulfilled;
+                    dispatch(setUserInfo(data));
+                } catch (err) {
+                    console.error(err);
+                }
+            }
+        }),
+
         createUser: builder.mutation<User, Partial<User>>({
             query: ({ ...data }) => ({
                 url: '/users',
@@ -40,7 +63,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
             })
         }),
 
-        login: builder.mutation<IResponse, Partial<User>>({
+        login: builder.mutation<ILoginResponse, Partial<User>>({
             query: ({ ...data }) => ({
                 url: '/auth/login/',
                 method: 'POST',
@@ -48,35 +71,35 @@ export const authApiSlice = apiSlice.injectEndpoints({
                 validateStatus: (response, result) =>
                     (response.status === 200 || response.status === 201) && !result.isError
             }),
-            transformResponse: (rawResult: { message: IResponse }) => {
+            transformResponse: (rawResult: { message: ILoginResponse }) => {
                 return rawResult.message;
             },
             async onQueryStarted(arg, { dispatch, queryFulfilled }) {
                 try {
                     const { data } = await queryFulfilled;
                     dispatch(setcredantial(data.token));
-                    dispatch(setUserInfo(data.user));
+                    dispatch(setUserInfo(data.user!));
                 } catch (err) {
                     console.error(err);
                 }
             }
         }),
 
-        refresh: builder.query<IResponse, void>({
+        refresh: builder.query<IRefreshResponse, void>({
             query: () => ({
                 url: '/auth/refresh',
                 method: 'GET',
                 validateStatus: (response, result) =>
                     (response.status === 200 || response.status === 201) && !result.isError
             }),
-            transformResponse: (rawResult: { message: IResponse }) => {
+            transformResponse: (rawResult: { message: IRefreshResponse }) => {
                 return rawResult.message;
             },
             async onQueryStarted(arg, { dispatch, queryFulfilled }) {
                 try {
                     const { data } = await queryFulfilled;
                     dispatch(setcredantial(data.token));
-                    dispatch(setUserInfo(data.user));
+                    dispatch(setUserInfo({ id: data.id }));
                 } catch (err) {
                     console.error(err);
                 }
@@ -104,6 +127,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
 });
 
 export const {
+    useGetUserByIdQuery,
     useCreateUserMutation,
     useResendEmailMutation,
     useLoginMutation,

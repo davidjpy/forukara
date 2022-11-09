@@ -5,14 +5,15 @@ import SignUpForm from '@features/auth/SignUpForm';
 import LoginForm from '@features/auth/LoginForm';
 import { useAppSelector, useAppDispatch } from '@app/hooks';
 import { toggleSignUpForm, toggleLoginForm } from '@features/auth/authSlice'
-import { useLogoutMutation, useRefreshQuery } from '@features/auth/authApiSlice';
-
+import { useLogoutMutation, useGetUserByIdQuery, useRefreshQuery } from '@features/auth/authApiSlice';
 
 const Nav: FC = () => {
 
+    useRefreshQuery();
     const dispatch = useAppDispatch();
     const [logout, logoutResult] = useLogoutMutation();
     const user = useAppSelector(state => state.auth.user);
+    const { isLoading, isFetching, isSuccess } = useGetUserByIdQuery(user.id as string, { skip: !user.id });
 
     const handleSignUpFormMounted = (): void => {
         dispatch(toggleSignUpForm(true));
@@ -26,8 +27,6 @@ const Nav: FC = () => {
         await logout();
     }
 
-    useRefreshQuery();
-
     return (
         <>
             <header className='splashlayout__nav'>
@@ -35,13 +34,18 @@ const Nav: FC = () => {
                     <div className='splashlayout__logo-wrapper'>
                         <FaBlog />
                         Forukara
-                        <p>{user.username}</p>
                     </div>
-                    <div className='splashlayout__button-wrapper'>
-                        <button onClick={handleLogout}>logout</button>
-                        <button onClick={handleLoginFormMounted} className='splashlayout__button splashlayout__button--text'>Login</button>
-                        <button onClick={handleSignUpFormMounted} className='splashlayout__button splashlayout__button--slide'>&nbsp;</button>
-                    </div>
+                    {user.id ? (
+                        <div className='splashlayout__action-wrapper'>
+                            <button onClick={handleLogout} className='splashlayout__button splashlayout__button--text'>Logout</button>
+                            <p>{user.username}</p>
+                        </div>
+                    ) : (
+                        <div className='splashlayout__action-wrapper'>
+                            <button onClick={handleLoginFormMounted} className='splashlayout__button splashlayout__button--text'>Login</button>
+                            <button onClick={handleSignUpFormMounted} className='splashlayout__button splashlayout__button--slide'>&nbsp;</button>
+                        </div>
+                    )}
                 </div>
             </header>
             <LoginForm />

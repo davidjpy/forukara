@@ -4,7 +4,6 @@ import { ErrorCode, IToken } from '@utilities/types';
 
 const verifyToken = (req: Request, res: Response, next: NextFunction) => {
     const authToken = req.headers.authorization;
-    console.log(authToken);
 
     if (!authToken || !authToken?.startsWith('Bearer ')) {
         return res.status(401).json({ message: { error: 'Authorizatin token missing', code: ErrorCode.AuthErr } });

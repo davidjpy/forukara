@@ -16,7 +16,7 @@
 
 .SplashPage__image {
     position: absolute;
-    background-image: url('@media/images/nav_background.jpg');
+    background-image: url('@media/images/nav_background.webp');
     background-size: cover;
     background-repeat: no-repeat;
     height: 100%;

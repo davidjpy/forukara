@@ -14,6 +14,7 @@
 .splashlayout__container {
     display: flex;
     align-items: center;
+    height: 52px;
 }
 
 .splashlayout__logo-wrapper {
@@ -28,7 +29,7 @@
     user-select: none;
 }
 
-.splashlayout__button-wrapper {
+.splashlayout__action-wrapper {
     display: flex;
     align-items: center;
     gap: 60px;
@@ -102,6 +103,36 @@
     opacity: 0;
 }
 
+@media screen and (max-width: 1400px) {
+    .splashlayout__nav {
+        width: 80%;
+    }
+
+    .splashlayout__logo-wrapper {
+        font-size: 1.8rem;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .splashlayout__logo-wrapper {
+        font-size: 1.6rem;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .splashlayout__logo-wrapper {
+        font-size: 1.4rem;
+    }
+
+    .splashlayout__action-wrapper {
+        gap: 10px;
+    }
+
+    .splashlayout__button {
+        width: 80px;
+        font-size: 0.6rem;
+    }
+}
 /* =========================================================================================== */
 /* ======================================== Layout =========================================== */
 /* =========================================================================================== */

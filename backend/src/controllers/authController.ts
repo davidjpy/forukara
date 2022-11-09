@@ -43,7 +43,7 @@ const login = asyncHandler(async (req: Request, res: Response): Promise<any> => 
     const refreshTokenPayload: IToken = { tokenId: user._id.toString() };
 
     const accessToken = jwt.sign(accessTokenPayload, process.env.ACCESS_TOKEN_SECRET as Secret, { expiresIn: '1m' });
-    const refreshToken = jwt.sign(refreshTokenPayload, process.env.REFRESH_TOKEN_SECRET as Secret, { expiresIn: '5m' });
+    const refreshToken = jwt.sign(refreshTokenPayload, process.env.REFRESH_TOKEN_SECRET as Secret, { expiresIn: '1m' });
 
     res.cookie('jwt', refreshToken, {
         httpOnly: true,
@@ -88,14 +88,7 @@ const refresh = asyncHandler(async (req: Request, res: Response): Promise<any> =
         const accessTokenPayload: IToken = { tokenId: user._id.toString(), tokenUsername: user.username, tokenEmail: user.email };
         const accessToken = jwt.sign(accessTokenPayload, process.env.ACCESS_TOKEN_SECRET as Secret, { expiresIn: '1m' });
 
-        const userPayload: IUser = { 
-            id: user._id.toString(), 
-            username: user.username, 
-            email: user.email, 
-            createdAt: user.createdAt 
-        };
-
-        res.json({ message: { token: accessToken, user: userPayload } });
+        res.json({ message: { token: accessToken, id: user._id.toString() } });
     } catch (err) {
         return res.status(401).json({ message: { error: 'Invalid token', code: ErrorCode.AuthErr } });
     }

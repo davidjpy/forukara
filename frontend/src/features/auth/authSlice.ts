@@ -5,9 +5,9 @@ import type { RootState } from '@app/store';
 
 type User = {
     id: string | null;
-    username: string | null;
-    email: string | null;
-    createdAt: Date | null;
+    username?: string | null;
+    email?: string | null;
+    createdAt?: Date | null;
 }
 
 interface AuthState {

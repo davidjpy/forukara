@@ -32,7 +32,14 @@ const getUserById = asyncHandler(async (req: Request, res: Response): Promise<an
         return res.status(404).json({ message: 'User not found', code: ErrorCode.Failed });
     }
 
-    res.json(user);
+    const returnPayload: IUser = { 
+        id: user._id.toString(), 
+        username: user.username, 
+        email: user.email, 
+        createdAt: user.createdAt 
+    };
+
+    res.json({ message: returnPayload });
 })
 
 const createUser = asyncHandler(async (req: Request, res: Response): Promise<any> => {
