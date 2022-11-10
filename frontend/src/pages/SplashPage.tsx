@@ -68,18 +68,19 @@ const SplashPage: FC = () => {
     }, []);
 
     return (
-        <div className='SplashPage'>
-            <div className='SplashPage__image'></div>
-            <div className='SplashPage__slogan'>
-                <div className='SplashPage__dynamic-txts-wrapper'>
-                    <p className='SplashPage__header SplashPage__header--large'>I'm a</p>
-                    <p className='SplashPage__header SplashPage__header--large SplashPage__header--dynamic' ref={dynamicTxtRef}></p>
+        <div className='splashPage'>
+            <div className='splashPage__overlay'>
+                <div className='splashPage__slogan'>
+                    <div className='splashPage__dynamic-txts-wrapper'>
+                        <p className='splashPage__header splashPage__header--large'>I'm a</p>
+                        <p className='splashPage__header splashPage__header--large splashPage__header--dynamic' ref={dynamicTxtRef}></p>
+                    </div>
+                    <p className='splashPage__header'>Share Your Wisdoms, Inspire The World, Reach The Impossibility</p>
+                    <button onClick={handleNavigateHomepage} className='splashPage__button'>
+                        Start Now
+                        <FaArrowRight className='splashPage__icon' />
+                    </button>
                 </div>
-                <p className='SplashPage__header'>Share Your Wisdoms, Inspire The World, Reach The Impossibility</p>
-                <button onClick={handleNavigateHomepage} className='SplashPage__button'>
-                    Start Now
-                    <FaArrowRight className='SplashPage__icon' />
-                </button>
             </div>
         </div>
     );

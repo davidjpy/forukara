@@ -9,7 +9,6 @@ import emailService from '@utilities/emailService';
 
 import { IUser, IToken, IErrorResponse, ErrorCode } from '@utilities/types';
 
-// Add an additional handler
 const getAllUsers = asyncHandler(async (req: Request, res: Response): Promise<any> => {
     const users = await User.find().select('-password').lean();
 

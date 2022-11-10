@@ -48,7 +48,7 @@ const LoginForm: FC = () => {
             const { message } = loginResult.error.data as { message: Array<{ error: string, code: number }> };
 
             for (let i = 0; i < message.length; i++) {
-                switch(message[i].code) {
+                switch (message[i].code) {
                     case 0:
                         setErr(message[i].error);
                         break;
@@ -87,7 +87,7 @@ const LoginForm: FC = () => {
     return (
         <>
             <div className='layout__overlay'
-                style={loginFormMounted 
+                style={loginFormMounted
                     ? { opacity: 1, pointerEvents: 'all' }
                     : { opacity: 0, pointerEvents: 'none' }}
             />
@@ -96,35 +96,31 @@ const LoginForm: FC = () => {
                     ? { opacity: 1, pointerEvents: 'all' }
                     : { opacity: 0, pointerEvents: 'none' }}>
                 <h1 className='layout__header'>Login</h1>
-                <div className='layout__form-wrapper'>
-                    <div style={{ width: '322px' }}>
-                        <form onSubmit={handleSubmitForm} className='layout__form'>
-                            <div style={{ margin: userIdErr && '1.5rem 0 0.5rem 0' }}>
-                                <input value={userId} onChange={handleChangeUserId} type='text' placeholder=' ' className='layout__input' />
-                                <span className='layout__placeholder'><FaUser style={{ fontSize: '14px', marginBottom: '1px' }} /> User ID*</span>
-                                {userIdErr && <p className='layout__text layout__text--red' style={{ margin: '8px 0 0 8px', fontSize: '0.8rem' }}>{userIdErr}</p>}
-                            </div>
-                            <div style={{ margin: passwordErr && '1.5rem 0 0.5rem 0' }}>
-                                <input value={password} onChange={handleChangePassword} type='password' placeholder=' ' className='layout__input' />
-                                <span className='layout__placeholder'><RiLockPasswordFill style={{ fontSize: '16px' }} /> Password*</span>
-                                {passwordErr && <p className='layout__text layout__text--red' style={{ margin: '8px 0 0 8px', fontSize: '0.8rem' }}>{passwordErr}</p>}
-                            </div>
-                            {err && <p className='layout__text layout__text--red'>{err}</p>}
-                            {loginResult.isLoading ? (
-                                <div style={{ position: 'relative' }}>
-                                    <input type='submit' disabled={true} value='' />
-                                    <div className='layout__loader' style={{ position: 'absolute' }} />
-                                </div>
-                            ) : (
-                                <input type='submit' disabled={submitNotAllowed} value='Login' />
-                            )}
-                        </form>
-                        <p className='layout__text layout__text--white' style={{ textAlign: 'center', marginTop: '30px' }}>
-                            Don't have an account?
-                            <span onClick={handleSignUpFormMounted} className='layout__text--alien-green-light layout__text--link' style={{ marginLeft: '5px' }} >Sign up</span>
-                        </p>
+                <form onSubmit={handleSubmitForm} className='layout__form'>
+                    <div style={{ margin: userIdErr && '1.5rem 0 0.5rem 0' }}>
+                        <input value={userId} onChange={handleChangeUserId} type='text' placeholder=' ' className='layout__input' />
+                        <span className='layout__placeholder'><FaUser style={{ fontSize: '14px', marginBottom: '1px' }} /> User ID*</span>
+                        {userIdErr && <p className='layout__text layout__text--red' style={{ margin: '8px 0 0 8px', fontSize: '0.8rem' }}>{userIdErr}</p>}
                     </div>
-                </div>
+                    <div style={{ margin: passwordErr && '1.5rem 0 0.5rem 0' }}>
+                        <input value={password} onChange={handleChangePassword} type='password' placeholder=' ' className='layout__input' />
+                        <span className='layout__placeholder'><RiLockPasswordFill style={{ fontSize: '16px' }} /> Password*</span>
+                        {passwordErr && <p className='layout__text layout__text--red' style={{ margin: '8px 0 0 8px', fontSize: '0.8rem' }}>{passwordErr}</p>}
+                    </div>
+                    {err && <p className='layout__text layout__text--red'>{err}</p>}
+                    {loginResult.isLoading ? (
+                        <div style={{ position: 'relative' }}>
+                            <input type='submit' disabled={true} value='' />
+                            <div className='layout__loader' style={{ position: 'absolute' }} />
+                        </div>
+                    ) : (
+                        <input type='submit' disabled={submitNotAllowed} value='Login' />
+                    )}
+                </form>
+                <p className='layout__text layout__text--white' style={{ textAlign: 'center', marginTop: '30px' }}>
+                    Don't have an account?
+                    <span onClick={handleSignUpFormMounted} className='layout__text--alien-green-light layout__text--link' style={{ marginLeft: '5px' }} >Sign up</span>
+                </p>
             </section>
         </>
     );

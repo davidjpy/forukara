@@ -11,12 +11,16 @@ import { useCreateUserMutation, useResendEmailMutation } from '@features/auth/au
 const SignUpForm: FC = () => {
 
     const counterTime = 30;
-    const formRef = useRef<HTMLDivElement | null>(null);
+    const formRef = useRef<HTMLDivElement>(null);
     const counterRef = useRef<number>(counterTime);
+    const formInnerRef = useRef<HTMLDivElement>(null);
+    const successInnerRef = useRef<HTMLDivElement>(null);
     const dispatch = useAppDispatch();
     const signUpFormMounted = useAppSelector((state) => state.auth.signUpFormMounted);
     const [createUser, createUserResult] = useCreateUserMutation();
     const [resendEmail, resendEmailResult] = useResendEmailMutation();
+    const [success, setSuccess] = useState<boolean>(false);
+    const [formWidth, setFormwidth] = useState<number>();
     const [userId, setUserId] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [emailCopy, setEmailCopy] = useState<string>('');
@@ -37,8 +41,10 @@ const SignUpForm: FC = () => {
         dispatch(toggleSignUpForm(false));
         handleResetInput();
         setTimeout(() => {
-            if (formRef.current) {
-                formRef.current.style.left = '64px';
+            if (formRef.current && wrapperRef.current) {
+                let formPadding: number = parseInt(window.getComputedStyle(wrapperRef.current).getPropertyValue('padding-right'));
+                formRef.current.style.left = `${formPadding}px`;
+                setSuccess(false);
             }
         }, 300);
     }
@@ -59,10 +65,28 @@ const SignUpForm: FC = () => {
         });
     }
 
+    const handleResize = (): void => {
+        if (formInnerRef.current && wrapperRef.current && formRef.current && successInnerRef.current) {
+            let formPadding: number = parseInt(window.getComputedStyle(wrapperRef.current).getPropertyValue('padding-right'));
+            let width: number = wrapperRef.current.clientWidth - formPadding * 2;
+            setFormwidth(width);
+            formInnerRef.current.style.width = `${formWidth}px`;
+            formRef.current.style.gap = `${formPadding}px`;
+            if (!success) {
+                formRef.current.style.left = `${formPadding}px`;
+            } else {
+                formRef.current.style.left = `-${formWidth}px`;
+            }
+            successInnerRef.current.style.width = `${formWidth}px`;
+        }
+    }
+
     useEffect(() => {
+        console.log(createUserResult)
         if (createUserResult.isSuccess) {
             if (formRef.current) {
-                formRef.current.style.left = '-322px';
+                formRef.current.style.left = `-${formWidth}px`;
+                setSuccess(true);
             };
             handleResetInput();
         }
@@ -159,6 +183,15 @@ const SignUpForm: FC = () => {
 
     const wrapperRef = useClickOutside(hadnleSignUpFormUnmounted);
 
+    useEffect(() => {
+        handleResize();
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        }
+    });
+
     return (
         <>
             <div className='layout__overlay'
@@ -172,7 +205,7 @@ const SignUpForm: FC = () => {
                     : { opacity: 0, pointerEvents: 'none' }}>
                 <h1 className='layout__header'>Sign Up</h1>
                 <div ref={formRef} className='layout__form-wrapper'>
-                    <div style={{ width: '322px' }}>
+                    <div ref={formInnerRef} style={{ width: '100%' }}>
                         <form onSubmit={handleSubmitForm} className='layout__form'>
                             <div style={{ margin: userIdErr && '1.5rem 0 0.5rem 0' }}>
                                 <input value={userId} onChange={handleChangeUserId} type='text' placeholder=' ' className='layout__input' />
@@ -209,7 +242,7 @@ const SignUpForm: FC = () => {
                             <span onClick={handleLoginFormMounted} className='layout__text--alien-green-light layout__text--link' style={{ marginLeft: '5px' }} >Login</span>
                         </p>
                     </div>
-                    <div className='layout__success-wrapper'>
+                    <div ref={successInnerRef} className='layout__success-wrapper'>
                         <p className='layout__text layout__text--alien-green-light'>Congratulation!</p>
                         <p className='layout__text layout__text--white'>Your account has been successfully created. Verify your email address by checking the verification email we just delivered to your inbox</p>
                         <p className='layout__text layout__text--white'>If the email is not reaching you. To get another email, click {counterRef?.current === counterTime ?

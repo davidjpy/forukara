@@ -119,7 +119,7 @@
     }
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 600px) {
     .splashlayout__logo-wrapper {
         font-size: 1.4rem;
     }
@@ -166,12 +166,13 @@
     border-radius: 20px;
     background-color: var(--black-opacity-deep);
     width: 450px;
-    height: 650px;
+    height: 70%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     transition: opacity 0.3s ease-in-out;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 .layout__loginform {
@@ -181,11 +182,12 @@
     border-radius: 20px;
     background-color: var(--black-opacity-deep);
     width: 450px;
-    height: 650px;
+    height: 70%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     transition: opacity 0.3s ease-in-out;
+    overflow: auto;
 }
 
 .layout__header {
@@ -220,9 +222,8 @@
 
 .layout__form-wrapper {
     display: flex;
-    position: absolute;
-    gap: 64px;
-    left: 64px;
+    position: fixed;
+    left: 0;
     transition: left 0.3s ease-in-out;
 }
 
@@ -333,4 +334,28 @@ input[type='password'] {
 
 .layout__success-wrapper p:last-child {
     margin-top: 2rem;
+}
+
+@media screen and (max-width: 600px) {
+    .layout__loginform {
+        width: 80%;
+        padding: 3rem;
+    }
+
+    .layout__signupform {
+        width: 80%;
+        padding: 3rem;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .layout__loginform {
+        width: 85%;
+        padding: 2.6rem 2rem;
+    }
+
+    .layout__signupform {
+        width: 85%;
+        padding: 2.6rem 2rem;
+    }
 }

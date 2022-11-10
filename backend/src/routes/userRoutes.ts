@@ -12,6 +12,8 @@ router.route('/verifications/:token')
 router.route('/verifications/resend')
     .post(emailLimiter, userController.resendVerification)
 
+router.route('/')
+    .post(userController.createUser)
 
 router.use(verifyToken);
 
