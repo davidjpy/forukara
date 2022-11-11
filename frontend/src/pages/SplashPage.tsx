@@ -27,13 +27,21 @@ const textOptions: Array<string> = [
 const SplashPage: FC = () => {
 
     const dynamicTxtRef = useRef<HTMLParagraphElement>(null);
+    const imageRef = useRef<HTMLDivElement>(null);
     const navigate = useNavigate();
 
     const handleNavigateHomepage = () => {
         navigate('/home');
     }
 
+    const handleResize = (): void => {
+        if (imageRef.current) {
+            imageRef.current.style.height = `${window.innerHeight}px`;
+        }
+    }
+
     useEffect(() => {
+        handleResize();
         function changeText() {
             let optionIndex: number = 0;
             let charIndex: number = 0;
@@ -67,18 +75,26 @@ const SplashPage: FC = () => {
         changeText();
     }, []);
 
+    useEffect(() => {
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        }
+    })
+
     return (
-        <div className='splashPage'>
-            <div className='splashPage__overlay'>
-                <div className='splashPage__slogan'>
-                    <div className='splashPage__dynamic-txts-wrapper'>
-                        <p className='splashPage__header splashPage__header--large'>I'm a</p>
-                        <p className='splashPage__header splashPage__header--large splashPage__header--dynamic' ref={dynamicTxtRef}></p>
+        <div ref={imageRef} className='splashpage'>
+            <div className='splashpage__overlay'>
+                <div className='splashpage__slogan'>
+                    <div className='splashpage__dynamic-txts-wrapper'>
+                        <p className='splashpage__header splashpage__header--large'>I'm a</p>
+                        <p className='splashpage__header splashpage__header--large splashpage__header--dynamic' ref={dynamicTxtRef}></p>
                     </div>
-                    <p className='splashPage__header'>Share Your Wisdoms, Inspire The World, Reach The Impossibility</p>
-                    <button onClick={handleNavigateHomepage} className='splashPage__button'>
+                    <p className='splashpage__header'>Share Your Wisdoms, Inspire The World, Reach The Impossibility</p>
+                    <button onClick={handleNavigateHomepage} className='splashpage__button'>
                         Start Now
-                        <FaArrowRight className='splashPage__icon' />
+                        <FaArrowRight className='splashpage__icon' />
                     </button>
                 </div>
             </div>

@@ -1,4 +1,4 @@
-import { Suspense, lazy } from 'react';
+import { Suspense, lazy, useRef, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 const SplashLayout = lazy(() => import('@common/layout/SplashLayout'));
@@ -15,6 +15,7 @@ function App() {
                 </Route>
                 <Route path='/' element={<Layout />}>
                     <Route path='home' element={<HomePage />} />
+                    <Route path='davidho' element={<HomePage />} />
                 </Route>
             </Routes>
         </Suspense>

@@ -82,7 +82,6 @@ const SignUpForm: FC = () => {
     }
 
     useEffect(() => {
-        console.log(createUserResult)
         if (createUserResult.isSuccess) {
             if (formRef.current) {
                 formRef.current.style.left = `-${formWidth}px`;
@@ -198,7 +197,7 @@ const SignUpForm: FC = () => {
                 style={signUpFormMounted
                     ? { opacity: 1, pointerEvents: 'all' }
                     : { opacity: 0, pointerEvents: 'none' }}
-            />
+            ></div>
             <section ref={wrapperRef} className='layout__signupform'
                 style={signUpFormMounted
                     ? { opacity: 1, pointerEvents: 'all' }

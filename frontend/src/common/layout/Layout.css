@@ -139,6 +139,8 @@
 
 .layout__nav {
     background-color: black;
+    position: fixed;
+    width: 100%;
 }
 
 .layout__container {

@@ -86,7 +86,7 @@ const LoginForm: FC = () => {
 
     return (
         <>
-            <div className='layout__overlay'
+            <div  className='layout__overlay'
                 style={loginFormMounted
                     ? { opacity: 1, pointerEvents: 'all' }
                     : { opacity: 0, pointerEvents: 'none' }}

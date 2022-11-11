@@ -6,12 +6,14 @@ import LoginForm from '@features/auth/LoginForm';
 import { useAppSelector, useAppDispatch } from '@app/hooks';
 import { toggleSignUpForm, toggleLoginForm } from '@features/auth/authSlice'
 import { useLogoutMutation, useGetUserByIdQuery, useRefreshQuery } from '@features/auth/authApiSlice';
+import { useNavigate } from 'react-router-dom';
 
 const Nav: FC = () => {
 
     useRefreshQuery();
+    const navigate = useNavigate();
     const dispatch = useAppDispatch();
-    const [logout, logoutResult] = useLogoutMutation();
+    const [logout,] = useLogoutMutation();
     const user = useAppSelector(state => state.auth.user);
     const { isLoading, isFetching, isSuccess } = useGetUserByIdQuery(user.id as string, { skip: !user.id });
 
@@ -27,6 +29,10 @@ const Nav: FC = () => {
         await logout();
     }
 
+    const handleNavigateProfile = (): void => {
+        navigate(`${user.username}`);
+    }
+
     return (
         <>
             <header className='splashlayout__nav'>
@@ -38,7 +44,7 @@ const Nav: FC = () => {
                     {user.id ? (
                         <div className='splashlayout__action-wrapper'>
                             <button onClick={handleLogout} className='splashlayout__button splashlayout__button--text'>Logout</button>
-                            <p>{user.username}</p>
+                            <p onClick={handleNavigateProfile} className='splashlayout__button splashlayout__button--text'>{user.username}</p>
                         </div>
                     ) : (
                         <div className='splashlayout__action-wrapper'>

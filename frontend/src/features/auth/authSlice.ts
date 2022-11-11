@@ -42,8 +42,7 @@ export const authSlice = createSlice({
         },
 
         setUserInfo: (state, action: PayloadAction<User>) => {
-            const { id, username, email, createdAt }: User = action.payload;
-            state.user = { id: id, username: username, email: email, createdAt: createdAt };
+            state.user = { ...state.user, ...action.payload };
         },
 
         setcredantial: (state, action: PayloadAction<string>) => {

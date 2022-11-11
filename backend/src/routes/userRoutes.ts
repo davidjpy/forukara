@@ -15,7 +15,7 @@ router.route('/verifications/resend')
 router.route('/')
     .post(userController.createUser)
 
-router.use(verifyToken);
+// router.use(verifyToken);
 
 router.route('/')
     .get(userController.getAllUsers)

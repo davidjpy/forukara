@@ -2,18 +2,19 @@
 /* ====================================== SplashPage ========================================= */
 /* =========================================================================================== */
 
-.splashPage {
+.splashpage {
     position: relative;
-    background-image: url('@media/images/nav_background.webp');
+    background: url('@media/images/nav_background.webp');
     user-select: none;
-    background-position: center center;
+    padding-bottom: 50.45%;
+    height: 0;
+    background-position: center;
     background-size: cover;
-    height: 100vh;
-    width: 100vw;
+    background-repeat: no-repeat;
 }
 
 
-.splashPage__overlay {
+.splashpage__overlay {
     position: absolute;
     display: flex;
     align-items: center;
@@ -23,27 +24,27 @@
     background: linear-gradient(rgba(0, 0, 0, 0.9), 35%, rgba(0, 0, 0, 0.25));
 }
 
-.splashPage__slogan {
-    position: relative;
+.splashpage__slogan {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin-top: 4rem;
     width: 1200px;
     height: 500px;
 }
 
-.splashPage__header {
+.splashpage__header {
     font-size: 2.4rem;
     font-weight: bolder;
     color: white;
 }
 
-.splashPage__header--large {
+.splashpage__header--large {
     font-size: 4rem;
 }
 
-.splashPage__header--dynamic {
+.splashpage__header--dynamic {
     margin: 0 20px;
     color: var(--alien-green-light);
     border-right: 3px solid black;
@@ -62,7 +63,7 @@
     }
 }
 
-.splashPage__button {
+.splashpage__button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -80,89 +81,98 @@
     transition: all 0.2s ease-in-out;
 }
 
-.splashPage__button:hover {
+.splashpage__button:hover {
     background-color: var(--alien-green-deep);
 }
 
-.splashPage__button:active {
+.splashpage__button:active {
     background-color: #13684e;
 }
 
-.splashPage__icon {
+.splashpage__icon {
     margin-left: 5px;
 }
 
-.splashPage__dynamic-txts-wrapper {
+.splashpage__dynamic-txts-wrapper {
     display: flex;
     align-items: center;
     margin: 30px;
 }
 
 @media screen and (max-width: 1400px) {
-    .splashPage__slogan {
+    .splashpage__slogan {
         width: 80%;
         text-align: center;
     }
 
-    .splashPage__header {
+    .splashpage__header {
         font-size: 2rem;
     }
 
-    .splashPage__header--large {
+    .splashpage__header--large {
         font-size: 3rem;
     }
 }
 
 @media screen and (max-width: 1000px) {
-    .splashPage__button {
+    .splashpage__button {
         width: 180px;
         font-size: 0.9rem;
     }
 
-    .splashPage__header {
+    .splashpage__header {
         font-size: 1.6rem;
     }
 
-    .splashPage__header--large {
+    .splashpage__header--large {
         font-size: 2.2rem;
     }
 }
 
 @media screen and (max-width: 1000px) {
-    .splashPage__button {
+    .splashpage__button {
         width: 160px;
         font-size: 0.8rem;
     }
 
-    .splashPage__header {
+    .splashpage__header {
         font-size: 1.4rem;
     }
 
-    .splashPage__header--large {
+    .splashpage__header--large {
         font-size: 2rem;
     }
 }
 
 @media screen and (max-width: 800px) {
-    .splashPage__header {
+    .splashpage__header {
         font-size: 1.2rem;
     }
 
-    .splashPage__header--large {
+    .splashpage__header--large {
         font-size: 1.8rem;
     }
 
-    .splashPage__header--dynamic {
+    .splashpage__header--dynamic {
         margin: 0 10px;
     }
 }
 
 @media screen and (max-width: 600px) {
-    .splashPage__header {
+    .splashpage__slogan {
+        width: 90%;
+    }
+
+    .splashpage__header {
         font-size: 1rem;
     }
 
-    .splashPage__header--large {
-        font-size: 1.3rem;
+    .splashpage__header--large {
+        font-size: 1.2rem;
+    }
+
+    .splashpage__button {
+        width: 140px;
+        height: 50px;
     }
 }

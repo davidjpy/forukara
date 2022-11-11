@@ -1,7 +1,9 @@
+import '@pages/HomePage.css';
+
 const ForumPage = () => {
     return (
-        <div>
-            
+        <div className='homepage'>
+            heee
         </div>
     );
 }
