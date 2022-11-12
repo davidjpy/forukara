@@ -1,4 +1,4 @@
-import { FC, useState, ChangeEvent, FormEvent, useEffect, useCallback } from 'react';
+import { FC, useState, ChangeEvent, FormEvent, useEffect, useCallback, useRef } from 'react';
 import { FaUser } from 'react-icons/fa';
 import { RiLockPasswordFill } from 'react-icons/ri';
 
@@ -10,6 +10,7 @@ import { useLoginMutation } from '@features/auth/authApiSlice';
 const LoginForm: FC = () => {
 
     const dispatch = useAppDispatch();
+    const overlayRef = useRef<HTMLDivElement>(null);
     const loginFormMounted = useAppSelector((state) => state.auth.loginFormMounted);
     const [login, loginResult] = useLoginMutation();
     const [userId, setUserId] = useState<string>('');
@@ -84,13 +85,30 @@ const LoginForm: FC = () => {
 
     const wrapperRef = useClickOutside(handleLoginFormUnmounted);
 
+    const handleResize = (): void => {
+        if (overlayRef.current) {
+            if (window.innerWidth <= 301) {
+                overlayRef.current.style.height = `${window.innerHeight}px`;
+            } else {
+                overlayRef.current.style.height = `${document.body.offsetHeight}px`;
+            }
+        }
+    }
+
+    useEffect(() => {
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        }
+    });
+
     return (
-        <>
-            <div  className='layout__overlay'
-                style={loginFormMounted
-                    ? { opacity: 1, pointerEvents: 'all' }
-                    : { opacity: 0, pointerEvents: 'none' }}
-            />
+        <div ref={overlayRef} className='layout__overlay'
+            style={loginFormMounted
+                ? { opacity: 1, pointerEvents: 'all' }
+                : { opacity: 0, pointerEvents: 'none' }}
+        >
             <section ref={wrapperRef} className='layout__loginform'
                 style={loginFormMounted
                     ? { opacity: 1, pointerEvents: 'all' }
@@ -122,7 +140,7 @@ const LoginForm: FC = () => {
                     <span onClick={handleSignUpFormMounted} className='layout__text--alien-green-light layout__text--link' style={{ marginLeft: '5px' }} >Sign up</span>
                 </p>
             </section>
-        </>
+        </div>
     );
 }
 

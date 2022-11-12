@@ -33,25 +33,23 @@ const Nav: FC = () => {
         navigate(`${user.username}`);
     }
 
-    console.log(user, isSuccess)
-
     return (
         <>
             <header className='layout__nav'>
                 <div className='layout__container'>
-                    <div className='splashlayout__logo-wrapper'>
-                        <FaBlog />
-                        <p>Forukara</p>
+                    <div className='layout__logo-wrapper'>
+                        <FaBlog className='layout__logo'/>
+                        <p className='layout__logo--text'>Forukara</p>
                     </div>
                     {user.id ? (
-                        <div className='splashlayout__action-wrapper'>
-                            <button onClick={handleLogout} className='splashlayout__button splashlayout__button--text'>Logout</button>
-                            <p onClick={handleNavigateProfile} className='splashlayout__button splashlayout__button--text'>{user.username}</p>
+                        <div className='layout__action-wrapper'>
+                            <button onClick={handleLogout} className='layout__button layout__button--text'>Logout</button>
+                            <p onClick={handleNavigateProfile} className='layout__button layout__button--text' style={{ textAlign: 'center' }}>{user.username}</p>
                         </div>
                     ) : (
-                        <div className='splashlayout__action-wrapper'>
-                            <button onClick={handleLoginFormMounted} className='splashlayout__button splashlayout__button--text'>Login</button>
-                            <button onClick={handleSignUpFormMounted} className='splashlayout__button splashlayout__button--slide'>&nbsp;</button>
+                        <div className='layout__action-wrapper'>
+                            <button onClick={handleLoginFormMounted} className='layout__button layout__button--text'>Login</button>
+                            <button onClick={handleSignUpFormMounted} className='layout__button layout__button--slide'>&nbsp;</button>
                         </div>
                     )}
                 </div>
@@ -62,4 +60,4 @@ const Nav: FC = () => {
     );
 }
 
-export default Nav;
+export default Nav; 

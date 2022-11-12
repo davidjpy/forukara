@@ -4,6 +4,6 @@
 
 .homepage {
     height: 100vh;
-    padding-top: 80px;
-    background-color: rgba(46, 44, 44, 0.514);
+    background-color: rgba(0, 0, 0, 0.514);
+    min-height: 600px;
 }

@@ -28,6 +28,7 @@ const SplashPage: FC = () => {
 
     const dynamicTxtRef = useRef<HTMLParagraphElement>(null);
     const imageRef = useRef<HTMLDivElement>(null);
+    const overlayRef= useRef<HTMLDivElement>(null);
     const navigate = useNavigate();
 
     const handleNavigateHomepage = () => {
@@ -35,8 +36,14 @@ const SplashPage: FC = () => {
     }
 
     const handleResize = (): void => {
-        if (imageRef.current) {
-            imageRef.current.style.height = `${window.innerHeight}px`;
+        if (imageRef.current && overlayRef.current) {
+            if (window.innerWidth <= 301) {
+                imageRef.current.style.height = `${window.innerHeight}px`;
+                overlayRef.current.style.height = `${window.innerHeight}px`;
+            } else {
+                imageRef.current.style.height = `${document.body.offsetHeight}px`;
+                overlayRef.current.style.height = `${document.body.offsetHeight}px`;
+            }
         }
     }
 
@@ -85,7 +92,7 @@ const SplashPage: FC = () => {
 
     return (
         <div ref={imageRef} className='splashpage'>
-            <div className='splashpage__overlay'>
+            <div ref={overlayRef} className='splashpage__overlay'>
                 <div className='splashpage__slogan'>
                     <div className='splashpage__dynamic-txts-wrapper'>
                         <p className='splashpage__header splashpage__header--large'>I'm a</p>

@@ -15,6 +15,7 @@ const SignUpForm: FC = () => {
     const counterRef = useRef<number>(counterTime);
     const formInnerRef = useRef<HTMLDivElement>(null);
     const successInnerRef = useRef<HTMLDivElement>(null);
+    const overlayRef = useRef<HTMLDivElement>(null);
     const dispatch = useAppDispatch();
     const signUpFormMounted = useAppSelector((state) => state.auth.signUpFormMounted);
     const [createUser, createUserResult] = useCreateUserMutation();
@@ -78,6 +79,14 @@ const SignUpForm: FC = () => {
                 formRef.current.style.left = `-${formWidth}px`;
             }
             successInnerRef.current.style.width = `${formWidth}px`;
+        }
+
+        if (overlayRef.current) {
+            if (window.innerWidth <= 301) {
+                overlayRef.current.style.height = `${window.innerHeight}px`;
+            } else {
+                overlayRef.current.style.height = `${document.body.offsetHeight}px`;
+            }
         }
     }
 
@@ -192,12 +201,11 @@ const SignUpForm: FC = () => {
     });
 
     return (
-        <>
-            <div className='layout__overlay'
-                style={signUpFormMounted
-                    ? { opacity: 1, pointerEvents: 'all' }
-                    : { opacity: 0, pointerEvents: 'none' }}
-            ></div>
+        <div ref={overlayRef} className='layout__overlay'
+            style={signUpFormMounted
+                ? { opacity: 1, pointerEvents: 'all' }
+                : { opacity: 0, pointerEvents: 'none' }}
+        >
             <section ref={wrapperRef} className='layout__signupform'
                 style={signUpFormMounted
                     ? { opacity: 1, pointerEvents: 'all' }
@@ -255,7 +263,7 @@ const SignUpForm: FC = () => {
                     </div>
                 </div>
             </section>
-        </>
+        </div>
     );
 }
 
