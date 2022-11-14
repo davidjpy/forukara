@@ -1,25 +1,6 @@
 import { apiSlice } from '@app/apiSlice';
 import { setUserInfo, setcredantial, logout } from '@features/auth/authSlice';
-
-interface ILoginResponse {
-    token: string;
-    user: User,
-}
-
-interface IRefreshResponse {
-    token: string,
-    id: string
-}
-
-type User = {
-    id: string;
-    username: string;
-    email: string;
-    password: string;
-    confirmPassword: string;
-    status: 'Pending' | 'Active';
-    createdAt: Date;
-}
+import { User, ILoginResponse, IRefreshResponse } from '@common/utilities/types';
 
 export const authApiSlice = apiSlice.injectEndpoints({
     endpoints: builder => ({

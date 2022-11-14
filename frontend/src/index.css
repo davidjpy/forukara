@@ -3,12 +3,17 @@
     margin: 0;
     box-sizing: border-box;
     font-family: sans-serif, Arial, Helvetica;
+    word-wrap: break-word;
 }
 
 :root {
     --black-opacity-light: rgba(0, 0, 0, 0.4);
     --black-opacity-deep: rgba(0, 0, 0, 0.85);
-    --alien-green-deep: #23ac83;
-    --alien-green-light: #00DE9A;
-    --error-red: #cc0000;
+    --black-light: #202020;
+    --green-alien-deep: #23ac83;
+    --green-alien-light: #00DE9A;
+    --red-error: #cc0000;
+    --nav-height: 60px;
+    --min-height: 600px;
+    --min-width: 300px
 }

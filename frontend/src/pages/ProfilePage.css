@@ -1,0 +1,57 @@
+/* =========================================================================================== */
+/* ====================================== ProfilePage ======================================== */
+/* =========================================================================================== */
+
+.profilepage {
+    height: 100vh;
+    min-height: var(--min-height);
+    padding-top: var(--nav-height);
+    background-color: rgb(245, 245, 245);
+}
+
+.profilepage__wrapper {
+    width: 1200px;
+    margin: auto;
+    background-color: white;
+    height: 100%;
+}
+
+/* =========================================================================================== */
+/* ===================================== ProfileImage ======================================== */
+/* =========================================================================================== */
+
+.profileimage {
+    position: relative;
+    height: 500px;
+}
+
+.profileimage__background {
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    clip-path: polygon(
+        0 0,
+        100% 0,
+        100% 72%,
+        0 100%
+    );
+}
+
+.profileimage__icon-wrapper {
+    position: absolute;
+    width: 230px;
+    height: 230px;
+    background-color: white;
+    border-radius: 50%;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.profileimage__icon {
+    border-radius: 50%;
+    width: 90%;
+    height: 90%;
+    margin: 5%;
+}

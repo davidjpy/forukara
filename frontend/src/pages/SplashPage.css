@@ -8,7 +8,7 @@
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    min-height: 600px;
+    min-height: var(--min-height);
 }
 
 .splashpage__overlay {
@@ -19,7 +19,7 @@
     align-items: center;
     justify-content: center;
     background: linear-gradient(rgba(0, 0, 0, 0.9), 35%, rgba(0, 0, 0, 0.25));
-    min-height: 600px;
+    min-height: var(--min-height);
 }
 
 .splashpage__slogan {
@@ -46,7 +46,7 @@
 
 .splashpage__header--dynamic {
     margin: 0 20px;
-    color: var(--alien-green-light);
+    color: var(--green-alien-light);
     border-right: 3px solid black;
     animation: flash 0.85s step-end infinite;
 }
@@ -69,7 +69,7 @@
     justify-content: center;
     width: 230px;
     height: 60px;
-    background-color: var(--alien-green-light);
+    background-color: var(--green-alien-light);
     color: black;
     border: none;
     font-size: 1rem;
@@ -82,7 +82,7 @@
 }
 
 .splashpage__button:hover {
-    background-color: var(--alien-green-deep);
+    background-color: var(--green-alien-deep);
 }
 
 .splashpage__button:active {

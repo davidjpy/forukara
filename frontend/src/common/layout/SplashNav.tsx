@@ -1,7 +1,6 @@
 import { FC } from 'react';
 import { FaBlog } from 'react-icons/fa';
 
-import '@common/layout/Layout.css'
 import SignUpForm from '@features/auth/SignUpForm';
 import LoginForm from '@features/auth/LoginForm';
 import { useAppSelector, useAppDispatch } from '@app/hooks';
@@ -9,7 +8,7 @@ import { toggleSignUpForm, toggleLoginForm } from '@features/auth/authSlice'
 import { useLogoutMutation, useGetUserByIdQuery, useRefreshQuery } from '@features/auth/authApiSlice';
 import { useNavigate } from 'react-router-dom';
 
-const Nav: FC = () => {
+const SplashNav: FC = () => {
 
     useRefreshQuery();
     const navigate = useNavigate();
@@ -36,33 +35,29 @@ const Nav: FC = () => {
 
     return (
         <>
-            <nav className='layout__nav'>
-                <section className='layout__nav-wrapper'>
-                    <header className='layout__logo-wrapper'>
-                        <FaBlog className='layout__logo' />
-                        <p className='layout__header'>Forukara</p>
+            <nav className='splashlayout__nav'>
+                <section className='splashlayout__container'>
+                    <header className='splashlayout__logo-wrapper'>
+                        <FaBlog className='splashlayout__logo'/>
+                        <p className='splashlayout__logo--text'>Forukara</p>
                     </header>
                     {user.id ? (
-                        <div className='layout__action-wrapper'>
-                            <p onClick={handleLogout} className='layout__text layout__text--button layout__text--link'>Logout</p>
-                            <p onClick={handleNavigateProfile} className='layout__text layout__text--button layout__text--link'>
-                                {user?.username}
-                            </p>
+                        <div className='splashlayout__action-wrapper'>
+                            <button onClick={handleLogout} className='splashlayout__button splashlayout__button--text'>Logout</button>
+                            <p onClick={handleNavigateProfile} className='splashlayout__button splashlayout__button--text' style={{ textAlign: 'center' }}>{user.username}</p>
                         </div>
                     ) : (
-                        <div className='layout__action-wrapper'>
-                            <p onClick={handleLoginFormMounted} className='layout__text layout__text--button layout__text--link'>Login</p>
-                            <button onClick={handleSignUpFormMounted} className='layout__button layout__button--green-alien-light'>
-                                Register
-                            </button>
+                        <div className='splashlayout__action-wrapper'>
+                            <button onClick={handleLoginFormMounted} className='splashlayout__button splashlayout__button--text'>Login</button>
+                            <button onClick={handleSignUpFormMounted} className='splashlayout__button splashlayout__button--slide'>&nbsp;</button>
                         </div>
                     )}
                 </section>
             </nav>
-            <SignUpForm />
             <LoginForm />
+            <SignUpForm />
         </>
-    )
+    );
 }
 
-export default Nav;
+export default SplashNav; 

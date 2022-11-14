@@ -201,65 +201,67 @@ const SignUpForm: FC = () => {
     });
 
     return (
-        <div ref={overlayRef} className='layout__overlay'
+        <div ref={overlayRef} className='splashlayout__overlay'
             style={signUpFormMounted
                 ? { opacity: 1, pointerEvents: 'all' }
                 : { opacity: 0, pointerEvents: 'none' }}
         >
-            <section ref={wrapperRef} className='layout__signupform'
+            <section ref={wrapperRef} className='splashlayout__signupform'
                 style={signUpFormMounted
                     ? { opacity: 1, pointerEvents: 'all' }
                     : { opacity: 0, pointerEvents: 'none' }}>
-                <h1 className='layout__header'>Sign Up</h1>
-                <div ref={formRef} className='layout__form-wrapper'>
+                <header>
+                    <h1 className='splashlayout__header'>Sign Up</h1>
+                </header>
+                <div ref={formRef} className='splashlayout__form-wrapper'>
                     <div ref={formInnerRef} style={{ width: '100%' }}>
-                        <form onSubmit={handleSubmitForm} className='layout__form'>
+                        <form onSubmit={handleSubmitForm} className='splashlayout__form'>
                             <div style={{ margin: userIdErr && '1.5rem 0 0.5rem 0' }}>
-                                <input value={userId} onChange={handleChangeUserId} type='text' placeholder=' ' className='layout__input' />
-                                <span className='layout__placeholder'><FaUser style={{ fontSize: '14px', marginBottom: '1px' }} /> User ID*</span>
-                                {userIdErr && <p className='layout__text layout__text--red' style={{ margin: '8px 0 0 8px', fontSize: '0.8rem' }}>{userIdErr}</p>}
+                                <input value={userId} onChange={handleChangeUserId} type='text' placeholder=' ' className='splashlayout__input' />
+                                <span className='splashlayout__placeholder'><FaUser style={{ fontSize: '14px', marginBottom: '1px' }} /> User ID*</span>
+                                {userIdErr && <p className='splashlayout__text splashlayout__text--red' style={{ margin: '8px 0 0 8px', fontSize: '0.8rem' }}>{userIdErr}</p>}
                             </div>
                             <div style={{ margin: emailErr && '1.5rem 0 0.5rem 0' }}>
-                                <input value={email} onChange={handleChangeEmail} type='email' placeholder=' ' className='layout__input' />
-                                <span className='layout__placeholder'><IoMdMail style={{ fontSize: '17px' }} /> Email*</span>
-                                {emailErr && <p className='layout__text layout__text--red' style={{ margin: '8px 0 0 8px', fontSize: '0.8rem' }}>{emailErr}</p>}
+                                <input value={email} onChange={handleChangeEmail} type='email' placeholder=' ' className='splashlayout__input' />
+                                <span className='splashlayout__placeholder'><IoMdMail style={{ fontSize: '17px' }} /> Email*</span>
+                                {emailErr && <p className='splashlayout__text splashlayout__text--red' style={{ margin: '8px 0 0 8px', fontSize: '0.8rem' }}>{emailErr}</p>}
                             </div>
                             <div style={{ margin: passwordErr && '1.5rem 0 0.5rem 0' }}>
-                                <input value={password} onChange={handleChangePassword} type='password' placeholder=' ' className='layout__input' />
-                                <span className='layout__placeholder'><RiLockPasswordFill style={{ fontSize: '16px' }} /> Password*</span>
-                                {passwordErr && <p className='layout__text layout__text--red' style={{ margin: '8px 0 0 8px', fontSize: '0.8rem' }}>{passwordErr}</p>}
+                                <input value={password} onChange={handleChangePassword} type='password' placeholder=' ' className='splashlayout__input' />
+                                <span className='splashlayout__placeholder'><RiLockPasswordFill style={{ fontSize: '16px' }} /> Password*</span>
+                                {passwordErr && <p className='splashlayout__text splashlayout__text--red' style={{ margin: '8px 0 0 8px', fontSize: '0.8rem' }}>{passwordErr}</p>}
                             </div>
                             <div style={{ margin: confirmPasswordErr && '1.5rem 0 0.5rem 0' }}>
-                                <input value={confirmPassword} onChange={handleChangeConfirmPassword} type='password' placeholder=' ' className='layout__input' />
-                                <span className='layout__placeholder'><RiLockPasswordFill style={{ fontSize: '16px' }} /> Confirm Password*</span>
-                                {confirmPasswordErr && <p className='layout__text layout__text--red' style={{ margin: '8px 0 0 8px', fontSize: '0.8rem' }}>{confirmPasswordErr}</p>}
+                                <input value={confirmPassword} onChange={handleChangeConfirmPassword} type='password' placeholder=' ' className='splashlayout__input' />
+                                <span className='splashlayout__placeholder'><RiLockPasswordFill style={{ fontSize: '16px' }} /> Confirm Password*</span>
+                                {confirmPasswordErr && <p className='splashlayout__text splashlayout__text--red' style={{ margin: '8px 0 0 8px', fontSize: '0.8rem' }}>{confirmPasswordErr}</p>}
                             </div>
-                            {err && <p className='layout__text layout__text--red'>{err}</p>}
+                            {err && <p className='splashlayout__text splashlayout__text--red'>{err}</p>}
                             {createUserResult.isLoading ? (
                                 <div style={{ position: 'relative' }}>
                                     <input type='submit' disabled={true} value='' />
-                                    <div className='layout__loader' style={{ position: 'absolute' }} />
+                                    <div className='splashlayout__loader' style={{ position: 'absolute' }} />
                                 </div>
                             ) : (
                                 <input type='submit' disabled={submitNotAllowed} value='Create Account' />
                             )}
                         </form>
-                        <p className='layout__text layout__text--white' style={{ textAlign: 'center', marginTop: '30px' }}>
+                        <p className='splashlayout__text splashlayout__text--white' style={{ textAlign: 'center', marginTop: '30px' }}>
                             Already have an account?
-                            <span onClick={handleLoginFormMounted} className='layout__text--alien-green-light layout__text--link' style={{ marginLeft: '5px' }} >Login</span>
+                            <span onClick={handleLoginFormMounted} className='splashlayout__text--green-alien-light splashlayout__text--link' style={{ marginLeft: '5px' }} >Login</span>
                         </p>
                     </div>
-                    <div ref={successInnerRef} className='layout__success-wrapper'>
-                        <p className='layout__text layout__text--alien-green-light'>Congratulation!</p>
-                        <p className='layout__text layout__text--white'>Your account has been successfully created. Verify your email address by checking the verification email we just delivered to your inbox</p>
-                        <p className='layout__text layout__text--white'>If the email is not reaching you. To get another email, click {counterRef?.current === counterTime ?
+                    <div ref={successInnerRef} className='splashlayout__success-wrapper'>
+                        <p className='splashlayout__text splashlayout__text--green-alien-light'>Congratulation!</p>
+                        <p className='splashlayout__text splashlayout__text--white'>Your account has been successfully created. Verify your email address by checking the verification email we just delivered to your inbox</p>
+                        <p className='splashlayout__text splashlayout__text--white'>If the email is not reaching you. To get another email, click {counterRef?.current === counterTime ?
                             (
-                                <span onClick={handleresendEmail} className='layout__text layout__text--alien-green-light layout__text--link'>here</span>
+                                <span onClick={handleresendEmail} className='splashlayout__text splashlayout__text--green-alien-light splashlayout__text--link'>here</span>
                             ) : (
-                                <span className='layout__text layout__text--gray'>here ({counterRef?.current})</span>
+                                <span className='splashlayout__text splashlayout__text--gray'>here ({counterRef?.current})</span>
                             )}</p>
-                        {resendEmailErr && <p className='layout__text layout__text--red' style={{ margin: '0 0 1rem 0' }}>{resendEmailErr}</p>}
-                        <p className='layout__text layout__text--red'>The account will be deleted in ten minutes if not verified*</p>
+                        {resendEmailErr && <p className='splashlayout__text splashlayout__text--red' style={{ margin: '0 0 1rem 0' }}>{resendEmailErr}</p>}
+                        <p className='splashlayout__text splashlayout__text--red'>The account will be deleted in ten minutes if not verified*</p>
                     </div>
                 </div>
             </section>

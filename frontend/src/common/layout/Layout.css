@@ -1,8 +1,8 @@
 /* =========================================================================================== */
-/* ======================================== Layout =========================================== */
+/* ===================================== SplashLayout ======================================== */
 /* =========================================================================================== */
 
-.layout__nav {
+.splashlayout__nav {
     width: 1200px;
     position: absolute;
     z-index: 1;
@@ -11,24 +11,24 @@
     transform: translate(-50%, 0);
 }
 
-.layout__container {
+.splashlayout__container {
     display: flex;
     align-items: center;
     height: 52px;
 }
 
-.layout__overlay {
+.splashlayout__overlay {
     position: absolute;
     overflow: hidden;
     background-color: var(--black-opacity-light);
     z-index: 2;
     width: 100%;
     height: 100%;
-    min-height: 600px;
+    min-height: var(--min-height);
     transition: opacity 0.3s ease-in-out;
 }
 
-.layout__logo-wrapper {
+.splashlayout__logo-wrapper {
     display: flex;
     align-items: top;
     font-size: 2rem;
@@ -40,13 +40,13 @@
     user-select: none;
 }
 
-.layout__action-wrapper {
+.splashlayout__action-wrapper {
     display: flex;
     align-items: center;
     gap: 60px;
 }
 
-.layout__button {
+.splashlayout__button {
     cursor: pointer;
     height: 52px;
     width: 130px;
@@ -54,7 +54,7 @@
     user-select: none;
 }
 
-.layout__button--text {
+.splashlayout__button--text {
     height: auto;
     width: auto;
     letter-spacing: 0.6px;
@@ -63,11 +63,11 @@
     border: none;
 }
 
-.layout__button--text:hover {
+.splashlayout__button--text:hover {
     text-decoration: underline;
 }
 
-.layout__button--slide {
+.splashlayout__button--slide {
     position: relative;
     overflow: hidden;
     background-color: transparent;
@@ -78,7 +78,7 @@
     border: 2px solid rgb(185, 185, 185);
 }
 
-.layout__button--slide::after {
+.splashlayout__button--slide::after {
     content: "Register";
     position: absolute;
     width: 100%;
@@ -88,7 +88,7 @@
     transition: all 400ms cubic-bezier(0.680, -0.550, 0.265, 1.550);
 }
 
-.layout__button--slide::before {
+.splashlayout__button--slide::before {
     content: "Join Us";
     height: 100%;
     width: 100%;
@@ -98,32 +98,32 @@
     transition: all 500ms cubic-bezier(0.680, -0.550, 0.265, 1.550);
 }
 
-.layout__button--slide:hover {
+.splashlayout__button--slide:hover {
     background: rgba(0, 0, 0, 0.4);
     border: 2px solid white;
 }
 
-.layout__button--slide:hover::before {
+.splashlayout__button--slide:hover::before {
     left: 0;
     opacity: 1;
     color: #fff;
 }
 
-.layout__button--slide:hover::after {
+.splashlayout__button--slide:hover::after {
     left: 100%;
     opacity: 0;
 }
 
-.layout__signupform {
+.splashlayout__signupform {
     position: absolute;
     z-index: 3;
     padding: 4rem;
     border-radius: 20px;
     background-color: var(--black-opacity-deep);
     width: 450px;
-    height: 80%;
+    height: 70%;
     max-height: 700px;
-    min-height: 600px;
+    min-height: 560px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -132,7 +132,7 @@
     overflow-y: auto;
 }
 
-.layout__loginform {
+.splashlayout__loginform {
     position: absolute;
     z-index: 3;
     padding: 4rem;
@@ -148,64 +148,64 @@
     overflow: auto;
 }
 
-.layout__header {
+.splashlayout__header {
     color: white;
 }
 
-.layout__text {
+.splashlayout__text {
     font-size: 0.9rem;
     text-align: justify;
 }
 
-.layout__text--white {
+.splashlayout__text--white {
     color: white;
 }
 
-.layout__text--red {
-    color: var(--error-red);
+.splashlayout__text--red {
+    color: var(--red-error);
 }
 
-.layout__text--gray {
+.splashlayout__text--gray {
     color: gray;
 }
 
-.layout__text--alien-green-light {
-    color: var(--alien-green-light);
+.splashlayout__text--green-alien-light {
+    color: var(--green-alien-light);
 }
 
-.layout__text--link:hover {
+.splashlayout__text--link:hover {
     text-decoration: underline;
     cursor: pointer;
 }
 
-.layout__form-wrapper {
+.splashlayout__form-wrapper {
     display: flex;
     position: fixed;
     left: 0;
     transition: left 0.3s ease-in-out;
 }
 
-.layout__form div {
+.splashlayout__form div {
     position: relative;
     margin: 1.5rem 0;
 }
 
-.layout__form div:first-child {
+.splashlayout__form div:first-child {
     margin-top: 2.6rem;
 }
 
-.layout__form input {
+.splashlayout__form input {
     width: 100%;
     font-size: 1rem;
     border: none;
     background-color: rgba(255, 255, 255, 0.3);
 }
 
-.layout__form input:focus {
-    outline: 2px solid var(--alien-green-light);
+.splashlayout__form input:focus {
+    outline: 2px solid var(--green-alien-light);
 }
 
-.layout__form span {
+.splashlayout__form span {
     position: absolute;
     display: flex;
     align-items: center;
@@ -217,7 +217,7 @@
     pointer-events: none;
 }
 
-.layout__form input[type='text'],
+.splashlayout__form input[type='text'],
 input[type='email'],
 input[type='password'] {
     border-radius: 6px;
@@ -225,8 +225,8 @@ input[type='password'] {
     color: white;
 }
 
-.layout__form input[type='submit'] {
-    background-color: var(--alien-green-light);
+.splashlayout__form input[type='submit'] {
+    background-color: var(--green-alien-light);
     color: black;
     cursor: pointer;
     font-weight: bolder;
@@ -236,29 +236,29 @@ input[type='password'] {
     height: 50px;
 }
 
-.layout__form input[type='submit']:hover {
-    background-color: var(--alien-green-deep);
+.splashlayout__form input[type='submit']:hover {
+    background-color: var(--green-alien-deep);
 }
 
-.layout__form input[type='submit']:focus {
-    outline: 2px solid var(--alien-green-deep);
+.splashlayout__form input[type='submit']:focus {
+    outline: 2px solid var(--green-alien-deep);
     outline-offset: -4px;
 }
 
-.layout__form input[type='submit']:disabled {
+.splashlayout__form input[type='submit']:disabled {
     background-color: gray;
     cursor: not-allowed;
 }
 
-.layout__input:not(:placeholder-shown)+.layout__placeholder {
+.splashlayout__input:not(:placeholder-shown)+.splashlayout__placeholder {
     display: none;
 }
 
-.layout__loader {
+.splashlayout__loader {
     position: absolute;
     border: 4px solid white;
     border-radius: 50%;
-    border-top: 4px solid var(--alien-green-light);
+    border-top: 4px solid var(--green-alien-light);
     width: 30px;
     height: 30px;
     top: calc(50% - 1.2rem - 12px);
@@ -276,99 +276,189 @@ input[type='password'] {
     }
 }
 
-.layout__success-wrapper {
+.splashlayout__success-wrapper {
     width: 322px;
     margin-top: 2.6rem;
 }
 
-.layout__success-wrapper p:first-child {
+.splashlayout__success-wrapper p:first-child {
     font-weight: 600;
 }
 
-.layout__success-wrapper p {
+.splashlayout__success-wrapper p {
     margin: 1rem 0;
     line-height: 22px;
 }
 
-.layout__success-wrapper p:last-child {
+.splashlayout__success-wrapper p:last-child {
     margin-top: 2rem;
 }
 
 @media screen and (max-width: 1400px) {
-    .layout__nav {
+    .splashlayout__nav {
         width: 80%;
     }
 
-    .layout__logo-wrapper {
+    .splashlayout__logo-wrapper {
         font-size: 1.8rem;
     }
 }
 
 @media screen and (max-width: 1000px) {
-    .layout__logo-wrapper {
+    .splashlayout__logo-wrapper {
         font-size: 1.6rem;
     }
 }
 
 @media screen and (max-width: 800px) {
-    .layout__action-wrapper {
+    .splashlayout__action-wrapper {
         gap: 20px;
     }
 
-    .layout__button {
+    .splashlayout__button {
         width: 110px;
     }
 }
 
 
 @media screen and (max-width: 600px) {
-    .layout__nav {
+    .splashlayout__nav {
         width: 85%;
     }
 
-    .layout__logo-wrapper {
+    .splashlayout__logo-wrapper {
         font-size: 1.2rem;
     }
 
-    .layout__action-wrapper {
+    .splashlayout__action-wrapper {
         font-size: 0.9rem;
     }
 
-    .layout__button:first-child {
+    .splashlayout__button:first-child {
         width: 50px;
     }
 
-    .layout__button {
+    .splashlayout__button {
         font-size: 0.8rem;
         width: 90px;
     }
 
-    .layout__loginform {
+    .splashlayout__loginform {
         width: 90%;
         padding: 3rem;
     }
 
-    .layout__signupform {
+    .splashlayout__signupform {
         width: 90%;
         padding: 3rem;
     }
 }
 
 @media screen and (max-width: 400px) {
-    .layout__loginform {
+    .splashlayout__loginform {
         padding: 2.6rem 2rem;
     }
 
-    .layout__signupform {
+    .splashlayout__signupform {
         padding: 2.6rem 2rem;
     }
 
-    .layout__logo--text {
+    .splashlayout__logo--text {
         display: none;
     }
     
-    .layout__logo {
+    .splashlayout__logo {
         font-size: 2rem;
         margin-left: 1rem;
+    }
+}
+
+/* =========================================================================================== */
+/* ======================================== Layout =========================================== */
+/* =========================================================================================== */
+
+.layout__nav {
+    position: fixed;
+    width: 100%;
+    height: var(--nav-height);
+    background-color: var(--black-light);
+    z-index: 1000;
+}
+
+.layout__nav-wrapper {
+    width: 1200px;
+    height: 100%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+.layout__logo-wrapper {
+    display: flex;
+    font-size: 1.4rem;
+    color: white;
+    font-weight: bolder;
+    font-style: italic;
+    gap: 22px;
+    user-select: none;
+    flex: 1;
+}
+
+.layout__action-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.layout__text {
+    color: white;
+    font-size: 0.8rem;
+}
+
+.layout__text--link:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.layout__text--button {
+    letter-spacing: 0.6px;
+    user-select: none;
+    margin: 0 1.2rem;
+}
+
+.layout__button {
+    font-size: 0.8rem;
+    padding: 0.6rem 0.8rem;
+    margin-left: 0.2rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--black-light);
+    border: none;
+    user-select: none;
+}
+
+.layout__button--green-alien-light {
+    background-color: var(--green-alien-light);
+    transition: background-color 0.2s ease-in-out;
+}
+
+.layout__button--green-alien-light:hover {
+    background-color: var(--green-alien-deep);
+} 
+
+@media screen and (max-width: 1400px) {
+    .layout__nav-wrapper {
+        width: 85%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .layout__nav-wrapper {
+        padding: 0;
+    }
+
+    .layout__header {
+        display: none;
     }
 }
