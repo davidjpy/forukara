@@ -217,46 +217,46 @@ const SignUpForm: FC = () => {
                     <div ref={formInnerRef} style={{ width: '100%' }}>
                         <form onSubmit={handleSubmitForm} className='splashlayout__form'>
                             <div style={{ margin: userIdErr && '1.5rem 0 0.5rem 0' }}>
-                                <input value={userId} onChange={handleChangeUserId} type='text' placeholder=' ' className='splashlayout__input' />
-                                <span className='splashlayout__placeholder'><FaUser style={{ fontSize: '14px', marginBottom: '1px' }} /> User ID*</span>
+                                <input id='register-username' value={userId} onChange={handleChangeUserId} type='text' placeholder=' ' className='splashlayout__input' />
+                                <label htmlFor='register-username' className='splashlayout__placeholder'><FaUser style={{ fontSize: '14px', marginBottom: '1px' }} /> User ID*</label>
                                 {userIdErr && <p className='splashlayout__text splashlayout__text--red' style={{ margin: '8px 0 0 8px', fontSize: '0.8rem' }}>{userIdErr}</p>}
                             </div>
                             <div style={{ margin: emailErr && '1.5rem 0 0.5rem 0' }}>
-                                <input value={email} onChange={handleChangeEmail} type='email' placeholder=' ' className='splashlayout__input' />
-                                <span className='splashlayout__placeholder'><IoMdMail style={{ fontSize: '17px' }} /> Email*</span>
+                                <input id='register-email' value={email} onChange={handleChangeEmail} type='email' placeholder=' ' className='splashlayout__input' />
+                                <label htmlFor='register-email' className='splashlayout__placeholder'><IoMdMail style={{ fontSize: '17px' }} /> Email*</label>
                                 {emailErr && <p className='splashlayout__text splashlayout__text--red' style={{ margin: '8px 0 0 8px', fontSize: '0.8rem' }}>{emailErr}</p>}
                             </div>
                             <div style={{ margin: passwordErr && '1.5rem 0 0.5rem 0' }}>
-                                <input value={password} onChange={handleChangePassword} type='password' placeholder=' ' className='splashlayout__input' />
-                                <span className='splashlayout__placeholder'><RiLockPasswordFill style={{ fontSize: '16px' }} /> Password*</span>
+                                <input id='register-password' value={password} onChange={handleChangePassword} type='password' placeholder=' ' className='splashlayout__input' />
+                                <label htmlFor='register-password' className='splashlayout__placeholder'><RiLockPasswordFill style={{ fontSize: '16px' }} /> Password*</label>
                                 {passwordErr && <p className='splashlayout__text splashlayout__text--red' style={{ margin: '8px 0 0 8px', fontSize: '0.8rem' }}>{passwordErr}</p>}
                             </div>
                             <div style={{ margin: confirmPasswordErr && '1.5rem 0 0.5rem 0' }}>
-                                <input value={confirmPassword} onChange={handleChangeConfirmPassword} type='password' placeholder=' ' className='splashlayout__input' />
-                                <span className='splashlayout__placeholder'><RiLockPasswordFill style={{ fontSize: '16px' }} /> Confirm Password*</span>
+                                <input id='register-confirm-password' value={confirmPassword} onChange={handleChangeConfirmPassword} type='password' placeholder=' ' className='splashlayout__input' />
+                                <label htmlFor='register-confirm-password' className='splashlayout__placeholder'><RiLockPasswordFill style={{ fontSize: '16px' }} /> Confirm Password*</label>
                                 {confirmPasswordErr && <p className='splashlayout__text splashlayout__text--red' style={{ margin: '8px 0 0 8px', fontSize: '0.8rem' }}>{confirmPasswordErr}</p>}
                             </div>
                             {err && <p className='splashlayout__text splashlayout__text--red'>{err}</p>}
                             {createUserResult.isLoading ? (
                                 <div style={{ position: 'relative' }}>
-                                    <input type='submit' disabled={true} value='' />
+                                    <input aria-label='Loading' type='submit' disabled={true} value='' />
                                     <div className='splashlayout__loader' style={{ position: 'absolute' }} />
                                 </div>
                             ) : (
-                                <input type='submit' disabled={submitNotAllowed} value='Create Account' />
+                                <input aria-label='Sign up' type='submit' disabled={submitNotAllowed} value='Create Account' />
                             )}
                         </form>
-                        <p className='splashlayout__text splashlayout__text--white' style={{ textAlign: 'center', marginTop: '30px' }}>
+                        <p id='open-login-form' className='splashlayout__text splashlayout__text--white' style={{ textAlign: 'center', marginTop: '30px' }}>
                             Already have an account?
-                            <span onClick={handleLoginFormMounted} className='splashlayout__text--green-alien-light splashlayout__text--link' style={{ marginLeft: '5px' }} >Login</span>
+                            <span role='button' aria-labelledby='open-login-form' onClick={handleLoginFormMounted} className='splashlayout__text--green-alien-light splashlayout__text--link' style={{ marginLeft: '5px' }} >Login</span>
                         </p>
                     </div>
                     <div ref={successInnerRef} className='splashlayout__success-wrapper'>
                         <p className='splashlayout__text splashlayout__text--green-alien-light'>Congratulation!</p>
                         <p className='splashlayout__text splashlayout__text--white'>Your account has been successfully created. Verify your email address by checking the verification email we just delivered to your inbox</p>
-                        <p className='splashlayout__text splashlayout__text--white'>If the email is not reaching you. To get another email, click {counterRef?.current === counterTime ?
+                        <p id='resend-email' className='splashlayout__text splashlayout__text--white'>If the email is not reaching you. To get another email, click {counterRef?.current === counterTime ?
                             (
-                                <span onClick={handleresendEmail} className='splashlayout__text splashlayout__text--green-alien-light splashlayout__text--link'>here</span>
+                                <span role='button' aria-labelledby='resend-email' onClick={handleresendEmail} className='splashlayout__text splashlayout__text--green-alien-light splashlayout__text--link'>here</span>
                             ) : (
                                 <span className='splashlayout__text splashlayout__text--gray'>here ({counterRef?.current})</span>
                             )}</p>

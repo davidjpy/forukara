@@ -44,7 +44,7 @@ const SplashNav: FC = () => {
                     {user.id ? (
                         <div className='splashlayout__action-wrapper'>
                             <button onClick={handleLogout} className='splashlayout__button splashlayout__button--text'>Logout</button>
-                            <p onClick={handleNavigateProfile} className='splashlayout__button splashlayout__button--text' style={{ textAlign: 'center' }}>{user.username}</p>
+                            <p role='button' onClick={handleNavigateProfile} className='splashlayout__button splashlayout__button--text' style={{ textAlign: 'center' }}>{user.username}</p>
                         </div>
                     ) : (
                         <div className='splashlayout__action-wrapper'>

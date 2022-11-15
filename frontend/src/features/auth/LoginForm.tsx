@@ -118,28 +118,28 @@ const LoginForm: FC = () => {
                 </header>
                 <form onSubmit={handleSubmitForm} className='splashlayout__form'>
                     <div style={{ margin: userIdErr && '1.5rem 0 0.5rem 0' }}>
-                        <input value={userId} onChange={handleChangeUserId} type='text' placeholder=' ' className='splashlayout__input' />
-                        <span className='splashlayout__placeholder'><FaUser style={{ fontSize: '14px', marginBottom: '1px' }} /> User ID*</span>
+                        <input value={userId} id='login-username' onChange={handleChangeUserId} type='text' placeholder=' ' className='splashlayout__input' />
+                        <label htmlFor='login-username' className='splashlayout__placeholder'><FaUser style={{ fontSize: '14px', marginBottom: '1px' }} /> User ID*</label>
                         {userIdErr && <p className='splashlayout__text splashlayout__text--red' style={{ margin: '8px 0 0 8px', fontSize: '0.8rem' }}>{userIdErr}</p>}
                     </div>
                     <div style={{ margin: passwordErr && '1.5rem 0 0.5rem 0' }}>
-                        <input value={password} onChange={handleChangePassword} type='password' placeholder=' ' className='splashlayout__input' />
-                        <span className='splashlayout__placeholder'><RiLockPasswordFill style={{ fontSize: '16px' }} /> Password*</span>
+                        <input value={password} id='login-password' onChange={handleChangePassword} type='password' placeholder=' ' className='splashlayout__input' />
+                        <label htmlFor='login-password' className='splashlayout__placeholder'><RiLockPasswordFill style={{ fontSize: '16px' }} /> Password*</label>
                         {passwordErr && <p className='splashlayout__text splashlayout__text--red' style={{ margin: '8px 0 0 8px', fontSize: '0.8rem' }}>{passwordErr}</p>}
                     </div>
                     {err && <p className='splashlayout__text splashlayout__text--red'>{err}</p>}
                     {loginResult.isLoading ? (
                         <div style={{ position: 'relative' }}>
-                            <input type='submit' disabled={true} value='' />
+                            <input aria-label='Loading' type='submit' disabled={true} value='' />
                             <div className='splashlayout__loader' style={{ position: 'absolute' }} />
                         </div>
                     ) : (
-                        <input type='submit' disabled={submitNotAllowed} value='Login' />
+                        <input aria-label='Login' type='submit' disabled={submitNotAllowed} value='Login' />
                     )}
                 </form>
-                <p className='splashlayout__text splashlayout__text--white' style={{ textAlign: 'center', marginTop: '30px' }}>
+                <p id='open-signup-form' className='splashlayout__text splashlayout__text--white' style={{ textAlign: 'center', marginTop: '30px' }}>
                     Don't have an account?
-                    <span onClick={handleSignUpFormMounted} className='splashlayout__text--green-alien-light splashlayout__text--link' style={{ marginLeft: '5px' }} >Sign up</span>
+                    <span role='button' aria-labelledby='open-signup-form' onClick={handleSignUpFormMounted} className='splashlayout__text--green-alien-light splashlayout__text--link' style={{ marginLeft: '5px' }} >Sign up</span>
                 </p>
             </section>
         </div>

@@ -44,14 +44,14 @@ const Nav: FC = () => {
                     </header>
                     {user.id ? (
                         <div className='layout__action-wrapper'>
-                            <p onClick={handleLogout} className='layout__text layout__text--button layout__text--link'>Logout</p>
-                            <p onClick={handleNavigateProfile} className='layout__text layout__text--button layout__text--link'>
+                            <p role='button' onClick={handleLogout} className='layout__text layout__text--button layout__text--link'>Logout</p>
+                            <p role='button' onClick={handleNavigateProfile} className='layout__text layout__text--button layout__text--link'>
                                 {user?.username}
                             </p>
                         </div>
                     ) : (
                         <div className='layout__action-wrapper'>
-                            <p onClick={handleLoginFormMounted} className='layout__text layout__text--button layout__text--link'>Login</p>
+                            <p role='button' onClick={handleLoginFormMounted} className='layout__text layout__text--button layout__text--link'>Login</p>
                             <button onClick={handleSignUpFormMounted} className='layout__button layout__button--green-alien-light'>
                                 Register
                             </button>

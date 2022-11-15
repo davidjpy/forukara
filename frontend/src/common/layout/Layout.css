@@ -205,7 +205,7 @@
     outline: 2px solid var(--green-alien-light);
 }
 
-.splashlayout__form span {
+.splashlayout__form label {
     position: absolute;
     display: flex;
     align-items: center;
