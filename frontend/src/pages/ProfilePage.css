@@ -3,16 +3,16 @@
 /* =========================================================================================== */
 
 .profilepage {
-    height: 100vh;
+    height: 100%;
     min-height: var(--min-height);
     padding-top: var(--nav-height);
-    background-color: rgb(245, 245, 245);
+    background-color: rgb(235, 235, 235);
 }
 
 .profilepage__wrapper {
     width: 1200px;
     margin: auto;
-    background-color: white;
+    background-color: rgb(245, 245, 245);
     height: 100%;
 }
 
@@ -22,40 +22,36 @@
 
 .profileimage {
     position: relative;
-    height: 660px;
+    height: 600px;
 }
 
 .profileimage__background {
-    height: 80%;
+    height: 100%;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    clip-path: ellipse(
-        0% 0% at 0% 0%
-    );
+    clip-path: ellipse(0% 0% at 0% 0%);
     transition: clip-path 0.5s ease-in-out;
 }
 
 .profileimage__background--loaded {
-    clip-path: ellipse(
-        100% 74% at 15% 23%
-    );
+    clip-path: ellipse(100% 74% at 15% 23%);
 }
 
 .profileimage__icon-wrapper {
     position: absolute;
     width: 230px;
     height: 230px;
-    background-color: white;
+    background-color: rgb(245, 245, 245);
     border-radius: 50%;
-    top: 70%;
+    top: 87%;
     left: 50%;
     transform: translate(-50%, -50%);
     transition: top 0.6s ease-in-out;
 }
 
 .profileimage__icon-wrapper--loaded {
-    top: 66%;
+    top: 82%;
 }
 
 .profileimage__icon {
@@ -71,9 +67,38 @@
     opacity: 1;
 }
 
-.profileimage__username {
-    position: relative;
+/* =========================================================================================== */
+/* ==================================== ProfileDetails ======================================= */
+/* =========================================================================================== */
+
+.profiledetails {
+    height: 300px;
+    margin: 2.3rem auto;
+    width: 80%;
+}
+
+.profiledetails header h1 {
+    list-style: none;
     text-align: center;
-    margin-top: 2rem;
-    z-index: 1;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.profiledetails__tablist {
+    list-style: none;
+    display: flex;
+    margin: 1rem;
+}
+
+.profiledetails__tablist li {
+    flex: 1;
+    text-align: center;
+}
+
+.profiledetails__tablist li div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    gap: 8px;
 }

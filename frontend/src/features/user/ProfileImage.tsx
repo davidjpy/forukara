@@ -10,7 +10,7 @@ const ProfileImage: FC = () => {
 
     useEffect(() => {
         setIsLoading(false);
-    });
+    }, []);
 
     return (
         <section className='profileimage'>
@@ -18,9 +18,6 @@ const ProfileImage: FC = () => {
             <figure className={isLoading ? 'profileimage__icon-wrapper' : 'profileimage__icon-wrapper profileimage__icon-wrapper--loaded'} >
                 <img src={nav_background} alt='profile' className={isLoading ? 'profileimage__icon' : 'profileimage__icon profileimage__icon--loaded'} />
             </figure>
-            <header className='profileimage__username'>
-                <h1>Ho Chi Hang</h1>
-            </header>
         </section>
     );
 }
