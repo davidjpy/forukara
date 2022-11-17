@@ -3,7 +3,6 @@
     margin: 0;
     box-sizing: border-box;
     font-family: sans-serif, Arial, Helvetica;
-    word-wrap: break-word;
 }
 
 :root {
@@ -14,7 +13,7 @@
     --green-alien-light: #00DE9A;
     --red-error: #cc0000;
     --nav-height: 60px;
-    --min-height: 600px;
+    --min-height: 650px;
     --min-width: 300px
 }
 

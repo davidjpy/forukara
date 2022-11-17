@@ -34,6 +34,8 @@ const Nav: FC = () => {
         navigate(`${user.username}`);
     }
 
+    
+
     return (
         <>
             <nav className='layout__nav'>
@@ -59,8 +61,8 @@ const Nav: FC = () => {
                     )}
                 </section>
             </nav>
-            <SignUpForm />
-            <LoginForm />
+            {/* <SignUpForm />
+            <LoginForm /> */}
         </>
     )
 }

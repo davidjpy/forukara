@@ -6,6 +6,7 @@ import { useAppSelector, useAppDispatch } from '@app/hooks';
 import { useClickOutside } from '@common/hooks/useClickOutside';
 import { toggleLoginForm, toggleSignUpForm } from '@features/auth/authSlice';
 import { useLoginMutation } from '@features/auth/authApiSlice';
+import { useWindowResize } from '@common/hooks/useWindowResize';
 
 const LoginForm: FC = () => {
 
@@ -18,6 +19,7 @@ const LoginForm: FC = () => {
     const [userIdErr, setUserIdErr] = useState<string>('');
     const [passwordErr, setPasswordErr] = useState<string>('');
     const [err, setErr] = useState<string>('');
+    useWindowResize(overlayRef);
 
     const submitNotAllowed: boolean = Boolean(err || userIdErr || passwordErr);
 
@@ -84,24 +86,6 @@ const LoginForm: FC = () => {
     }
 
     const wrapperRef = useClickOutside(handleLoginFormUnmounted);
-
-    const handleResize = (): void => {
-        if (overlayRef.current) {
-            if (window.innerWidth <= 301) {
-                overlayRef.current.style.height = `${window.innerHeight}px`;
-            } else {
-                overlayRef.current.style.height = `${document.body.offsetHeight}px`;
-            }
-        }
-    }
-
-    useEffect(() => {
-        window.addEventListener('resize', handleResize);
-
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        }
-    });
 
     return (
         <div ref={overlayRef} className='splashlayout__overlay'

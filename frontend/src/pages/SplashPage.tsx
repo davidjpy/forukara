@@ -3,6 +3,7 @@ import { FaArrowRight } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
 import '@pages/SplashPage.css';
+import { useWindowResize } from '@common/hooks/useWindowResize';
 
 const textOptions: Array<string> = [
     'Construction Worker',
@@ -28,27 +29,16 @@ const SplashPage: FC = () => {
 
     const dynamicTxtRef = useRef<HTMLParagraphElement>(null);
     const imageRef = useRef<HTMLDivElement>(null);
-    const overlayRef= useRef<HTMLDivElement>(null);
+    const overlayRef = useRef<HTMLDivElement>(null);
+    useWindowResize(imageRef);
+    useWindowResize(overlayRef);
     const navigate = useNavigate();
 
     const handleNavigateHomepage = () => {
         navigate('/home');
     }
 
-    const handleResize = (): void => {
-        if (imageRef.current && overlayRef.current) {
-            if (window.innerWidth <= 301) {
-                imageRef.current.style.height = `${window.innerHeight}px`;
-                overlayRef.current.style.height = `${window.innerHeight}px`;
-            } else {
-                imageRef.current.style.height = `${document.body.offsetHeight}px`;
-                overlayRef.current.style.height = `${document.body.offsetHeight}px`;
-            }
-        }
-    }
-
     useEffect(() => {
-        handleResize();
         function changeText() {
             let optionIndex: number = 0;
             let charIndex: number = 0;
@@ -81,14 +71,6 @@ const SplashPage: FC = () => {
         }
         changeText();
     }, []);
-
-    useEffect(() => {
-        window.addEventListener('resize', handleResize);
-
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        }
-    })
 
     return (
         <div ref={imageRef} className='splashpage'>

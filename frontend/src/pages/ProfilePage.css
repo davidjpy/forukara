@@ -3,7 +3,6 @@
 /* =========================================================================================== */
 
 .profilepage {
-    height: 100%;
     min-height: var(--min-height);
     padding-top: var(--nav-height);
     background-color: rgb(235, 235, 235);
@@ -13,7 +12,7 @@
     width: 1200px;
     margin: auto;
     background-color: rgb(245, 245, 245);
-    height: 100%;
+    overflow: auto;
 }
 
 /* =========================================================================================== */
@@ -72,9 +71,9 @@
 /* =========================================================================================== */
 
 .profiledetails {
-    height: 300px;
     margin: 2.3rem auto;
     width: 80%;
+    height: 100%;
 }
 
 .profiledetails header h1 {

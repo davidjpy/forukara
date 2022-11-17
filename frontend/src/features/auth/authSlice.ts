@@ -35,10 +35,26 @@ export const authSlice = createSlice({
     reducers: {
         toggleSignUpForm: (state, action: PayloadAction<boolean>) => {
             state.signUpFormMounted = action.payload;
+
+            if (state.signUpFormMounted) {
+                document.body.style.overflow = 'hidden';
+            }
+
+            if (!state.signUpFormMounted) {
+                document.body.style.overflow = 'auto';
+            }
         },
 
         toggleLoginForm: (state, action: PayloadAction<boolean>) => {
             state.loginFormMounted = action.payload;
+
+            if (state.loginFormMounted) {
+                document.body.style.overflow = 'hidden';
+            }
+
+            if (!state.loginFormMounted) {
+                document.body.style.overflow = 'auto';
+            }
         },
 
         setUserInfo: (state, action: PayloadAction<User>) => {

@@ -7,6 +7,7 @@ import { useClickOutside } from '@common/hooks/useClickOutside';
 import { useAppSelector, useAppDispatch } from '@app/hooks';
 import { toggleSignUpForm, toggleLoginForm } from '@features/auth/authSlice';
 import { useCreateUserMutation, useResendEmailMutation } from '@features/auth/authApiSlice';
+import { useWindowResize } from '@common/hooks/useWindowResize';
 
 const SignUpForm: FC = () => {
 
@@ -35,6 +36,7 @@ const SignUpForm: FC = () => {
     const [confirmPasswordErr, setConfirmPasswordErr] = useState<string>('');
     const [resendEmailErr, setResendEmailErr] = useState<string>('');
     const [, setCoolDown] = useState<number>(counterTime);
+    useWindowResize(overlayRef);
 
     const submitNotAllowed: boolean = Boolean(err || userIdErr || emailErr || passwordErr || confirmPasswordErr);
 
@@ -64,30 +66,6 @@ const SignUpForm: FC = () => {
             password: password,
             confirmPassword: confirmPassword
         });
-    }
-
-    const handleResize = (): void => {
-        if (formInnerRef.current && wrapperRef.current && formRef.current && successInnerRef.current) {
-            let formPadding: number = parseInt(window.getComputedStyle(wrapperRef.current).getPropertyValue('padding-right'));
-            let width: number = wrapperRef.current.clientWidth - formPadding * 2;
-            setFormwidth(width);
-            formInnerRef.current.style.width = `${formWidth}px`;
-            formRef.current.style.gap = `${formPadding}px`;
-            if (!success) {
-                formRef.current.style.left = `${formPadding}px`;
-            } else {
-                formRef.current.style.left = `-${formWidth}px`;
-            }
-            successInnerRef.current.style.width = `${formWidth}px`;
-        }
-
-        if (overlayRef.current) {
-            if (window.innerWidth <= 301) {
-                overlayRef.current.style.height = `${window.innerHeight}px`;
-            } else {
-                overlayRef.current.style.height = `${document.body.offsetHeight}px`;
-            }
-        }
     }
 
     useEffect(() => {
@@ -192,7 +170,23 @@ const SignUpForm: FC = () => {
     const wrapperRef = useClickOutside(hadnleSignUpFormUnmounted);
 
     useEffect(() => {
+        const handleResize = (): void => {
+            if (formInnerRef.current && wrapperRef.current && formRef.current && successInnerRef.current) {
+                let formPadding: number = parseInt(window.getComputedStyle(wrapperRef.current).getPropertyValue('padding-right'));
+                let width: number = wrapperRef.current.clientWidth - formPadding * 2;
+                setFormwidth(width);
+                formInnerRef.current.style.width = `${formWidth}px`;
+                formRef.current.style.gap = `${formPadding}px`;
+                if (!success) {
+                    formRef.current.style.left = `${formPadding}px`;
+                } else {
+                    formRef.current.style.left = `-${formWidth}px`;
+                }
+                successInnerRef.current.style.width = `${formWidth}px`;
+            }
+        }
         handleResize();
+
         window.addEventListener('resize', handleResize);
 
         return () => {

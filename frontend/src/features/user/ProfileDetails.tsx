@@ -35,6 +35,259 @@ const ProfileDetails: FC = () => {
                     </div>
                 </li>
             </ul>
+            <ul role='tablist' className='profiledetails__tablist'>
+                <li role='tab'>
+                    <h2>23</h2>
+                    <div>
+                        <RiDiscussFill />
+                        Discussions
+                    </div>
+                </li>
+                <li role='tab'>
+                    <h2>123</h2>
+                    <div>
+                        <BsFillPersonCheckFill />
+                        Followers
+                    </div>
+                </li>
+                <li role='tab'>
+                    <h2>223</h2>
+                    <div>
+                        <BsFillPersonPlusFill />
+                        Following
+                    </div>
+                </li>
+            </ul>
+            <ul role='tablist' className='profiledetails__tablist'>
+                <li role='tab'>
+                    <h2>23</h2>
+                    <div>
+                        <RiDiscussFill />
+                        Discussions
+                    </div>
+                </li>
+                <li role='tab'>
+                    <h2>123</h2>
+                    <div>
+                        <BsFillPersonCheckFill />
+                        Followers
+                    </div>
+                </li>
+                <li role='tab'>
+                    <h2>223</h2>
+                    <div>
+                        <BsFillPersonPlusFill />
+                        Following
+                    </div>
+                </li>
+            </ul>
+            <ul role='tablist' className='profiledetails__tablist'>
+                <li role='tab'>
+                    <h2>23</h2>
+                    <div>
+                        <RiDiscussFill />
+                        Discussions
+                    </div>
+                </li>
+                <li role='tab'>
+                    <h2>123</h2>
+                    <div>
+                        <BsFillPersonCheckFill />
+                        Followers
+                    </div>
+                </li>
+                <li role='tab'>
+                    <h2>223</h2>
+                    <div>
+                        <BsFillPersonPlusFill />
+                        Following
+                    </div>
+                </li>
+            </ul>
+            <ul role='tablist' className='profiledetails__tablist'>
+                <li role='tab'>
+                    <h2>23</h2>
+                    <div>
+                        <RiDiscussFill />
+                        Discussions
+                    </div>
+                </li>
+                <li role='tab'>
+                    <h2>123</h2>
+                    <div>
+                        <BsFillPersonCheckFill />
+                        Followers
+                    </div>
+                </li>
+                <li role='tab'>
+                    <h2>223</h2>
+                    <div>
+                        <BsFillPersonPlusFill />
+                        Following
+                    </div>
+                </li>
+            </ul>
+            <ul role='tablist' className='profiledetails__tablist'>
+                <li role='tab'>
+                    <h2>23</h2>
+                    <div>
+                        <RiDiscussFill />
+                        Discussions
+                    </div>
+                </li>
+                <li role='tab'>
+                    <h2>123</h2>
+                    <div>
+                        <BsFillPersonCheckFill />
+                        Followers
+                    </div>
+                </li>
+                <li role='tab'>
+                    <h2>223</h2>
+                    <div>
+                        <BsFillPersonPlusFill />
+                        Following
+                    </div>
+                </li>
+            </ul>
+            <ul role='tablist' className='profiledetails__tablist'>
+                <li role='tab'>
+                    <h2>23</h2>
+                    <div>
+                        <RiDiscussFill />
+                        Discussions
+                    </div>
+                </li>
+                <li role='tab'>
+                    <h2>123</h2>
+                    <div>
+                        <BsFillPersonCheckFill />
+                        Followers
+                    </div>
+                </li>
+                <li role='tab'>
+                    <h2>223</h2>
+                    <div>
+                        <BsFillPersonPlusFill />
+                        Following
+                    </div>
+                </li>
+            </ul>
+            <ul role='tablist' className='profiledetails__tablist'>
+                <li role='tab'>
+                    <h2>23</h2>
+                    <div>
+                        <RiDiscussFill />
+                        Discussions
+                    </div>
+                </li>
+                <li role='tab'>
+                    <h2>123</h2>
+                    <div>
+                        <BsFillPersonCheckFill />
+                        Followers
+                    </div>
+                </li>
+                <li role='tab'>
+                    <h2>223</h2>
+                    <div>
+                        <BsFillPersonPlusFill />
+                        Following
+                    </div>
+                </li>
+            </ul>
+            <ul role='tablist' className='profiledetails__tablist'>
+                <li role='tab'>
+                    <h2>23</h2>
+                    <div>
+                        <RiDiscussFill />
+                        Discussions
+                    </div>
+                </li>
+                <li role='tab'>
+                    <h2>123</h2>
+                    <div>
+                        <BsFillPersonCheckFill />
+                        Followers
+                    </div>
+                </li>
+                <li role='tab'>
+                    <h2>223</h2>
+                    <div>
+                        <BsFillPersonPlusFill />
+                        Following
+                    </div>
+                </li>
+            </ul>
+            <ul role='tablist' className='profiledetails__tablist'>
+                <li role='tab'>
+                    <h2>23</h2>
+                    <div>
+                        <RiDiscussFill />
+                        Discussions
+                    </div>
+                </li>
+                <li role='tab'>
+                    <h2>123</h2>
+                    <div>
+                        <BsFillPersonCheckFill />
+                        Followers
+                    </div>
+                </li>
+                <li role='tab'>
+                    <h2>223</h2>
+                    <div>
+                        <BsFillPersonPlusFill />
+                        Following
+                    </div>
+                </li>
+            </ul>
+            <ul role='tablist' className='profiledetails__tablist'>
+                <li role='tab'>
+                    <h2>23</h2>
+                    <div>
+                        <RiDiscussFill />
+                        Discussions
+                    </div>
+                </li>
+                <li role='tab'>
+                    <h2>123</h2>
+                    <div>
+                        <BsFillPersonCheckFill />
+                        Followers
+                    </div>
+                </li>
+                <li role='tab'>
+                    <h2>223</h2>
+                    <div>
+                        <BsFillPersonPlusFill />
+                        Following
+                    </div>
+                </li>
+            </ul>
+                        <ul role='tablist' className='profiledetails__tablist'>
+                <li role='tab'>
+                    <h2>23</h2>
+                    <div>
+                        <RiDiscussFill />
+                        Discussions
+                    </div>
+                </li>
+                <li role='tab'>
+                    <h2>123</h2>
+                    <div>
+                        <BsFillPersonCheckFill />
+                        Followers
+                    </div>
+                </li>
+                <li role='tab'>
+                    <h2>223</h2>
+                    <div>
+                        <BsFillPersonPlusFill />
+                        Following
+                    </div>
+                </li>
+            </ul>
         </section>
     );
 }
