@@ -4,19 +4,18 @@ import { FaBlog } from 'react-icons/fa';
 import '@common/layout/Layout.css'
 import SignUpForm from '@features/auth/SignUpForm';
 import LoginForm from '@features/auth/LoginForm';
-import { useAppSelector, useAppDispatch } from '@app/hooks';
+import { useAppDispatch } from '@app/hooks';
 import { toggleSignUpForm, toggleLoginForm } from '@features/auth/authSlice'
-import { useLogoutMutation, useGetUserByIdQuery, useRefreshQuery } from '@features/auth/authApiSlice';
+import { useLogoutMutation } from '@features/auth/authApiSlice';
 import { useNavigate } from 'react-router-dom';
+import { useGetUser } from '@common/hooks/useGetUser';
 
 const Nav: FC = () => {
 
-    useRefreshQuery();
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const [logout,] = useLogoutMutation();
-    const user = useAppSelector(state => state.auth.user);
-    const { isLoading, isFetching, isSuccess } = useGetUserByIdQuery(user.id as string, { skip: !user.id });
+    const { user, isLoading, isFetching, isSuccess } = useGetUser();
 
     const handleSignUpFormMounted = (): void => {
         dispatch(toggleSignUpForm(true));
@@ -31,10 +30,8 @@ const Nav: FC = () => {
     }
 
     const handleNavigateProfile = (): void => {
-        navigate(`${user.username}`);
+        navigate(`profile/${user.username}`);
     }
-
-    
 
     return (
         <>

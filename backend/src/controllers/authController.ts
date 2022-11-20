@@ -42,14 +42,14 @@ const login = asyncHandler(async (req: Request, res: Response): Promise<any> => 
     const accessTokenPayload: IToken = { tokenId: user._id.toString(), tokenUsername: username!, tokenEmail: user.email! };
     const refreshTokenPayload: IToken = { tokenId: user._id.toString() };
 
-    const accessToken = jwt.sign(accessTokenPayload, process.env.ACCESS_TOKEN_SECRET as Secret, { expiresIn: '1m' });
-    const refreshToken = jwt.sign(refreshTokenPayload, process.env.REFRESH_TOKEN_SECRET as Secret, { expiresIn: '1m' });
+    const accessToken = jwt.sign(accessTokenPayload, process.env.ACCESS_TOKEN_SECRET as Secret, { expiresIn: '5m' });
+    const refreshToken = jwt.sign(refreshTokenPayload, process.env.REFRESH_TOKEN_SECRET as Secret, { expiresIn: '7d' });
 
     res.cookie('jwt', refreshToken, {
         httpOnly: true,
         secure: true,
         sameSite: 'none',
-        maxAge: 5 * 60 * 1000
+        maxAge: 7 * 24 * 60 * 60 * 1000
     });
 
     const userPayload: IUser = { 
@@ -86,7 +86,7 @@ const refresh = asyncHandler(async (req: Request, res: Response): Promise<any> =
         }
 
         const accessTokenPayload: IToken = { tokenId: user._id.toString(), tokenUsername: user.username, tokenEmail: user.email };
-        const accessToken = jwt.sign(accessTokenPayload, process.env.ACCESS_TOKEN_SECRET as Secret, { expiresIn: '1m' });
+        const accessToken = jwt.sign(accessTokenPayload, process.env.ACCESS_TOKEN_SECRET as Secret, { expiresIn: '5m' });
 
         res.json({ message: { token: accessToken, id: user._id.toString() } });
     } catch (err) {

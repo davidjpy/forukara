@@ -4,7 +4,7 @@ import { NextFunction, Request, Response } from 'express';
 import { logEvents } from '@middlewares/logger';
 import { ErrorCode } from '@utilities/types';
 
-
+// Prevent too frequent email request from the same origin 
 export const emailLimiter = rateLimit({
     windowMs: 5 * 60 * 1000,
     max: 3,
@@ -17,6 +17,7 @@ export const emailLimiter = rateLimit({
     legacyHeaders: false
 });
 
+// Prevent too frequent login request from the same origin 
 export const loginLimiter = rateLimit({
     windowMs: 5 * 60 * 1000,
     max: 5,

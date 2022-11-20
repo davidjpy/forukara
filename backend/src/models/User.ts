@@ -16,6 +16,16 @@ const userSchema = new mongoose.Schema<IUser>(
             type: String,
             required: true,
         },
+        avatar: {
+            type: Buffer,
+            contentType: String,
+            default: null
+        },
+        background: {
+            type: Buffer,
+            contentType: String,
+            default: null
+        },
         status: {
             type: String,
             default: "Pending",
