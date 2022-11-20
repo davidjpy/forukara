@@ -61,8 +61,8 @@ const Nav: FC = () => {
                     )}
                 </section>
             </nav>
-            {/* <SignUpForm />
-            <LoginForm /> */}
+            <SignUpForm />
+            <LoginForm />
         </>
     )
 }

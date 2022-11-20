@@ -7,6 +7,7 @@
 
 :root {
     --black-opacity-light: rgba(0, 0, 0, 0.4);
+    --black-opacity-moderate: rgba(0, 0, 0, 0.7);
     --black-opacity-deep: rgba(0, 0, 0, 0.85);
     --black-light: #202020;
     --green-alien-deep: #23ac83;

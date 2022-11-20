@@ -1,7 +1,7 @@
 import { FC, useState, useEffect } from 'react';
 
-import nav_background from '@media/images/nav_background.webp';
 import coast from '@media/images/coast.jpg';
+import ProfileDetails from '@features/user/ProfileDetails';
 
 
 const ProfileImage: FC = () => {
@@ -13,11 +13,9 @@ const ProfileImage: FC = () => {
     }, []);
 
     return (
-        <section className='profileimage'>
+        <section className={isLoading ? 'profileimage' : 'profileimage profileimage--loaded'}>
             <div className={isLoading ? 'profileimage__background' : 'profileimage__background profileimage__background--loaded'} style={{ backgroundImage: `url(${coast})` }} />
-            <figure className={isLoading ? 'profileimage__icon-wrapper' : 'profileimage__icon-wrapper profileimage__icon-wrapper--loaded'} >
-                <img src={nav_background} alt='profile' className={isLoading ? 'profileimage__icon' : 'profileimage__icon profileimage__icon--loaded'} />
-            </figure>
+            <ProfileDetails />
         </section>
     );
 }

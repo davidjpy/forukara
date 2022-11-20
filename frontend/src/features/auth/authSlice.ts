@@ -36,13 +36,13 @@ export const authSlice = createSlice({
         toggleSignUpForm: (state, action: PayloadAction<boolean>) => {
             state.signUpFormMounted = action.payload;
 
-            if (state.signUpFormMounted) {
-                document.body.style.overflow = 'hidden';
-            }
+            // if (state.signUpFormMounted) {
+            //     document.body.style.overflow = 'hidden';
+            // }
 
-            if (!state.signUpFormMounted) {
-                document.body.style.overflow = 'auto';
-            }
+            // if (!state.signUpFormMounted) {
+            //     document.body.style.overflow = 'auto';
+            // }
         },
 
         toggleLoginForm: (state, action: PayloadAction<boolean>) => {
