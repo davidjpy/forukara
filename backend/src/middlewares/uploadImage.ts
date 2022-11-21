@@ -2,19 +2,16 @@ import multer from 'multer';
 import { Request, Response, NextFunction } from 'express';
 import path from 'path';
 
+const absolutePath = path.resolve('src/media/images');
 // Upload image to local disk middleware
 const storage = multer.diskStorage({
     // determine local storage location
     destination: (req: Request, file, callback) => {
-        console.log(file)
-        callback(null, '../media/images');
+        callback(null, absolutePath);
     },
     // Set image filename
     filename: (req: Request, file, callback) => {
-        console.log(file)
-        console.log(file.originalname)
-        console.log(path.extname(file.originalname))
-        callback(null, Date.now() + path.extname(file.originalname));
+        callback(null, file.originalname);
     }
 });
 

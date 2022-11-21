@@ -14,7 +14,7 @@ const SplashNav: FC = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const [logout,] = useLogoutMutation();
-    const { user, isLoading, isFetching, isSuccess } = useGetUser();
+    const [user, isLoading, isFetching, isSuccess] = useGetUser();
 
     const handleSignUpFormMounted = (): void => {
         dispatch(toggleSignUpForm(true));
@@ -42,12 +42,12 @@ const SplashNav: FC = () => {
                     </header>
                     {user.id ? (
                         <div className='splashlayout__action-wrapper'>
-                            <button onClick={handleLogout} className='splashlayout__button splashlayout__button--text'>Logout</button>
+                            <button onClick={handleLogout} className='splashlayout__button splashlayout__button--text'>LOGOUT</button>
                             <p role='button' onClick={handleNavigateProfile} className='splashlayout__button splashlayout__button--text' style={{ textAlign: 'center' }}>{user.username}</p>
                         </div>
                     ) : (
                         <div className='splashlayout__action-wrapper'>
-                            <button onClick={handleLoginFormMounted} className='splashlayout__button splashlayout__button--text'>Login</button>
+                            <button onClick={handleLoginFormMounted} className='splashlayout__button splashlayout__button--text'>LOGIN</button>
                             <button onClick={handleSignUpFormMounted} className='splashlayout__button splashlayout__button--slide'>&nbsp;</button>
                         </div>
                     )}

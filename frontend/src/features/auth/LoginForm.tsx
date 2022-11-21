@@ -7,6 +7,7 @@ import { useClickOutside } from '@common/hooks/useClickOutside';
 import { toggleLoginForm, toggleSignUpForm } from '@features/auth/authSlice';
 import { useLoginMutation } from '@features/auth/authApiSlice';
 import { useWindowResize } from '@common/hooks/useWindowResize';
+import { useInput } from '@common/hooks/useInput';
 
 const LoginForm: FC = () => {
 
@@ -14,14 +15,22 @@ const LoginForm: FC = () => {
     const overlayRef = useRef<HTMLDivElement>(null);
     const loginFormMounted = useAppSelector((state) => state.auth.loginFormMounted);
     const [login, loginResult] = useLoginMutation();
-    const [userId, setUserId] = useState<string>('');
-    const [password, setPassword] = useState<string>('');
     const [userIdErr, setUserIdErr] = useState<string>('');
     const [passwordErr, setPasswordErr] = useState<string>('');
     const [err, setErr] = useState<string>('');
+    const [userId, handleChangeUserId, resetUserId] = useInput('', [setUserIdErr, setErr]);
+    const [password, handleChangePassword, resetPassword] = useInput('', [setPasswordErr, setErr]);
     useWindowResize(overlayRef);
 
     const submitNotAllowed: boolean = Boolean(err || userIdErr || passwordErr);
+
+    const handleResetInput = (): void => {
+        resetUserId();
+        resetPassword();
+        setUserIdErr('');
+        setPasswordErr('');
+        setErr('');
+    }
 
     const handleLoginFormUnmounted = useCallback((): void => {
         dispatch(toggleLoginForm(false));
@@ -65,25 +74,6 @@ const LoginForm: FC = () => {
             }
         }
     }, [loginResult, handleLoginFormUnmounted]);
-
-    const handleChangeUserId = (e: ChangeEvent<HTMLInputElement>): void => {
-        setUserId(e.target.value);
-        setUserIdErr('');
-        setErr('');
-    }
-
-    const handleChangePassword = (e: ChangeEvent<HTMLInputElement>): void => {
-        setPassword(e.target.value);
-        setPasswordErr('');
-        setErr('');
-    }
-
-    const handleResetInput = (): void => {
-        setUserId('');
-        setPassword('');
-        setUserIdErr('');
-        setPasswordErr('');
-    }
 
     const wrapperRef = useClickOutside(handleLoginFormUnmounted);
 

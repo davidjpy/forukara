@@ -6,7 +6,7 @@ import { loginLimiter } from '@middlewares/requestLimiter';
 const router = express.Router();
 
 router.route('/login')
-    .post(authController.login)
+    .post(loginLimiter, authController.login)
 
 router.route('/logout')
     .post(authController.logout)

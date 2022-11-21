@@ -136,10 +136,11 @@ const createUser = asyncHandler(async (req: Request, res: Response): Promise<any
 
 // Update existing user
 const updateUser = asyncHandler(async (req: Request, res: Response): Promise<any> => {
-    const { id, username, password, email, avatar, background }: IUser = req.body;
+    const { id, username, password, email }: IUser = req.body;
+    const avatar = req.file?.filename;
 
     // Case 1: Missing fields
-    if (!id || !username || !email || !avatar || !background) {
+    if (!id || !username || !email) {
         return res.status(400).json({ message: 'All fields are required', code: ErrorCode.Failed });
     }
 
@@ -165,8 +166,10 @@ const updateUser = asyncHandler(async (req: Request, res: Response): Promise<any
 
     user.username = username;
     user.email = email;
-    user.avatar = avatar;
-    user.background = background;
+    user.avatar!.data = avatar;
+    user.avatar!.contentType = 'image/jpg';
+
+    // user.background = background;
 
     // Encrypt password before storing it to MongoDB
     if (password) {

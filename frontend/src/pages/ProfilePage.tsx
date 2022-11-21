@@ -7,7 +7,7 @@ import ProfileIntro from '@features/user/ProfileIntro';
 const ProfilePage: FC = () => {
     return (
         <div className='profilepage'>
-            <div className='profilepage__wrapper'>
+            <div className='profilepage-wrapper'>
                 <ProfileImage />
                 <ProfileIntro />
             </div>

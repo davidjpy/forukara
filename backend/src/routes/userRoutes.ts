@@ -21,7 +21,7 @@ router.route('/')
 router.route('/')
     .get(userController.getAllUsers)
     .post(userController.createUser)
-    .patch(upload.single('image'), userController.updateUser)
+    .patch(upload.single('avatar'), userController.updateUser)
     .delete(userController.deleteUser)
 
 router.route('/:id')

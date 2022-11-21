@@ -1,4 +1,4 @@
-import { FC, FormEvent, ChangeEvent, useState, useEffect, useRef } from 'react';
+import { FC, FormEvent, useState, useEffect, useRef } from 'react';
 import { FaUser } from 'react-icons/fa';
 import { IoMdMail } from 'react-icons/io';
 import { RiLockPasswordFill } from 'react-icons/ri';
@@ -8,6 +8,7 @@ import { useAppSelector, useAppDispatch } from '@app/hooks';
 import { toggleSignUpForm, toggleLoginForm } from '@features/auth/authSlice';
 import { useCreateUserMutation, useResendEmailMutation } from '@features/auth/authApiSlice';
 import { useWindowResize } from '@common/hooks/useWindowResize';
+import { useInput } from '@common/hooks/useInput';
 
 const SignUpForm: FC = () => {
 
@@ -23,11 +24,7 @@ const SignUpForm: FC = () => {
     const [resendEmail, resendEmailResult] = useResendEmailMutation();
     const [success, setSuccess] = useState<boolean>(false);
     const [formWidth, setFormwidth] = useState<number>();
-    const [userId, setUserId] = useState<string>('');
-    const [email, setEmail] = useState<string>('');
     const [emailCopy, setEmailCopy] = useState<string>('');
-    const [password, setPassword] = useState<string>('');
-    const [confirmPassword, setConfirmPassword] = useState<string>('');
 
     const [err, setErr] = useState<string>('');
     const [userIdErr, setUserIdErr] = useState<string>('');
@@ -36,9 +33,26 @@ const SignUpForm: FC = () => {
     const [confirmPasswordErr, setConfirmPasswordErr] = useState<string>('');
     const [resendEmailErr, setResendEmailErr] = useState<string>('');
     const [, setCoolDown] = useState<number>(counterTime);
+    const [userId, handleChangeUserId, resetUserId] = useInput('', [setUserIdErr, setErr]);
+    const [email, handleChangeEmail, resetEmail] = useInput('', [setEmailErr, setErr]);
+    const [password, handleChangePassword, resetPassword] = useInput('', [setPasswordErr, setErr]);
+    const [confirmPassword, handleChangeConfirmPassword, resetConfirmPassword] = useInput('', [setConfirmPasswordErr, setErr]);
     useWindowResize(overlayRef);
 
     const submitNotAllowed: boolean = Boolean(err || userIdErr || emailErr || passwordErr || confirmPasswordErr);
+
+    const handleResetInput = (): void => {
+        resetUserId();
+        resetEmail();
+        resetPassword();
+        resetConfirmPassword();
+        setErr('');
+        setUserIdErr('');
+        setEmailErr('');
+        setPasswordErr('');
+        setConfirmPasswordErr('');
+    }
+
 
     const hadnleSignUpFormUnmounted = (): void => {
         dispatch(toggleSignUpForm(false));
@@ -129,43 +143,6 @@ const SignUpForm: FC = () => {
             setResendEmailErr('');
         }
     }, [resendEmailResult]);
-
-
-    const handleResetInput = (): void => {
-        setUserId('');
-        setEmail('');
-        setPassword('');
-        setConfirmPassword('');
-        setErr('');
-        setUserIdErr('');
-        setEmailErr('');
-        setPasswordErr('');
-        setConfirmPasswordErr('');
-    }
-
-    const handleChangeUserId = (e: ChangeEvent<HTMLInputElement>): void => {
-        setUserId(e.target.value);
-        setUserIdErr('');
-        setErr('');
-    }
-
-    const handleChangeEmail = (e: ChangeEvent<HTMLInputElement>): void => {
-        setEmail(e.target.value);
-        setEmailErr('');
-        setErr('');
-    }
-
-    const handleChangePassword = (e: ChangeEvent<HTMLInputElement>): void => {
-        setPassword(e.target.value);
-        setPasswordErr('');
-        setErr('');
-    }
-
-    const handleChangeConfirmPassword = (e: ChangeEvent<HTMLInputElement>): void => {
-        setConfirmPassword(e.target.value);
-        setConfirmPasswordErr('');
-        setErr('');
-    }
 
     const wrapperRef = useClickOutside(hadnleSignUpFormUnmounted);
 

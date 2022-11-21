@@ -7,5 +7,5 @@ export const useGetUser = (): any => {
     const user = useAppSelector(state => state.auth.user);
     const { isLoading, isFetching, isSuccess } = useGetUserByIdQuery(user.id as string, { skip: !user.id });
 
-    return { user, isLoading, isFetching, isSuccess };
+    return [user, isLoading, isFetching, isSuccess];
 }
