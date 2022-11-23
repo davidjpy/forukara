@@ -22,7 +22,7 @@ const ProfileDetails: FC<PropsWithChildren<any>> = (props: Props) => {
         <section className={isLoading ? 'profiledetails' : 'profiledetails profiledetails--loaded' }>
             <div className={isLoading ? 'profiledetails-wrapper' : 'profiledetails-wrapper profiledetails-wrapper--loaded'}> 
                 <figure className={isLoading ? 'profiledetails__figure' : 'profiledetails__figure profiledetails__figure--loaded'}>
-                    <img src={!props.user.avatar ? default_avatar :  baseUrl + props.user.avatar} alt='profile' />
+                    <img src={!props.user?.avatar ? default_avatar :  baseUrl + props.user?.avatar} alt='profile' />
                     <figcaption>{props.user?.username}</figcaption>
                     <p>Tokyo, Japan</p>
                     <p>{props.user?.createdAt}</p>

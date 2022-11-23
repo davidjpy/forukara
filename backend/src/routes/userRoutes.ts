@@ -16,16 +16,16 @@ router.route('/verifications/resend')
 router.route('/')
     .post(userController.createUser)
 
-// router.use(verifyToken);
+router.route('/:username')
+    .get(userController.getUserByUsername)
 
+// router.use(verifyToken);
 router.route('/')
     .get(userController.getAllUsers)
     .post(userController.createUser)
     .patch(upload.fields([{ name: 'avatar', maxCount: 1 }, { name: 'background', maxCount: 1 }]), userController.updateUser)
     .delete(userController.deleteUser)
 
-router.route('/:id')
-    .get(userController.getUserById)
 
 
 router.route('/test')

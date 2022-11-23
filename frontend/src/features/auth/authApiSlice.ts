@@ -4,26 +4,6 @@ import { User, ILoginResponse, IRefreshResponse } from '@common/utilities/types'
 
 export const authApiSlice = apiSlice.injectEndpoints({
     endpoints: builder => ({
-        getUser: builder.query<User, string>({
-            query: (id) => ({
-                url: `/users/${id}`,
-                method: 'GET',
-                validateStatus: (response, result) =>
-                    (response.status === 200 || response.status === 201) && !result.isError
-            }),
-            transformResponse: (rawResult: { message: User }) => {
-                return rawResult.message;
-            },
-            async onQueryStarted(arg, { dispatch, queryFulfilled }) {
-                try {
-                    const { data } = await queryFulfilled;
-                    dispatch(setUserInfo(data));
-                } catch (err) {
-                    console.error(err);
-                }
-            }
-        }),
-
         createUser: builder.mutation<User, Partial<User>>({
             query: ({ ...data }) => ({
                 url: '/users',
@@ -86,7 +66,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
                 }
             }
         }),
-        
+
         logout: builder.mutation<void, void>({
             query: () => ({
                 url: '/auth/logout/',
@@ -103,17 +83,37 @@ export const authApiSlice = apiSlice.injectEndpoints({
                     console.error(err);
                 }
             }
-        })
+        }),
+
+        getUser: builder.query<User, string>({
+            query: (id) => ({
+                url: `auth/user/${id}`,
+                method: 'GET',
+                validateStatus: (response, result) =>
+                    (response.status === 200 || response.status === 201) && !result.isError
+            }),
+            transformResponse: (rawResult: { message: User }) => {
+                return rawResult.message;
+            },
+            async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+                try {
+                    const { data } = await queryFulfilled;
+                    dispatch(setUserInfo(data));
+                } catch (err) {
+                    console.error(err);
+                }
+            }
+        }),
     })
 });
 
 export const {
-    useGetUserQuery,
     useCreateUserMutation,
     useResendEmailMutation,
     useLoginMutation,
     useRefreshQuery,
-    useLogoutMutation
+    useLogoutMutation,
+    useGetUserQuery
 } = authApiSlice;
 
 

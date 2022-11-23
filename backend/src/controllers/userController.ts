@@ -3,7 +3,6 @@ import bcrypt from 'bcrypt';
 import jwt, { Secret } from 'jsonwebtoken';
 import { Request, Response } from 'express';
 import * as EmailValidator from 'email-validator';
-import path from 'path';
 
 import User from '@models/User';
 import emailService from '@utilities/emailService';
@@ -23,15 +22,16 @@ const getAllUsers = asyncHandler(async (req: Request, res: Response): Promise<an
 });
 
 // Get specific user by document id
-const getUserById = asyncHandler(async (req: Request, res: Response): Promise<any> => {
-    const id: string = req.params.id;
+const getUserByUsername = asyncHandler(async (req: Request, res: Response): Promise<any> => {
+    const username: string = req.params.username;
 
-    // Case 1: Id missing
-    if (!id) {
-        return res.status(400).json({ message: 'All fields are required', code: ErrorCode.Failed });
+    // Case 1: Username missing
+    if (!username) {
+        return res.status(400).json({ message: 'Username is required', code: ErrorCode.Failed });
     }
 
-    const user = await User.findById(id).select('-password').lean().exec();
+    const user = await User.findOne({ username: username }).select(['-_id', '-email','-password']).lean().exec();
+    // const user = await User.findById(id).select('-password').lean().exec();
 
     // Case 2: User not found
     if (!user) {
@@ -39,16 +39,14 @@ const getUserById = asyncHandler(async (req: Request, res: Response): Promise<an
     }
 
     const returnPayload: IUser = { 
-        id: user._id.toString(), 
         username: user.username, 
-        email: user.email, 
         avatar: user.avatar,
         background: user.background,
         createdAt: user.createdAt 
     };
 
     res.json({ message: returnPayload });
-})
+});
 
 // Create new user
 const createUser = asyncHandler(async (req: Request, res: Response): Promise<any> => {
@@ -294,7 +292,7 @@ const testing = asyncHandler(async (req: Request, res: Response): Promise<any> =
 
 export = {
     getAllUsers,
-    getUserById,
+    getUserByUsername,
     createUser,
     updateUser,
     deleteUser,
