@@ -9,11 +9,13 @@ export interface IRefreshResponse {
 }
 
 export type User = {
-    id: string;
-    username: string;
-    email: string;
-    password: string;
-    confirmPassword: string;
-    status: 'Pending' | 'Active';
-    createdAt: Date;
+    id?: string | null;
+    username?: string | null;
+    email?: string | null;
+    password?: string | null;
+    confirmPassword?: string | null;
+    avatar?: string | null;
+    background?: string | null;
+    status?: 'Pending' | 'Active';
+    createdAt?: string | null;
 }

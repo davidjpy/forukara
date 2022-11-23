@@ -17,13 +17,11 @@ const userSchema = new mongoose.Schema<IUser>(
             required: true,
         },
         avatar: {
-            type: Buffer,
-            contentType: String,
+            type: String,
             default: null
         },
         background: {
-            type: Buffer,
-            contentType: String,
+            type: String,
             default: null
         },
         status: {

@@ -19,10 +19,7 @@ export interface IUser {
     username?: string;
     password?: string;
     email?: string;
-    avatar?: {
-        data?: string;
-        contentType?: string;
-    };
+    avatar?: string;
     background?: string;
     confirmPassword?: string;
     status?: 'Pending' | 'Active';

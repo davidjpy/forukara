@@ -1,10 +1,14 @@
-import { FC, useState, useEffect } from 'react';
+import { FC, useState, useEffect, PropsWithChildren } from 'react';
 
-import nav_background from '@media/images/nav_background.webp';
-import profile from '@media/images/profile.jpg';
+import { User } from '@common/utilities/types';
+import { baseUrl } from '@app/apiSlice';
+import default_avatar from '@media/images/default_avatar.jpg';
 
+type Props = {
+    user: User
+}
 
-const ProfileDetails: FC = () => {
+const ProfileDetails: FC<PropsWithChildren<any>> = (props: Props) => {
 
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -18,9 +22,10 @@ const ProfileDetails: FC = () => {
         <section className={isLoading ? 'profiledetails' : 'profiledetails profiledetails--loaded' }>
             <div className={isLoading ? 'profiledetails-wrapper' : 'profiledetails-wrapper profiledetails-wrapper--loaded'}> 
                 <figure className={isLoading ? 'profiledetails__figure' : 'profiledetails__figure profiledetails__figure--loaded'}>
-                    <img src={profile} alt='profile' />
-                    <figcaption>Ho Chi Hang</figcaption>
+                    <img src={!props.user.avatar ? default_avatar :  baseUrl + props.user.avatar} alt='profile' />
+                    <figcaption>{props.user?.username}</figcaption>
                     <p>Tokyo, Japan</p>
+                    <p>{props.user?.createdAt}</p>
                 </figure>
                 <ul role='tablist' className='profiledetails__tablist'>
                     <li role='tab'>

@@ -5,7 +5,9 @@ import { useInput } from '@common/hooks/useInput';
 // Update user profile
 const UpdateForm: FC = () => {
 
-    const fileRef = useRef<HTMLInputElement>(null);
+    const avatarRef = useRef<HTMLInputElement>(null);
+    const backgroundRef = useRef<HTMLInputElement>(null);
+
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
@@ -15,10 +17,13 @@ const UpdateForm: FC = () => {
         formData.append('email', email);
         formData.append('password', password);
 
-        if (fileRef.current?.files) {
-            formData.append('avatar', fileRef.current.files[0])
+        if (avatarRef.current?.files) {
+            formData.append('avatar', avatarRef.current.files[0])
         }
 
+        if (backgroundRef.current?.files) {
+            formData.append('background', backgroundRef.current.files[0])
+        }
 
         await fetch('http://127.0.0.1:3500/users', {
             method: 'PATCH',
@@ -27,8 +32,6 @@ const UpdateForm: FC = () => {
         }).then(res => {
             console.log(res)
         })
-
-        
     }
 
     const [id, handleChangeId, resetId] = useInput('');
@@ -65,12 +68,12 @@ const UpdateForm: FC = () => {
 
                 <div>
                     <label htmlFor='update-avatar'>avatar</label>
-                    <input id='update-avatar' ref={fileRef} type='file' name='avatar' />
+                    <input id='update-avatar' ref={avatarRef} type='file' name='avatar' />
                 </div>
 
                 <div>
                     <label htmlFor='update-background'>background</label>
-                    <input id='update-background' type='file' name='background' />
+                    <input id='update-background' ref={backgroundRef} type='file' name='background' />
                 </div>
 
                 <input type='submit' />

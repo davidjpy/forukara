@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt';
 import jwt, { Secret } from 'jsonwebtoken';
 import { Request, Response } from 'express';
 import * as EmailValidator from 'email-validator';
+import path from 'path';
 
 import User from '@models/User';
 import emailService from '@utilities/emailService';
@@ -107,6 +108,7 @@ const createUser = asyncHandler(async (req: Request, res: Response): Promise<any
     // Encrypt password before storing it to MongoDB
     const hashedPwd = await bcrypt.hash(password!, 10);
     const userObj = { username, 'password': hashedPwd, email };
+
     const user = await User.create(userObj);
 
     const payload: IToken = { tokenId: user._id.toString(), tokenUsername: user.username!, tokenEmail: user.email! };
@@ -119,7 +121,7 @@ const createUser = asyncHandler(async (req: Request, res: Response): Promise<any
         HTMLTemplate: 'emailVerification.html',
         replacement: { 
             username: username!, 
-            url: `http://localhost:3500/users/verifications/${token}/` 
+            url: `${process.env.HOST}/users/verifications/${token}/` 
         },
         target: email!, 
         subject: 'Verify Your Forukara Account'
@@ -136,8 +138,8 @@ const createUser = asyncHandler(async (req: Request, res: Response): Promise<any
 
 // Update existing user
 const updateUser = asyncHandler(async (req: Request, res: Response): Promise<any> => {
-    const { id, username, password, email }: IUser = req.body;
-    const avatar = req.file?.filename;
+    const { id, username, password, email }: IUser = req.body;  
+    const { avatar, background }: any = req.files;
 
     // Case 1: Missing fields
     if (!id || !username || !email) {
@@ -166,10 +168,8 @@ const updateUser = asyncHandler(async (req: Request, res: Response): Promise<any
 
     user.username = username;
     user.email = email;
-    user.avatar!.data = avatar;
-    user.avatar!.contentType = 'image/jpg';
-
-    // user.background = background;
+    user.avatar! = `/images/${avatar[0].filename}`;
+    user.background! = `/images/${background[0].filename}`;
 
     // Encrypt password before storing it to MongoDB
     if (password) {
@@ -270,7 +270,7 @@ const resendVerification = asyncHandler(async (req: Request, res: Response): Pro
         HTMLTemplate: 'emailVerification.html',
         replacement: { 
             username: user.username, 
-            url: `http://localhost:3500/users/verifications/${token}/` 
+            url: `${process.env.HOST}/users/verifications/${token}/` 
         },
         target: email, 
         subject: 'Verify Your Forukara Account'

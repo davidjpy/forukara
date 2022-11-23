@@ -4,7 +4,7 @@ import { User, ILoginResponse, IRefreshResponse } from '@common/utilities/types'
 
 export const authApiSlice = apiSlice.injectEndpoints({
     endpoints: builder => ({
-        getUserById: builder.query<User, string>({
+        getUser: builder.query<User, string>({
             query: (id) => ({
                 url: `/users/${id}`,
                 method: 'GET',
@@ -108,7 +108,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
 });
 
 export const {
-    useGetUserByIdQuery,
+    useGetUserQuery,
     useCreateUserMutation,
     useResendEmailMutation,
     useLoginMutation,

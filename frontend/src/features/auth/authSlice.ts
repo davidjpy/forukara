@@ -2,13 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
 import type { RootState } from '@app/store';
-
-type User = {
-    id: string | null;
-    username?: string | null;
-    email?: string | null;
-    createdAt?: Date | null;
-}
+import { User } from '@common/utilities/types'
 
 interface AuthState {
     signUpFormMounted: boolean;
@@ -25,6 +19,8 @@ const initialState: AuthState = {
         id: null,
         username: null,
         email: null,
+        avatar: null,
+        background: null,
         createdAt: null
     }
 }

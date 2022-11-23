@@ -1,10 +1,15 @@
-import { FC, useState, useEffect } from 'react';
+import { FC, useState, useEffect, PropsWithChildren } from 'react';
 
-import coast from '@media/images/coast.jpg';
 import ProfileDetails from '@features/user/ProfileDetails';
+import { User } from '@common/utilities/types';
+import { baseUrl } from '@app/apiSlice';
+import default_background from '@media/images/default_background.jpg';
 
+type Props = {
+    user: User
+}
 
-const ProfileImage: FC = () => {
+const ProfileImage: FC<PropsWithChildren<any>> = (props: Props) => {
 
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -14,8 +19,10 @@ const ProfileImage: FC = () => {
 
     return (
         <section className={isLoading ? 'profileimage' : 'profileimage profileimage--loaded'}>
-            <div className={isLoading ? 'profileimage__background' : 'profileimage__background profileimage__background--loaded'} style={{ backgroundImage: `url(${coast})` }} />
-            <ProfileDetails />
+            <div className={isLoading ? 'profileimage__background' : 'profileimage__background profileimage__background--loaded'} style={{ backgroundImage: `url(${!props.user.background ? default_background : baseUrl + props.user?.background})` }} />
+            <ProfileDetails 
+                user={props.user}
+            />
         </section>
     );
 }

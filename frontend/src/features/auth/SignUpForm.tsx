@@ -51,6 +51,7 @@ const SignUpForm: FC = () => {
         setEmailErr('');
         setPasswordErr('');
         setConfirmPasswordErr('');
+        setResendEmailErr('');
     }
 
 

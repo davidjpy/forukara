@@ -1,7 +1,13 @@
-import { FC } from 'react';
+import { FC, PropsWithChildren } from 'react';
 import { AiFillProfile } from 'react-icons/ai';
 
-const ProfileIntro: FC = () => {
+import { User } from '@common/utilities/types';
+
+type props = {
+    user: User
+}
+
+const ProfileIntro: FC<PropsWithChildren<any>> = (props: props) => {
     return (
         <section className='profileintro'>
             <header>

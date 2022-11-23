@@ -21,7 +21,7 @@ router.route('/')
 router.route('/')
     .get(userController.getAllUsers)
     .post(userController.createUser)
-    .patch(upload.single('avatar'), userController.updateUser)
+    .patch(upload.fields([{ name: 'avatar', maxCount: 1 }, { name: 'background', maxCount: 1 }]), userController.updateUser)
     .delete(userController.deleteUser)
 
 router.route('/:id')

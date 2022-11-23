@@ -3,6 +3,7 @@ import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
+import path from 'path';
 
 import { connectDB } from '@configs/dbConnect';
 import { corsOptions } from '@configs/corsOptions';
@@ -13,6 +14,7 @@ import postRoutes from '@routes/postRoutes';
 import userRoutes from '@routes/userRoutes'
 import authRoutes from '@routes/authRoutes';
 import { IDBError } from '@utilities/types';
+
 
 
 const app = express();
@@ -27,6 +29,8 @@ app.use(cors(corsOptions));
 app.use(express.json());
 
 app.use(cookieParser());
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/users', userRoutes);
 
