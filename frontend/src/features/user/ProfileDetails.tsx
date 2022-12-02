@@ -1,7 +1,9 @@
 import { FC, useState, useEffect, PropsWithChildren } from 'react';
+import moment from 'moment';
+import { FaCalendarAlt } from 'react-icons/fa';
+import { ImLocation2 } from 'react-icons/im'
 
 import { User } from '@common/utilities/types';
-import { baseUrl } from '@app/apiSlice';
 import default_avatar from '@media/images/default_avatar.webp';
 
 type Props = {
@@ -18,19 +20,25 @@ const ProfileDetails: FC<PropsWithChildren<any>> = (props: Props) => {
         }, 0)
     }, []);
 
-    console.log(props.user)
-
     return (
-        <section className={isLoading ? 'profiledetails' : 'profiledetails profiledetails--loaded' }>
-            <div className={isLoading ? 'profiledetails-wrapper' : 'profiledetails-wrapper profiledetails-wrapper--loaded'}> 
+        <section className={isLoading ? 'profiledetails' : 'profiledetails profiledetails--loaded'}>
+            <div className={isLoading ? 'profiledetails__wrapper' : 'profiledetails__wrapper profiledetails__wrapper--loaded'}>
                 <figure className={isLoading ? 'profiledetails__figure' : 'profiledetails__figure profiledetails__figure--loaded'}>
                     <div>
                         <img src={!props.user?.avatar ? default_avatar : props.user?.avatar} alt='profile' />
                     </div>
                     <figcaption>{props.user?.username}</figcaption>
-                    <p>Tokyo, Japan</p>
-                    <p>{props.user?.createdAt}</p>
+                    <p>
+                        <ImLocation2 className='profiledetails__icon' />
+                        Tokyo, Japan
+                    </p>
+                    <p>
+                        <FaCalendarAlt className='profiledetails__icon' />
+                        {moment(`${props.user?.createdAt}`).format('Do MMMM, YYYY')}
+                    </p>
                 </figure>
+                <div className='profiledetails__info'>
+                </div>
                 <ul role='tablist' className='profiledetails__tablist'>
                     <li role='tab'>
                         <h1>{props.user?.discussion?.length}</h1>

@@ -66,7 +66,7 @@
     height: 100%;
 }
 
-.profiledetails-wrapper {
+.profiledetails__wrapper {
     position: relative;
     height: 100%;
     opacity: 0;
@@ -74,7 +74,7 @@
     transition-delay: 1s;
 }
 
-.profiledetails-wrapper--loaded {
+.profiledetails__wrapper--loaded {
     opacity: 1;
 }
 
@@ -120,11 +120,27 @@
     font-weight: 900;
 }
 
+.profiledetails__icon {
+    color: var(--green-alien-light);
+    margin: 0 0.4rem;
+    font-size: 1rem;
+}
+
 .profiledetails__figure p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: rgb(200, 200, 200);
-    text-transform: uppercase;
     font-size: 0.9rem;
-    letter-spacing: 1px;    
+    letter-spacing: 1px; 
+    margin: 0.6rem 0;   
+}
+
+.profiledetails__figure span {
+    text-align: start;
+    color: var(--green-alien-light);
+    font-weight: 800;
+    font-size: 0.8rem;
 }
 
 .profiledetails__tablist {
