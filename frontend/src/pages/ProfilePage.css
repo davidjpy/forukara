@@ -88,6 +88,7 @@
     opacity: 0;
     text-align: center;
     padding: 2.2rem;
+
 }
 
 .profiledetails__figure--loaded {
@@ -95,10 +96,19 @@
     top: 45%;
 }
 
-.profiledetails__figure img {
+.profiledetails__figure div {
+    background-color: var(--green-alien-light);
+    margin: 0 auto;
     border-radius: 50%;
     width: 160px;
     height: 160px;
+}
+
+.profiledetails__figure img {
+    margin: 2.5%;
+    border-radius: 50%;
+    width: 95%;
+    height: 95%;
     object-fit: cover;
 }
 
@@ -130,6 +140,7 @@
 .profiledetails__tablist li {
     text-align: center;
     margin: 0.6rem 5rem;
+    flex: 1
 }
 
 .profiledetails__tablist li h1 {
@@ -183,7 +194,17 @@
 
 @media screen and (max-width: 500px) {
     .profiledetails__tablist {
-        width: 90%;
+        width: 95%;
+    }
+
+    .profiledetails__tablist li {
+        margin: 0;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .profiledetails__divider {
+        display: none;
     }
 }
 
