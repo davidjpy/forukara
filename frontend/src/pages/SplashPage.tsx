@@ -76,12 +76,12 @@ const SplashPage: FC = () => {
         <div ref={imageRef} className='splashpage'>
             <div ref={overlayRef} className='splashpage__overlay'>
                 <div className='splashpage__slogan'>
-                    <div className='splashpage__dynamic-txts-wrapper'>
+                    <header>
                         <p className='splashpage__header splashpage__header--large'>I'm a</p>
                         <p className='splashpage__header splashpage__header--large splashpage__header--dynamic' ref={dynamicTxtRef}></p>
-                    </div>
+                    </header>
                     <p className='splashpage__header'>Share Your Wisdoms, Inspire The World, Reach The Impossibility</p>
-                    <button onClick={handleNavigateHomepage} className='splashpage__button'>
+                    <button onClick={handleNavigateHomepage}>
                         Start Now
                         <FaArrowRight className='splashpage__icon' />
                     </button>

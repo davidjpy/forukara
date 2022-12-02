@@ -1,7 +1,17 @@
-import { useState, ChangeEvent, useEffect } from 'react';
+import { useState, ChangeEvent } from 'react';
+
+/**
+ * @param {string | number | boolean} initialValue  
+ * Receive the initial state
+ * @param {Array<any>} errorHandler 
+ * Receive the optional error handler function
+ * @returns {ResultValue}
+ */
+
+type ResultValue = [any, (e: ChangeEvent<HTMLInputElement>) => void, () => void]
 
 // Return functions and components that a generic input field will use
-export const useInput = (initialValue: string | number | boolean, errorHandler?: Array<any>): any => {
+export const useInput = (initialValue: string | number | boolean, errorHandler?: Array<any>): ResultValue => {
     const [value, setValue] = useState<typeof initialValue>(initialValue);
 
     const reset = (): void => {

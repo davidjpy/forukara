@@ -35,23 +35,23 @@ const Nav: FC = () => {
 
     return (
         <>
-            <nav className='layout__nav'>
-                <section className='layout__nav-wrapper'>
-                    <header className='layout__logo-wrapper'>
-                        <FaBlog className='layout__logo' />
-                        <p className='layout__header'>Forukara</p>
+            <nav className='nav'>
+                <section className='nav__nav'>
+                    <header>
+                        <FaBlog className='nav__logo' />
+                        <p className='nav__header'>Forukara</p>
                     </header>
                     {user.id ? (
-                        <div className='layout__action-wrapper'>
-                            <p role='button' onClick={handleLogout} className='layout__text layout__text--button layout__text--link'>Logout</p>
-                            <p role='button' onClick={handleNavigateProfile} className='layout__text layout__text--button layout__text--link'>
+                        <div className='nav__wrapper'>
+                            <p role='button' onClick={handleLogout} className='nav__text nav__text--button nav__text--link'>Logout</p>
+                            <p role='button' onClick={handleNavigateProfile} className='nav__text nav__text--button nav__text--link'>
                                 {user?.username}
                             </p>
                         </div>
                     ) : (
-                        <div className='layout__action-wrapper'>
-                            <p role='button' onClick={handleLoginFormMounted} className='layout__text layout__text--button layout__text--link'>Login</p>
-                            <button onClick={handleSignUpFormMounted} className='layout__button layout__button--green-alien-light'>
+                        <div className='nav__wrapper'>
+                            <p role='button' onClick={handleLoginFormMounted} className='nav__text nav__text--button nav__text--link'>Login</p>
+                            <button onClick={handleSignUpFormMounted} className='nav__button nav__button--green-alien-light'>
                                 Register
                             </button>
                         </div>

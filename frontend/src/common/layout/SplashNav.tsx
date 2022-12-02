@@ -34,21 +34,21 @@ const SplashNav: FC = () => {
 
     return (
         <>
-            <nav className='splashlayout__nav'>
-                <section className='splashlayout__container'>
-                    <header className='splashlayout__logo-wrapper'>
-                        <FaBlog className='splashlayout__logo'/>
-                        <p className='splashlayout__logo--text'>Forukara</p>
+            <nav className='splashnav'>
+                <section className='splashnav__nav'>
+                    <header>
+                        <FaBlog className='splashnav__logo'/>
+                        <p>Forukara</p>
                     </header>
                     {user.id ? (
-                        <div className='splashlayout__action-wrapper'>
-                            <button onClick={handleLogout} className='splashlayout__button splashlayout__button--text'>LOGOUT</button>
-                            <p role='button' onClick={handleNavigateProfile} className='splashlayout__button splashlayout__button--text' style={{ textAlign: 'center' }}>{user.username}</p>
+                        <div className='splashnav__wrapper'>
+                            <button onClick={handleLogout} className='splashnav__button splashnav__button--text'>LOGOUT</button>
+                            <p role='button' onClick={handleNavigateProfile} className='splashnav__button splashnav__button--text' style={{ textAlign: 'center' }}>{user.username}</p>
                         </div>
                     ) : (
-                        <div className='splashlayout__action-wrapper'>
-                            <button onClick={handleLoginFormMounted} className='splashlayout__button splashlayout__button--text'>LOGIN</button>
-                            <button onClick={handleSignUpFormMounted} className='splashlayout__button splashlayout__button--slide'>&nbsp;</button>
+                        <div className='splashnav__wrapper'>
+                            <button onClick={handleLoginFormMounted} className='splashnav__button splashnav__button--text'>LOGIN</button>
+                            <button onClick={handleSignUpFormMounted} className='splashnav__button splashnav__button--slide'>&nbsp;</button>
                         </div>
                     )}
                 </section>

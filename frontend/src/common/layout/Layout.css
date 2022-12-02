@@ -1,8 +1,8 @@
 /* =========================================================================================== */
-/* ===================================== SplashLayout ======================================== */
+/* ======================================== SplashNav ======================================== */
 /* =========================================================================================== */
 
-.splashlayout__nav {
+.splashnav {
     width: 1200px;
     position: absolute;
     z-index: 1;
@@ -11,7 +11,7 @@
     transform: translate(-50%, 0);
 }
 
-.splashlayout__container {
+.splashnav__nav {
     display: flex;
     align-items: center;
     height: 52px;
@@ -30,7 +30,7 @@
     transition: opacity 0.3s ease-in-out;
 }
 
-.splashlayout__logo-wrapper {
+.splashnav__nav header {
     display: flex;
     align-items: top;
     font-size: 2rem;
@@ -42,13 +42,13 @@
     user-select: none;
 }
 
-.splashlayout__action-wrapper {
+.splashnav__wrapper {
     display: flex;
     align-items: center;
     gap: 60px;
 }
 
-.splashlayout__button {
+.splashnav__button {
     cursor: pointer;
     height: 52px;
     width: 130px;
@@ -56,7 +56,7 @@
     user-select: none;
 }
 
-.splashlayout__button--text {
+.splashnav__button--text {
     height: auto;
     width: auto;
     letter-spacing: 0.6px;
@@ -64,11 +64,11 @@
     border: none;
 }
 
-.splashlayout__button--text:hover {
+.splashnav__button--text:hover {
     text-decoration: underline;
 }
 
-.splashlayout__button--slide {
+.splashnav__button--slide {
     position: relative;
     overflow: hidden;
     background-color: transparent;
@@ -79,7 +79,7 @@
     border: 2px solid rgb(185, 185, 185);
 }
 
-.splashlayout__button--slide::after {
+.splashnav__button--slide::after {
     content: "Register";
     position: absolute;
     width: 100%;
@@ -89,7 +89,7 @@
     transition: all 400ms cubic-bezier(0.680, -0.550, 0.265, 1.550);
 }
 
-.splashlayout__button--slide::before {
+.splashnav__button--slide::before {
     content: "Join Us";
     height: 100%;
     width: 100%;
@@ -99,18 +99,18 @@
     transition: all 500ms cubic-bezier(0.680, -0.550, 0.265, 1.550);
 }
 
-.splashlayout__button--slide:hover {
+.splashnav__button--slide:hover {
     background: rgba(0, 0, 0, 0.4);
     border: 2px solid white;
 }
 
-.splashlayout__button--slide:hover::before {
+.splashnav__button--slide:hover::before {
     left: 0;
     opacity: 1;
     color: #fff;
 }
 
-.splashlayout__button--slide:hover::after {
+.splashnav__button--slide:hover::after {
     left: 100%;
     opacity: 0;
 }
@@ -296,50 +296,50 @@ input[type='password'] {
 }
 
 @media screen and (max-width: 1400px) {
-    .splashlayout__nav {
+    .splashnav {
         width: 80%;
     }
 
-    .splashlayout__logo-wrapper {
+    .splashnav__nav header {
         font-size: 1.8rem;
     }
 }
 
 @media screen and (max-width: 1000px) {
-    .splashlayout__logo-wrapper {
+    .splashnav__nav header {
         font-size: 1.6rem;
     }
 }
 
 @media screen and (max-width: 800px) {
-    .splashlayout__action-wrapper {
+    .splashnav__wrapper {
         gap: 20px;
     }
 
-    .splashlayout__button {
+    .splashnav__button {
         width: 110px;
     }
 }
 
 
 @media screen and (max-width: 600px) {
-    .splashlayout__nav {
+    .splashnav {
         width: 85%;
     }
 
-    .splashlayout__logo-wrapper {
+    .splashnav__nav header {
         font-size: 1.2rem;
     }
 
-    .splashlayout__action-wrapper {
+    .splashnav__wrapper {
         font-size: 0.9rem;
     }
 
-    .splashlayout__button:first-child {
+    .splashnav__button:first-child {
         width: 50px;
     }
 
-    .splashlayout__button {
+    .splashnav__button {
         font-size: 0.8rem;
         width: 90px;
     }
@@ -364,21 +364,21 @@ input[type='password'] {
         padding: 2.6rem 2rem;
     }
 
-    .splashlayout__logo--text {
+    .splashnav__nav header p {
         display: none;
     }
     
-    .splashlayout__logo {
+    .splashnav__logo {
         font-size: 2rem;
         margin-left: 1rem;
     }
 }
 
 /* =========================================================================================== */
-/* ======================================== Layout =========================================== */
+/* ========================================= Nav ============================================= */
 /* =========================================================================================== */
 
-.layout__nav {
+.nav {
     position: fixed;
     width: 100%;
     height: var(--nav-height);
@@ -386,7 +386,7 @@ input[type='password'] {
     z-index: 100;
 }
 
-.layout__nav-wrapper {
+.nav__nav {
     width: 1200px;
     height: 100%;
     margin: auto;
@@ -395,7 +395,7 @@ input[type='password'] {
     padding: 0 2rem;
 }
 
-.layout__logo-wrapper {
+.nav__nav header {
     display: flex;
     font-size: 1.4rem;
     color: white;
@@ -406,28 +406,28 @@ input[type='password'] {
     flex: 1;
 }
 
-.layout__action-wrapper {
+.nav__wrapper {
     display: flex;
     align-items: center;
 }
 
-.layout__text {
+.nav__text {
     color: white;
     font-size: 0.8rem;
 }
 
-.layout__text--link:hover {
+.nav__text--link:hover {
     cursor: pointer;
     text-decoration: underline;
 }
 
-.layout__text--button {
+.nav__text--button {
     letter-spacing: 0.6px;
     user-select: none;
     margin: 0 1.2rem;
 }
 
-.layout__button {
+.nav__button {
     font-size: 0.8rem;
     padding: 0.6rem 0.8rem;
     margin-left: 0.2rem;
@@ -439,27 +439,27 @@ input[type='password'] {
     user-select: none;
 }
 
-.layout__button--green-alien-light {
+.nav__button--green-alien-light {
     background-color: var(--green-alien-light);
     transition: background-color 0.2s ease-in-out;
 }
 
-.layout__button--green-alien-light:hover {
+.nav__button--green-alien-light:hover {
     background-color: var(--green-alien-deep);
 } 
 
 @media screen and (max-width: 1400px) {
-    .layout__nav-wrapper {
+    .nav__nav {
         width: 85%;
     }
 }
 
 @media screen and (max-width: 500px) {
-    .layout__nav-wrapper {
+    .nav__nav {
         padding: 0;
     }
 
-    .layout__header {
+    .nav__header {
         display: none;
     }
 }

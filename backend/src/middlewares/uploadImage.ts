@@ -2,8 +2,6 @@ import multer, { FileFilterCallback } from 'multer';
 import { Request } from 'express';
 import path from 'path';
 
-const absolutePath = path.resolve('src/media/images');
-
 // Upload image to local disk middleware
 const storage = multer.diskStorage({
     // determine local storage location
