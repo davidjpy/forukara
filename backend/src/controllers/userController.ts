@@ -3,10 +3,11 @@ import bcrypt from 'bcrypt';
 import jwt, { Secret } from 'jsonwebtoken';
 import { Request, Response } from 'express';
 import * as EmailValidator from 'email-validator';
+import sharp from 'sharp';
+import path from 'path';
 
 import User from '@models/User';
 import emailService from '@utilities/emailService';
-
 import { IUser, IToken, IErrorResponse, ErrorCode } from '@utilities/types';
 
 // Get all users
@@ -42,6 +43,10 @@ const getUserByUsername = asyncHandler(async (req: Request, res: Response): Prom
         username: user.username, 
         avatar: user.avatar,
         background: user.background,
+        about: user.about,
+        discussion: user.discussion,
+        followers: user.followers,
+        following: user.following,
         createdAt: user.createdAt 
     };
 
@@ -139,6 +144,25 @@ const updateUser = asyncHandler(async (req: Request, res: Response): Promise<any
     const { id, username, password, email }: IUser = req.body;  
     const { avatar, background }: any = req.files;
 
+    // Convert small avatar image to much smaller size
+    await sharp(avatar[0].path)
+        .resize(300)
+        .webp({
+            quality: 80
+        })
+        .toFile(`${avatar[0].destination}/${path.parse(avatar[0].filename).name}.webp`);
+
+    // Convert large background image to 16:9 ratio with lower dpi
+    await sharp(background[0].path)
+        .resize({
+            width: 1920,
+            height: 1080
+        })
+        .webp({
+            quality: 80
+        })
+        .toFile(`${background[0].destination}/${path.parse(background[0].filename).name}.webp`);
+
     // Case 1: Missing fields
     if (!id || !username || !email) {
         return res.status(400).json({ message: 'All fields are required', code: ErrorCode.Failed });
@@ -166,8 +190,8 @@ const updateUser = asyncHandler(async (req: Request, res: Response): Promise<any
 
     user.username = username;
     user.email = email;
-    user.avatar! = `/images/${avatar[0].filename}`;
-    user.background! = `/images/${background[0].filename}`;
+    user.avatar = `${process.env.HOST}/images/${path.parse(avatar[0].filename).name}.webp`;
+    user.background = `${process.env.HOST}/images/${path.parse(background[0].filename).name}.webp`;
 
     // Encrypt password before storing it to MongoDB
     if (password) {

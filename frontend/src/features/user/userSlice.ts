@@ -16,7 +16,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
             }
         })
     })
-})
+});
 
 export const {
     useGetUserByUsernameQuery

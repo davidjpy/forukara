@@ -1,4 +1,4 @@
-import { ObjectId } from 'mongoose';
+import { ObjectId, LeanDocument } from 'mongoose';
 
 export interface IDBError {
     no?: number;
@@ -21,6 +21,10 @@ export interface IUser {
     email?: string;
     avatar?: string;
     background?: string;
+    about?: string;
+    discussion?: Array<ObjectId> | Array<LeanDocument<ObjectId>>;
+    followers?: Array<ObjectId> | Array<LeanDocument<ObjectId>>;
+    following?: Array<ObjectId> | Array<LeanDocument<ObjectId>>;
     confirmPassword?: string;
     status?: 'Pending' | 'Active';
     createdAt?: Date;

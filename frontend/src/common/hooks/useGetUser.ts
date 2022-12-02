@@ -1,5 +1,6 @@
 import { useAppSelector } from '@app/hooks';
-import { useGetUserQuery, useRefreshQuery } from '@features/auth/authApiSlice';
+import { useRefreshQuery } from '@features/auth/authApiSlice';
+import { useGetUserQuery } from '@features/user/userApiSlice';
 
 
 export const useGetUser = (): any => {

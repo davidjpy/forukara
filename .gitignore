@@ -23,6 +23,5 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-*.jpg
-*.webp
-*.png
+backend/src/public/images/*jpg
+backend/src/public/images/*webp

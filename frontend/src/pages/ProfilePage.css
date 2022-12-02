@@ -6,14 +6,14 @@
     min-height: var(--min-height);
     padding-top: var(--nav-height);
     background-color: rgb(235, 235, 235);
-    height: 100vh;
+    overflow: auto;
 }
 
-.profilepage-wrapper {
+.profilepage__wrapper {
     width: 1000px;
     margin: auto;
     background-color: rgb(245, 245, 245);
-    height: 100%;
+    height: calc(100vh - var(--nav-height));
 }
 
 /* =========================================================================================== */

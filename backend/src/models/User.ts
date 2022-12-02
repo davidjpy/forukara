@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { ObjectId } from 'mongoose';
 
 import { IUser } from '@utilities/types';
 
@@ -24,6 +25,22 @@ const userSchema = new mongoose.Schema<IUser>(
             type: String,
             default: null
         },
+        about: {
+            type: String,
+            default: ''
+        },
+        discussion: {
+            type: Array<mongoose.Schema.Types.ObjectId>,
+            default: []
+        },
+        followers: {
+            type: Array<mongoose.Schema.Types.ObjectId>,
+            default: []
+        },
+        following: {
+            type: Array<mongoose.Schema.Types.ObjectId>,
+            default: []
+        },
         status: {
             type: String,
             default: "Pending",
@@ -33,7 +50,7 @@ const userSchema = new mongoose.Schema<IUser>(
             type: Date,
             default: Date.now,
             expires: 600
-        }
+        },
     },
     {
         timestamps: true

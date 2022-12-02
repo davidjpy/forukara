@@ -13,11 +13,11 @@ const ProfilePage: FC = () => {
 
     return (
         <div className='profilepage'>
-            <div className='profilepage-wrapper'>
-                <ProfileImage 
+            <div className='profilepage__wrapper'>
+                <ProfileImage
                     user={user}
                 />
-                <ProfileIntro 
+                <ProfileIntro
                     user={user}
                 />
             </div>

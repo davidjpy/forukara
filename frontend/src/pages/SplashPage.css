@@ -3,7 +3,7 @@
 /* =========================================================================================== */
 
 .splashpage {
-    background-image: url('@media/images/nav_background.webp');
+    background-image: url('@media/images/splash_background.webp');
     height: 100vh;
     background-position: center;
     background-size: cover;

@@ -6,7 +6,7 @@ import UpdateForm from '@features/user/UpdateForm';
 const UpdatePage: FC = () => {
     return (
         <div className='updatepage'>
-            <div className='updatepage-wrapper'>
+            <div className='updatepage__wrapper'>
                 <UpdateForm />
             </div>
         </div>

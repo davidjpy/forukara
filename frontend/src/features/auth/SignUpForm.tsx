@@ -6,7 +6,7 @@ import { RiLockPasswordFill } from 'react-icons/ri';
 import { useClickOutside } from '@common/hooks/useClickOutside';
 import { useAppSelector, useAppDispatch } from '@app/hooks';
 import { toggleSignUpForm, toggleLoginForm } from '@features/auth/authSlice';
-import { useCreateUserMutation, useResendEmailMutation } from '@features/auth/authApiSlice';
+import { useCreateUserMutation, useResendEmailMutation } from '@features/user/userApiSlice';
 import { useWindowResize } from '@common/hooks/useWindowResize';
 import { useInput } from '@common/hooks/useInput';
 

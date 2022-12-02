@@ -383,7 +383,7 @@ input[type='password'] {
     width: 100%;
     height: var(--nav-height);
     background-color: var(--black-light);
-    z-index: 100;
+    z-index: 10000;
 }
 
 .nav__nav {
