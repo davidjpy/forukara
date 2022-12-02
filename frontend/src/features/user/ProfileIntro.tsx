@@ -13,7 +13,7 @@ const ProfileIntro: FC<PropsWithChildren<any>> = (props: props) => {
             <header>
                 <AiFillProfile className='profileintro__icon' />
             </header>
-            <div className='profileintro-wrapper'>
+            <div className='profileintro__wrapper'>
                 <h1>
                     ABOUT ME
                     <div className='profileintro__divider'></div>

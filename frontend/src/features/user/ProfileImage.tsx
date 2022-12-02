@@ -17,7 +17,7 @@ const ProfileImage: FC<PropsWithChildren<any>> = (props: Props) => {
     }, []);
 
     return (
-        <section className={isLoading ? 'profileimage' : 'profileimage profileimage--loaded'}>
+        <section className='profileimage'>
             <div className={isLoading ? 'profileimage__background' : 'profileimage__background profileimage__background--loaded'} 
                 style={{ backgroundImage: `url(${!props.user?.background ? default_background : props.user?.background})` }} 
             />

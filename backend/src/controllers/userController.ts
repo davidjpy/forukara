@@ -144,11 +144,14 @@ const updateUser = asyncHandler(async (req: Request, res: Response): Promise<any
     const { id, username, password, email }: IUser = req.body;  
     const { avatar, background }: any = req.files;
 
-    // Convert small avatar image to much smaller size
+    // Convert small avatar image to a smaller size
     await sharp(avatar[0].path)
-        .resize(300)
+        .resize({
+            height: 400,
+            width: 400
+        })
         .webp({
-            quality: 80
+            quality: 60
         })
         .toFile(`${avatar[0].destination}/${path.parse(avatar[0].filename).name}.webp`);
 
@@ -159,7 +162,7 @@ const updateUser = asyncHandler(async (req: Request, res: Response): Promise<any
             height: 1080
         })
         .webp({
-            quality: 80
+            quality: 60
         })
         .toFile(`${background[0].destination}/${path.parse(background[0].filename).name}.webp`);
 
