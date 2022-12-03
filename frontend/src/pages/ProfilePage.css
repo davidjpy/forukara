@@ -154,9 +154,11 @@
 }
 
 .profiledetails__tablist li {
+    position: relative;
     text-align: center;
-    margin: 0.6rem 5rem;
-    flex: 1
+    margin: 0.6rem 0;
+    width: 250px;
+    cursor: pointer;
 }
 
 .profiledetails__tablist li h1 {
@@ -164,7 +166,6 @@
     font-weight: 700;
     font-size: 1.8rem;
     padding: 0.4rem;
-    flex: 1;
     text-align: center;
 }
 
@@ -180,23 +181,36 @@
     margin: auto;
 }
 
+.profiledetails__underline {
+    position: absolute;
+    width: 40px;
+    border-top: 3px solid var(--green-alien-deep);
+    bottom: 22px;
+    transition: left 0.5s ease-in-out;
+}
+
+.profiledetails__underline--left {
+    left: calc(33.333% / 2 - 20px);
+
+}
+
+.profiledetails__underline--center {
+    left: calc(33.333% + (33.333% / 2) - 20px);
+}
+
+.profiledetails__underline--right {
+    left: calc(66.667% + (33.333% / 2) - 20px);
+}
+
 @media screen and (max-width: 1000px) {
     .profiledetails__tablist {
         width: 70%;
-    }
-
-    .profiledetails__tablist li {
-        margin: 0.6rem 2rem;
     }
 }
 
 @media screen and (max-width: 800px) {
     .profiledetails__tablist {
         width: 80%;
-    }
-
-    .profiledetails__tablist li {
-        margin: 0.6rem 0rem;
     }
 
     .profiledetails__tablist li h1 {
@@ -210,11 +224,12 @@
 
 @media screen and (max-width: 500px) {
     .profiledetails__tablist {
-        width: 95%;
+        width: 100%;
     }
 
     .profiledetails__tablist li {
         margin: 0;
+        padding: 0;
     }
 }
 
@@ -225,10 +240,10 @@
 }
 
 /* =========================================================================================== */
-/* ===================================== ProfileIntro ======================================== */
+/* ======================================= ProfileBio ======================================== */
 /* =========================================================================================== */
 
-.profileintro {
+.profilebio {
     display: flex;
     background-color: rgb(240,240,240);
     box-shadow: 0px 6px 12px 0px var(--black-opacity-light);
@@ -237,7 +252,7 @@
     border-right-style: solid;
 }
 
-.profileintro header {
+.profilebio header {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -247,29 +262,29 @@
     font-size: 2rem;
 }
 
-.profileintro header h1 {
+.profilebio header h1 {
     font-weight: 700;
     color: black;
     font-size: 1.2rem;
 }   
 
-.profileintro__wrapper {
+.profilebio__wrapper {
     width: 92%;
     padding: 1.4rem;
     text-align: justify;
 }
 
-.profileintro__wrapper h1 {
+.profilebio__wrapper h1 {
     font-size: 0.9rem;
     color: rgb(100, 100, 100);
     width: fit-content;
 }
 
-.profileintro__wrapper p {
+.profilebio__wrapper p {
     line-height: 22px;
 }
 
-.profileintro__divider {
+.profilebio__divider {
     border-top: 2px solid var(--green-alien-light);
     margin: 0.2rem 0 0.5rem 0;
     width: 80%;

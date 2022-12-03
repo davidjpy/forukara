@@ -7,7 +7,9 @@ import { User } from '@common/utilities/types';
 import default_avatar from '@media/images/default_avatar.webp';
 
 type Props = {
-    user: User
+    user: User;
+    tab: string;
+    setTab: React.Dispatch<React.SetStateAction<'discussions' | 'followers' | 'following'>>;
 }
 
 const ProfileDetails: FC<PropsWithChildren<any>> = (props: Props) => {
@@ -19,6 +21,10 @@ const ProfileDetails: FC<PropsWithChildren<any>> = (props: Props) => {
             setIsLoading(false);
         }, 0)
     }, []);
+
+    const handleSwitchTab = (tab: 'discussions' | 'followers' | 'following'): void => {
+        props.setTab(tab);
+    }
 
     return (
         <section className={isLoading ? 'profiledetails' : 'profiledetails profiledetails--loaded'}>
@@ -34,26 +40,33 @@ const ProfileDetails: FC<PropsWithChildren<any>> = (props: Props) => {
                     </p>
                     <p>
                         <FaCalendarAlt className='profiledetails__icon' />
-                        {moment(`${props.user?.createdAt}`).format('Do MMMM, YYYY')}
+                        {props.user?.createdAt && moment(`${props.user.createdAt}`).format('Do MMMM, YYYY')}
                     </p>
                 </figure>
-                <div className='profiledetails__info'>
-                </div>
                 <ul role='tablist' className='profiledetails__tablist'>
-                    <li role='tab'>
+                    <li role='tab' aria-controls='discussions' onClick={() => handleSwitchTab('discussions')}>
                         <h1>{props.user?.discussion?.length}</h1>
                         <p>DISCUSSIONS</p>
                     </li>
                     <div className='profiledetails__divider'></div>
-                    <li role='tab'>
+                    <li role='tab' aria-controls='followers' onClick={() => handleSwitchTab('followers')}>
                         <h1>{props.user?.followers?.length}</h1>
                         <p>FOLLOWERS</p>
                     </li>
                     <div className='profiledetails__divider'></div>
-                    <li role='tab'>
+                    <li role='tab' aria-controls='following' onClick={() => handleSwitchTab('following')}>
                         <h1>{props.user?.following?.length}</h1>
                         <p>FOLLOWING</p>
                     </li>
+                    <div 
+                        className={
+                            props.tab === 'discussions' ?
+                            'profiledetails__underline profiledetails__underline--left' :
+                            props.tab === 'followers' ? 
+                            'profiledetails__underline profiledetails__underline--center' :
+                            'profiledetails__underline profiledetails__underline--right'
+                        }>
+                    </div>
                 </ul>
             </div>
         </section>

@@ -11,6 +11,7 @@ type Props = {
 const ProfileImage: FC<PropsWithChildren<any>> = (props: Props) => {
 
     const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [tab, setTab] = useState<'discussions' | 'followers' | 'following'>('discussions');
 
     useEffect(() => {
         setIsLoading(false);
@@ -23,6 +24,8 @@ const ProfileImage: FC<PropsWithChildren<any>> = (props: Props) => {
             />
             <ProfileDetails 
                 user={props.user}
+                tab={tab}
+                setTab={setTab}
             />
         </section>
     );

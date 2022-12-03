@@ -7,16 +7,16 @@ type props = {
     user: User
 }
 
-const ProfileIntro: FC<PropsWithChildren<any>> = (props: props) => {
+const ProfileBio: FC<PropsWithChildren<any>> = (props: props) => {
     return (
-        <section className='profileintro'>
+        <section className='profilebio'>
             <header>
-                <AiFillProfile className='profileintro__icon' />
+                <AiFillProfile className='profilebio__icon' />
             </header>
-            <div className='profileintro__wrapper'>
+            <div className='profilebio__wrapper'>
                 <h1>
-                    ABOUT ME
-                    <div className='profileintro__divider'></div>
+                    BIOGRAPHY
+                    <div className='profilebio__divider'></div>
                 </h1>
 
                 {props.user?.about ? (
@@ -30,4 +30,4 @@ const ProfileIntro: FC<PropsWithChildren<any>> = (props: props) => {
     );
 }
 
-export default ProfileIntro;
+export default ProfileBio;
