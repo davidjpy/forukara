@@ -1,4 +1,4 @@
-import { FC, useState, useEffect, PropsWithChildren } from 'react';
+import { FC, useState, useEffect } from 'react';
 
 import ProfileDetails from '@features/user/ProfileDetails';
 import { User } from '@common/utilities/types';
@@ -8,24 +8,21 @@ type Props = {
     user: User
 }
 
-const ProfileImage: FC<PropsWithChildren<any>> = (props: Props) => {
+const ProfileImage: FC<Props> = ({ user }: Props) => {
 
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [tab, setTab] = useState<'discussions' | 'followers' | 'following'>('discussions');
 
     useEffect(() => {
         setIsLoading(false);
     }, []);
 
     return (
-        <section className='profileimage'>
+        <section className={isLoading ? 'profileimage' : 'profileimage profileimage--loaded'}>
             <div className={isLoading ? 'profileimage__background' : 'profileimage__background profileimage__background--loaded'} 
-                style={{ backgroundImage: `url(${!props.user?.background ? default_background : props.user?.background})` }} 
+                style={{ backgroundImage: `url(${!user?.background ? default_background : user?.background})` }} 
             />
             <ProfileDetails 
-                user={props.user}
-                tab={tab}
-                setTab={setTab}
+                user={user}
             />
         </section>
     );

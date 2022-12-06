@@ -43,11 +43,24 @@ export const userApiSlice = apiSlice.injectEndpoints({
                 }
             }
         }),
+
+        getUserByUsername: builder.query<User, string>({
+            query: (username) => ({
+                url: `users/${username}`,
+                method: 'GET',
+                validateStatus: (response, result) =>
+                    (response.status === 200 || response.status === 201) && !result.isError
+            }),
+            transformResponse: (rawResult: { message: User }) => {
+                return rawResult.message;
+            }
+        })
     })
 })
 
 export const {
     useCreateUserMutation,
     useResendEmailMutation,
-    useGetUserQuery
+    useGetUserQuery,
+    useGetUserByUsernameQuery
 } = userApiSlice;

@@ -1,13 +1,13 @@
-import { FC, PropsWithChildren } from 'react';
+import { FC } from 'react';
 import { AiFillProfile } from 'react-icons/ai';
 
 import { User } from '@common/utilities/types';
 
-type props = {
+type Props = {
     user: User
 }
 
-const ProfileBio: FC<PropsWithChildren<any>> = (props: props) => {
+const ProfileBio: FC<Props> = ({ user }: Props) => {
     return (
         <section className='profilebio'>
             <header>
@@ -19,8 +19,8 @@ const ProfileBio: FC<PropsWithChildren<any>> = (props: props) => {
                     <div className='profilebio__divider'></div>
                 </h1>
 
-                {props.user?.about ? (
-                    <p>{props.user?.about}</p>
+                {user?.about ? (
+                    <p>{user?.about}</p>
                 ) : (
                     <p style={{ color: 'gray' }}>Write something about yourself...</p>
                 )}

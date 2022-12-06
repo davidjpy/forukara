@@ -22,9 +22,8 @@ export interface IUser {
     avatar?: string;
     background?: string;
     about?: string;
-    discussion?: Array<ObjectId> | Array<LeanDocument<ObjectId>>;
-    followers?: Array<ObjectId> | Array<LeanDocument<ObjectId>>;
-    following?: Array<ObjectId> | Array<LeanDocument<ObjectId>>;
+    discussions?: Array<ObjectId> | Array<LeanDocument<ObjectId>>;
+    connections?: Array<ObjectId> | Array<LeanDocument<ObjectId>>;
     confirmPassword?: string;
     status?: 'Pending' | 'Active';
     createdAt?: Date;

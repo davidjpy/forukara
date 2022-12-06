@@ -29,15 +29,11 @@ const userSchema = new mongoose.Schema<IUser>(
             type: String,
             default: ''
         },
-        discussion: {
+        discussions: {
             type: Array<mongoose.Schema.Types.ObjectId>,
             default: []
         },
-        followers: {
-            type: Array<mongoose.Schema.Types.ObjectId>,
-            default: []
-        },
-        following: {
+        connections: {
             type: Array<mongoose.Schema.Types.ObjectId>,
             default: []
         },

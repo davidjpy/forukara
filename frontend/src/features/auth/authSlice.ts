@@ -21,9 +21,8 @@ const initialState: AuthState = {
         email: null,
         avatar: null,
         about: null,
-        discussion: null,
-        followers: null,
-        following: null,
+        discussions: null,
+        connections: null,
         background: null,
         createdAt: null
     }

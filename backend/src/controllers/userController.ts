@@ -44,9 +44,8 @@ const getUserByUsername = asyncHandler(async (req: Request, res: Response): Prom
         avatar: user.avatar,
         background: user.background,
         about: user.about,
-        discussion: user.discussion,
-        followers: user.followers,
-        following: user.following,
+        discussions: user.discussions,
+        connections: user.connections,
         createdAt: user.createdAt 
     };
 

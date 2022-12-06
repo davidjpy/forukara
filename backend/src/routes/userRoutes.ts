@@ -27,7 +27,6 @@ router.route('/')
     .delete(userController.deleteUser)
 
 
-
 router.route('/test')
     .get(userController.testing)
 

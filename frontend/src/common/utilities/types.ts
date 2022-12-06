@@ -17,9 +17,8 @@ export type User = {
     avatar?: string | null;
     background?: string | null;
     about?: string | null;
-    discussion?: Array<string> | null;
-    followers?: Array<string> | null;
-    following?: Array<string> | null;
+    discussions?: Array<string> | null;
+    connections?: Array<string> | null;
     status?: 'Pending' | 'Active';
     createdAt?: string | null;
 }
