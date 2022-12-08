@@ -23,9 +23,7 @@ const ProfileDetails: FC<Props> = ({ user }: Props) => {
     }, []);
 
     const handleSwitchTab = (tab: 'biography' | 'discussions' | 'connections'): void => {
-        setSearchParams({
-            search: tab
-        });
+        setSearchParams({ search: tab }, { replace: true });
     }
 
     return (

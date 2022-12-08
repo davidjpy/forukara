@@ -2,8 +2,8 @@ import { FC } from 'react';
 
 const ProfileDiscussions: FC = () => {
     return (
-        <div>
-
+        <div>   
+            Discussions
         </div>
     );
 }

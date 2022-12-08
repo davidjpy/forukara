@@ -12,6 +12,7 @@
 .profilepage__wrapper {
     width: 1000px;
     height: 100%;
+    padding: 2rem;
     margin: auto;
     background-color: rgb(245, 245, 245);
     height: calc(100vh - var(--nav-height));
@@ -23,32 +24,46 @@
     }
 }
 
+@media screen and (max-width: 500px) {
+    .profilepage__wrapper {
+        padding: 0;
+    }
+}
+
 /* =========================================================================================== */
-/* ===================================== ProfileImage ======================================== */
+/* ================================== ProfileBackground ====================================== */
 /* =========================================================================================== */
 
-.profileimage {
+.profilebackground {
     position: relative;
     height: 550px;
     transition: box-shadow 0.1s ease-in-out;
     transition-delay: 0.4s;
+    border-radius: 8px;
 }
 
-.profileimage--loaded {
+.profilebackground--loaded {
     box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.3);
 }
 
-.profileimage__background {
+.profilebackground__background {
     height: 100%;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
     clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%);
     transition: clip-path 0.5s ease-in-out;
+    border-radius: 8px;
 }
 
-.profileimage__background--loaded {
+.profilebackground__background--loaded {
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+@media screen and (max-width: 500px) {
+    .profilebackground__background {
+        border-radius: 0;
+    }
 }
 
 /* =========================================================================================== */
@@ -66,6 +81,7 @@
     transform: translate(-50%, 0);
     transition: height 0.5s ease-in-out;
     transition-delay: 0.5s;
+    border-radius: 8px;
 }
 
 .profiledetails--loaded {
@@ -107,8 +123,8 @@
     background-color: var(--green-alien-light);
     margin: 0 auto;
     border-radius: 50%;
-    width: 160px;
-    height: 160px;
+    width: 130px;
+    height: 130px;
 }
 
 .profiledetails__figure img {
@@ -121,7 +137,7 @@
 
 .profiledetails__figure figcaption {
     color: var(--green-alien-light);
-    font-size: 1.8rem;
+    font-size: 1.4rem;
     margin: 1.2rem;
     letter-spacing: 2px;
     font-weight: 900;
@@ -158,27 +174,29 @@
     left: 50%;
     transform: translate(-50%, 0);
     user-select: none;
-    width: 70%;
+    width: 80%;
 }
 
 .profiledetails__tab {
     position: relative;
     text-align: center;
-    padding: 2rem 0 1rem 0;
+    padding: 1rem 0;
     cursor: pointer;
     flex: 1;
-}
-
-.profiledetails__tab--active {
-    background: linear-gradient(rgba(0, 0, 0, 0), 50%, rgba(41, 143, 109, 0.35));
 }
 
 .profiledetails__tab h1 {
     color: rgb(160, 160, 160);
     font-weight: 700;
-    font-size: 1rem;
+    font-size: 0.9rem;
     padding: 0.2rem 0;
     text-align: center; 
+    transition: color 0.4s linear;
+}
+
+.profiledetails__tab--active h1 {
+    color: var(--green-alien-light);
+    transition: color 0.4s linear;
 }
 
 .profiledetails__tab p {
@@ -209,7 +227,7 @@
 
 @media screen and (max-width: 1000px) {
     .profiledetails__tablist {
-        width: 80%;
+        width: 100%;
     }
 
     .profiledetails__tab h1 {
@@ -218,10 +236,6 @@
 }
 
 @media screen and (max-width: 500px) {
-    .profiledetails__tablist {
-        width: 100%;
-    }
-
     .profiledetails__tab h1 {
         font-size: 0.7rem;
     }
@@ -238,7 +252,7 @@
     border-image: linear-gradient(#abebd8, 50%, var(--green-alien-light)) 30%;
     border-right-width: 15px;
     border-right-style: solid;
-    margin: 2rem;
+    margin: 2rem 0;
 }
 
 .profilebio header {
@@ -289,6 +303,10 @@
 @media screen and (max-width: 600px) {
     .profilebio {
         border-right-width: 5px;
-        font-size: 0.9rem;
+        font-size: 0.7rem;
+    }
+
+    .profilebio__wrapper {
+        padding: 1rem ;
     }
 }

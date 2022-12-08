@@ -8,7 +8,7 @@ type Props = {
     user: User
 }
 
-const ProfileImage: FC<Props> = ({ user }: Props) => {
+const ProfileBackground: FC<Props> = ({ user }: Props) => {
 
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -17,8 +17,8 @@ const ProfileImage: FC<Props> = ({ user }: Props) => {
     }, []);
 
     return (
-        <section className={isLoading ? 'profileimage' : 'profileimage profileimage--loaded'}>
-            <div className={isLoading ? 'profileimage__background' : 'profileimage__background profileimage__background--loaded'} 
+        <section className={isLoading ? 'profilebackground' : 'profilebackground profilebackground--loaded'}>
+            <div className={isLoading ? 'profilebackground__background' : 'profilebackground__background profilebackground__background--loaded'} 
                 style={{ backgroundImage: `url(${!user?.background ? default_background : user?.background})` }} 
             />
             <ProfileDetails 
@@ -28,4 +28,4 @@ const ProfileImage: FC<Props> = ({ user }: Props) => {
     );
 }
 
-export default ProfileImage;
+export default ProfileBackground;
