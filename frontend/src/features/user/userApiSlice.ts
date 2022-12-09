@@ -1,6 +1,7 @@
 import { apiSlice } from '@app/apiSlice';
 import { setUserInfo } from '@features/auth/authSlice';
 import { User } from '@common/utilities/types';
+import { setUserProfile } from './userSlice';
 
 export const userApiSlice = apiSlice.injectEndpoints({
     endpoints: builder => ({
@@ -53,10 +54,18 @@ export const userApiSlice = apiSlice.injectEndpoints({
             }),
             transformResponse: (rawResult: { message: User }) => {
                 return rawResult.message;
+            },
+            async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+                try {
+                    const { data } = await queryFulfilled;
+                    dispatch(setUserProfile(data));
+                } catch (err) {
+                    console.error(err);
+                }
             }
         })
     })
-})
+});
 
 export const {
     useCreateUserMutation,

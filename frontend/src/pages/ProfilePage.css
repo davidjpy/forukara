@@ -5,27 +5,31 @@
 .profilepage {
     min-height: var(--min-height);
     padding-top: var(--nav-height);
-    background-color: rgb(235, 235, 235);
-    overflow: auto;
+    background-color: rgb(245, 245, 245);
+    /* overflow: auto; */
+    padding: calc(var(--nav-height) + 2rem) 2rem 2rem 2rem;
+    max-width: 800px;
+    width: 100%;
+    height: 100vh;
 }
 
-.profilepage__wrapper {
-    width: 1000px;
+/* .profilepage__wrapper {
+    width: 800px;
     height: 100%;
     padding: 2rem;
     margin: auto;
     background-color: rgb(245, 245, 245);
-    height: calc(100vh - var(--nav-height));
-}
+    min-height: calc(100vh - var(--nav-height));
+} */
 
-@media screen and (max-width: 1000px) {
-    .profilepage__wrapper {
+/* @media screen and (max-width: 1000px) {
+    .profilepage {
         width: 100%;
     }
-}
+} */
 
 @media screen and (max-width: 500px) {
-    .profilepage__wrapper {
+    .profilepage {
         padding: 0;
     }
 }

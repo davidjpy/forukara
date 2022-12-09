@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Outlet } from 'react-router-dom';
 
-import '@common/layout/Layout.css';
+import '@common/layout/SplashLayout.css';
 import SplashNav from '@common/layout/SplashNav';
 
 const SplashLayout: FC = () => {

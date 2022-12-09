@@ -1,23 +1,37 @@
-import { apiSlice } from '@app/apiSlice';
+import { createSlice } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
 
+import type { RootState } from '@app/store';
 import { User } from '@common/utilities/types';
 
-// export const userApiSlice = apiSlice.injectEndpoints({
-//     endpoints: builder => ({
-//         getUserByUsername: builder.query<User, string>({
-//             query: (username) => ({
-//                 url: `users/${username}`,
-//                 method: 'GET',
-//                 validateStatus: (response, result) =>
-//                     (response.status === 200 || response.status === 201) && !result.isError
-//             }),
-//             transformResponse: (rawResult: { message: User }) => {
-//                 return rawResult.message;
-//             }
-//         })
-//     })
-// });
+interface UserState {
+    userProfile: User;
+}
 
-// export const {
-//     useGetUserByUsernameQuery
-// } = userApiSlice;
+const initialState: UserState = {
+    userProfile: {
+        username: null,
+        avatar: null,
+        about: null,
+        discussions: null,
+        connections: null,
+        background: null,
+        createdAt: null
+    }
+}
+
+export const userSlice = createSlice({
+    name: 'user',
+    initialState,
+    reducers: {
+        setUserProfile: (state, action: PayloadAction<User>) => {
+            state.userProfile = { ...state.userProfile, ...action.payload };
+        }
+    }
+});
+
+export const { setUserProfile } = userSlice.actions;
+
+export const selectUserProfile = (state: RootState) => state.user.userProfile;
+
+export default userSlice.reducer;

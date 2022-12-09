@@ -68,7 +68,7 @@ export const authSlice = createSlice({
         logout: () => initialState
         
     }
-})
+});
 
 export const { toggleSignUpForm, toggleLoginForm, setUserInfo, setcredantial, logout } = authSlice.actions;
 
