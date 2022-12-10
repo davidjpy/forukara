@@ -20,13 +20,13 @@ const initialState: AuthState = {
         username: null,
         email: null,
         avatar: null,
+        background: null,
         about: null,
         discussions: null,
         connections: null,
-        background: null,
         createdAt: null
     }
-}
+};
 
 export const authSlice = createSlice({
     name: 'auth',

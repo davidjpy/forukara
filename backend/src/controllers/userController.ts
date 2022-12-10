@@ -22,17 +22,16 @@ const getAllUsers = asyncHandler(async (req: Request, res: Response): Promise<an
     res.json(users);
 });
 
-// Get specific user by document id
+// Get specific user by its username
 const getUserByUsername = asyncHandler(async (req: Request, res: Response): Promise<any> => {
     const username: string = req.params.username;
 
-    // Case 1: Username missing
+    // Case 1: Id missing
     if (!username) {
-        return res.status(400).json({ message: 'Username is required', code: ErrorCode.Failed });
+        return res.status(400).json({ message: 'All fields are required', code: ErrorCode.Failed });
     }
 
-    const user = await User.findOne({ username: username }).select(['-_id', '-email','-password']).lean().exec();
-    // const user = await User.findById(id).select('-password').lean().exec();
+    const user = await User.findOne({ username: username }).select(['-password', '-_id', '-email']).lean().exec();
 
     // Case 2: User not found
     if (!user) {
@@ -40,6 +39,37 @@ const getUserByUsername = asyncHandler(async (req: Request, res: Response): Prom
     }
 
     const returnPayload: IUser = { 
+        username: user.username, 
+        avatar: user.avatar,
+        background: user.background,
+        about: user.about,
+        discussions: user.discussions,
+        connections: user.connections,
+        createdAt: user.createdAt 
+    };
+
+    res.json({ message: returnPayload });
+});
+
+// Get account info by id
+const getAccountById = asyncHandler(async (req: Request, res: Response): Promise<any> => {
+    const id: string = req.params.id;
+
+    // Case 1: Id missing
+    if (!id) {
+        return res.status(400).json({ message: 'All fields are required', code: ErrorCode.Failed });
+    }
+
+    const user = await User.findById(id).select(['-password']).lean().exec();
+
+    // Case 2: User not found
+    if (!user) {
+        return res.status(404).json({ message: 'User not found', code: ErrorCode.Failed });
+    }
+
+    const returnPayload: IUser = {
+        id: user._id.toString(),
+        email: user.email,
         username: user.username, 
         avatar: user.avatar,
         background: user.background,
@@ -138,8 +168,8 @@ const createUser = asyncHandler(async (req: Request, res: Response): Promise<any
     }
 });
 
-// Update existing user
-const updateUser = asyncHandler(async (req: Request, res: Response): Promise<any> => {
+// Update account info
+const updateAccountById = asyncHandler(async (req: Request, res: Response): Promise<any> => {
     const { id, username, password, email }: IUser = req.body;  
     const { avatar, background }: any = req.files;
 
@@ -318,10 +348,12 @@ const testing = asyncHandler(async (req: Request, res: Response): Promise<any> =
 
 export = {
     getAllUsers,
+    // getUserByUsername,
     getUserByUsername,
     createUser,
-    updateUser,
     deleteUser,
+    getAccountById,
+    updateAccountById,
     verifiyUser,
     resendVerification,
     testing

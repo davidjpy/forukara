@@ -13,14 +13,15 @@ import { useAppSelector } from '@app/hooks';
 const ProfilePage: FC = () => {
 
     const { username } = useParams();
-    useGetUserByUsernameQuery(`${username}`);
     const user = useAppSelector((state) => state.user.userProfile);
+    const { isLoading } = useGetUserByUsernameQuery(`${username}`);
     const [searchParams] = useSearchParams();
 
     return (
         <div className='profilepage'>
             <ProfileBackground
                 user={user!}
+                isLoading={isLoading}
             />
             {
                 searchParams.get('search') === 'discussions' ?

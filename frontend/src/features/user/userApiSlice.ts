@@ -1,7 +1,7 @@
 import { apiSlice } from '@app/apiSlice';
-import { setUserInfo } from '@features/auth/authSlice';
 import { User } from '@common/utilities/types';
 import { setUserProfile } from './userSlice';
+import { setUserInfo } from '@features/auth/authSlice';
 
 export const userApiSlice = apiSlice.injectEndpoints({
     endpoints: builder => ({
@@ -25,29 +25,9 @@ export const userApiSlice = apiSlice.injectEndpoints({
             })
         }),
 
-        getUser: builder.query<User, string>({
-            query: (id) => ({
-                url: `auth/user/${id}`,
-                method: 'GET',
-                validateStatus: (response, result) =>
-                    (response.status === 200 || response.status === 201) && !result.isError
-            }),
-            transformResponse: (rawResult: { message: User }) => {
-                return rawResult.message;
-            },
-            async onQueryStarted(arg, { dispatch, queryFulfilled }) {
-                try {
-                    const { data } = await queryFulfilled;
-                    dispatch(setUserInfo(data));
-                } catch (err) {
-                    console.error(err);
-                }
-            }
-        }),
-
         getUserByUsername: builder.query<User, string>({
             query: (username) => ({
-                url: `users/${username}`,
+                url: `/users/${username}`,
                 method: 'GET',
                 validateStatus: (response, result) =>
                     (response.status === 200 || response.status === 201) && !result.isError
@@ -62,14 +42,34 @@ export const userApiSlice = apiSlice.injectEndpoints({
                 } catch (err) {
                     console.error(err);
                 }
-            }
-        })
+            },
+        }),
+
+        getAccountById: builder.query<User, string>({
+            query: (id) => ({
+                url: `/users/account/${id}`,
+                method: 'GET',
+                validateStatus: (response, result) =>
+                    (response.status === 200 || response.status === 201) && !result.isError
+            }),
+            transformResponse: (rawResult: { message: User }) => {
+                return rawResult.message;
+            },
+            async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+                try {
+                    const { data } = await queryFulfilled;
+                    dispatch(setUserInfo(data));
+                } catch (err) {
+                    console.error(err);
+                }
+            },
+        }),
     })
 });
 
 export const {
     useCreateUserMutation,
     useResendEmailMutation,
-    useGetUserQuery,
-    useGetUserByUsernameQuery
+    useGetUserByUsernameQuery,
+    useGetAccountByIdQuery
 } = userApiSlice;

@@ -1,4 +1,4 @@
-import { FC, useState, useEffect } from 'react';
+import { FC } from 'react';
 import { FaCalendarAlt } from 'react-icons/fa';
 import { ImLocation2 } from 'react-icons/im'
 import { useSearchParams } from "react-router-dom";
@@ -9,18 +9,12 @@ import default_avatar from '@media/images/default_avatar.webp';
 
 type Props = {
     user: User;
+    isLoading: boolean;
 }
 
-const ProfileDetails: FC<Props> = ({ user }: Props) => {
+const ProfileDetails: FC<Props> = ({ user, isLoading }: Props) => {
 
-    const [isLoading, setIsLoading] = useState<boolean>(true);
     const [searchParams, setSearchParams] = useSearchParams({ search: 'biography' });
-
-    useEffect(() => {
-        setTimeout(() => {
-            setIsLoading(false);
-        }, 0)
-    }, []);
 
     const handleSwitchTab = (tab: 'biography' | 'discussions' | 'connections'): void => {
         setSearchParams({ search: tab }, { replace: true });
@@ -31,7 +25,7 @@ const ProfileDetails: FC<Props> = ({ user }: Props) => {
             <div className={isLoading ? 'profiledetails__wrapper' : 'profiledetails__wrapper profiledetails__wrapper--loaded'}>
                 <figure className={isLoading ? 'profiledetails__figure' : 'profiledetails__figure profiledetails__figure--loaded'}>
                     <div>
-                        <img src={!user?.avatar ? default_avatar : user?.avatar} alt='profile' />
+                        <img alt='profile avatar' src={!user?.avatar ? default_avatar : user?.avatar} />
                     </div>
                     <figcaption>{user?.username}</figcaption>
                     <p>

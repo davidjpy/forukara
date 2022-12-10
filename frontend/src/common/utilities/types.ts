@@ -5,7 +5,7 @@ export interface ILoginResponse {
 
 export interface IRefreshResponse {
     token: string,
-    id: string
+    user: User
 }
 
 export type User = {

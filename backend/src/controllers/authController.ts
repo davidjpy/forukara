@@ -101,7 +101,19 @@ const refresh = asyncHandler(async (req: Request, res: Response): Promise<any> =
         const accessTokenPayload: IToken = { tokenId: user._id.toString(), tokenUsername: user.username, tokenEmail: user.email };
         const accessToken = jwt.sign(accessTokenPayload, process.env.ACCESS_TOKEN_SECRET as Secret, { expiresIn: '1d' });
 
-        res.json({ message: { token: accessToken, id: user._id.toString() } });
+        const returnPayload: IUser = { 
+            id: user._id.toString(), 
+            username: user.username, 
+            email: user.email, 
+            avatar: user.avatar,
+            background: user.background,
+            about: user.about,
+            discussions: user.discussions,
+            connections: user.connections,
+            createdAt: user.createdAt 
+        };
+
+        res.json({ message: { token: accessToken, user: returnPayload } });
     } catch (err) {
         return res.status(401).json({ message: { error: 'Invalid token', code: ErrorCode.AuthErr } });
     }
@@ -126,37 +138,8 @@ const logout = (req: Request, res: Response): any => {
     res.json({ message: 'Logout successful' });
 };
 
-// Get your own user data
-const getUser = asyncHandler(async (req: Request, res: Response): Promise<any> => {
-    const id: string = req.params.id;
-
-    // Case 1: Id missing
-    if (!id) {
-        return res.status(400).json({ message: 'All fields are required', code: ErrorCode.Failed });
-    }
-
-    const user = await User.findById(id).select('-password').lean().exec();
-
-    // Case 2: User not found
-    if (!user) {
-        return res.status(404).json({ message: 'User not found', code: ErrorCode.Failed });
-    }
-
-    const returnPayload: IUser = { 
-        id: user._id.toString(), 
-        username: user.username, 
-        email: user.email, 
-        avatar: user.avatar,
-        background: user.background,
-        createdAt: user.createdAt 
-    };
-
-    res.json({ message: returnPayload });
-});
-
 export = {
     login,
     refresh,
     logout,
-    getUser
 }

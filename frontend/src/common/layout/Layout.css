@@ -7,26 +7,62 @@
     justify-content: center;
 }
 
-
 /* =========================================================================================== */
-/* ======================================= LeftMenu ========================================== */
+/* ====================================== LeftMenu =========================================== */
 /* =========================================================================================== */
 
 .leftmenu {
-    min-width: 300px;
-    width: 300px;
-    background-color: rgb(153, 53, 53);
+    flex: 1;
+    padding-top: var(--nav-height);
+    background-color: rgb(245, 245, 245);
 }
 
+.leftmenu__wrapper {
+    position: relative;
+    margin: 2rem 2rem 2rem auto;
+    min-width: 260px;
+    width: 260px;
+    height: 600px;
+    border-radius: 16px;
+    background-color: white;
+    border: 1px solid rgb(220, 220, 220);
+}
+
+.leftmenu__background {
+    height: 100px;
+    border-radius: 16px 16px 0 0;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.leftmenu__wrapper figure {
+    top: 60px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    position: absolute;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: var(--green-alien-light);
+    width: 100px;
+    height: 100px;
+}
+
+.leftmenu__wrapper figure img {
+    border-radius: 50%;
+    width: 96%;
+    height: 96%;
+    margin: 2%;
+    object-fit: contain;
+}
 
 /* =========================================================================================== */
 /* ====================================== RightMenu ========================================== */
 /* =========================================================================================== */
 
 .rightmenu {
-    min-width: 300px;
-    width: 300px;
-    background-color: rgb(41, 87, 139);
+    flex: 1;
+    background-color: rgb(245, 245, 245);
 }
 
 /* =========================================================================================== */

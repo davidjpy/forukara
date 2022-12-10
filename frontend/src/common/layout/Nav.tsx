@@ -15,7 +15,7 @@ const Nav: FC = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const [logout,] = useLogoutMutation();
-    const [user, isLoading, isFetching, isSuccess] = useGetUser();
+    const [user] = useGetUser();
 
     const handleSignUpFormMounted = (): void => {
         dispatch(toggleSignUpForm(true));
