@@ -20,12 +20,12 @@
 .leftmenu__wrapper {
     position: relative;
     margin: 2rem 2rem 2rem auto;
-    min-width: 260px;
-    width: 260px;
+    min-width: 240px;
+    width: 240px;
     height: 600px;
     border-radius: 16px;
-    background-color: white;
-    border: 1px solid rgb(220, 220, 220);
+    background-image: linear-gradient(to left top, #e6f6f1, #e4f5f3, #e3f4f5, #e3f3f7, #e4f1f8, #e8f0fa, #edeffa, #f2eef8, #f9eef5, #fef0f1, #fff2ee, #fdf5ed);
+    outline: 1px solid rgb(220, 220, 220);
 }
 
 .leftmenu__background {
@@ -42,10 +42,9 @@
     transform: translate(-50%, 0);
     position: absolute;
     border-radius: 50%;
-    overflow: hidden;
     background-color: var(--green-alien-light);
-    width: 100px;
-    height: 100px;
+    width: 90px;
+    height: 90px;
 }
 
 .leftmenu__wrapper figure img {
@@ -54,6 +53,47 @@
     height: 96%;
     margin: 2%;
     object-fit: contain;
+}
+
+.leftmenu__wrapper figure figcaption {
+    color: var(--green-alien-deep);
+    text-align: center;
+    margin: 0.3rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.leftmenu__tablist {
+    position: absolute;
+    top: 33%;
+    width: 100%;
+}
+
+.leftmenu__tablist section header {
+    margin: 1.2rem 0.8rem 0.4rem 0.8rem;
+}
+
+.leftmenu__tablist section header h1 {
+    font-weight: 100;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    color: var(--gray-deep);
+}
+
+.leftmenu__tablist ul {
+    list-style-type: none;
+}
+
+.leftmenu__tablist section li {
+    font-size: 0.9rem;
+    padding: 0.8rem 0.8rem 0 0.8rem;
+    cursor: pointer;
+    user-select: none;
+}
+
+.leftmenu__divider {
+    width: 100%;
+    border-top: 1px solid rgb(220, 220, 220);
 }
 
 /* =========================================================================================== */
@@ -137,7 +177,7 @@
 
 .nav__button--green-alien-light:hover {
     background-color: var(--green-alien-deep);
-} 
+}
 
 @media screen and (max-width: 1400px) {
     .nav__nav {
