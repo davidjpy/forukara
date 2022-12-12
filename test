@@ -1,0 +1,53 @@
+<link href="https://www.w3schools.com/w3css/4/w3.css" rel="stylesheet"/>
+<style>
+ .w3-animate-opacity {
+   animation: opac 0.8s
+ }
+ 
+ @keyframes opac {
+   from {
+     opacity: 0
+   }
+   to {
+     opacity: 1
+   }
+ }
+ 
+ .w3-animate-show {
+   animation: show 1s;
+   animation-fill-mode: forwards;
+ }
+ 
+ @keyframes show {
+   0% {
+     opacity: 1
+   }
+   100% {
+     opacity: 0
+   }
+ }
+</style>
+<div class="w3-container">
+  <button onclick="document.getElementById('id01').style.display='block'">Fade In Modal</button>
+
+  <div id="id01" class="w3-animate-opacity">
+    <div>
+        <span class="w3-button close">&times;</span>
+    </div>
+  </div>
+  
+  
+  
+  var id01 = document.getElementById('id01');
+
+document.querySelector('.close').addEventListener('click', function() {
+  id01.classList.add('w3-animate-show');
+})
+
+id01.addEventListener('animationend', function() {
+  if (this.classList.contains('w3-animate-show')) {
+    this.style.display = 'none';
+    this.classList.remove('w3-animate-show')
+  }
+});
+</div>
