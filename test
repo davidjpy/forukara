@@ -28,3 +28,37 @@
             </section>
         </div>
     );
+
+
+.w3-animate-opacity {
+    display: none;
+    animation: opac 0.8s;
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.479);
+  }
+  
+  @keyframes opac {
+    from {
+      opacity: 0
+    }
+    to {
+      opacity: 1
+    }
+  }
+  
+  .w3-animate-show {
+    animation: show 1s;
+    animation-fill-mode: forwards;
+  }
+  
+  @keyframes show {
+    from {
+      opacity: 1
+    }
+    to {
+      opacity: 0
+    }
+  }
