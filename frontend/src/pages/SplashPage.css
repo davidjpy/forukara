@@ -30,7 +30,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 4rem;
+    margin-top: 2rem;
     text-align: center;
     top: 50%;
     transform: translate(0, -50%);
@@ -38,13 +38,13 @@
 }
 
 .splashpage__header {
-    font-size: 2.4rem;
+    font-size: 2.2rem;
     font-weight: bolder;
     color: white;
 }
 
 .splashpage__header--large {
-    font-size: 4rem;
+    font-size: 3.8rem;
 }
 
 .splashpage__header--dynamic {
@@ -105,22 +105,22 @@
 @media screen and (max-width: 1600px),
 screen and (max-height: 800px) {
     .splashpage__header {
-        font-size: 2rem;
+        font-size: 1.8rem;
     }
 
     .splashpage__header--large {
-        font-size: 3rem;
+        font-size: 2.8rem;
     }
 }
 
 @media screen and (max-width: 1000px),
 screen and (max-height: 600px) {
     .splashpage__header {
-        font-size: 1.6rem;
+        font-size: 1.4rem;
     }
 
     .splashpage__header--large {
-        font-size: 2.6rem;
+        font-size: 2.4rem;
     }
 }
 

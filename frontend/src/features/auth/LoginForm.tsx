@@ -6,7 +6,6 @@ import { useAppSelector, useAppDispatch } from '@app/hooks';
 import { useClickOutside } from '@common/hooks/useClickOutside';
 import { toggleLoginForm, toggleSignUpForm } from '@features/auth/authSlice';
 import { useLoginMutation } from '@features/auth/authApiSlice';
-import { useWindowResize } from '@common/hooks/useWindowResize';
 import { useInput } from '@common/hooks/useInput';
 
 const LoginForm: FC = () => {
@@ -20,10 +19,9 @@ const LoginForm: FC = () => {
     const [err, setErr] = useState<string>('');
     const [userId, handleChangeUserId, resetUserId] = useInput('', [setUserIdErr, setErr]);
     const [password, handleChangePassword, resetPassword] = useInput('', [setPasswordErr, setErr]);
-    useWindowResize(overlayRef);
 
     const submitNotAllowed: boolean = Boolean(err || userIdErr || passwordErr);
-
+    
     const handleResetInput = (): void => {
         resetUserId();
         resetPassword();
@@ -75,45 +73,62 @@ const LoginForm: FC = () => {
         }
     }, [loginResult, handleLoginFormUnmounted]);
 
+    useEffect(() => {
+        const fadeOut = (): void => {
+            if (overlayRef.current && overlayRef.current.classList.contains('form__overlay--fade') && !loginFormMounted) {
+                overlayRef.current.style.display = 'none';
+                overlayRef.current.classList.remove('form__overlay--fade');
+            }
+        }
+
+        if (overlayRef.current) {
+            overlayRef.current.addEventListener('animationend', fadeOut);
+        }
+
+        return () => {
+            overlayRef.current?.removeEventListener('animationend', fadeOut);
+        }
+    }, []);
+
+    useEffect(() => {
+        if (loginFormMounted && overlayRef.current) {
+            overlayRef.current.style.display = 'block';
+        }
+    }, [loginFormMounted]);
+
     const wrapperRef = useClickOutside(handleLoginFormUnmounted);
 
     return (
-        <div ref={overlayRef} className='splashlayout__overlay'
-            style={loginFormMounted
-                ? { opacity: 1, pointerEvents: 'all' }
-                : { opacity: 0, pointerEvents: 'none' }}
-        >
-            <section ref={wrapperRef} className='splashlayout__loginform'
-                style={loginFormMounted
-                    ? { opacity: 1, pointerEvents: 'all' }
-                    : { opacity: 0, pointerEvents: 'none' }}>
+        <div ref={overlayRef}
+            className={loginFormMounted ? 'form__overlay' : 'form__overlay form__overlay--fade'}>
+            <section ref={wrapperRef} className='form form--login'>
                 <header>
-                    <h1 className='splashlayout__header'>Login</h1>
+                    <h1>Login</h1>
                 </header>
-                <form onSubmit={handleSubmitForm} className='splashlayout__form'>
+                <form onSubmit={handleSubmitForm}>
                     <div style={{ margin: userIdErr && '1.5rem 0 0.5rem 0' }}>
-                        <input value={userId} id='login-username' onChange={handleChangeUserId} type='text' placeholder=' ' className='splashlayout__input' />
-                        <label htmlFor='login-username' className='splashlayout__placeholder'><FaUser style={{ fontSize: '14px', marginBottom: '1px' }} /> User ID*</label>
-                        {userIdErr && <p className='splashlayout__text splashlayout__text--red' style={{ margin: '8px 0 0 8px', fontSize: '0.8rem' }}>{userIdErr}</p>}
+                        <input value={userId} id='login-username' onChange={handleChangeUserId} type='text' placeholder=' ' className='form__input' />
+                        <label htmlFor='login-username' className='form__placeholder'><FaUser style={{ fontSize: '14px', marginBottom: '1px' }} /> User ID*</label>
+                        {userIdErr && <p className='form__text form__text--red' style={{ margin: '8px 0 0 8px', fontSize: '0.8rem' }}>{userIdErr}</p>}
                     </div>
                     <div style={{ margin: passwordErr && '1.5rem 0 0.5rem 0' }}>
-                        <input value={password} id='login-password' onChange={handleChangePassword} type='password' placeholder=' ' className='splashlayout__input' />
-                        <label htmlFor='login-password' className='splashlayout__placeholder'><RiLockPasswordFill style={{ fontSize: '16px' }} /> Password*</label>
-                        {passwordErr && <p className='splashlayout__text splashlayout__text--red' style={{ margin: '8px 0 0 8px', fontSize: '0.8rem' }}>{passwordErr}</p>}
+                        <input value={password} id='login-password' onChange={handleChangePassword} type='password' placeholder=' ' className='form__input' />
+                        <label htmlFor='login-password' className='form__placeholder'><RiLockPasswordFill style={{ fontSize: '16px' }} /> Password*</label>
+                        {passwordErr && <p className='form__text form__text--red' style={{ margin: '8px 0 0 8px', fontSize: '0.8rem' }}>{passwordErr}</p>}
                     </div>
-                    {err && <p className='splashlayout__text splashlayout__text--red'>{err}</p>}
+                    {err && <p className='form__text form__text--red'>{err}</p>}
                     {loginResult.isLoading ? (
                         <div style={{ position: 'relative' }}>
                             <input aria-label='Loading' type='submit' disabled={true} value='' />
-                            <div className='splashlayout__loader' style={{ position: 'absolute' }} />
+                            <div className='form__loader' style={{ position: 'absolute' }} />
                         </div>
                     ) : (
                         <input aria-label='Login' type='submit' disabled={submitNotAllowed} value='Login' />
                     )}
                 </form>
-                <p id='open-signup-form' className='splashlayout__text splashlayout__text--white' style={{ textAlign: 'center', marginTop: '30px' }}>
+                <p id='open-signup-form' className='form__text form__text--white' style={{ textAlign: 'center', marginTop: '30px' }}>
                     Don't have an account?
-                    <span role='button' aria-labelledby='open-signup-form' onClick={handleSignUpFormMounted} className='splashlayout__text--green-alien-light splashlayout__text--link' style={{ marginLeft: '5px' }} >Sign up</span>
+                    <span role='button' aria-labelledby='open-signup-form' onClick={handleSignUpFormMounted} className='form__text--green-alien-light form__text--link' style={{ marginLeft: '5px' }} >Sign up</span>
                 </p>
             </section>
         </div>
@@ -121,3 +136,4 @@ const LoginForm: FC = () => {
 }
 
 export default LoginForm;
+

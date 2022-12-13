@@ -38,7 +38,7 @@ const SplashNav: FC = () => {
                 <section className='splashnav__nav'>
                     <header>
                         <FaBlog className='splashnav__logo'/>
-                        <p>Forukara</p>
+                        <h1>Forukara</h1>
                     </header>
                     {user.id ? (
                         <div className='splashnav__wrapper'>
