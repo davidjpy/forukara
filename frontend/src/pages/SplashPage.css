@@ -3,11 +3,12 @@
 /* =========================================================================================== */
 
 .splashpage {
+    width: 100%;
     background-image: url('@media/images/splash_background.webp');
-    height: 100vh;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+    height: 100vh;
     min-height: var(--min-height);
     min-width: var(--min-width);
 }
@@ -30,21 +31,22 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 2rem;
+    margin-top: 3rem;
     text-align: center;
     top: 50%;
     transform: translate(0, -50%);
     word-wrap: break-word;
+    padding: 1rem;
 }
 
 .splashpage__header {
-    font-size: 2.2rem;
+    font-size: 2rem;
     font-weight: bolder;
     color: white;
 }
 
 .splashpage__header--large {
-    font-size: 3.8rem;
+    font-size: 2.8rem;
 }
 
 .splashpage__header--dynamic {
@@ -102,8 +104,7 @@
     margin: 30px;
 }
 
-@media screen and (max-width: 1600px),
-screen and (max-height: 800px) {
+@media screen and (max-width: 1600px) {
     .splashpage__header {
         font-size: 1.8rem;
     }
@@ -113,8 +114,7 @@ screen and (max-height: 800px) {
     }
 }
 
-@media screen and (max-width: 1000px),
-screen and (max-height: 600px) {
+@media screen and (max-width: 1000px) {
     .splashpage__header {
         font-size: 1.4rem;
     }
@@ -124,8 +124,7 @@ screen and (max-height: 600px) {
     }
 }
 
-@media screen and (max-width: 800px),
-screen and (max-height: 400px) {
+@media screen and (max-width: 800px) {
     .splashpage__header {
         font-size: 1.2rem;
     }
@@ -141,17 +140,30 @@ screen and (max-height: 400px) {
     }
 }
 
-@media screen and (max-width: 600px),
-screen and (max-height: 300px) {
+@media screen and (max-width: 600px) {
     .splashpage__header {
-        font-size: 0.9rem;
+        font-size: 1rem;
     }
 
     .splashpage__header--large {
-        font-size: 1.3rem;
+        font-size: 1.4rem;
     }
 
     .splashpage__header--dynamic {
         margin: 0 10px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .splashpage__header {
+        font-size: 0.8rem;
+    }
+
+    .splashpage__header--large {
+        font-size: 1rem;
+    }
+
+    .splashpage__header--dynamic {
+        margin: 0 0 0 5px
     }
 }

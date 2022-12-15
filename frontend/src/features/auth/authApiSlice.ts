@@ -1,5 +1,5 @@
 import { apiSlice } from '@app/apiSlice';
-import { setUserInfo, setcredantial, logout } from '@features/auth/authSlice';
+import { setUserInfo, setCredantial, logout } from '@features/auth/authSlice';
 import { User, ILoginResponse, IRefreshResponse } from '@common/utilities/types';
 
 export const authApiSlice = apiSlice.injectEndpoints({
@@ -18,7 +18,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
             async onQueryStarted(arg, { dispatch, queryFulfilled }) {
                 try {
                     const { data } = await queryFulfilled;
-                    dispatch(setcredantial(data.token));
+                    dispatch(setCredantial(data.token));
                     dispatch(setUserInfo(data.user!));
                 } catch (err) {
                     console.error(err);
@@ -39,7 +39,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
             async onQueryStarted(arg, { dispatch, queryFulfilled }) {
                 try {
                     const { data } = await queryFulfilled;
-                    dispatch(setcredantial(data.token));
+                    dispatch(setCredantial(data.token));
                     dispatch(setUserInfo({ id: data.user.id }));
                 } catch (err) {
                     console.error(err);

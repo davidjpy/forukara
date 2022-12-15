@@ -101,19 +101,20 @@ const SignUpForm: FC = () => {
 
 
     useEffect(() => {
+        let ref = overlayRef.current;
         const fadeOut = (): void => {
-            if (overlayRef.current && overlayRef.current.classList.contains('form__overlay--fade') && !signUpFormMounted) {
-                overlayRef.current.style.display = 'none';
-                overlayRef.current.classList.remove('form__overlay--fade');
+            if (ref && ref.classList.contains('form__overlay--fade') && !signUpFormMounted) {
+                ref.style.display = 'none';
+                ref.classList.remove('form__overlay--fade');
             }
         }
 
-        if (overlayRef.current) {
-            overlayRef.current.addEventListener('animationend', fadeOut);
+        if (ref) {
+            ref.addEventListener('animationend', fadeOut);
         }
 
         return () => {
-            overlayRef.current?.removeEventListener('animationend', fadeOut);
+            ref?.removeEventListener('animationend', fadeOut);
         }
     });
 
@@ -135,7 +136,7 @@ const SignUpForm: FC = () => {
                 <div className='form__wrapper'>
                     <form onSubmit={handleSubmitForm} 
                         style={{ 
-                            left: successed ? '-100%' : '4rem',
+                            left: successed ? '-100%' : '3rem',
                             transitionDelay: successed ? '0s' : '0.5s'
                         }}
                     >
@@ -161,14 +162,14 @@ const SignUpForm: FC = () => {
                         </div>
                         {err && <p className='form__text form__text--red'>{err}</p>}
                         {createUserResult.isLoading ? (
-                            <div style={{ position: 'relative' }}>
+                            <div style={{ position: 'relative', margin: 0 }}>
                                 <input aria-label='Loading' type='submit' disabled={true} value='' />
                                 <div className='form__loader' style={{ position: 'absolute' }} />
                             </div>
                         ) : (
                             <input aria-label='Sign up' type='submit' disabled={submitNotAllowed} value='Create Account' />
                         )}
-                        <p id='open-login-form' className='form__text form__text--white' style={{ textAlign: 'center', marginTop: '30px' }}>
+                        <p id='open-login-form' className='form__text form__text--white' style={{ textAlign: 'center', margin: '30px 0' }}>
                             Already have an account?
                             <span role='button' aria-labelledby='open-login-form' onClick={handleLoginFormMounted} className='form__text--green-alien-light form__text--link' style={{ marginLeft: '5px' }} >Login</span>
                         </p>

@@ -182,7 +182,7 @@
     z-index: 1;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.479);
+    background-color: var(--black-opacity-light);
 }
 
 @keyframes fadein {
@@ -213,28 +213,31 @@
 .form {
     position: absolute;
     z-index: 3;
-    padding: 4rem;
+    padding: 3rem;
+    width: 400px;
     border-radius: 20px;
     background-color: var(--black-opacity-deep);
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     overflow: auto;
+    min-width: var(--min-width);
 }
 
 .form--signup {
-    width: 450px;
     height: 70%;
-    max-height: 700px;
-    min-height: 650px;
-    position: absolute;
     overflow-x: hidden;
+    max-height: 650px;
 }
 
 .form--login {
-    width: 450px;
-    height: 80%;
-    max-height: 560px;
+    height: 70%;
+    max-height: 500px;
+}
+
+.form header h1 {
+    font-size: 1.4rem;
+    color: white;
 }
 
 .form__wrapper {
@@ -243,17 +246,17 @@
 
 .form__wrapper form {
     position: absolute;
-    width: calc(100% - 8rem);
+    width: calc(100% - 6rem);
     transition: left 0.5s ease-out;
 }
 
 .form form div {
     position: relative;
-    margin: 1.5rem 0;
+    margin: 1.2rem 0;
 }
 
 .form form div:first-child {
-    margin-top: 2.6rem;
+    margin-top: 2rem;
 }
 
 .form form input {
@@ -272,7 +275,7 @@
     display: flex;
     align-items: center;
     gap: 5px;
-    top: 13px;
+    top: 10px;
     left: 1rem;
     color: rgb(140, 140, 140);
     font-size: 1rem;
@@ -283,7 +286,7 @@
 input[type='email'],
 input[type='password'] {
     border-radius: 6px;
-    padding: 0.8rem;
+    padding: 0.6rem 0.8rem;
     color: white;
 }
 
@@ -294,8 +297,8 @@ input[type='password'] {
     font-weight: bolder;
     font-family: sans-serif;
     border-radius: 6px;
-    margin-top: 1.2rem;
-    height: 50px;
+    margin-top: 0.6rem;
+    height: 45px;
 }
 
 .form form input[type='submit']:hover {
@@ -314,10 +317,6 @@ input[type='password'] {
 
 .form__input:not(:placeholder-shown)+.form__placeholder {
     display: none;
-}
-
-.form header h1 {
-    color: white;
 }
 
 .form__text {
@@ -368,7 +367,7 @@ input[type='password'] {
     }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 500px) {
     .form {
         width: 90%;
     }
@@ -382,7 +381,7 @@ input[type='password'] {
     position: absolute;
     left: 100%;
     width: 100%;
-    padding: 0 4rem;
+    padding: 0 3rem;
     transition: left 0.5s ease-out;
 }
 
