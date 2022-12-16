@@ -65,7 +65,7 @@
 
 .leftmenu__tablist {
     position: absolute;
-    top: 33%;
+    top: 30%;
     width: 100%;
 }
 
@@ -85,10 +85,20 @@
 }
 
 .leftmenu__tablist section li {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    text-transform: capitalize;
     font-size: 0.9rem;
-    padding: 0.8rem 0.8rem 0 0.8rem;
+    margin: 0.4rem;
+    padding: 0.4rem;
     cursor: pointer;
     user-select: none;
+    border-radius: 8px;
+}
+
+.leftmenu__tablist section li:hover {
+    background-color: var(--green-alien-light);
 }
 
 .leftmenu__divider {

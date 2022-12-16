@@ -9,6 +9,7 @@ interface AuthState {
     loginFormMounted: boolean;
     credantial: string | null;
     user: User;
+    unknownAuthErr: string;
 }
 
 const initialState: AuthState = {
@@ -25,7 +26,8 @@ const initialState: AuthState = {
         discussions: null,
         connections: null,
         createdAt: null
-    }
+    },
+    unknownAuthErr: ''
 };
 
 export const authSlice = createSlice({
@@ -60,7 +62,7 @@ export const authSlice = createSlice({
             state.user = { ...state.user, ...action.payload };
         },
 
-        setcredantial: (state, action: PayloadAction<string>) => {
+        setCredantial: (state, action: PayloadAction<string>) => {
             const token = action.payload;
             state.credantial = token;
         },
@@ -70,7 +72,7 @@ export const authSlice = createSlice({
     }
 });
 
-export const { toggleSignUpForm, toggleLoginForm, setUserInfo, setcredantial, logout } = authSlice.actions;
+export const { toggleSignUpForm, toggleLoginForm, setUserInfo, setCredantial, logout } = authSlice.actions;
 
 export const selectSignUpFormMounted = (state: RootState) => state.auth.signUpFormMounted;
 export const selectLoginFormMounted = (state: RootState) => state.auth.loginFormMounted;

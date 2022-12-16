@@ -1,13 +1,28 @@
 import { FC } from 'react';
 import { AiOutlineHome, AiOutlineSetting } from 'react-icons/ai';
 import { FiUser, FiHelpCircle } from 'react-icons/fi';
-import { IoIosNotificationsOutline } from 'react-icons/io';
+import { IoMdNotificationsOutline } from 'react-icons/io';
 import { MdOutlineFeedback, MdOutlinePermContactCalendar } from 'react-icons/md';
 
 import { useAppSelector } from '@app/hooks';
 import default_background from '@media/images/default_background.webp';
 import default_avatar from '@media/images/default_avatar.webp';
-import List from '@common/generic/List';
+
+const contentList = [
+    { tab: 'home', icon: <AiOutlineHome style={{ marginBottom: '2px' }} /> }
+];
+
+const accountList = [
+    { tab: 'user', icon: <FiUser style={{ marginBottom: '2px' }} /> },
+    { tab: 'notifications', icon: <IoMdNotificationsOutline style={{ marginBottom: '2px' }} /> },
+    { tab: 'settings', icon: <AiOutlineSetting style={{ marginBottom: '2px' }} /> }
+];
+
+const supportList = [
+    { tab: 'get Help', icon: <FiHelpCircle style={{ marginBottom: '2px' }} /> },
+    { tab: 'submit Feedback', icon: <MdOutlineFeedback style={{ marginBottom: '2px' }} /> },
+    { tab: 'contact', icon: <MdOutlinePermContactCalendar style={{ marginBottom: '2px' }} /> }
+]
 
 const LeftMenu: FC = () => {
 
@@ -29,49 +44,39 @@ const LeftMenu: FC = () => {
                             <h1>Content</h1>
                         </header>
                         <div className='leftmenu__divider'></div>
-                        <List
-                            item={[
-                                { tab: 'home', icon: <AiOutlineHome /> }
-                            ]}
-                            render={(item: { tab: string; icon: JSX.Element; }) => <>{item.icon}{item.tab}</>}
-                            keyExtractor={({ tab }) => tab}
-                            listRole='tablist'
-                            listItemRole='tab'
-                        />
+                        <ul role='tablist'>
+                            {contentList.map((item) => {
+                                return (
+                                    <li role='tab' aria-controls={item.tab}>{item.icon}{item.tab}</li>
+                                );
+                            })}
+                        </ul>
                     </section>
                     <section>
                         <header>
                             <h1>Account</h1>
                         </header>
                         <div className='leftmenu__divider'></div>
-                        <List
-                            item={[
-                                { tab: 'user', icon: <FiUser /> },
-                                { tab: 'notifications', icon: <IoIosNotificationsOutline />},
-                                { tab: 'settings', icon: <AiOutlineSetting />}
-                            ]}
-                            render={(item: { tab: string; icon: JSX.Element; }) => <>{item.icon}{item.tab}</>}
-                            keyExtractor={({ tab }) => tab}
-                            listRole='tablist'
-                            listItemRole='tab'
-                        />
+                        <ul role='tablist'>
+                            {accountList.map((item) => {
+                                return (
+                                    <li role='tab' aria-controls={item.tab}>{item.icon}{item.tab}</li>
+                                );
+                            })}
+                        </ul>
                     </section>
                     <section>
                         <header>
                             <h1>Support</h1>
                         </header>
                         <div className='leftmenu__divider'></div>
-                        <List
-                            item={[
-                                { tab: 'get Help', icon: <FiHelpCircle /> },
-                                { tab: 'submit Feedback', icon: <MdOutlineFeedback /> },
-                                { tab: 'contact', icon: <MdOutlinePermContactCalendar /> }
-                            ]}
-                            render={(item: { tab: string; icon: JSX.Element; }) => <>{item.icon}{item.tab}</>}
-                            keyExtractor={({ tab }) => tab}
-                            listRole='tablist'
-                            listItemRole='tab'
-                        />
+                        <ul role='tablist'>
+                            {supportList.map((item) => {
+                                return (
+                                    <li role='tab' aria-controls={item.tab}>{item.icon}{item.tab}</li>
+                                );
+                            })}
+                        </ul>
                     </section>
                 </div>
             </div>

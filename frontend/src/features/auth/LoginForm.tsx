@@ -17,8 +17,9 @@ const LoginForm: FC = () => {
     const [userIdErr, setUserIdErr] = useState<string>('');
     const [passwordErr, setPasswordErr] = useState<string>('');
     const [err, setErr] = useState<string>('');
-    const [userId, handleChangeUserId, resetUserId] = useInput('', [setUserIdErr, setErr]);
-    const [password, handleChangePassword, resetPassword] = useInput('', [setPasswordErr, setErr]);
+    const [connectionErr, setConnectionErr] = useState<string>('');
+    const [userId, handleChangeUserId, resetUserId] = useInput('', [setUserIdErr, setErr, setConnectionErr]);
+    const [password, handleChangePassword, resetPassword] = useInput('', [setPasswordErr, setErr, setConnectionErr]);
 
     const submitNotAllowed: boolean = Boolean(err || userIdErr || passwordErr);
     
@@ -28,6 +29,7 @@ const LoginForm: FC = () => {
         setUserIdErr('');
         setPasswordErr('');
         setErr('');
+        setConnectionErr('');
     }
 
     const handleLoginFormUnmounted = useCallback((): void => {
@@ -71,22 +73,27 @@ const LoginForm: FC = () => {
                 }
             }
         }
+
+        if (loginResult.status === 'rejected') {
+            setConnectionErr('*Connection lost');
+        }
     }, [loginResult, handleLoginFormUnmounted]);
 
     useEffect(() => {
+        let ref = overlayRef.current;
         const fadeOut = (): void => {
-            if (overlayRef.current && overlayRef.current.classList.contains('form__overlay--fade') && !loginFormMounted) {
-                overlayRef.current.style.display = 'none';
-                overlayRef.current.classList.remove('form__overlay--fade');
+            if (ref && ref.classList.contains('form__overlay--fade') && !loginFormMounted) {
+                ref.style.display = 'none';
+                ref.classList.remove('form__overlay--fade');
             }
         }
 
-        if (overlayRef.current) {
-            overlayRef.current.addEventListener('animationend', fadeOut);
+        if (ref) {
+            ref.addEventListener('animationend', fadeOut);
         }
 
         return () => {
-            overlayRef.current?.removeEventListener('animationend', fadeOut);
+            ref?.removeEventListener('animationend', fadeOut);
         }
     }, []);
 
@@ -117,8 +124,9 @@ const LoginForm: FC = () => {
                         {passwordErr && <p className='form__text form__text--red' style={{ margin: '8px 0 0 8px', fontSize: '0.8rem' }}>{passwordErr}</p>}
                     </div>
                     {err && <p className='form__text form__text--red'>{err}</p>}
+                    {connectionErr && <p className='form__text form__text--red'>{connectionErr}</p>}
                     {loginResult.isLoading ? (
-                        <div style={{ position: 'relative' }}>
+                        <div style={{ position: 'relative', margin: 0 }}>
                             <input aria-label='Loading' type='submit' disabled={true} value='' />
                             <div className='form__loader' style={{ position: 'absolute' }} />
                         </div>

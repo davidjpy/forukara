@@ -12,7 +12,14 @@ export const userApiSlice = apiSlice.injectEndpoints({
                 body: data,
                 validateStatus: (response, result) =>
                     (response.status === 200 || response.status === 201) && !result.isError
-            })
+            }),
+            async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+                try {
+                    await queryFulfilled;
+                } catch (err) {
+
+                }
+            }
         }),
 
         resendEmail: builder.mutation<any, Partial<User>>({

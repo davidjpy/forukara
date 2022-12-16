@@ -10,7 +10,7 @@ import default_avatar from '@media/images/default_avatar.webp';
 type Props = {
     user: User;
     isLoading: boolean;
-}
+};
 
 const ProfileDetails: FC<Props> = ({ user, isLoading }: Props) => {
 

@@ -12,7 +12,7 @@ export const useWindowResize = (node: RefObject<HTMLDivElement>): void => {
     useLayoutEffect(() => {
         const handleResize = (): void => {
             if (node.current) {
-                node.current.style.height = `${window.innerHeight}px`;
+                node.current.style.height = `${window.visualViewport?.height}px`;
             }
         }
         handleResize();
