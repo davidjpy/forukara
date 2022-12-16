@@ -79,6 +79,8 @@ const LoginForm: FC = () => {
         }
     }, [loginResult, handleLoginFormUnmounted]);
 
+    console.log(loginResult)
+
     useEffect(() => {
         let ref = overlayRef.current;
         const fadeOut = (): void => {
