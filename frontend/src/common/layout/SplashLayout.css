@@ -172,6 +172,70 @@
 }
 
 /* =========================================================================================== */
+/* ===================================== SignUpOptions ======================================= */
+/* =========================================================================================== */
+
+.signupoptions {
+    position: absolute;
+    left: 100%;
+    width: 100%;
+    padding: 0 2rem;
+    transition: left 0.5s ease-out;
+}
+
+.signupoptions__wrapper {
+    margin: 1.6rem 0;
+}
+
+.signupoptions__button {
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    height: 45px;
+    font-size: 0.8rem;
+    color: white;
+    margin: 0.6rem 0;
+    border-radius: 6px;
+}
+
+.signupoptions__button--transparent {
+    background-color: transparent;
+    border: 1px solid var(--gray-light);
+    color: var(--gray-light);
+    border-radius: 6px;
+}
+
+.signupoptions__button--google {
+    background-color: rgb(66, 133, 244);
+}
+
+.signupoptions__button--twitter {
+    background-color: rgb(29, 162, 241);
+}
+
+.signupoptions__button--linkedin {
+    background-color: rgb(60, 90, 154);
+}
+
+.signupoptions__divider {
+    position: relative;
+    width: 100%;
+    border-top: 1px solid var(--gray-deep);
+    color: white;
+    text-align: center;
+}
+
+.signupoptions__divider p {
+    background-color: var(--black-opacity-deep);
+    color: var(--gray-deep);
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 30px;
+}
+
+/* =========================================================================================== */
 /* ================================= LoginForm & SignUpForm ================================== */
 /* =========================================================================================== */
 
@@ -213,8 +277,8 @@
 .form {
     position: absolute;
     z-index: 3;
-    padding: 3rem;
-    width: 400px;
+    padding: 3rem 2rem;
+    width: 360px;
     border-radius: 20px;
     background-color: var(--black-opacity-deep);
     top: 50%;
@@ -227,7 +291,7 @@
 .form--signup {
     height: 70%;
     overflow-x: hidden;
-    max-height: 650px;
+    max-height: 560px;
 }
 
 .form--login {
@@ -246,7 +310,7 @@
 
 .form__wrapper form {
     position: absolute;
-    width: calc(100% - 6rem);
+    width: calc(100% - 4rem);
     transition: left 0.5s ease-out;
 }
 
@@ -371,6 +435,11 @@ input[type='password'] {
     .form {
         width: 90%;
     }
+
+    .form header h1 {
+        font-size: 1.2rem;
+    }
+    
 }
 
 /* =========================================================================================== */
@@ -381,7 +450,7 @@ input[type='password'] {
     position: absolute;
     left: 100%;
     width: 100%;
-    padding: 0 3rem;
+    padding: 0 2rem;
     transition: left 0.5s ease-out;
 }
 

@@ -6,10 +6,10 @@ type Props = {
     emailCopy: string;
     resendEmailErr: string;
     setResendEmailErr: React.Dispatch<React.SetStateAction<string>>;
-    successed: boolean;
+    block: 'options' | 'form' | 'success';
 }
 
-const SignUpSuccess: FC<Props> = ({ emailCopy, resendEmailErr, setResendEmailErr, successed }: Props) => {
+const SignUpSuccess: FC<Props> = ({ emailCopy, resendEmailErr, setResendEmailErr, block }: Props) => {
 
     const counterTime = 30;
     const [resendEmail, resendEmailResult] = useResendEmailMutation();
@@ -48,8 +48,10 @@ const SignUpSuccess: FC<Props> = ({ emailCopy, resendEmailErr, setResendEmailErr
     return (
         <section className='signupsuccess'
             style={{
-                left: successed ? '0' : '100%',
-                transitionDelay: successed ? '0s' : '0.5s'
+                left:
+                    block === 'options' ? '200%' :
+                        block === 'form' ? '100%' :
+                            '0'
             }}
         >
             <p className='form__text form__text--green-alien-light'>Congratulation!</p>

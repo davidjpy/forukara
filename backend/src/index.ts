@@ -15,8 +15,6 @@ import userRoutes from '@routes/userRoutes'
 import authRoutes from '@routes/authRoutes';
 import { IDBError } from '@utilities/types';
 
-
-
 const app = express();
 const PORT = process.env.PORT;
 
