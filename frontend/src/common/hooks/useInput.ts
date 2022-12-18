@@ -19,6 +19,7 @@ export const useInput = (initialValue: string | number | boolean, errorHandler?:
     }   
 
     const handleOnChange = (e: ChangeEvent<HTMLInputElement>): void => {
+        e.preventDefault();
         setValue(e.target.value);
         
         if (errorHandler && errorHandler.length) {

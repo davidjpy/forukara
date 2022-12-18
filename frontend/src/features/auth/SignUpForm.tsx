@@ -64,14 +64,14 @@ const SignUpForm: FC = () => {
 
     const handleSubmitForm = async (e: FormEvent<HTMLFormElement>): Promise<any> => {
         e.preventDefault();
-        // setSuccessed(true);
-        setEmailCopy(email);
-        await createUser({
-            username: userId,
-            email: email,
-            password: password,
-            confirmPassword: confirmPassword
-        });
+        setBlock('success');
+        // setEmailCopy(email);
+        // await createUser({
+        //     username: userId,
+        //     email: email,    
+        //     password: password,
+        //     confirmPassword: confirmPassword
+        // });
     }
 
     useEffect(() => {
@@ -184,12 +184,12 @@ const SignUpForm: FC = () => {
                 <header>
                     <h1>Sign Up</h1>
                 </header>
-
                 <div className='form__wrapper'>
                     <SignUpOptions
                         block={block}
                         setBlock={setBlock}
                         handleLoginFormMounted={handleLoginFormMounted}
+                        signUpFormMounted={signUpFormMounted}
                     />
                     <form onSubmit={handleSubmitForm}
                         style={{
@@ -202,7 +202,8 @@ const SignUpForm: FC = () => {
                         {inputFields.map((item) => {
                             return (
                                 <div key={item.id} style={{ margin: item.err && '1rem 0 0.5rem 0' }}>
-                                    <input value={item.value} onChange={item.onChange} type={item.type} placeholder=' ' className='form__input' />
+                                    <input value={item.value} onChange={item.onChange} type={item.type} placeholder=' '
+                                        onKeyDown={(e) => { e.key === 'Enter' && e.preventDefault(); }} className='form__input' />
                                     <label htmlFor={item.id} className='form__placeholder'>{item.icon} {item.text}</label>
                                     {item.err && <p className='form__text form__text--red' style={{ margin: '8px 0 0 8px', fontSize: '0.8rem' }}>{item.err}</p>}
                                 </div>
@@ -220,7 +221,8 @@ const SignUpForm: FC = () => {
                         )}
                         <p id='open-login-form' className='form__text form__text--white' style={{ textAlign: 'center', margin: '30px 0 50px 0' }}>
                             Already have an account?
-                            <span role='button' aria-labelledby='open-login-form' onClick={handleLoginFormMounted} className='form__text--green-alien-light form__text--link' style={{ marginLeft: '5px' }} >Login</span>
+                            <span role='button' aria-labelledby='open-login-form' tabIndex={0} onClick={handleLoginFormMounted}
+                                className='form__text--green-alien-light form__text--link' style={{ marginLeft: '5px' }} >Login</span>
                         </p>
                     </form>
                     <SignUpSuccess
@@ -228,13 +230,14 @@ const SignUpForm: FC = () => {
                         resendEmailErr={resendEmailErr}
                         setResendEmailErr={setResendEmailErr}
                         block={block}
+                        signUpFormMounted={signUpFormMounted}
                     />
                 </div>
-                <div style={{ position: 'absolute', bottom: 0 }}>
+                {/* <div style={{ position: 'absolute', bottom: 0 }}>
                     <button onClick={() => setBlock('options')}>options</button>
                     <button onClick={() => setBlock('form')}>form</button>
                     <button onClick={() => setBlock('success')}>success</button>
-                </div>
+                </div> */}
             </section>
         </div>
     );

@@ -13,7 +13,7 @@ interface AuthState {
 }
 
 const initialState: AuthState = {
-    signUpFormMounted: true,
+    signUpFormMounted: false,
     loginFormMounted: false,
     credantial: null,
     user: {

@@ -188,6 +188,7 @@
 }
 
 .signupoptions__button {
+    position: relative;
     width: 100%;
     border: none;
     cursor: pointer;
@@ -195,26 +196,70 @@
     font-size: 0.8rem;
     color: white;
     margin: 0.6rem 0;
-    border-radius: 6px;
+    border-radius: 4px;
 }
 
 .signupoptions__button--transparent {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
     background-color: transparent;
     border: 1px solid var(--gray-light);
     color: var(--gray-light);
     border-radius: 6px;
 }
 
+.signupoptions__button--transparent:hover {
+    background-color: rgba(120, 120, 120, 0.2);
+}
+
+.signupoptions__button--transparent:focus {
+    outline-offset: 2px;
+}
+
 .signupoptions__button--google {
-    background-color: rgb(66, 133, 244);
+    background-color: rgb(53, 115, 216);
 }
 
 .signupoptions__button--twitter {
-    background-color: rgb(29, 162, 241);
+    background-color: rgb(5, 132, 206);
 }
 
 .signupoptions__button--linkedin {
     background-color: rgb(60, 90, 154);
+}
+
+.signupoptions__button div {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 50%;
+    transform: translate(0, -50%);
+    background-color: white;
+    height: 26px;
+    width: 26px;
+    left: 9.5px;
+    border-radius: 4px;
+}
+
+.signupoptions__icon {
+    height: 20px;
+    width: 20px;
+}
+
+.signupoptions__icon--twitter {
+    position: absolute;
+    height: 26px;
+    width: 26px;
+    left: 9.5px;
+    top: 50%;
+    transform: translate(0, -50%);
+}
+
+.signupoptions__icon--linkedin {
+    color: rgb(60, 90, 154);
 }
 
 .signupoptions__divider {

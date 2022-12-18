@@ -140,7 +140,8 @@ const LoginForm: FC = () => {
                     {inputFields.map((item) => {
                         return (
                             <div key={item.id} style={{ margin: item.err && '1rem 0 0.5rem 0' }}>
-                                <input value={item.value}  onChange={item.onChange} type={item.type} placeholder=' ' className='form__input' />
+                                <input value={item.value}  onChange={item.onChange} type={item.type} placeholder=' ' 
+                                    onKeyDown={(e) => { e.key === 'Enter' && e.preventDefault(); }}className='form__input' />
                                 <label htmlFor={item.id} className='form__placeholder'>{item.icon} {item.text}</label>
                                 {item.err && <p className='form__text form__text--red' style={{ margin: '8px 0 0 8px', fontSize: '0.8rem' }}>{item.err}</p>}
                             </div>
