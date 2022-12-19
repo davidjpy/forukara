@@ -6,16 +6,17 @@ type Props = {
     emailCopy: string;
     resendEmailErr: string;
     setResendEmailErr: React.Dispatch<React.SetStateAction<string>>;
-    successed: boolean;
+    block: 'options' | 'form' | 'success';
+    signUpFormMounted: boolean;
 }
 
-const SignUpSuccess: FC<Props> = ({ emailCopy, resendEmailErr, setResendEmailErr, successed }: Props) => {
+const counterTime = 30;
 
-    const counterTime = 30;
+const SignUpSuccess: FC<Props> = ({ emailCopy, resendEmailErr, setResendEmailErr, block, signUpFormMounted }: Props) => {
+
     const [resendEmail, resendEmailResult] = useResendEmailMutation();
     const counterRef = useRef<number>(counterTime);
     const [, setCoolDown] = useState<number>(counterTime);
-
 
     const handleresendEmail = async (): Promise<any> => {
         await resendEmail({
@@ -48,15 +49,17 @@ const SignUpSuccess: FC<Props> = ({ emailCopy, resendEmailErr, setResendEmailErr
     return (
         <section className='signupsuccess'
             style={{
-                left: successed ? '0' : '100%',
-                transitionDelay: successed ? '0s' : '0.5s'
+                left:
+                    block === 'options' ? '200%' :
+                        block === 'form' ? '100%' :
+                            '0'
             }}
         >
             <p className='form__text form__text--green-alien-light'>Congratulation!</p>
             <p className='form__text form__text--white'>Your account has been successfully created. Verify your email address by checking the verification email we just delivered to your inbox</p>
             <p id='resend-email' className='form__text form__text--white'>If the email is not reaching you. To get another email, click {counterRef?.current === counterTime ?
                 (
-                    <span role='button' aria-labelledby='resend-email' onClick={handleresendEmail} className='form__text form__text--green-alien-light form__text--link'>here</span>
+                    <span role='button' aria-labelledby='resend' tabIndex={0} onClick={handleresendEmail} className='form__text form__text--green-alien-light form__text--link'>here</span>
                 ) : (
                     <span className='form__text form__text--gray'>here ({counterRef?.current})</span>
                 )}</p>
