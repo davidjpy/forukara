@@ -2,6 +2,9 @@ import { FC, FormEvent, useState, useEffect, useRef } from 'react';
 import { FaUser } from 'react-icons/fa';
 import { IoMdMail } from 'react-icons/io';
 import { RiLockPasswordFill } from 'react-icons/ri';
+import { IoMdClose } from 'react-icons/io';
+import { Options } from 'focus-trap';
+import FocusTrap from 'focus-trap-react';
 
 import { useClickOutside } from '@common/hooks/useClickOutside';
 import { useAppSelector, useAppDispatch } from '@app/hooks';
@@ -10,6 +13,23 @@ import { useCreateUserMutation } from '@features/user/userApiSlice';
 import { useInput } from '@common/hooks/useInput';
 import SignUpSuccess from '@features/auth/SignUpSuccess';
 import SignUpOptions from './SignUpOptions';
+import { onkeyDown } from '@common/utilities/onKeyDown';
+
+const focusTrapOptions: Options = {
+    checkCanFocusTrap: (trapContainers) => {
+        return new Promise((resolve) => {
+            const results = trapContainers.map((container) => {
+                setTimeout(() => {
+                    resolve();
+                }, 500);
+            })
+            return Promise.all(results);
+        });
+    },
+    initialFocus: false,
+    returnFocusOnDeactivate: false,
+    escapeDeactivates: false
+};
 
 const SignUpForm: FC = () => {
 
@@ -61,7 +81,7 @@ const SignUpForm: FC = () => {
         hadnleSignUpFormUnmounted();
         dispatch(toggleLoginForm(true));
     }
-
+    
     const handleSubmitForm = async (e: FormEvent<HTMLFormElement>): Promise<any> => {
         e.preventDefault();
         setBlock('success');
@@ -115,9 +135,9 @@ const SignUpForm: FC = () => {
     useEffect(() => {
         let ref = overlayRef.current;
         const fadeOut = (): void => {
-            if (ref && ref.classList.contains('form__overlay--fade') && !signUpFormMounted) {
+            if (ref && ref.classList.contains('authform__overlay--fade') && !signUpFormMounted) {
                 ref.style.display = 'none';
-                ref.classList.remove('form__overlay--fade');
+                ref.classList.remove('authform__overlay--fade');
             }
         }
 
@@ -141,7 +161,7 @@ const SignUpForm: FC = () => {
     const inputFields = [
         {
             id: 'register-username',
-            text: 'User ID*',
+            text: 'User ID',
             icon: <FaUser style={{ fontSize: '14px', marginBottom: '1px' }} />,
             value: userId,
             onChange: handleChangeUserId,
@@ -150,7 +170,7 @@ const SignUpForm: FC = () => {
         },
         {
             id: 'register-email',
-            text: 'Email*',
+            text: 'Email',
             icon: <IoMdMail style={{ fontSize: '14px', marginBottom: '1px' }} />,
             value: email,
             onChange: handleChangeEmail,
@@ -159,7 +179,7 @@ const SignUpForm: FC = () => {
         },
         {
             id: 'register-password',
-            text: 'Password*',
+            text: 'Password',
             icon: <RiLockPasswordFill style={{ fontSize: '14px', marginBottom: '1px' }} />,
             value: password,
             onChange: handleChangePassword,
@@ -168,7 +188,7 @@ const SignUpForm: FC = () => {
         },
         {
             id: 'register-confirm-password',
-            text: 'Confirm Password*',
+            text: 'Confirm Password',
             icon: <RiLockPasswordFill style={{ fontSize: '14px', marginBottom: '1px' }} />,
             value: confirmPassword,
             onChange: handleChangeConfirmPassword,
@@ -179,52 +199,60 @@ const SignUpForm: FC = () => {
 
     return (
         <div ref={overlayRef}
-            className={signUpFormMounted ? 'form__overlay' : 'form__overlay form__overlay--fade'}>
-            <section ref={wrapperRef} className='form form--signup'>
+            className={signUpFormMounted ? 'authform__overlay' : 'authform__overlay authform__overlay--fade'}>
+            <section ref={wrapperRef} className='authform authform--signup'>
+                <button aria-label='close login form' title='Close Login Form' onClick={hadnleSignUpFormUnmounted}
+                    className='authform__button authform__button--cross'
+                >
+                    <IoMdClose aria-hidden={true} />
+                </button>
                 <header>
                     <h1>Sign Up</h1>
                 </header>
-                <div className='form__wrapper'>
+                <div className='authform__wrapper'>
                     <SignUpOptions
                         block={block}
                         setBlock={setBlock}
                         handleLoginFormMounted={handleLoginFormMounted}
+                        hadnleSignUpFormUnmounted={hadnleSignUpFormUnmounted}
                         signUpFormMounted={signUpFormMounted}
                     />
-                    <form onSubmit={handleSubmitForm}
-                        style={{
-                            left:
-                                block === 'options' ? 'calc(100% + 2rem)' :
-                                    block === 'form' ? '2rem' :
-                                        'calc(-100% + 2rem)',
-                        }}
-                    >
-                        {inputFields.map((item) => {
-                            return (
-                                <div key={item.id} style={{ margin: item.err && '1rem 0 0.5rem 0' }}>
-                                    <input value={item.value} onChange={item.onChange} type={item.type} placeholder=' '
-                                        onKeyDown={(e) => { e.key === 'Enter' && e.preventDefault(); }} className='form__input' />
-                                    <label htmlFor={item.id} className='form__placeholder'>{item.icon} {item.text}</label>
-                                    {item.err && <p className='form__text form__text--red' style={{ margin: '8px 0 0 8px', fontSize: '0.8rem' }}>{item.err}</p>}
+                    <FocusTrap active={signUpFormMounted && block === 'form'} focusTrapOptions={focusTrapOptions}>
+                        <form onSubmit={handleSubmitForm}
+                            style={{
+                                left:
+                                    block === 'options' ? 'calc(100% + 2rem)' :
+                                        block === 'form' ? '2rem' :
+                                            'calc(-100% + 2rem)',
+                            }}
+                        >
+                            {inputFields.map((item) => {
+                                return (
+                                    <div key={item.id} style={{ margin: item.err && '1rem 0 0.5rem 0' }}>
+                                        <input id={item.id} value={item.value} onChange={item.onChange} type={item.type} placeholder=' '
+                                            onKeyDown={(e) => { e.key === 'Enter' && e.preventDefault(); }} className='authform__input' />
+                                        <label htmlFor={item.id} aria-label={item.text} className='authform__placeholder'>{item.icon} {item.text + '*'}</label>
+                                        {item.err && <p className='authform__text authform__text--red' style={{ margin: '8px 0 0 8px', fontSize: '0.8rem' }}>{item.err}</p>}
+                                    </div>
+                                );
+                            })}
+                            {err && <p className='authform__text authform__text--red' style={{ margin: '8px 0 0 8px', fontSize: '0.8rem' }}>{err}</p>}
+                            {connectionErr && <p className='authform__text authform__text--red' style={{ margin: '8px 0 0 8px', fontSize: '0.8rem' }}>{connectionErr}</p>}
+                            {createUserResult.isLoading ? (
+                                <div style={{ position: 'relative', margin: 0 }}>
+                                    <input aria-label='Loading' type='submit' disabled={true} value='' />
+                                    <div className='authform__loader' style={{ position: 'absolute' }} />
                                 </div>
-                            );
-                        })}
-                        {err && <p className='form__text form__text--red' style={{ margin: '8px 0 0 8px', fontSize: '0.8rem' }}>{err}</p>}
-                        {connectionErr && <p className='form__text form__text--red' style={{ margin: '8px 0 0 8px', fontSize: '0.8rem' }}>{connectionErr}</p>}
-                        {createUserResult.isLoading ? (
-                            <div style={{ position: 'relative', margin: 0 }}>
-                                <input aria-label='Loading' type='submit' disabled={true} value='' />
-                                <div className='form__loader' style={{ position: 'absolute' }} />
-                            </div>
-                        ) : (
-                            <input aria-label='Sign up' type='submit' disabled={submitNotAllowed} value='Create Account' />
-                        )}
-                        <p id='open-login-form' className='form__text form__text--white' style={{ textAlign: 'center', margin: '30px 0 50px 0' }}>
-                            Already have an account?
-                            <span role='button' aria-labelledby='open-login-form' tabIndex={0} onClick={handleLoginFormMounted}
-                                className='form__text--green-alien-light form__text--link' style={{ marginLeft: '5px' }} >Login</span>
-                        </p>
-                    </form>
+                            ) : (
+                                <input aria-label='Sign up' type='submit' disabled={submitNotAllowed} value='Create Account' />
+                            )}
+                            <p className='authform__text authform__text--white' style={{ textAlign: 'center', margin: '30px 0 50px 0' }}>
+                                Already have an account?
+                                <span role='button' aria-label='open login form' tabIndex={0} onClick={handleLoginFormMounted} onKeyDown={(e) => onkeyDown(e, 'Enter', handleLoginFormMounted)}
+                                    className='authform__text--green-alien-light authform__text--link' style={{ marginLeft: '5px' }}>Login</span>
+                            </p>
+                        </form>
+                    </FocusTrap>
                     <SignUpSuccess
                         emailCopy={emailCopy}
                         resendEmailErr={resendEmailErr}

@@ -73,7 +73,7 @@ const SplashPage: FC = () => {
     }, []);
 
     return (
-        <div ref={imageRef} className='splashpage'>
+        <div aria-hidden={true} ref={imageRef} className='splashpage'>
             <div ref={overlayRef} className='splashpage__overlay'>
                 <div className='splashpage__slogan'>
                     <header>
@@ -81,7 +81,7 @@ const SplashPage: FC = () => {
                         <p className='splashpage__header splashpage__header--large splashpage__header--dynamic' ref={dynamicTxtRef}></p>
                     </header>
                     <p className='splashpage__header'>Share Your Wisdoms, Inspire The World, Reach The Impossibility</p>
-                    <button onClick={handleNavigateHomepage}>
+                    <button aria-label='navigate to home page' onClick={handleNavigateHomepage}>
                         Start Now
                         <FaArrowRight className='splashpage__icon' />
                     </button>

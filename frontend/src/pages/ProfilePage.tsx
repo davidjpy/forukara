@@ -20,7 +20,7 @@ const ProfilePage: FC = () => {
     return (
         <div className='profilepage'>
             <ProfileBackground
-                user={user!}
+                user={user}
                 isLoading={isLoading}
             />
             {
@@ -28,7 +28,7 @@ const ProfilePage: FC = () => {
                     <ProfileDiscussions /> :
                     searchParams.get('search') === 'connections' ?
                         <ProfileConnections /> :
-                        <ProfileBio user={user!} />
+                        <ProfileBio user={user} />
             }
         </div>
     );

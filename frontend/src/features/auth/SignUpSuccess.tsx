@@ -55,16 +55,16 @@ const SignUpSuccess: FC<Props> = ({ emailCopy, resendEmailErr, setResendEmailErr
                             '0'
             }}
         >
-            <p className='form__text form__text--green-alien-light'>Congratulation!</p>
-            <p className='form__text form__text--white'>Your account has been successfully created. Verify your email address by checking the verification email we just delivered to your inbox</p>
-            <p id='resend-email' className='form__text form__text--white'>If the email is not reaching you. To get another email, click {counterRef?.current === counterTime ?
+            {/* <p className='authform__text authform__text--green-alien-light'>Congratulation!</p>
+            <p className='authform__text authform__text--white'>Your account has been successfully created. Verify your email address by checking the verification email we just delivered to your inbox</p>
+            <p id='resend-email' className='authform__text authform__text--white'>If the email is not reaching you. To get another email, click {counterRef?.current === counterTime ?
                 (
-                    <span role='button' aria-labelledby='resend' tabIndex={0} onClick={handleresendEmail} className='form__text form__text--green-alien-light form__text--link'>here</span>
+                    <span role='button' aria-labelledby='resend' tabIndex={0} onClick={handleresendEmail} className='authform__text authform__text--green-alien-light authform__text--link'>here</span>
                 ) : (
-                    <span className='form__text form__text--gray'>here ({counterRef?.current})</span>
+                    <span className='authform__text authform__text--gray'>here ({counterRef?.current})</span>
                 )}</p>
-            {resendEmailErr && <p className='form__text form__text--red' style={{ margin: '0 0 1rem 0' }}>{resendEmailErr}</p>}
-            <p className='form__text form__text--red'>The account will be deleted in ten minutes if not verified*</p>
+            {resendEmailErr && <p className='authform__text authform__text--red' style={{ margin: '0 0 1rem 0' }}>{resendEmailErr}</p>}
+            <p className='authform__text authform__text--red'>The account will be deleted in ten minutes if not verified*</p> */}
         </section>
     );
 }

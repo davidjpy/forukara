@@ -1,12 +1,35 @@
 import { FC, useState, FormEvent, useEffect, useCallback, useRef } from 'react';
 import { FaUser } from 'react-icons/fa';
 import { RiLockPasswordFill } from 'react-icons/ri';
+import FocusTrap from 'focus-trap-react';
+import { Options } from 'focus-trap';
+import { IoMdClose } from 'react-icons/io';
 
 import { useAppSelector, useAppDispatch } from '@app/hooks';
 import { useClickOutside } from '@common/hooks/useClickOutside';
 import { toggleLoginForm, toggleSignUpForm } from '@features/auth/authSlice';
 import { useLoginMutation } from '@features/auth/authApiSlice';
 import { useInput } from '@common/hooks/useInput';
+import { onkeyDown } from '@common/utilities/onKeyDown';
+
+const focusTrapOptions: Options = {
+    checkCanFocusTrap: (trapContainers) => {
+        return new Promise((resolve) => {
+            const results = trapContainers.map((container) => {
+                const interval = setInterval(() => {
+                    if (getComputedStyle(container).display !== 'none') {
+                        resolve();
+                        clearInterval(interval);
+                    }
+                }, 5);
+            })
+            return Promise.all(results);
+        });
+    },
+    initialFocus: false,
+    returnFocusOnDeactivate: false,
+    escapeDeactivates: false
+};
 
 const LoginForm: FC = () => {
 
@@ -78,16 +101,15 @@ const LoginForm: FC = () => {
                     }
                 }
             }
-
         }
     }, [loginResult, handleLoginFormUnmounted]);
 
     useEffect(() => {
         let ref = overlayRef.current;
         const fadeOut = (): void => {
-            if (ref && ref.classList.contains('form__overlay--fade') && !loginFormMounted) {
+            if (ref && ref.classList.contains('authform__overlay--fade') && !loginFormMounted) {
                 ref.style.display = 'none';
-                ref.classList.remove('form__overlay--fade');
+                ref.classList.remove('authform__overlay--fade');
             }
         }
 
@@ -109,61 +131,69 @@ const LoginForm: FC = () => {
     const wrapperRef = useClickOutside(handleLoginFormUnmounted);
 
     const inputFields = [
-        { 
-            id: 'login-username', 
-            text: 'User ID*', 
-            icon: <FaUser style={{ fontSize: '14px', marginBottom: '1px' }} />, 
-            value: userId, 
-            onChange: handleChangeUserId, 
-            err: userIdErr, 
-            type: 'text' 
+        {
+            id: 'login-username',
+            text: 'User ID',
+            icon: <FaUser aria-hidden={true} style={{ fontSize: '14px', marginBottom: '1px' }} />,
+            value: userId,
+            onChange: handleChangeUserId,
+            err: userIdErr,
+            type: 'text'
         },
-        { 
-            id: 'login-password', 
-            text: 'Password*', 
-            icon: <RiLockPasswordFill style={{ fontSize: '14px', marginBottom: '1px' }} />, 
-            value: password, 
-            onChange: handleChangePassword, 
+        {
+            id: 'login-password',
+            text: 'Password',
+            icon: <RiLockPasswordFill aria-hidden={true} style={{ fontSize: '14px', marginBottom: '1px' }} />,
+            value: password,
+            onChange: handleChangePassword,
             err: passwordErr,
-            type: 'text' 
+            type: 'text'
         }
     ];
 
     return (
-        <div ref={overlayRef}
-            className={loginFormMounted ? 'form__overlay' : 'form__overlay form__overlay--fade'}>
-            <section ref={wrapperRef} className='form form--login'>
-                <header>
-                    <h1>Login</h1>
-                </header>
-                <form onSubmit={handleSubmitForm}>
-                    {inputFields.map((item) => {
-                        return (
-                            <div key={item.id} style={{ margin: item.err && '1rem 0 0.5rem 0' }}>
-                                <input value={item.value}  onChange={item.onChange} type={item.type} placeholder=' ' 
-                                    onKeyDown={(e) => { e.key === 'Enter' && e.preventDefault(); }}className='form__input' />
-                                <label htmlFor={item.id} className='form__placeholder'>{item.icon} {item.text}</label>
-                                {item.err && <p className='form__text form__text--red' style={{ margin: '8px 0 0 8px', fontSize: '0.8rem' }}>{item.err}</p>}
+        <FocusTrap active={loginFormMounted} focusTrapOptions={focusTrapOptions}>
+            <div ref={overlayRef}
+                className={loginFormMounted ? 'authform__overlay' : 'authform__overlay authform__overlay--fade'}>
+                <section ref={wrapperRef} className='authform authform--login'>
+                    <button aria-label='close login form' title='Close Login Form' onClick={handleLoginFormUnmounted}
+                        className='authform__button authform__button--cross'
+                    >
+                        <IoMdClose aria-hidden={true} />
+                    </button>
+                    <header>
+                        <h1>Login</h1>
+                    </header>
+                    <form onSubmit={handleSubmitForm}>
+                        {inputFields.map((item) => {
+                            return (
+                                <div key={item.id} style={{ margin: item.err && '1rem 0 0.5rem 0' }}>
+                                    <input id={item.id} value={item.value} onChange={item.onChange} type={item.type} placeholder=' '
+                                        onKeyDown={(e) => { e.key === 'Enter' && e.preventDefault(); }} className='authform__input' />
+                                    <label htmlFor={item.id} aria-label={item.text} className='authform__placeholder'>{item.icon} {item.text + '*'}</label>
+                                    {item.err && <p className='authform__text authform__text--red' style={{ margin: '8px 0 0 8px', fontSize: '0.8rem' }}>{item.err}</p>}
+                                </div>
+                            );
+                        })}
+                        {err && <p className='authform__text authform__text--red' style={{ margin: '8px 0 0 8px', fontSize: '0.8rem' }}>{err}</p>}
+                        {connectionErr && <p className='authform__text authform__text--red' style={{ margin: '8px 0 0 8px', fontSize: '0.8rem' }}>{connectionErr}</p>}
+                        {loginResult.isLoading ? (
+                            <div style={{ position: 'relative', margin: 0 }}>
+                                <input aria-label='Loading' type='submit' disabled={true} value='' />
+                                <div className='authform__loader' style={{ position: 'absolute' }} />
                             </div>
-                        );
-                    })}
-                    {err && <p className='form__text form__text--red' style={{ margin: '8px 0 0 8px', fontSize: '0.8rem' }}>{err}</p>}
-                    {connectionErr && <p className='form__text form__text--red' style={{ margin: '8px 0 0 8px', fontSize: '0.8rem' }}>{connectionErr}</p>}
-                    {loginResult.isLoading ? (
-                        <div style={{ position: 'relative', margin: 0 }}>
-                            <input aria-label='Loading' type='submit' disabled={true} value='' />
-                            <div className='form__loader' style={{ position: 'absolute' }} />
-                        </div>
-                    ) : (
-                        <input aria-label='Login' type='submit' disabled={submitNotAllowed} value='Login' />
-                    )}
-                </form>
-                <p id='open-signup-form' className='form__text form__text--white' style={{ textAlign: 'center', marginTop: '30px' }}>
-                    Don't have an account?
-                    <span role='button' aria-labelledby='open-signup-form' onClick={handleSignUpFormMounted} className='form__text--green-alien-light form__text--link' style={{ marginLeft: '5px' }} >Sign up</span>
-                </p>
-            </section>
-        </div>
+                        ) : (
+                            <input aria-label='Login' type='submit' disabled={submitNotAllowed} value='Login' />
+                        )}
+                    </form>
+                    <p className='authform__text authform__text--white' style={{ textAlign: 'center', marginTop: '30px' }}>
+                        Don't have an account?
+                        <span role='button' aria-label='open signup form' tabIndex={0} onClick={handleSignUpFormMounted} onKeyDown={(e) => onkeyDown(e, 'Enter', handleSignUpFormMounted)}
+                            className='authform__text--green-alien-light authform__text--link' style={{ marginLeft: '5px' }} >Sign up</span>
+                    </p>
+                </section>
+            </div>
+        </FocusTrap>
     );
 }
 

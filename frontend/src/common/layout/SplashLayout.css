@@ -180,7 +180,7 @@
     left: 100%;
     width: 100%;
     padding: 0 2rem;
-    transition: left 0.5s ease-out;
+    transition: left 0.5s ease-out, opacity 0.5s ease-out;
 }
 
 .signupoptions__wrapper {
@@ -199,6 +199,11 @@
     border-radius: 4px;
 }
 
+.signupoptions__button:focus {
+    outline: var(--green-alien-focus);
+    outline-offset: 2px;
+}
+
 .signupoptions__button--transparent {
     display: inline-flex;
     align-items: center;
@@ -212,10 +217,6 @@
 
 .signupoptions__button--transparent:hover {
     background-color: rgba(120, 120, 120, 0.2);
-}
-
-.signupoptions__button--transparent:focus {
-    outline-offset: 2px;
 }
 
 .signupoptions__button--google {
@@ -284,7 +285,7 @@
 /* ================================= LoginForm & SignUpForm ================================== */
 /* =========================================================================================== */
 
-.form__overlay {
+.authform__overlay {
     display: none;
     animation: fadein 0.4s;
     position: fixed;
@@ -304,7 +305,7 @@
     }
 }
 
-.form__overlay--fade {
+.authform__overlay--fade {
     animation: fadeout 0.4s;
     animation-fill-mode: forwards;
 }
@@ -319,7 +320,7 @@
     }
 }
 
-.form {
+.authform {
     position: absolute;
     z-index: 3;
     padding: 3rem 2rem;
@@ -329,57 +330,83 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    overflow: auto;
+    /* overflow: auto; */
     min-width: var(--min-width);
 }
 
-.form--signup {
+.authform--signup {
     height: 70%;
     overflow-x: hidden;
     max-height: 560px;
 }
 
-.form--login {
+.authform--login {
     height: 70%;
     max-height: 500px;
 }
 
-.form header h1 {
+.authform__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    color: var(--gray-deep);
+    background-color: transparent;
+    cursor: pointer;
+    border: none;
+}
+
+.authform__button:focus {
+    outline: var(--green-alien-focus);
+}
+
+.authform__button--cross {
+    right: 2rem;
+    top: 1.5rem;
+    font-size: 1.1rem;  
+    border-radius: 50%;
+}
+
+.authform__button--cross:hover {
+    background-color: rgba(128, 128, 128, 0.288);
+}
+
+.authform header h1 {
     font-size: 1.4rem;
     color: white;
 }
 
-.form__wrapper {
+.authform__wrapper {
     display: flex;
 }
 
-.form__wrapper form {
+.authform__wrapper form {
     position: absolute;
     width: calc(100% - 4rem);
     transition: left 0.5s ease-out;
 }
 
-.form form div {
+.authform form div {
     position: relative;
     margin: 1.2rem 0;
 }
 
-.form form div:first-child {
+.authform form div:first-child {
     margin-top: 2rem;
 }
 
-.form form input {
+.authform form input {
     width: 100%;
     font-size: 1rem;
     border: none;
     background-color: rgba(255, 255, 255, 0.3);
 }
 
-.form form input:focus {
+.authform form input:focus {
     outline: 2px solid var(--green-alien-light);
 }
 
-.form form label {
+.authform form label {
     position: absolute;
     display: flex;
     align-items: center;
@@ -391,7 +418,7 @@
     pointer-events: none;
 }
 
-.form form input[type='text'],
+.authform form input[type='text'],
 input[type='email'],
 input[type='password'] {
     border-radius: 6px;
@@ -399,7 +426,7 @@ input[type='password'] {
     color: white;
 }
 
-.form form input[type='submit'] {
+.authform form input[type='submit'] {
     background-color: var(--green-alien-light);
     color: black;
     cursor: pointer;
@@ -410,51 +437,55 @@ input[type='password'] {
     height: 45px;
 }
 
-.form form input[type='submit']:hover {
+.authform form input[type='submit']:hover {
     background-color: var(--green-alien-deep);
 }
 
-.form form input[type='submit']:focus {
-    outline: 2px solid var(--green-alien-deep);
-    outline-offset: -4px;
+.authform form input[type='submit']:focus {
+    outline: var(--green-alien-focus);
+    outline-offset: 1px;
 }
 
-.form form input[type='submit']:disabled {
+.authform form input[type='submit']:disabled {
     background-color: gray;
     cursor: not-allowed;
 }
 
-.form__input:not(:placeholder-shown)+.form__placeholder {
+.authform__input:not(:placeholder-shown)+.authform__placeholder {
     display: none;
 }
 
-.form__text {
+.authform__text {
     font-size: 0.9rem;
     text-align: justify;
 }
 
-.form__text--white {
+.authform__text--white {
     color: white;
 }
 
-.form__text--red {
+.authform__text--red {
     color: var(--red-error);
 }
 
-.form__text--gray {
+.authform__text--gray {
     color: gray;
 }
 
-.form__text--green-alien-light {
+.authform__text--green-alien-light {
     color: var(--green-alien-light);
 }
 
-.form__text--link:hover {
+.authform__text--link:hover {
     text-decoration: underline;
     cursor: pointer;
 }
 
-.form__loader {
+.authform__text--link:focus {
+    outline: var(--green-alien-focus);
+}
+
+.authform__loader {
     position: absolute;
     border: 4px solid white;
     border-radius: 50%;
@@ -477,11 +508,11 @@ input[type='password'] {
 }
 
 @media screen and (max-width: 500px) {
-    .form {
+    .authform {
         width: 90%;
     }
 
-    .form header h1 {
+    .authform header h1 {
         font-size: 1.2rem;
     }
     
