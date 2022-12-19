@@ -1,6 +1,7 @@
 import { FC, useRef, useState, useEffect } from 'react';
 import { Options } from 'focus-trap';
 import FocusTrap from 'focus-trap-react';
+import { IoMdClose } from 'react-icons/io';
 
 import { useResendEmailMutation } from '@features/user/userApiSlice';
 
@@ -10,6 +11,7 @@ type Props = {
     setResendEmailErr: React.Dispatch<React.SetStateAction<string>>;
     block: 'options' | 'form' | 'success';
     signUpFormMounted: boolean;
+    hadnleSignUpFormUnmounted: () => void;
 };
 
 const focusTrapOptions: Options = {
@@ -30,7 +32,7 @@ const focusTrapOptions: Options = {
 
 const counterTime = 30;
 
-const SignUpSuccess: FC<Props> = ({ emailCopy, resendEmailErr, setResendEmailErr, block, signUpFormMounted }: Props) => {
+const SignUpSuccess: FC<Props> = ({ emailCopy, resendEmailErr, setResendEmailErr, block, signUpFormMounted, hadnleSignUpFormUnmounted }: Props) => {
 
     const [resendEmail, resendEmailResult] = useResendEmailMutation();
     const counterRef = useRef<number>(counterTime);
@@ -74,6 +76,11 @@ const SignUpSuccess: FC<Props> = ({ emailCopy, resendEmailErr, setResendEmailErr
                                 '0'
                 }}
             >
+                <button aria-label='close signup form' title='Close Signup Form' onClick={hadnleSignUpFormUnmounted}
+                    className='authform__button authform__button--cross' style={{ display: block === 'success' ? 'block' : 'none' }}
+                >
+                    <IoMdClose aria-hidden={true} />
+                </button>
                 <p className='authform__text authform__text--green-alien-light'>Congratulation!</p>
                 <p className='authform__text authform__text--white'>Your account has been successfully created. Verify your email address by checking the verification email we just delivered to your inbox</p>
                 <p id='resend-email' className='authform__text authform__text--white'>If the email is not reaching you. To get another email, click {counterRef?.current === counterTime ?

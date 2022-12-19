@@ -5,15 +5,16 @@ import { AiOutlineTwitter } from 'react-icons/ai';
 import { FaLinkedinIn } from 'react-icons/fa';
 import { Options } from 'focus-trap';
 import FocusTrap from 'focus-trap-react';
+import { IoMdClose } from 'react-icons/io';
 
 import { onkeyDown } from '@common/utilities/onKeyDown';
 
 type Props = {
     block: 'options' | 'form' | 'success';
-    setBlock: React.Dispatch<React.SetStateAction<'options' | 'form' | 'success'>>;
     handleLoginFormMounted: () => void;
     hadnleSignUpFormUnmounted: () => void;
     signUpFormMounted: boolean;
+    handleNextBlock: (block: 'options' | 'form' | 'success') => void;
 }
 
 const focusTrapOptions: Options = {
@@ -35,11 +36,7 @@ const focusTrapOptions: Options = {
     escapeDeactivates: false
 };
 
-const SignUpOptions: FC<Props> = ({ block, setBlock, hadnleSignUpFormUnmounted, handleLoginFormMounted, signUpFormMounted }: Props) => {
-
-    const handleNextBlock = (block: 'options' | 'form' | 'success'): void => {
-        setBlock(block);
-    }
+const SignUpOptions: FC<Props> = ({ block, hadnleSignUpFormUnmounted, handleLoginFormMounted, signUpFormMounted, handleNextBlock }: Props) => {
 
     return (
         <FocusTrap
@@ -55,6 +52,11 @@ const SignUpOptions: FC<Props> = ({ block, setBlock, hadnleSignUpFormUnmounted, 
                     opacity: signUpFormMounted ? '1' : '0'
                 }}
             >
+                <button aria-label='close signup form' title='Close Signup Form' onClick={hadnleSignUpFormUnmounted}
+                    className='authform__button authform__button--cross' style={{ display: block === 'options' ? 'block' : 'none' }}
+                >
+                    <IoMdClose aria-hidden={true} />
+                </button>
                 <div className='signupoptions__wrapper'>
                     <button onClick={() => handleNextBlock('form')} className='signupoptions__button signupoptions__button--transparent'>
                         <MdEmail aria-hidden={true} className='signupoptions__icon' />

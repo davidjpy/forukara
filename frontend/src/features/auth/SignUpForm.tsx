@@ -1,9 +1,9 @@
 import { FC, FormEvent, useState, useEffect, useRef } from 'react';
 import { FaUser } from 'react-icons/fa';
-import { IoMdMail } from 'react-icons/io';
+import { IoMdMail, IoMdClose } from 'react-icons/io';
 import { RiLockPasswordFill } from 'react-icons/ri';
-import { IoMdClose } from 'react-icons/io';
 import { Options } from 'focus-trap';
+import { BsArrowLeft } from 'react-icons/bs';
 import FocusTrap from 'focus-trap-react';
 
 import { useClickOutside } from '@common/hooks/useClickOutside';
@@ -71,7 +71,6 @@ const SignUpForm: FC = () => {
     const hadnleSignUpFormUnmounted = (): void => {
         dispatch(toggleSignUpForm(false));
         handleResetInput();
-        console.log('dsadas')
         setTimeout(() => {
             setBlock('options');
         }, 400);
@@ -92,6 +91,10 @@ const SignUpForm: FC = () => {
         //     password: password,
         //     confirmPassword: confirmPassword
         // });
+    }
+
+    const handleNextBlock = (block: 'options' | 'form' | 'success'): void => {
+        setBlock(block);
     }
 
     useEffect(() => {
@@ -197,28 +200,25 @@ const SignUpForm: FC = () => {
         }
     ];
 
+    console.log(block)
+
     return (
         <div ref={overlayRef}
             className={signUpFormMounted ? 'authform__overlay' : 'authform__overlay authform__overlay--fade'}>
             <section ref={wrapperRef} className='authform authform--signup'>
-                <button aria-label='close signup form' title='Close Signup Form' onClick={hadnleSignUpFormUnmounted}
-                    className='authform__button authform__button--cross'
-                >
-                    <IoMdClose aria-hidden={true} />
-                </button>
                 <header>
                     <h1>Sign Up</h1>
                 </header>
                 <div className='authform__wrapper'>
                     <SignUpOptions
                         block={block}
-                        setBlock={setBlock}
                         handleLoginFormMounted={handleLoginFormMounted}
                         hadnleSignUpFormUnmounted={hadnleSignUpFormUnmounted}
                         signUpFormMounted={signUpFormMounted}
+                        handleNextBlock={handleNextBlock}
                     />
-                    <FocusTrap 
-                        active={signUpFormMounted && block === 'form'} 
+                    <FocusTrap
+                        active={signUpFormMounted && block === 'form'}
                         focusTrapOptions={focusTrapOptions}
                     >
                         <form onSubmit={handleSubmitForm}
@@ -229,6 +229,18 @@ const SignUpForm: FC = () => {
                                             'calc(-100% + 2rem)',
                             }}
                         >
+                            <button aria-label='back to signup options' title='Back to Signup Options' onClick={() => handleNextBlock('options')} type='button'
+                                className='authform__button authform__button--leftarrow' 
+                                style={{ display: block === 'form' ? 'block' : 'none' }}
+                            >
+                                <BsArrowLeft aria-hidden={true} />
+                            </button>
+                            <button aria-label='close signup form' title='Close Signup Form' onClick={hadnleSignUpFormUnmounted} type='button'
+                                className='authform__button authform__button--cross' 
+                                style={{ display: block === 'form' ? 'block' : 'none', right: '0' }}
+                            >
+                                <IoMdClose aria-hidden={true} />
+                            </button>
                             {inputFields.map((item) => {
                                 return (
                                     <div key={item.id} style={{ margin: item.err && '1rem 0 0.5rem 0' }}>
@@ -262,6 +274,7 @@ const SignUpForm: FC = () => {
                         setResendEmailErr={setResendEmailErr}
                         block={block}
                         signUpFormMounted={signUpFormMounted}
+                        hadnleSignUpFormUnmounted={hadnleSignUpFormUnmounted}
                     />
                 </div>
                 {/* <div style={{ position: 'absolute', bottom: 0 }}>

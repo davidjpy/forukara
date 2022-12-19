@@ -353,6 +353,9 @@
     background-color: transparent;
     cursor: pointer;
     border: none;
+    width: 18px;
+    height: 18px;
+    top: -50px;
 }
 
 .authform__button:focus {
@@ -361,13 +364,22 @@
 
 .authform__button--cross {
     right: 2rem;
-    top: 1.5rem;
     font-size: 1.1rem;  
     border-radius: 50%;
 }
 
+.authform__button--leftarrow {
+    left: 95px;
+    top: -19px;
+    font-size: 1.1rem;  
+}
+
 .authform__button--cross:hover {
-    background-color: rgba(128, 128, 128, 0.288);
+    background-color: rgba(128, 128, 128, 0.2);
+}
+
+.authform__button--leftarrow:hover {
+    background-color: rgba(128, 128, 128, 0.2);
 }
 
 .authform header h1 {

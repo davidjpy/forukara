@@ -157,7 +157,7 @@ const LoginForm: FC = () => {
                 className={loginFormMounted ? 'authform__overlay' : 'authform__overlay authform__overlay--fade'}>
                 <section ref={wrapperRef} className='authform authform--login'>
                     <button aria-label='close login form' title='Close Login Form' onClick={handleLoginFormUnmounted}
-                        className='authform__button authform__button--cross'
+                        className='authform__button authform__button--cross' style={{ top: '1.5rem' }}
                     >
                         <IoMdClose aria-hidden={true} />
                     </button>
