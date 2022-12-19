@@ -1,4 +1,6 @@
 import { FC, useRef, useState, useEffect } from 'react';
+import { Options } from 'focus-trap';
+import FocusTrap from 'focus-trap-react';
 
 import { useResendEmailMutation } from '@features/user/userApiSlice';
 
@@ -8,7 +10,23 @@ type Props = {
     setResendEmailErr: React.Dispatch<React.SetStateAction<string>>;
     block: 'options' | 'form' | 'success';
     signUpFormMounted: boolean;
-}
+};
+
+const focusTrapOptions: Options = {
+    checkCanFocusTrap: (trapContainers) => {
+        return new Promise((resolve) => {
+            const results = trapContainers.map((container) => {
+                setTimeout(() => {
+                    resolve();
+                }, 500);
+            })
+            return Promise.all(results);
+        });
+    },
+    initialFocus: false,
+    returnFocusOnDeactivate: false,
+    escapeDeactivates: false
+};
 
 const counterTime = 30;
 
@@ -47,25 +65,28 @@ const SignUpSuccess: FC<Props> = ({ emailCopy, resendEmailErr, setResendEmailErr
     }, [resendEmailResult]);
 
     return (
-        <section className='signupsuccess'
-            style={{
-                left:
-                    block === 'options' ? '200%' :
-                        block === 'form' ? '100%' :
-                            '0'
-            }}
-        >
-            {/* <p className='authform__text authform__text--green-alien-light'>Congratulation!</p>
-            <p className='authform__text authform__text--white'>Your account has been successfully created. Verify your email address by checking the verification email we just delivered to your inbox</p>
-            <p id='resend-email' className='authform__text authform__text--white'>If the email is not reaching you. To get another email, click {counterRef?.current === counterTime ?
-                (
-                    <span role='button' aria-labelledby='resend' tabIndex={0} onClick={handleresendEmail} className='authform__text authform__text--green-alien-light authform__text--link'>here</span>
-                ) : (
-                    <span className='authform__text authform__text--gray'>here ({counterRef?.current})</span>
-                )}</p>
-            {resendEmailErr && <p className='authform__text authform__text--red' style={{ margin: '0 0 1rem 0' }}>{resendEmailErr}</p>}
-            <p className='authform__text authform__text--red'>The account will be deleted in ten minutes if not verified*</p> */}
-        </section>
+        <FocusTrap active={signUpFormMounted && block === 'success'} focusTrapOptions={focusTrapOptions}>
+            <section className='signupsuccess'
+                style={{
+                    left:
+                        block === 'options' ? '200%' :
+                            block === 'form' ? '100%' :
+                                '0'
+                }}
+            >
+                <p className='authform__text authform__text--green-alien-light'>Congratulation!</p>
+                <p className='authform__text authform__text--white'>Your account has been successfully created. Verify your email address by checking the verification email we just delivered to your inbox</p>
+                <p id='resend-email' className='authform__text authform__text--white'>If the email is not reaching you. To get another email, click {counterRef?.current === counterTime ?
+                    (
+                        <span role='button' aria-labelledby='resend' tabIndex={0} onClick={handleresendEmail} className='authform__text authform__text--green-alien-light authform__text--link'>here</span>
+                    ) : (
+                        <span className='authform__text authform__text--gray'>here ({counterRef?.current})</span>
+                    )}</p>
+                {resendEmailErr && <p className='authform__text authform__text--red' style={{ margin: '0 0 1rem 0' }}>{resendEmailErr}</p>}
+                <p className='authform__text authform__text--red'>The account will be deleted in ten minutes if not verified*</p>
+            </section>
+        </FocusTrap>
+
     );
 }
 

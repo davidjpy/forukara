@@ -71,7 +71,7 @@ const SignUpForm: FC = () => {
     const hadnleSignUpFormUnmounted = (): void => {
         dispatch(toggleSignUpForm(false));
         handleResetInput();
-
+        console.log('dsadas')
         setTimeout(() => {
             setBlock('options');
         }, 400);
@@ -81,7 +81,7 @@ const SignUpForm: FC = () => {
         hadnleSignUpFormUnmounted();
         dispatch(toggleLoginForm(true));
     }
-    
+
     const handleSubmitForm = async (e: FormEvent<HTMLFormElement>): Promise<any> => {
         e.preventDefault();
         setBlock('success');
@@ -201,7 +201,7 @@ const SignUpForm: FC = () => {
         <div ref={overlayRef}
             className={signUpFormMounted ? 'authform__overlay' : 'authform__overlay authform__overlay--fade'}>
             <section ref={wrapperRef} className='authform authform--signup'>
-                <button aria-label='close login form' title='Close Login Form' onClick={hadnleSignUpFormUnmounted}
+                <button aria-label='close signup form' title='Close Signup Form' onClick={hadnleSignUpFormUnmounted}
                     className='authform__button authform__button--cross'
                 >
                     <IoMdClose aria-hidden={true} />
@@ -217,7 +217,10 @@ const SignUpForm: FC = () => {
                         hadnleSignUpFormUnmounted={hadnleSignUpFormUnmounted}
                         signUpFormMounted={signUpFormMounted}
                     />
-                    <FocusTrap active={signUpFormMounted && block === 'form'} focusTrapOptions={focusTrapOptions}>
+                    <FocusTrap 
+                        active={signUpFormMounted && block === 'form'} 
+                        focusTrapOptions={focusTrapOptions}
+                    >
                         <form onSubmit={handleSubmitForm}
                             style={{
                                 left:

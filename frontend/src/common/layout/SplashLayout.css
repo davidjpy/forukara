@@ -330,7 +330,6 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    /* overflow: auto; */
     min-width: var(--min-width);
 }
 
@@ -515,7 +514,11 @@ input[type='password'] {
     .authform header h1 {
         font-size: 1.2rem;
     }
-    
+
+    .authform__button--transparent {
+        top: -47px;
+        right: 2.01rem;
+    }
 }
 
 /* =========================================================================================== */

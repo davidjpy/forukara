@@ -1,4 +1,4 @@
-import { FC, RefObject } from 'react';
+import { FC } from 'react';
 import { MdEmail } from 'react-icons/md';
 import { FcGoogle } from 'react-icons/fc';
 import { AiOutlineTwitter } from 'react-icons/ai';
@@ -42,7 +42,7 @@ const SignUpOptions: FC<Props> = ({ block, setBlock, hadnleSignUpFormUnmounted, 
     }
 
     return (
-        <FocusTrap 
+        <FocusTrap
             active={signUpFormMounted && block === 'options'}
             focusTrapOptions={focusTrapOptions}
         >
