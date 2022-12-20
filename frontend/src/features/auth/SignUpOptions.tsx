@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { MdEmail } from 'react-icons/md';
 import { FcGoogle } from 'react-icons/fc';
 import { AiOutlineTwitter } from 'react-icons/ai';
@@ -8,6 +8,7 @@ import FocusTrap from 'focus-trap-react';
 import { IoMdClose } from 'react-icons/io';
 
 import { onkeyDown } from '@common/utilities/onKeyDown';
+import { baseUrl } from '@app/apiSlice';
 
 type Props = {
     block: 'options' | 'form' | 'success';
@@ -65,12 +66,14 @@ const SignUpOptions: FC<Props> = ({ block, hadnleSignUpFormUnmounted, handleLogi
                 </div>
                 <div className='signupoptions__divider'><p>or</p></div>
                 <div className='signupoptions__wrapper'>
-                    <button className='signupoptions__button signupoptions__button--google'>
-                        <div>
-                            <FcGoogle aria-hidden={true} className='signupoptions__icon' />
-                        </div>
-                        Sign up with Google
-                    </button>
+                    <a href={baseUrl + '/auth/google'}>
+                        <button className='signupoptions__button signupoptions__button--google'>
+                            <div>
+                                <FcGoogle aria-hidden={true} className='signupoptions__icon' />
+                            </div>
+                            Sign up with Google
+                        </button>
+                    </a>
                     <button className='signupoptions__button signupoptions__button--twitter'>
                         <AiOutlineTwitter aria-hidden={true} className='signupoptions__icon signupoptions__icon--twitter' />
                         Sign Up With Twitter

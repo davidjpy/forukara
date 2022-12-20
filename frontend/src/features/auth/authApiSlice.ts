@@ -6,7 +6,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
     endpoints: builder => ({
         login: builder.mutation<ILoginResponse, Partial<User>>({
             query: ({ ...data }) => ({
-                url: '/auth/login/',
+                url: '/auth/login',
                 method: 'POST',
                 body: data,
                 validateStatus: (response, result) =>
@@ -49,7 +49,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
 
         logout: builder.mutation<void, void>({
             query: () => ({
-                url: '/auth/logout/',
+                url: '/auth/logout',
                 method: 'POST',
                 validateStatus: (response, result) =>
                     (response.status === 200 || response.status === 201) && !result.isError

@@ -1,4 +1,5 @@
 import express from 'express';
+import passport from 'passport';
 
 import authController from '@controllers/authController';
 import { loginLimiter } from '@middlewares/requestLimiter';
@@ -14,5 +15,16 @@ router.route('/logout')
 
 router.route('/refresh')
     .get(authController.refresh)
+
+// Oauth routes 
+router.route('/google')
+    .get(passport.authenticate('google', { scope: ['profile'] }))
+
+// Oauth callback routes 
+router.route('/google/callback')
+    .get(passport.authenticate('google', {
+        successRedirect: process.env.CLIENT_HOST,
+        failureRedirect: process.env.CLIENT_HOST
+    }))
 
 export default router;
