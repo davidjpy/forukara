@@ -200,8 +200,6 @@ const SignUpForm: FC = () => {
         }
     ];
 
-    console.log(block)
-
     return (
         <div ref={overlayRef}
             className={signUpFormMounted ? 'authform__overlay' : 'authform__overlay authform__overlay--fade'}>
@@ -229,17 +227,17 @@ const SignUpForm: FC = () => {
                                             'calc(-100% + 2rem)',
                             }}
                         >
-                            <button aria-label='back to signup options' title='Back to Signup Options' onClick={() => handleNextBlock('options')} type='button'
-                                className='authform__button authform__button--leftarrow' 
-                                style={{ display: block === 'form' ? 'block' : 'none' }}
-                            >
-                                <BsArrowLeft aria-hidden={true} />
-                            </button>
                             <button aria-label='close signup form' title='Close Signup Form' onClick={hadnleSignUpFormUnmounted} type='button'
                                 className='authform__button authform__button--cross' 
                                 style={{ display: block === 'form' ? 'block' : 'none', right: '0' }}
                             >
                                 <IoMdClose aria-hidden={true} />
+                            </button>
+                            <button aria-label='back to signup options' title='Back to Signup Options' onClick={() => handleNextBlock('options')} type='button'
+                                className='authform__button authform__button--leftarrow' 
+                                style={{ display: block === 'form' ? 'block' : 'none' }}
+                            >
+                                <BsArrowLeft aria-hidden={true} />
                             </button>
                             {inputFields.map((item) => {
                                 return (

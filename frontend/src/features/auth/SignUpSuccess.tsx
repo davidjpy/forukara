@@ -4,6 +4,7 @@ import FocusTrap from 'focus-trap-react';
 import { IoMdClose } from 'react-icons/io';
 
 import { useResendEmailMutation } from '@features/user/userApiSlice';
+import { onkeyDown } from '@common/utilities/onKeyDown';
 
 type Props = {
     emailCopy: string;
@@ -38,11 +39,7 @@ const SignUpSuccess: FC<Props> = ({ emailCopy, resendEmailErr, setResendEmailErr
     const counterRef = useRef<number>(counterTime);
     const [, setCoolDown] = useState<number>(counterTime);
 
-    const handleresendEmail = async (): Promise<any> => {
-        await resendEmail({
-            email: emailCopy,
-        });
-
+    const handleResendEmail = async (): Promise<any> => {
         counterRef.current--;
         setCoolDown(prev => prev - 1);
         const counter = setInterval(() => {
@@ -55,6 +52,10 @@ const SignUpSuccess: FC<Props> = ({ emailCopy, resendEmailErr, setResendEmailErr
                 counterRef.current = counterTime;
             }
         }, 1000);
+
+        await resendEmail({
+            email: emailCopy,
+        });
     }
 
     useEffect(() => {
@@ -85,7 +86,9 @@ const SignUpSuccess: FC<Props> = ({ emailCopy, resendEmailErr, setResendEmailErr
                 <p className='authform__text authform__text--white'>Your account has been successfully created. Verify your email address by checking the verification email we just delivered to your inbox</p>
                 <p id='resend-email' className='authform__text authform__text--white'>If the email is not reaching you. To get another email, click {counterRef?.current === counterTime ?
                     (
-                        <span role='button' aria-labelledby='resend' tabIndex={0} onClick={handleresendEmail} className='authform__text authform__text--green-alien-light authform__text--link'>here</span>
+                        <span role='button' title='Get Another Verification Email' aria-label='get another verification email' tabIndex={0} 
+                            onClick={handleResendEmail} onKeyDown={(e) => onkeyDown(e, 'Enter', handleResendEmail)}
+                            className='authform__text authform__text--green-alien-light authform__text--link'>here</span>
                     ) : (
                         <span className='authform__text authform__text--gray'>here ({counterRef?.current})</span>
                     )}</p>

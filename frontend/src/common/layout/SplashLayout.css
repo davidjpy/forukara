@@ -272,10 +272,10 @@
 }
 
 .signupoptions__divider p {
-    background-color: var(--black-opacity-deep);
+    background-color: black;
     color: var(--gray-deep);
     position: absolute;
-    top: -10px;
+    top: -10px; 
     left: 50%;
     transform: translate(-50%, 0);
     width: 30px;
@@ -326,7 +326,7 @@
     padding: 3rem 2rem;
     width: 360px;
     border-radius: 20px;
-    background-color: var(--black-opacity-deep);
+    background-color: black;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -342,6 +342,7 @@
 .authform--login {
     height: 70%;
     max-height: 500px;
+    overflow-x: auto;
 }
 
 .authform__button {
