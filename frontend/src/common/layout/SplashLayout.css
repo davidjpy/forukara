@@ -383,6 +383,74 @@
     background-color: rgba(128, 128, 128, 0.2);
 }
 
+.authform__icon-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 1.8rem 0;
+}
+
+.authform__icon-group a {
+    display: flex;
+    background-color: var(--gray-deep);
+    align-items: center;
+    justify-content: center;
+    margin: 0 0.4rem;
+    height: 42px;
+    width: 42px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.authform__icon-group a:hover {
+    background-color: white;
+}
+
+.authform__icon-group a:nth-child(2):hover {
+    background-color: rgb(5, 132, 206);
+}
+
+.authform__icon-group a:nth-child(2):hover .authform__icon--twitter {
+    color: white;
+}
+
+.authform__icon-group a:last-child:hover {
+    background-color: rgb(60, 90, 154);
+}
+
+.authform__icon-group a:last-child:hover .authform__icon--linkedin {
+    color: white;
+}
+
+.authform__icon-group a:focus {
+    outline: var(--green-alien-focus);
+    outline-offset: 2px;
+    background-color: white;
+}
+
+.authform__icon-group a:nth-child(2):focus {
+    background-color: rgb(5, 132, 206);
+}
+
+.authform__icon-group a:last-child:focus {
+    background-color: rgb(60, 90, 154);
+}
+
+.authform__icon-group a:focus .authform__icon--twitter {
+    color: white;
+}
+
+.authform__icon-group a:focus .authform__icon--linkedin {
+    color: white;
+}
+
+.authform__icon {
+    height: 24px;
+    width: 24px;
+    color: var(--black-light);
+}
+
+
 .authform header h1 {
     font-size: 1.4rem;
     color: white;

@@ -1,9 +1,12 @@
 import { FC, useState, FormEvent, useEffect, useCallback, useRef } from 'react';
-import { FaUser } from 'react-icons/fa';
+import { FaUser, FaLinkedinIn } from 'react-icons/fa';
 import { RiLockPasswordFill } from 'react-icons/ri';
 import FocusTrap from 'focus-trap-react';
 import { Options } from 'focus-trap';
 import { IoMdClose } from 'react-icons/io';
+import { FcGoogle } from 'react-icons/fc';
+import { AiOutlineTwitter } from 'react-icons/ai';
+import { GrGoogle } from 'react-icons/gr';
 
 import { useAppSelector, useAppDispatch } from '@app/hooks';
 import { useClickOutside } from '@common/hooks/useClickOutside';
@@ -43,6 +46,7 @@ const LoginForm: FC = () => {
     const [connectionErr, setConnectionErr] = useState<string>('');
     const [userId, handleChangeUserId, resetUserId] = useInput('', [setUserIdErr, setErr, setConnectionErr]);
     const [password, handleChangePassword, resetPassword] = useInput('', [setPasswordErr, setErr, setConnectionErr]);
+    const [focusGoogle, setFocusGoogle] = useState<boolean>(false);
 
     const submitNotAllowed: boolean = Boolean(err || userIdErr || passwordErr);
 
@@ -186,7 +190,19 @@ const LoginForm: FC = () => {
                             <input aria-label='Login' type='submit' disabled={submitNotAllowed} value='Login' />
                         )}
                     </form>
-                    <p className='authform__text authform__text--white' style={{ textAlign: 'center', marginTop: '30px' }}>
+                    <div className='signupoptions__divider' style={{ marginTop: '1.8rem' }}><p>or</p></div>
+                    <div className='authform__icon-group'>
+                        <a tabIndex={0} aria-label='login with google' title='Login With Google'
+                            onFocus={() => setFocusGoogle(true)} onBlur={() => setFocusGoogle(false)}
+                            onMouseEnter={() => setFocusGoogle(true)} onMouseLeave={() => setFocusGoogle(false)}>
+                            {focusGoogle ?
+                                <FcGoogle aria-hidden={true} className='authform__icon' /> :
+                                <GrGoogle aria-hidden={true} className='authform__icon' style={{ width: '20px', height: '20px' }} />}
+                        </a>
+                        <a tabIndex={0} aria-label='login with twitter'  title='Login With Twitter'><AiOutlineTwitter aria-hidden={true} className='authform__icon authform__icon--twitter' /></a>
+                        <a tabIndex={0} aria-label='login with linkedin'  title='Login With Linkedin'><FaLinkedinIn aria-hidden={true} className='authform__icon authform__icon--linkedin' /></a>
+                    </div>
+                    <p className='authform__text authform__text--white' style={{ textAlign: 'center' }}>
                         Don't have an account?
                         <span role='button' aria-label='open signup form' tabIndex={0} onClick={handleSignUpFormMounted} onKeyDown={(e) => onkeyDown(e, 'Enter', handleSignUpFormMounted)}
                             className='authform__text--green-alien-light authform__text--link' style={{ marginLeft: '5px' }} >Sign up</span>
