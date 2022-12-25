@@ -30,12 +30,12 @@ app.use(express.json());
 
 app.use(cookieParser());
 
-app.use(session({
-    secret: process.env.SESSION_SECRET!,
-    name: 'forukara',
-    resave: true,
-    saveUninitialized: true
-}));
+// app.use(session({
+//     secret: process.env.SESSION_SECRET!,
+//     name: 'forukara',
+//     resave: true,
+//     saveUninitialized: true
+// }));
 
 app.use(express.static(path.join(__dirname, 'public')));
 

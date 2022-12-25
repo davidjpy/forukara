@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.route('/login')
     .post(authController.login)
-    // .post(loginLimiter, authController.login)
+// .post(loginLimiter, authController.login)
 
 router.route('/logout')
     .post(authController.logout)
@@ -18,13 +18,10 @@ router.route('/refresh')
 
 // Oauth routes 
 router.route('/google')
-    .get(passport.authenticate('google', { scope: ['profile'] }))
+    .get(passport.authenticate('google', { scope: ['email', 'profile'], session: false }))
 
 // Oauth callback routes 
 router.route('/google/callback')
-    .get(passport.authenticate('google', {
-        successRedirect: process.env.CLIENT_HOST,
-        failureRedirect: process.env.CLIENT_HOST
-    }))
+    .get(authController.googleOauth)
 
 export default router;
