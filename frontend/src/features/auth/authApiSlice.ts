@@ -40,7 +40,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
                 try {
                     const { data } = await queryFulfilled;
                     dispatch(setCredantial(data.token));
-                    dispatch(setUserInfo({ id: data.user.id }));
+                    dispatch(setUserInfo({ id: data.id }));
                 } catch (err) {
                     console.error(err);
                 }

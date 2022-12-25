@@ -15,6 +15,8 @@ export interface IEmailService {
 }
 
 export interface IUser {
+    token?: string;
+    _id?: ObjectId;
     id?: string;
     username?: string;
     password?: string;

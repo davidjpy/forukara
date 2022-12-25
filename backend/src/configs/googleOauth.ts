@@ -1,7 +1,18 @@
 import passport from 'passport';
-
 var GoogleStrategy = require('passport-google-oauth20').Strategy;
 
+import { IUser } from '@utilities/types';
+import User from '@models/User';
+
+type GoogleProfile = {
+    _json: Profile
+};
+
+type Profile = {
+    email: string;
+    name: string;
+    picture: string;
+};
 
 // Google oauth strategy
 passport.use(new GoogleStrategy({
@@ -9,15 +20,22 @@ passport.use(new GoogleStrategy({
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     callbackURL: `${process.env.HOST}/auth/google/callback`,
 },
-    async function verify(accessToken: string, refreshToken: string, profile: unknown, cb: any) {
-        return cb(null, profile, null);
+    async function verify(accessToken: string, refreshToken: string, profile: GoogleProfile, cb: any) {
+
+        // Check for any matches for google email
+        let existingUser = await User.findOne({ email: profile._json.email }).lean().exec();
+
+        // Case 1: Not an existing user
+        if (!existingUser) {
+            const userObj: IUser = {
+                username: profile._json.name,
+                email: profile._json.email,
+                avatar: profile._json.picture
+            };
+
+            existingUser = await User.create(userObj);
+        }
+    
+        cb(null, existingUser, null);
     }
 ));
-
-// passport.serializeUser(function(user, done) {
-//     done(null, user);
-// });
-
-// passport.deserializeUser(function(user, done) {
-//     done(null, user!);
-// });

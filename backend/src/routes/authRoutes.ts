@@ -1,8 +1,10 @@
 import express from 'express';
 import passport from 'passport';
+import jwt, { Secret } from 'jsonwebtoken';
 
 import authController from '@controllers/authController';
 import { loginLimiter } from '@middlewares/requestLimiter';
+import { IToken, IUser } from '@utilities/types';
 
 const router = express.Router();
 
@@ -22,6 +24,7 @@ router.route('/google')
 
 // Oauth callback routes 
 router.route('/google/callback')
-    .get(authController.googleOauth)
+    .get(passport.authenticate('google', { session: false }), authController.googleOauth)
 
-export default router;
+
+export default router;  

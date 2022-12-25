@@ -4,6 +4,7 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
 import path from 'path';
+import passport from 'passport';
 import session from 'express-session';
 
 import { connectDB } from '@configs/dbConnect';

@@ -1,14 +1,15 @@
 export interface ILoginResponse {
     token: string;
-    user: User,
+    user: User;
 }
 
 export interface IRefreshResponse {
-    token: string,
-    user: User
+    token: string;
+    id: string;
 }
 
 export type User = {
+    token?: string;
     id?: string | null;
     username?: string | null;
     email?: string | null;

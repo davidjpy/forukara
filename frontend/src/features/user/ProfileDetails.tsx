@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { FaCalendarAlt } from 'react-icons/fa';
 import { ImLocation2 } from 'react-icons/im'
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from 'react-router-dom';
 import moment from 'moment';
 
 import { User } from '@common/utilities/types';
