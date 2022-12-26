@@ -14,7 +14,7 @@ type Profile = {
     picture: string;
 };
 
-// Google oauth strategy
+// Google OAuth strategy
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
@@ -22,15 +22,17 @@ passport.use(new GoogleStrategy({
 },
     async function verify(accessToken: string, refreshToken: string, profile: GoogleProfile, cb: any) {
 
-        // Check for any matches for google email
+        // Check for any matches for Google email
         let existingUser = await User.findOne({ email: profile._json.email }).lean().exec();
 
         // Case 1: Not an existing user
         if (!existingUser) {
             const userObj: IUser = {
-                username: profile._json.name,
+                username: profile._json.name.trim(),
                 email: profile._json.email,
-                avatar: profile._json.picture
+                avatar: profile._json.picture,
+                status: 'Active',
+                expiredIn: null
             };
 
             existingUser = await User.create(userObj);

@@ -14,6 +14,7 @@ import { toggleLoginForm, toggleSignUpForm } from '@features/auth/authSlice';
 import { useLoginMutation } from '@features/auth/authApiSlice';
 import { useInput } from '@common/hooks/useInput';
 import { onkeyDown } from '@common/utilities/onKeyDown';
+import { baseUrl } from '@app/apiSlice';
 
 const focusTrapOptions: Options = {
     checkCanFocusTrap: (trapContainers) => {
@@ -192,7 +193,7 @@ const LoginForm: FC = () => {
                     </form>
                     <div className='signupoptions__divider' style={{ marginTop: '1.8rem' }}><p>or</p></div>
                     <div className='authform__icon-group'>
-                        <a tabIndex={0} aria-label='login with google' title='Login With Google'
+                        <a aria-label='login with google' title='Login With Google'  href={baseUrl + '/auth/google'}
                             onFocus={() => setFocusGoogle(true)} onBlur={() => setFocusGoogle(false)}
                             onMouseEnter={() => setFocusGoogle(true)} onMouseLeave={() => setFocusGoogle(false)}>
                             {focusGoogle ?
@@ -200,7 +201,7 @@ const LoginForm: FC = () => {
                                 <GrGoogle aria-hidden={true} className='authform__icon' style={{ width: '20px', height: '20px' }} />}
                         </a>
                         <a tabIndex={0} aria-label='login with twitter'  title='Login With Twitter'><AiOutlineTwitter aria-hidden={true} className='authform__icon authform__icon--twitter' /></a>
-                        <a tabIndex={0} aria-label='login with linkedin'  title='Login With Linkedin'><FaLinkedinIn aria-hidden={true} className='authform__icon authform__icon--linkedin' /></a>
+                        <a aria-label='login with linkedin' title='Login With Linkedin' href={baseUrl + '/auth/linkedin'}><FaLinkedinIn aria-hidden={true} className='authform__icon authform__icon--linkedin' /></a>
                     </div>
                     <p className='authform__text authform__text--white' style={{ textAlign: 'center' }}>
                         Don't have an account?

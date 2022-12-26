@@ -22,9 +22,15 @@ router.route('/refresh')
 router.route('/google')
     .get(passport.authenticate('google', { scope: ['email', 'profile'], session: false }))
 
+router.route('/linkedin')
+    .get(passport.authenticate('linkedin', { session: false }))
+
 // Oauth callback routes 
 router.route('/google/callback')
-    .get(passport.authenticate('google', { session: false }), authController.googleOauth)
+    .get(passport.authenticate('google', { session: false }), authController.oauthCallback)
+
+router.route('/linkedin/callback')
+    .get(passport.authenticate('linkedin', { session: false }), authController.oauthCallback)
 
 
 export default router;  

@@ -83,14 +83,14 @@ const SignUpForm: FC = () => {
 
     const handleSubmitForm = async (e: FormEvent<HTMLFormElement>): Promise<any> => {
         e.preventDefault();
-        setBlock('success');
-        // setEmailCopy(email);
-        // await createUser({
-        //     username: userId,
-        //     email: email,    
-        //     password: password,
-        //     confirmPassword: confirmPassword
-        // });
+        // setBlock('success');
+        setEmailCopy(email);
+        await createUser({
+            username: userId,
+            email: email,    
+            password: password,
+            confirmPassword: confirmPassword
+        });
     }
 
     const handleNextBlock = (block: 'options' | 'form' | 'success'): void => {

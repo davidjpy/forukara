@@ -59,31 +59,29 @@ const SignUpOptions: FC<Props> = ({ block, hadnleSignUpFormUnmounted, handleLogi
                     <IoMdClose aria-hidden={true} />
                 </button>
                 <div className='signupoptions__wrapper'>
-                    <button onClick={() => handleNextBlock('form')} className='signupoptions__button signupoptions__button--transparent'>
+                    <button onClick={() => handleNextBlock('form')} className='signupoptions__button signupoptions__button--transparent' style={{ margin: '0.6rem 0 0 0' }}>
                         <MdEmail aria-hidden={true} className='signupoptions__icon' />
                         Sign up with email
                     </button>
                 </div>
                 <div className='signupoptions__divider'><p>or</p></div>
                 <div className='signupoptions__wrapper'>
-                    <a href={baseUrl + '/auth/google'}>
-                        <button className='signupoptions__button signupoptions__button--google'>
-                            <div>
-                                <FcGoogle aria-hidden={true} className='signupoptions__icon' />
-                            </div>
-                            Sign up with Google
-                        </button>
+                    <a href={baseUrl + '/auth/google'} className='signupoptions__button signupoptions__button--google'>
+                        <div>
+                            <FcGoogle aria-hidden={true} className='signupoptions__icon' />
+                        </div>
+                        Sign up with Google
                     </a>
-                    <button className='signupoptions__button signupoptions__button--twitter'>
+                    <a tabIndex={0} className='signupoptions__button signupoptions__button--twitter'>
                         <AiOutlineTwitter aria-hidden={true} className='signupoptions__icon signupoptions__icon--twitter' />
                         Sign Up With Twitter
-                    </button>
-                    <button className='signupoptions__button signupoptions__button--linkedin'>
+                    </a>
+                    <a href={baseUrl + '/auth/linkedin'} className='signupoptions__button signupoptions__button--linkedin'>
                         <div>
                             <FaLinkedinIn aria-hidden={true} className='signupoptions__icon signupoptions__icon--linkedin' />
                         </div>
                         Sign Up With Linkedin
-                    </button>
+                    </a>
                 </div>
                 <p className='authform__text authform__text--white' style={{ textAlign: 'center', margin: '30px 0 50px 0' }}>
                     Already have an account?

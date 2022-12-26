@@ -35,7 +35,9 @@ const LeftMenu: FC = () => {
                     className='leftmenu__background' style={{ backgroundImage: `url(${!user?.background ? default_background : user?.background})` }}
                 />
                 <figure>
-                    <img alt='profile avatar' src={!user?.avatar ? default_avatar : user?.avatar} />
+                    <div>
+                        <img alt='profile avatar' src={!user?.avatar ? default_avatar : user?.avatar} />
+                    </div>
                     <figcaption>{user?.username}</figcaption>
                 </figure>
                 <div className='leftmenu__tablist'>
@@ -47,7 +49,7 @@ const LeftMenu: FC = () => {
                         <ul role='tablist'>
                             {contentList.map((item) => {
                                 return (
-                                    <li role='tab' aria-controls={item.tab}>{item.icon}{item.tab}</li>
+                                    <li key={item.tab} role='tab' aria-controls={item.tab}>{item.icon}{item.tab}</li>
                                 );
                             })}
                         </ul>
@@ -60,7 +62,7 @@ const LeftMenu: FC = () => {
                         <ul role='tablist'>
                             {accountList.map((item) => {
                                 return (
-                                    <li role='tab' aria-controls={item.tab}>{item.icon}{item.tab}</li>
+                                    <li key={item.tab} role='tab' aria-controls={item.tab}>{item.icon}{item.tab}</li>
                                 );
                             })}
                         </ul>
@@ -73,7 +75,7 @@ const LeftMenu: FC = () => {
                         <ul role='tablist'>
                             {supportList.map((item) => {
                                 return (
-                                    <li role='tab' aria-controls={item.tab}>{item.icon}{item.tab}</li>
+                                    <li key={item.tab} role='tab' aria-controls={item.tab}>{item.icon}{item.tab}</li>
                                 );
                             })}
                         </ul>

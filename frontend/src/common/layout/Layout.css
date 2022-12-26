@@ -37,17 +37,24 @@
 }
 
 .leftmenu__wrapper figure {
-    top: 60px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    top: 45px;
     left: 50%;
     transform: translate(-50%, 0);
-    position: absolute;
-    border-radius: 50%;
-    background-color: var(--green-alien-light);
-    width: 90px;
-    height: 90px;
 }
 
-.leftmenu__wrapper figure img {
+.leftmenu__wrapper figure div {
+    border-radius: 50%;
+    background-color: var(--green-alien-light);
+    width: 85px;
+    height: 85px;   
+}
+
+.leftmenu__wrapper figure div img {
     border-radius: 50%;
     width: 96%;
     height: 96%;
@@ -58,7 +65,7 @@
 .leftmenu__wrapper figure figcaption {
     color: var(--green-alien-deep);
     text-align: center;
-    margin: 0.3rem;
+    margin: 0.6rem;
     font-size: 1.2rem;
     font-weight: 600;
 }

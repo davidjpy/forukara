@@ -141,10 +141,10 @@ const logout = (req: Request, res: Response): any => {
     res.json({ message: 'Logout successful' });
 };
 
-// Google oauth handler 
-const googleOauth = (req: Request, res: Response) => {
+// OAuth callback handle 
+const oauthCallback = (req: Request, res: Response) => {
     const user = req.user as IUser;
-    console.log(user)
+        
     const refreshTokenPayload: IToken = {
         tokenId: user._id!.toString(),
         tokenEmail: user.email,
@@ -164,5 +164,5 @@ export = {
     login,
     refresh,
     logout,
-    googleOauth
+    oauthCallback,
 }

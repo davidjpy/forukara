@@ -16,7 +16,8 @@ import postRoutes from '@routes/postRoutes';
 import userRoutes from '@routes/userRoutes'
 import authRoutes from '@routes/authRoutes';
 import { IDBError } from '@utilities/types';
-import '@configs/googleOauth'
+import '@configs/googleOauth';
+import '@configs/linkedinOauth';
 
 const app = express();
 const PORT = process.env.PORT;
