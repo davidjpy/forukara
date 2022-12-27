@@ -25,7 +25,7 @@ const ProfilePage: FC = () => {
             />
             {
                 searchParams.get('search') === 'discussions' ?
-                    <ProfileDiscussions /> :
+                    <ProfileDiscussions user={user} /> :
                     searchParams.get('search') === 'connections' ?
                         <ProfileConnections /> :
                         <ProfileBio user={user} />

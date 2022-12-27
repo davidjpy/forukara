@@ -275,11 +275,6 @@ const SignUpForm: FC = () => {
                         hadnleSignUpFormUnmounted={hadnleSignUpFormUnmounted}
                     />
                 </div>
-                {/* <div style={{ position: 'absolute', bottom: 0 }}>
-                    <button onClick={() => setBlock('options')}>options</button>
-                    <button onClick={() => setBlock('form')}>form</button>
-                    <button onClick={() => setBlock('success')}>success</button>
-                </div> */}
             </section>
         </div>
     );

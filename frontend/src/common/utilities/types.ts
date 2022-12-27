@@ -24,3 +24,4 @@ export type User = {
     createdAt?: string | null;
 }
 
+export type Pages = 'splash' | 'home' | 'profile' | 'notifications' | 'settings' | 'help' | 'feedback' | 'contact' | null;

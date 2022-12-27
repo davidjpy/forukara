@@ -15,7 +15,7 @@ const login = asyncHandler(async (req: Request, res: Response): Promise<any> => 
     if (token) {
         const payload = jwt.verify(token, process.env.OAUTH_TOKEN_SECRET as Secret);
         const { tokenId } = payload as IToken;
-        console.log(payload)
+        
         user = await User.findById(tokenId).lean().exec();
     }
     // Login user with local account

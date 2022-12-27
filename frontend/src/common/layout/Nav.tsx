@@ -27,10 +27,11 @@ const Nav: FC = () => {
 
     const handleLogout = async (): Promise<any> => {
         await logout();
+        handleNavigateProfile('/');
     }
 
-    const handleNavigateProfile = (): void => {
-        navigate(`profile/${user.username}`);
+    const handleNavigateProfile = (page: string): void => {
+        navigate(page);
     }
 
     return (
@@ -44,7 +45,7 @@ const Nav: FC = () => {
                     {user.id ? (
                         <div className='nav__wrapper'>
                             <p role='button' onClick={handleLogout} className='nav__text nav__text--button nav__text--link'>Logout</p>
-                            <p role='button' onClick={handleNavigateProfile} className='nav__text nav__text--button nav__text--link'>
+                            <p role='button' onClick={() => handleNavigateProfile(`profile/${user.username}`)} className='nav__text nav__text--button nav__text--link'>
                                 {user?.username}
                             </p>
                         </div>

@@ -8,6 +8,7 @@
     padding: calc(var(--nav-height) + 2rem) 2rem 2rem 2rem;
     max-width: 800px;
     width: 100%;
+    background-color: rgb(250,250,250);
 }
 
 @media screen and (max-width: 500px) {
@@ -232,38 +233,38 @@
 /* =========================================================================================== */
 
 .profilebio {
-    display: flex;
-    background-color: rgb(240,240,240);
-    box-shadow: 0px 6px 12px 0px var(--black-opacity-light);
-    border-image: linear-gradient(#abebd8, 50%, var(--green-alien-light)) 30%;
-    border-right-width: 15px;
-    border-right-style: solid;
-    margin: 2rem 0;
 }
 
-.profilebio header {
+.profilebio__wrapper {
+    display: flex;
+    background-color: rgb(240, 240, 240);
+    box-shadow: 0px 6px 12px 0px var(--black-opacity-light);
+    margin: 2rem 0;
+    border-radius: 8px;
+    /* border-image: linear-gradient(rgb(53, 146, 167), 50%, var(--green-dark)) 30%;
+    border-right-width: 15px;
+    border-right-style: solid; */
+}
+
+.profilebio__wrapper header {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    width: 80px;
-    background: linear-gradient(#abebd8, 50%, var(--green-alien-light));
+    width: 50px;
+    background: linear-gradient(rgb(53, 146, 167), 50%, var(--green-dark));
     font-size: 2rem;
+    border-radius: 8px 0 0 8px;
+    color: white;
 }
 
-.profilebio header h1 {
-    font-weight: 700;
-    color: black;
-    font-size: 1.2rem;
-}   
-
-.profilebio__wrapper {
+.profilebio__content {
     width: 92%;
     padding: 1.4rem;
     text-align: justify;
 }
 
-.profilebio__wrapper h1 {
+.profilebio__content h1 {
     font-size: 0.9rem;
     color: rgb(100, 100, 100);
     width: fit-content;
@@ -274,7 +275,7 @@
 }
 
 .profilebio__divider {
-    border-top: 2px solid var(--green-alien-light);
+    border-top: 2px solid var(--green-dark);
     margin: 0.2rem 0 0.5rem 0;
     width: 80%;
 }
@@ -295,4 +296,18 @@
     .profilebio__wrapper {
         padding: 1rem ;
     }
+}
+
+/* =========================================================================================== */
+/* =================================== ProfileDiscussions ==================================== */
+/* =========================================================================================== */
+
+.profilediscussions {
+    margin: 2rem 0;
+    border-radius: 8px;
+}
+
+.profilediscussions header {
+    display: flex;
+    align-items: center;
 }

@@ -34,39 +34,28 @@ export const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
+        // Open and close signup form dialog
         toggleSignUpForm: (state, action: PayloadAction<boolean>) => {
             state.signUpFormMounted = action.payload;
-
-            // if (state.signUpFormMounted) {
-            //     document.body.style.overflow = 'hidden';
-            // }
-
-            // if (!state.signUpFormMounted) {
-            //     document.body.style.overflow = 'auto';
-            // }
         },
 
+        // Open and close login form dialog
         toggleLoginForm: (state, action: PayloadAction<boolean>) => {
             state.loginFormMounted = action.payload;
-
-            // if (state.loginFormMounted) {
-            //     document.body.style.overflow = 'hidden';
-            // }
-
-            // if (!state.loginFormMounted) {
-            //     document.body.style.overflow = 'auto';
-            // }
         },
 
+        // Set current user info
         setUserInfo: (state, action: PayloadAction<User>) => {
             state.user = { ...state.user, ...action.payload };
         },
 
+        // Set user's access token
         setCredantial: (state, action: PayloadAction<string>) => {
             const token = action.payload;
             state.credantial = token;
         },
 
+        // Logout and reset all states
         logout: () => initialState
         
     }

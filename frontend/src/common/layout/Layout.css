@@ -49,25 +49,38 @@
 
 .leftmenu__wrapper figure div {
     border-radius: 50%;
-    background-color: var(--green-alien-light);
+    background: linear-gradient(to left top, #e6f6f1, #e4f5f3, #e3f4f5, #e3f3f7, #e4f1f8, #e8f0fa, #edeffa, #f2eef8, #f9eef5, #fef0f1, #fff2ee, #fdf5ed);;
     width: 85px;
     height: 85px;   
 }
 
 .leftmenu__wrapper figure div img {
     border-radius: 50%;
-    width: 96%;
-    height: 96%;
-    margin: 2%;
+    width: 92%;
+    height: 92%;
+    margin: 4%;
     object-fit: contain;
 }
 
 .leftmenu__wrapper figure figcaption {
-    color: var(--green-alien-deep);
     text-align: center;
-    margin: 0.6rem;
-    font-size: 1.2rem;
+    margin: 0.5rem;
+    font-size: 1rem;
     font-weight: 600;
+}
+
+.leftmenu__wrapper figure figcaption button {
+    padding: 0.4rem 1rem;
+    background-color: var(--green-alien-light);
+    border: none;
+    font-weight: 700;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.1s linear;
+}
+
+.leftmenu__wrapper figure figcaption button:hover {
+    background-color: var(--green-alien-deep);
 }
 
 .leftmenu__tablist {
@@ -91,21 +104,29 @@
     list-style-type: none;
 }
 
-.leftmenu__tablist section li {
+.leftmenu__listitem {
     display: flex;
     align-items: center;
     gap: 5px;
     text-transform: capitalize;
     font-size: 0.9rem;
-    margin: 0.4rem;
-    padding: 0.4rem;
+    /* margin: 0.4rem; */
+    padding: 0.6rem 0.8rem;
     cursor: pointer;
     user-select: none;
-    border-radius: 8px;
 }
 
-.leftmenu__tablist section li:hover {
-    background-color: var(--green-alien-light);
+.leftmenu__listitem:hover {
+    background-color: var(--gray-light);
+}
+
+.leftmenu__listitem--active {
+    color: white;
+    background-color: var(--green-dark);
+}
+
+.leftmenu__listitem--active:hover {
+    background-color: var(--green-dark);
 }
 
 .leftmenu__divider {
