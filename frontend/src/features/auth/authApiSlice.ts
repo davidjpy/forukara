@@ -1,10 +1,10 @@
 import { apiSlice } from '@app/apiSlice';
 import { setUserInfo, setCredantial, logout } from '@features/auth/authSlice';
-import { User, ILoginResponse, IRefreshResponse } from '@common/utilities/types';
+import { User, LoginResponse, RefreshResponse } from '@common/utilities/types';
 
 export const authApiSlice = apiSlice.injectEndpoints({
     endpoints: builder => ({
-        login: builder.mutation<ILoginResponse, Partial<User>>({
+        login: builder.mutation<LoginResponse, Partial<User>>({
             query: ({ ...data }) => ({
                 url: '/auth/login',
                 method: 'POST',
@@ -12,7 +12,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
                 validateStatus: (response, result) =>
                     (response.status === 200 || response.status === 201) && !result.isError
             }),
-            transformResponse: (rawResult: { message: ILoginResponse }) => {
+            transformResponse: (rawResult: { message: LoginResponse }) => {
                 return rawResult.message;
             },
             async onQueryStarted(arg, { dispatch, queryFulfilled }) {
@@ -26,14 +26,14 @@ export const authApiSlice = apiSlice.injectEndpoints({
             }
         }),
 
-        refresh: builder.query<IRefreshResponse, void>({
+        refresh: builder.query<RefreshResponse, void>({
             query: () => ({
                 url: '/auth/refresh',
                 method: 'GET',
                 validateStatus: (response, result) =>
                     (response.status === 200 || response.status === 201) && !result.isError
             }),
-            transformResponse: (rawResult: { message: IRefreshResponse }) => {
+            transformResponse: (rawResult: { message: RefreshResponse }) => {
                 return rawResult.message;
             },
             async onQueryStarted(arg, { dispatch, queryFulfilled }) {

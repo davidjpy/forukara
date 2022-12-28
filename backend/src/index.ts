@@ -15,9 +15,7 @@ import commentRoutes from '@routes/commentRoutes';
 import postRoutes from '@routes/postRoutes';
 import userRoutes from '@routes/userRoutes'
 import authRoutes from '@routes/authRoutes';
-import { IDBError } from '@utilities/types';
-import '@configs/googleOauth';
-import '@configs/linkedinOauth';
+import { DBError } from '@utilities/types';
 
 const app = express();
 const PORT = process.env.PORT;
@@ -31,13 +29,6 @@ app.use(cors(corsOptions));
 app.use(express.json());
 
 app.use(cookieParser());
-
-// app.use(session({
-//     secret: process.env.SESSION_SECRET!,
-//     name: 'forukara',
-//     resave: true,
-//     saveUninitialized: true
-// }));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -56,7 +47,7 @@ mongoose.connection.once('open', () => {
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 });
 
-mongoose.connection.on('error', (err: IDBError) => {
+mongoose.connection.on('error', (err: DBError) => {
     console.log(err);
     logEvents(`${err.no}: ${err.code}\t${err.syscall}\t${err.hostname}`, 'dbErrLog.log');
 });

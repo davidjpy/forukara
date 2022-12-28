@@ -1,15 +1,15 @@
-export interface ILoginResponse {
+export interface LoginResponse {
     token: string;
     user: User;
 }
 
-export interface IRefreshResponse {
+export interface RefreshResponse {
     token: string;
     id: string;
 }
 
 export type User = {
-    token?: string;
+    code?: string;
     id?: string | null;
     username?: string | null;
     email?: string | null;

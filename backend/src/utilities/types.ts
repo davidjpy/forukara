@@ -1,13 +1,13 @@
 import { ObjectId, LeanDocument } from 'mongoose';
 
-export interface IDBError {
+export interface DBError {
     no?: number;
     code?: string;
     syscall?: string;
     hostname?: string;
 }
 
-export interface IEmailService {
+export interface EmailService {
     HTMLTemplate: string;
     replacement: object,
     target: string;
@@ -15,7 +15,7 @@ export interface IEmailService {
 }
 
 export interface IUser {
-    token?: string;
+    code?: string;
     _id?: ObjectId;
     id?: string;
     username?: string;
@@ -46,13 +46,13 @@ export interface IComment {
     content?: string;
 }
 
-export interface IToken {
+export interface JwtToken {
     tokenId?: string;
     tokenUsername?: string;
     tokenEmail?: string;
 }
 
-export interface IErrorResponse {
+export interface ErrorResponse {
     error: string;
     code: number;
 }

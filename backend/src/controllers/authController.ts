@@ -4,23 +4,48 @@ import jwt, { Secret } from 'jsonwebtoken';
 import { Request, Response } from 'express';
 
 import User from '@models/User';
-import { IUser, IErrorResponse, ErrorCode, IToken } from '@utilities/types';
+import { getOAuthCredential } from '@utilities/getOAuthCredential';
+import { IUser, ErrorResponse, ErrorCode, JwtToken } from '@utilities/types';
+
+type OAuthProfile = {
+    email: string;
+    name: string;
+    picture: string;
+};
 
 // Login a user
 const login = asyncHandler(async (req: Request, res: Response): Promise<any> => {
-    const { token, username, password }: IUser = req.body;
+    const { code, username, password }: IUser = req.body;
     let user;
 
-    // Login user with OAuth 2.0 returned token
-    if (token) {
-        const payload = jwt.verify(token, process.env.OAUTH_TOKEN_SECRET as Secret);
-        const { tokenId } = payload as IToken;
+    // Login user with OAuth 2.0 code
+    if (code) {
+        // Get Goolge tokens
+        const authResults = await getOAuthCredential(code);
+
+        // Get user info from Google token
+        const profile = jwt.decode(authResults.id_token) as OAuthProfile;
+
+        // Check for any matches for Google email
+        user = await User.findOne({ email: profile.email }).lean().exec();
         
-        user = await User.findById(tokenId).lean().exec();
+        // Create user with provided email
+        if (!user) {
+            const userObj: IUser = {
+                username: profile.name.trim(),
+                email: profile.email,
+                avatar: profile.picture,
+                status: 'Active',
+                expiredIn: null
+            };
+
+            user = await User.create(userObj);
+        }
     }
+    
     // Login user with local account
     else {
-        let errorCodes: Array<IErrorResponse> = [];
+        let errorCodes: Array<ErrorResponse> = [];
 
         // Case 1: Username missing
         if (!username) {
@@ -60,8 +85,8 @@ const login = asyncHandler(async (req: Request, res: Response): Promise<any> => 
         return res.status(404).json({ message: [{ error: `The Forukara account doesn't exist`, code: ErrorCode.UsernameErr }] });
     }
 
-    const accessTokenPayload: IToken = { tokenId: user._id.toString(), tokenUsername: username, tokenEmail: user.email };
-    const refreshTokenPayload: IToken = { tokenId: user._id.toString() };
+    const accessTokenPayload: JwtToken = { tokenId: user._id.toString(), tokenUsername: username, tokenEmail: user.email };
+    const refreshTokenPayload: JwtToken = { tokenId: user._id.toString() };
 
     const accessToken = jwt.sign(accessTokenPayload, process.env.ACCESS_TOKEN_SECRET as Secret, { expiresIn: '1d' });
     const refreshToken = jwt.sign(refreshTokenPayload, process.env.REFRESH_TOKEN_SECRET as Secret, { expiresIn: '7d' });
@@ -98,7 +123,7 @@ const refresh = asyncHandler(async (req: Request, res: Response): Promise<any> =
 
     try {
         const payload = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET as Secret);
-        const { tokenId } = payload as IToken;
+        const { tokenId } = payload as JwtToken;
 
         // Case 2: Token missing
         if (!tokenId) {
@@ -113,7 +138,7 @@ const refresh = asyncHandler(async (req: Request, res: Response): Promise<any> =
         }
 
         // Assign new token
-        const accessTokenPayload: IToken = { tokenId: user._id.toString(), tokenUsername: user.username, tokenEmail: user.email };
+        const accessTokenPayload: JwtToken = { tokenId: user._id.toString(), tokenUsername: user.username, tokenEmail: user.email };
         const accessToken = jwt.sign(accessTokenPayload, process.env.ACCESS_TOKEN_SECRET as Secret, { expiresIn: '1d' });
 
         res.json({ message: { token: accessToken, id: user._id.toString() } });
@@ -141,28 +166,30 @@ const logout = (req: Request, res: Response): any => {
     res.json({ message: 'Logout successful' });
 };
 
-// OAuth callback handle 
-const oauthCallback = (req: Request, res: Response) => {
-    const user = req.user as IUser;
-        
-    const refreshTokenPayload: IToken = {
-        tokenId: user._id!.toString(),
-        tokenEmail: user.email,
-        tokenUsername: user.username
+// Google OAuth handler
+const googleOAuth = (req: Request, res: Response) => {
+    const rootUrl = 'https://accounts.google.com/o/oauth2/v2/auth';
+
+    const options = {
+        redirect_uri: process.env.CLIENT_HOST as string,
+        client_id: process.env.GOOGLE_CLIENT_ID as string,
+        access_type: 'offline',
+        response_type: 'code',
+        prompt: 'consent',
+        scope: [
+            'https://www.googleapis.com/auth/userinfo.profile',
+            'https://www.googleapis.com/auth/userinfo.email',
+        ].join(' ')
     };
 
-    const idToken = jwt.sign(
-        refreshTokenPayload,
-        process.env.OAUTH_TOKEN_SECRET as Secret,
-        { expiresIn: '10m' }
-    );
-
-    return res.redirect(process.env.CLIENT_HOST as string + `/?token=${idToken}`);
-};
+    const qs = new URLSearchParams(options);
+    
+    res.redirect(`${rootUrl}?${qs.toString()}`);
+}
 
 export = {
     login,
     refresh,
     logout,
-    oauthCallback,
+    googleOAuth,
 }

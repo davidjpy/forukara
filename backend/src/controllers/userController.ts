@@ -8,7 +8,7 @@ import path from 'path';
 
 import User from '@models/User';
 import emailService from '@utilities/emailService';
-import { IUser, IToken, IErrorResponse, ErrorCode } from '@utilities/types';
+import { IUser, JwtToken, ErrorResponse, ErrorCode } from '@utilities/types';
 
 // Get all users
 const getAllUsers = asyncHandler(async (req: Request, res: Response): Promise<any> => {
@@ -87,7 +87,7 @@ const createUser = asyncHandler(async (req: Request, res: Response): Promise<any
     const { username, password, confirmPassword, email }: IUser = req.body;
 
     // Buffer array for holding the missing error messages
-    let errorCodes: Array<IErrorResponse> = [];
+    let errorCodes: Array<ErrorResponse> = [];
 
     // Case 1: Username missing
     if (!username) {
@@ -143,7 +143,7 @@ const createUser = asyncHandler(async (req: Request, res: Response): Promise<any
 
     const user = await User.create(userObj);
 
-    const payload: IToken = { tokenId: user._id.toString(), tokenUsername: user.username!, tokenEmail: user.email! };
+    const payload: JwtToken = { tokenId: user._id.toString(), tokenUsername: user.username!, tokenEmail: user.email! };
 
     // Token for email verification endpoint
     const token = jwt.sign(payload, process.env.VERIFICATION_SECRET_KEY as Secret, { expiresIn: '300s' });
@@ -263,7 +263,7 @@ const verifiyUser = asyncHandler(async (req: Request, res: Response): Promise<an
     try {
         // Decrypt the token recevied 
         const userToken = jwt.verify(token, process.env.VERIFICATION_SECRET_KEY as Secret);
-        const { tokenId, tokenUsername, tokenEmail } = userToken as IToken;
+        const { tokenId, tokenUsername, tokenEmail } = userToken as JwtToken;
 
         // Case 1: Token payload missing
         if (!tokenId || !tokenUsername || !tokenEmail) {
@@ -314,7 +314,7 @@ const resendVerification = asyncHandler(async (req: Request, res: Response): Pro
         return res.status(400).json({ message: { error: 'Account has been verified'}, code: ErrorCode.Failed });
     }
 
-    const payload: IToken = { tokenId: user._id.toString(), tokenUsername: user.username!, tokenEmail: user.email! }
+    const payload: JwtToken = { tokenId: user._id.toString(), tokenUsername: user.username!, tokenEmail: user.email! }
 
     // Create another token for email verification endpoint
     const token = jwt.sign(payload, process.env.VERIFICATION_SECRET_KEY as Secret, { expiresIn: '300s' });

@@ -1,6 +1,6 @@
 import jwt, { Secret } from 'jsonwebtoken';
 import { Request, Response, NextFunction } from 'express';
-import { ErrorCode, IToken } from '@utilities/types';
+import { ErrorCode, JwtToken } from '@utilities/types';
 
 // Verify the bearer token of the requests for all protected routes
 export const verifyToken = (req: Request, res: Response, next: NextFunction) => {
@@ -14,7 +14,7 @@ export const verifyToken = (req: Request, res: Response, next: NextFunction) => 
     const token = authToken.split(' ')[1];
 
     try {
-        const user = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET as Secret) as IToken;
+        const user = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET as Secret) as JwtToken;
         next();
     } catch {
         // Case 2: Invalid token

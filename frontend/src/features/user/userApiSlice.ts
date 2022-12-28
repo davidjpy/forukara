@@ -1,6 +1,5 @@
 import { apiSlice } from '@app/apiSlice';
 import { User } from '@common/utilities/types';
-import { setUserProfile } from './userSlice';
 import { setUserInfo } from '@features/auth/authSlice';
 
 export const userApiSlice = apiSlice.injectEndpoints({
@@ -41,14 +40,6 @@ export const userApiSlice = apiSlice.injectEndpoints({
             }),
             transformResponse: (rawResult: { message: User }) => {
                 return rawResult.message;
-            },
-            async onQueryStarted(arg, { dispatch, queryFulfilled }) {
-                try {
-                    const { data } = await queryFulfilled;
-                    dispatch(setUserProfile(data));
-                } catch (err) {
-                    console.error(err);
-                }
             },
         }),
 

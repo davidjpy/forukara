@@ -8,27 +8,26 @@ import ProfileDiscussions from '@features/user/ProfileDiscussions';
 import ProfileConnections from '@features/user/ProfileConnections';
 import { useGetUserByUsernameQuery } from '@features/user/userApiSlice';
 import { useParams } from 'react-router-dom';
-import { useAppSelector } from '@app/hooks';
+import { User } from '@common/utilities/types';
 
 const ProfilePage: FC = () => {
 
     const { username } = useParams();
-    const user = useAppSelector((state) => state.user.userProfile);
-    const { isLoading } = useGetUserByUsernameQuery(`${username}`);
+    const { data: user, isLoading } = useGetUserByUsernameQuery(`${username}`);
     const [searchParams] = useSearchParams();
 
     return (
         <div className='profilepage'>
             <ProfileBackground
-                user={user}
+                user={user as User}
                 isLoading={isLoading}
             />
             {
                 searchParams.get('search') === 'discussions' ?
-                    <ProfileDiscussions user={user} /> :
+                    <ProfileDiscussions user={user as User} /> :
                     searchParams.get('search') === 'connections' ?
                         <ProfileConnections /> :
-                        <ProfileBio user={user} />
+                        <ProfileBio user={user as User} />
             }
         </div>
     );
