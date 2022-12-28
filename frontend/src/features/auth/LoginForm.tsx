@@ -169,10 +169,10 @@ const LoginForm: FC = () => {
                     <header>
                         <h1>Login</h1>
                     </header>
-                    <form onSubmit={handleSubmitForm}>
+                    <form onSubmit={handleSubmitForm} className='authform__form'>
                         {inputFields.map((item) => {
                             return (
-                                <div key={item.id} style={{ margin: item.err && '1rem 0 0.5rem 0' }}>
+                                <div key={item.id} style={{ margin: item.id === 'login-username' ? '2rem 0 0 0' : item.err && '1rem 0 0 0' }}>
                                     <input id={item.id} value={item.value} onChange={item.onChange} type={item.type} placeholder=' '
                                         onKeyDown={(e) => { e.key === 'Enter' && e.preventDefault(); }} className='authform__input' />
                                     <label htmlFor={item.id} aria-label={item.text} className='authform__placeholder'>{item.icon} {item.text + '*'}</label>

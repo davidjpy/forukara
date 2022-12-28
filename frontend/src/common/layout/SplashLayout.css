@@ -196,7 +196,7 @@
     height: 45px;
     font-size: 0.8rem;
     color: white;
-    margin: 1rem 0;
+    margin: 1.2rem 0;
     border-radius: 4px;
     text-decoration: none;
     align-items: center;
@@ -340,12 +340,12 @@
 .authform--signup {
     height: 70%;
     overflow-x: hidden;
-    max-height: 560px;
+    max-height: 550px;
 }
 
 .authform--login {
     height: 70%;
-    max-height: 500px;
+    max-height: 520px;
     overflow-x: auto;
 }
 
@@ -470,27 +470,27 @@
     transition: left 0.5s ease-out;
 }
 
-.authform form div {
+.authform__form div {
     position: relative;
     margin: 1.2rem 0;
 }
 
-.authform form div:first-child {
+.authform__form div:first-child {
     margin-top: 2rem;
 }
 
-.authform form input {
+.authform__form input {
     width: 100%;
     font-size: 1rem;
     border: none;
     background-color: rgba(255, 255, 255, 0.3);
 }
 
-.authform form input:focus {
+.authform__form input:focus {
     outline: 2px solid var(--green-alien-light);
 }
 
-.authform form label {
+.authform__form label {
     position: absolute;
     display: flex;
     align-items: center;
@@ -502,7 +502,7 @@
     pointer-events: none;
 }
 
-.authform form input[type='text'],
+.authform__form input[type='text'],
 input[type='email'],
 input[type='password'] {
     border-radius: 6px;
@@ -510,7 +510,7 @@ input[type='password'] {
     color: white;
 }
 
-.authform form input[type='submit'] {
+.authform__form input[type='submit'] {
     background-color: var(--green-alien-light);
     color: black;
     cursor: pointer;
@@ -521,16 +521,16 @@ input[type='password'] {
     height: 45px;
 }
 
-.authform form input[type='submit']:hover {
+.authform__form input[type='submit']:hover {
     background-color: var(--green-alien-deep);
 }
 
-.authform form input[type='submit']:focus {
+.authform__form input[type='submit']:focus {
     outline: var(--green-alien-focus);
     outline-offset: 1px;
 }
 
-.authform form input[type='submit']:disabled {
+.authform__form input[type='submit']:disabled {
     background-color: gray;
     cursor: not-allowed;
 }

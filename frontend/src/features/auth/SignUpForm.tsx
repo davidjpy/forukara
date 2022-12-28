@@ -87,7 +87,7 @@ const SignUpForm: FC = () => {
         setEmailCopy(email);
         await createUser({
             username: userId,
-            email: email,    
+            email: email,
             password: password,
             confirmPassword: confirmPassword
         });
@@ -220,6 +220,7 @@ const SignUpForm: FC = () => {
                         focusTrapOptions={focusTrapOptions}
                     >
                         <form onSubmit={handleSubmitForm}
+                            className='authform__form'
                             style={{
                                 left:
                                     block === 'options' ? 'calc(100% + 2rem)' :
@@ -228,20 +229,20 @@ const SignUpForm: FC = () => {
                             }}
                         >
                             <button aria-label='close signup form' title='Close Signup Form' onClick={hadnleSignUpFormUnmounted} type='button'
-                                className='authform__button authform__button--cross' 
+                                className='authform__button authform__button--cross'
                                 style={{ display: block === 'form' ? 'block' : 'none', right: '0' }}
                             >
                                 <IoMdClose aria-hidden={true} />
                             </button>
-                            <button aria-label='back to signup options' title='Back to Signup Options' onClick={() => handleNextBlock('options')} type='button'
-                                className='authform__button authform__button--leftarrow' 
+                            <button aria-label='back to signup options' title='Back to Signup Options' onClick={() => {handleNextBlock('options'); handleResetInput()}} type='button'
+                                className='authform__button authform__button--leftarrow'
                                 style={{ display: block === 'form' ? 'block' : 'none' }}
                             >
                                 <BsArrowLeft aria-hidden={true} />
                             </button>
                             {inputFields.map((item) => {
                                 return (
-                                    <div key={item.id} style={{ margin: item.err && '1rem 0 0.5rem 0' }}>
+                                    <div key={item.id} style={{ margin: item.id === 'register-username' ? '2rem 0 0 0' : item.err && '1rem 0 0 0' }}>
                                         <input id={item.id} value={item.value} onChange={item.onChange} type={item.type} placeholder=' '
                                             onKeyDown={(e) => { e.key === 'Enter' && e.preventDefault(); }} className='authform__input' />
                                         <label htmlFor={item.id} aria-label={item.text} className='authform__placeholder'>{item.icon} {item.text + '*'}</label>
