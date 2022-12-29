@@ -7,8 +7,8 @@ import { Options } from 'focus-trap';
 import FocusTrap from 'focus-trap-react';
 import { IoMdClose } from 'react-icons/io';
 
-import { onkeyDown } from '@common/utilities/onKeyDown';
-import { baseUrl } from '@app/apiSlice';
+import { onkeyDownHandler } from '@common/utilities/onKeyDownHandler';
+import { oAuthPKCEHandler } from '@common/utilities/oAuthPKCEHandler';
 
 type Props = {
     block: 'options' | 'form' | 'success';
@@ -34,7 +34,8 @@ const focusTrapOptions: Options = {
     },
     initialFocus: false,
     returnFocusOnDeactivate: false,
-    escapeDeactivates: false
+    escapeDeactivates: false,
+    allowOutsideClick: true
 };
 
 const SignUpOptions: FC<Props> = ({ block, hadnleSignUpFormUnmounted, handleLoginFormMounted, signUpFormMounted, handleNextBlock }: Props) => {
@@ -66,7 +67,7 @@ const SignUpOptions: FC<Props> = ({ block, hadnleSignUpFormUnmounted, handleLogi
                 </div>
                 <div className='signupoptions__divider'><p>or</p></div>
                 <div className='signupoptions__wrapper'>
-                    <a href={baseUrl + '/auth/google'} className='signupoptions__button signupoptions__button--google'>
+                    <a onClick={() => oAuthPKCEHandler('/auth/google', 82)} className='signupoptions__button signupoptions__button--google'>
                         <div>
                             <FcGoogle aria-hidden={true} className='signupoptions__icon' />
                         </div>
@@ -76,7 +77,7 @@ const SignUpOptions: FC<Props> = ({ block, hadnleSignUpFormUnmounted, handleLogi
                         <AiOutlineTwitter aria-hidden={true} className='signupoptions__icon signupoptions__icon--twitter' />
                         Sign Up With Twitter
                     </a>
-                    <a href={baseUrl + '/auth/linkedin'} className='signupoptions__button signupoptions__button--linkedin'>
+                    <a className='signupoptions__button signupoptions__button--linkedin'>
                         <div>
                             <FaLinkedinIn aria-hidden={true} className='signupoptions__icon signupoptions__icon--linkedin' />
                         </div>
@@ -85,7 +86,7 @@ const SignUpOptions: FC<Props> = ({ block, hadnleSignUpFormUnmounted, handleLogi
                 </div>
                 <p className='authform__text authform__text--white' style={{ textAlign: 'center', margin: '30px 0 50px 0' }}>
                     Already have an account?
-                    <span role='button' aria-label='open login form' tabIndex={0} onClick={handleLoginFormMounted} onKeyDown={(e) => onkeyDown(e, 'Enter', handleLoginFormMounted)}
+                    <span role='button' aria-label='open login form' tabIndex={0} onClick={handleLoginFormMounted} onKeyDown={(e) => onkeyDownHandler(e, 'Enter', handleLoginFormMounted)}
                         className='authform__text--green-alien-light authform__text--link' style={{ marginLeft: '5px' }} >Login</span>
                 </p>
             </section>

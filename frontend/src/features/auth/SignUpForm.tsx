@@ -13,7 +13,7 @@ import { useCreateUserMutation } from '@features/user/userApiSlice';
 import { useInput } from '@common/hooks/useInput';
 import SignUpSuccess from '@features/auth/SignUpSuccess';
 import SignUpOptions from './SignUpOptions';
-import { onkeyDown } from '@common/utilities/onKeyDown';
+import { onkeyDownHandler } from '@common/utilities/onKeyDownHandler';
 
 const focusTrapOptions: Options = {
     checkCanFocusTrap: (trapContainers) => {
@@ -28,7 +28,8 @@ const focusTrapOptions: Options = {
     },
     initialFocus: false,
     returnFocusOnDeactivate: false,
-    escapeDeactivates: false
+    escapeDeactivates: false,
+    allowOutsideClick: true
 };
 
 const SignUpForm: FC = () => {
@@ -262,7 +263,7 @@ const SignUpForm: FC = () => {
                             )}
                             <p className='authform__text authform__text--white' style={{ textAlign: 'center', margin: '30px 0 50px 0' }}>
                                 Already have an account?
-                                <span role='button' aria-label='open login form' tabIndex={0} onClick={handleLoginFormMounted} onKeyDown={(e) => onkeyDown(e, 'Enter', handleLoginFormMounted)}
+                                <span role='button' aria-label='open login form' tabIndex={0} onClick={handleLoginFormMounted} onKeyDown={(e) => onkeyDownHandler(e, 'Enter', handleLoginFormMounted)}
                                     className='authform__text--green-alien-light authform__text--link' style={{ marginLeft: '5px' }}>Login</span>
                             </p>
                         </form>

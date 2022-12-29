@@ -1,6 +1,6 @@
 import { apiSlice } from '@app/apiSlice';
 import { setUserInfo, setCredantial, logout } from '@features/auth/authSlice';
-import { User, LoginResponse, RefreshResponse } from '@common/utilities/types';
+import { User, LoginResponse, RefreshResponse, OAuthBody } from '@common/utilities/types';
 
 export const authApiSlice = apiSlice.injectEndpoints({
     endpoints: builder => ({

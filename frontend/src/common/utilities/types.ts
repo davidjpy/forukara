@@ -8,6 +8,11 @@ export interface RefreshResponse {
     id: string;
 }
 
+export interface OAuthBody {
+    url: string;
+    challenge: string;
+}
+
 export type User = {
     code?: string;
     id?: string | null;

@@ -4,7 +4,7 @@ import FocusTrap from 'focus-trap-react';
 import { IoMdClose } from 'react-icons/io';
 
 import { useResendEmailMutation } from '@features/user/userApiSlice';
-import { onkeyDown } from '@common/utilities/onKeyDown';
+import { onkeyDownHandler } from '@common/utilities/onKeyDownHandler';
 
 type Props = {
     emailCopy: string;
@@ -28,7 +28,8 @@ const focusTrapOptions: Options = {
     },
     initialFocus: false,
     returnFocusOnDeactivate: false,
-    escapeDeactivates: false
+    escapeDeactivates: false,
+    allowOutsideClick: true
 };
 
 const counterTime = 30;
@@ -87,7 +88,7 @@ const SignUpSuccess: FC<Props> = ({ emailCopy, resendEmailErr, setResendEmailErr
                 <p id='resend-email' className='authform__text authform__text--white'>If the email is not reaching you. To get another email, click {counterRef?.current === counterTime ?
                     (
                         <span role='button' title='Get Another Verification Email' aria-label='get another verification email' tabIndex={0} 
-                            onClick={handleResendEmail} onKeyDown={(e) => onkeyDown(e, 'Enter', handleResendEmail)}
+                            onClick={handleResendEmail} onKeyDown={(e) => onkeyDownHandler(e, 'Enter', handleResendEmail)}
                             className='authform__text authform__text--green-alien-light authform__text--link'>here</span>
                     ) : (
                         <span className='authform__text authform__text--gray'>here ({counterRef?.current})</span>

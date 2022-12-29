@@ -39,37 +39,38 @@ const SplashPage: FC = () => {
     }
 
     useEffect(() => {
-        function changeText() {
-            let optionIndex: number = 0;
-            let charIndex: number = 0;
-            let increment: boolean = true;
+        let optionIndex: number = 0;
+        let charIndex: number = 0;
+        let increment: boolean = true;
 
-            setInterval(() => {
-                if (dynamicTxtRef.current) {
-                    dynamicTxtRef.current.textContent = textOptions[optionIndex].slice(0, charIndex);
+        const typingInterval = setInterval(() => {
+            if (dynamicTxtRef.current) {
+                dynamicTxtRef.current.textContent = textOptions[optionIndex].slice(0, charIndex);
 
-                    if (charIndex === textOptions[optionIndex].length) {
-                        setTimeout(() => {
-                            increment = false;
-                        }, 400);
-                    } else if (charIndex === 0 && !increment) {
-                        optionIndex++;
-                        increment = true;
-                    }
-
-                    if (increment) {
-                        charIndex++;
-                    } else {
-                        charIndex--;
-                    }
-
-                    if (optionIndex > textOptions.length - 1) {
-                        optionIndex = 0;
-                    }
+                if (charIndex === textOptions[optionIndex].length) {
+                    setTimeout(() => {
+                        increment = false;
+                    }, 400);
+                } else if (charIndex === 0 && !increment) {
+                    optionIndex++;
+                    increment = true;
                 }
-            }, 80);
+
+                if (increment) {
+                    charIndex++;
+                } else {
+                    charIndex--;
+                }
+
+                if (optionIndex > textOptions.length - 1) {
+                    optionIndex = 0;
+                }
+            }
+        }, 80);
+
+        return () => {
+            clearInterval(typingInterval);
         }
-        changeText();
     }, []);
 
     return (

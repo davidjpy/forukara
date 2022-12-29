@@ -13,7 +13,7 @@ import { useClickOutside } from '@common/hooks/useClickOutside';
 import { toggleLoginForm, toggleSignUpForm } from '@features/auth/authSlice';
 import { useLoginMutation } from '@features/auth/authApiSlice';
 import { useInput } from '@common/hooks/useInput';
-import { onkeyDown } from '@common/utilities/onKeyDown';
+import { onkeyDownHandler } from '@common/utilities/onKeyDownHandler';
 import { baseUrl } from '@app/apiSlice';
 
 const focusTrapOptions: Options = {
@@ -205,7 +205,7 @@ const LoginForm: FC = () => {
                     </div>
                     <p className='authform__text authform__text--white' style={{ textAlign: 'center' }}>
                         Don't have an account?
-                        <span role='button' aria-label='open signup form' tabIndex={0} onClick={handleSignUpFormMounted} onKeyDown={(e) => onkeyDown(e, 'Enter', handleSignUpFormMounted)}
+                        <span role='button' aria-label='open signup form' tabIndex={0} onClick={handleSignUpFormMounted} onKeyDown={(e) => onkeyDownHandler(e, 'Enter', handleSignUpFormMounted)}
                             className='authform__text--green-alien-light authform__text--link' style={{ marginLeft: '5px' }} >Sign up</span>
                     </p>
                 </section>

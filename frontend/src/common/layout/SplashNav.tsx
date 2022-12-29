@@ -42,12 +42,12 @@ const SplashNav: FC = () => {
                     </header>
                     {user.id ? (
                         <div className='splashnav__wrapper'>
-                            <button onClick={handleLogout} className='splashnav__button splashnav__button--text'>LOGOUT</button>
+                            <button onClick={handleLogout} className='splashnav__button splashnav__button--text'>Logout</button>
                             <p role='button' onClick={handleNavigateProfile} className='splashnav__button splashnav__button--text' style={{ textAlign: 'center' }}>{user.username}</p>
                         </div>
                     ) : (
                         <div className='splashnav__wrapper'>
-                            <button onClick={handleLoginFormMounted} className='splashnav__button splashnav__button--text'>LOGIN</button>
+                            <button onClick={handleLoginFormMounted} className='splashnav__button splashnav__button--text'>Login</button>
                             <button onClick={handleSignUpFormMounted} className='splashnav__button splashnav__button--slide'>&nbsp;</button>
                         </div>
                     )}

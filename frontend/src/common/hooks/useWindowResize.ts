@@ -1,4 +1,4 @@
-import { RefObject, useLayoutEffect } from 'react';
+import { RefObject, useEffect } from 'react';
 
 /**
  * @param {RefObject<HTMLDivElement>} node
@@ -9,15 +9,17 @@ import { RefObject, useLayoutEffect } from 'react';
 export const useWindowResize = (node: RefObject<HTMLDivElement>): void => {
 
     // Define resize event listener whenever the component mounted or RefObject changes
-    useLayoutEffect(() => {
+    useEffect(() => {
         const handleResize = (): void => {
             if (node.current) {
                 node.current.style.height = `${window.visualViewport?.height}px`;
             }
         }
+
         handleResize();
+
         window.addEventListener('resize', handleResize);
-        
+
         // Remove resize event listener when component unmounted
         return () => {
             window.removeEventListener('resize', handleResize);

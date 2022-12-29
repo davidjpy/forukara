@@ -29,6 +29,5 @@ export const useGetUser = (): any => {
         }
     }, []);
 
-
     return [user, isLoading, isFetching, isSuccess];
 }

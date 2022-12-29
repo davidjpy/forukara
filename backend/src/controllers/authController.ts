@@ -167,7 +167,7 @@ const logout = (req: Request, res: Response): any => {
 };
 
 // Google OAuth handler
-const googleOAuth = (req: Request, res: Response) => {
+const googleOAuth = (req: Request, res: Response): void => {
     const rootUrl = 'https://accounts.google.com/o/oauth2/v2/auth';
 
     const options = {
@@ -176,6 +176,8 @@ const googleOAuth = (req: Request, res: Response) => {
         access_type: 'offline',
         response_type: 'code',
         prompt: 'consent',
+        // code_challenge: challenge,
+        // code_challenge_method: 'S256',
         scope: [
             'https://www.googleapis.com/auth/userinfo.profile',
             'https://www.googleapis.com/auth/userinfo.email',
