@@ -67,22 +67,22 @@ const SignUpOptions: FC<Props> = ({ block, hadnleSignUpFormUnmounted, handleLogi
                 </div>
                 <div className='signupoptions__divider'><p>or</p></div>
                 <div className='signupoptions__wrapper'>
-                    <a onClick={() => oAuthPKCEHandler('/auth/google', 82)} className='signupoptions__button signupoptions__button--google'>
+                    <button onClick={() => oAuthPKCEHandler('/auth/google', 82)} className='signupoptions__button signupoptions__button--google'>
                         <div>
                             <FcGoogle aria-hidden={true} className='signupoptions__icon' />
                         </div>
                         Sign up with Google
-                    </a>
-                    <a tabIndex={0} className='signupoptions__button signupoptions__button--twitter'>
+                    </button>
+                    <button className='signupoptions__button signupoptions__button--twitter'>
                         <AiOutlineTwitter aria-hidden={true} className='signupoptions__icon signupoptions__icon--twitter' />
                         Sign Up With Twitter
-                    </a>
-                    <a className='signupoptions__button signupoptions__button--linkedin'>
+                    </button>
+                    <button className='signupoptions__button signupoptions__button--linkedin'>
                         <div>
                             <FaLinkedinIn aria-hidden={true} className='signupoptions__icon signupoptions__icon--linkedin' />
                         </div>
                         Sign Up With Linkedin
-                    </a>
+                    </button>
                 </div>
                 <p className='authform__text authform__text--white' style={{ textAlign: 'center', margin: '30px 0 50px 0' }}>
                     Already have an account?
