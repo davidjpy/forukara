@@ -14,7 +14,6 @@ export interface OAuthBody {
 }
 
 export type User = {
-    code?: string;
     id?: string | null;
     username?: string | null;
     email?: string | null;
@@ -27,6 +26,12 @@ export type User = {
     connections?: Array<string> | null;
     status?: 'Pending' | 'Active';
     createdAt?: string | null;
+}
+
+export type OAuthLogin = {
+    authorizationCode?: string;
+    codeVerifier?: string;
+    codeChallenge?: string;
 }
 
 export type Pages = 'splash' | 'home' | 'profile' | 'notifications' | 'settings' | 'help' | 'feedback' | 'contact' | null;

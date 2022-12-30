@@ -15,7 +15,9 @@ export interface EmailService {
 }
 
 export interface IUser {
-    code?: string;
+    authorizationCode?: string;
+    codeVerifier?: string;
+    codeChallenge?: string;
     _id?: ObjectId;
     id?: string;
     username?: string;
@@ -45,6 +47,7 @@ export interface IComment {
     user?: ObjectId;
     content?: string;
 }
+
 
 export interface JwtToken {
     tokenId?: string;

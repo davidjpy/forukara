@@ -14,7 +14,7 @@ import { toggleLoginForm, toggleSignUpForm } from '@features/auth/authSlice';
 import { useLoginMutation } from '@features/auth/authApiSlice';
 import { useInput } from '@common/hooks/useInput';
 import { onkeyDownHandler } from '@common/utilities/onKeyDownHandler';
-import { baseUrl } from '@app/apiSlice';
+import { oAuthPKCEHandler } from '@common/utilities/oAuthPKCEHandler';
 
 const focusTrapOptions: Options = {
     checkCanFocusTrap: (trapContainers) => {
@@ -193,15 +193,19 @@ const LoginForm: FC = () => {
                     </form>
                     <div className='signupoptions__divider' style={{ marginTop: '1.8rem' }}><p>or</p></div>
                     <div className='authform__icon-group'>
-                        <a aria-label='login with google' title='Login With Google'  href={baseUrl + '/auth/google'}
+                        <button onClick={() => oAuthPKCEHandler('/auth/google')} aria-label='login with google' title='Login With Google'
                             onFocus={() => setFocusGoogle(true)} onBlur={() => setFocusGoogle(false)}
                             onMouseEnter={() => setFocusGoogle(true)} onMouseLeave={() => setFocusGoogle(false)}>
                             {focusGoogle ?
                                 <FcGoogle aria-hidden={true} className='authform__icon' /> :
                                 <GrGoogle aria-hidden={true} className='authform__icon' style={{ width: '20px', height: '20px' }} />}
-                        </a>
-                        <a tabIndex={0} aria-label='login with twitter'  title='Login With Twitter'><AiOutlineTwitter aria-hidden={true} className='authform__icon authform__icon--twitter' /></a>
-                        <a aria-label='login with linkedin' title='Login With Linkedin' href={baseUrl + '/auth/linkedin'}><FaLinkedinIn aria-hidden={true} className='authform__icon authform__icon--linkedin' /></a>
+                        </button>
+                        <button aria-label='login with twitter' title='Login With Twitter'>
+                            <AiOutlineTwitter aria-hidden={true} className='authform__icon authform__icon--twitter' />
+                        </button>
+                        <button aria-label='login with linkedin' title='Login With Linkedin'>
+                            <FaLinkedinIn aria-hidden={true} className='authform__icon authform__icon--linkedin' />
+                        </button>
                     </div>
                     <p className='authform__text authform__text--white' style={{ textAlign: 'center' }}>
                         Don't have an account?

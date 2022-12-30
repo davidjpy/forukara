@@ -4,43 +4,22 @@ import jwt, { Secret } from 'jsonwebtoken';
 import { Request, Response } from 'express';
 
 import User from '@models/User';
-import { getOAuthCredential } from '@utilities/getOAuthCredential';
+import { oAuthLoginHandler } from '@utilities/oAuthLoginHandler';
 import { IUser, ErrorResponse, ErrorCode, JwtToken } from '@utilities/types';
-
-type OAuthProfile = {
-    email: string;
-    name: string;
-    picture: string;
-};
 
 // Login a user
 const login = asyncHandler(async (req: Request, res: Response): Promise<any> => {
-    const { code, username, password }: IUser = req.body;
+    const { authorizationCode, codeVerifier, username, password }: IUser = req.body;
     let user;
 
     // Login user with OAuth 2.0 code
-    if (code) {
-        // Get Goolge tokens
-        const authResults = await getOAuthCredential(code);
+    if (authorizationCode && codeVerifier) {
 
-        // Get user info from Google token
-        const profile = jwt.decode(authResults.id_token) as OAuthProfile;
-
-        // Check for any matches for Google email
-        user = await User.findOne({ email: profile.email }).lean().exec();
-        
-        // Create user with provided email
-        if (!user) {
-            const userObj: IUser = {
-                username: profile.name.trim(),
-                email: profile.email,
-                avatar: profile.picture,
-                status: 'Active',
-                expiredIn: null
-            };
-
-            user = await User.create(userObj);
+        if (!authorizationCode || !codeVerifier) {
+            return res.status(403).json({ message: 'Authorization code or code verifier missing' });
         }
+
+        user = await oAuthLoginHandler(authorizationCode, codeVerifier);
     }
     
     // Login user with local account
@@ -168,6 +147,8 @@ const logout = (req: Request, res: Response): any => {
 
 // Google OAuth handler
 const googleOAuth = (req: Request, res: Response): void => {
+
+    const challenge = req.query.challenge as string;
     const rootUrl = 'https://accounts.google.com/o/oauth2/v2/auth';
 
     const options = {
@@ -176,8 +157,9 @@ const googleOAuth = (req: Request, res: Response): void => {
         access_type: 'offline',
         response_type: 'code',
         prompt: 'consent',
-        // code_challenge: challenge,
-        // code_challenge_method: 'S256',
+        code_challenge: challenge,
+        // code_challenge: 'YSxP-kzms1Vrh9LVXdYn4cBBZlx5ydmflebVe_Y7p6E',
+        code_challenge_method: 'S256',
         scope: [
             'https://www.googleapis.com/auth/userinfo.profile',
             'https://www.googleapis.com/auth/userinfo.email',

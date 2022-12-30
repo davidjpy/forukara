@@ -1,10 +1,10 @@
 import { apiSlice } from '@app/apiSlice';
 import { setUserInfo, setCredantial, logout } from '@features/auth/authSlice';
-import { User, LoginResponse, RefreshResponse, OAuthBody } from '@common/utilities/types';
+import { User, LoginResponse, RefreshResponse, OAuthLogin } from '@common/utilities/types';
 
 export const authApiSlice = apiSlice.injectEndpoints({
     endpoints: builder => ({
-        login: builder.mutation<LoginResponse, Partial<User>>({
+        login: builder.mutation<LoginResponse, Partial<User> | Partial<OAuthLogin>>({
             query: ({ ...data }) => ({
                 url: '/auth/login',
                 method: 'POST',
@@ -26,7 +26,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
             }
         }),
 
-        refresh: builder.query<RefreshResponse, void>({
+        refresh: builder.query<RefreshResponse, { sessionId: number }>({
             query: () => ({
                 url: '/auth/refresh',
                 method: 'GET',
@@ -57,8 +57,8 @@ export const authApiSlice = apiSlice.injectEndpoints({
             async onQueryStarted(arg, { dispatch, queryFulfilled }) {
                 try {
                     await queryFulfilled;
-                    dispatch(logout());
                     dispatch(authApiSlice.util.resetApiState());
+                    dispatch(logout());
                 } catch (err) {
                     console.error(err);
                 }

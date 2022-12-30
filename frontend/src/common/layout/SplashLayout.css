@@ -394,7 +394,7 @@
     margin: 1.8rem 0;
 }
 
-.authform__icon-group a {
+.authform__icon-group button {
     display: flex;
     background-color: var(--gray-deep);
     align-items: center;
@@ -406,45 +406,45 @@
     cursor: pointer;
 }
 
-.authform__icon-group a:hover {
+.authform__icon-group button:hover {
     background-color: white;
 }
 
-.authform__icon-group a:nth-child(2):hover {
+.authform__icon-group button:nth-child(2):hover {
     background-color: rgb(5, 132, 206);
 }
 
-.authform__icon-group a:nth-child(2):hover .authform__icon--twitter {
+.authform__icon-group button:nth-child(2):hover .authform__icon--twitter {
     color: white;
 }
 
-.authform__icon-group a:last-child:hover {
+.authform__icon-group button:last-child:hover {
     background-color: rgb(60, 90, 154);
 }
 
-.authform__icon-group a:last-child:hover .authform__icon--linkedin {
+.authform__icon-group button:last-child:hover .authform__icon--linkedin {
     color: white;
 }
 
-.authform__icon-group a:focus {
+.authform__icon-group button:focus {
     outline: var(--green-alien-focus);
     outline-offset: 2px;
     background-color: white;
 }
 
-.authform__icon-group a:nth-child(2):focus {
+.authform__icon-group button:nth-child(2):focus {
     background-color: rgb(5, 132, 206);
 }
 
-.authform__icon-group a:last-child:focus {
+.authform__icon-group button:last-child:focus {
     background-color: rgb(60, 90, 154);
 }
 
-.authform__icon-group a:focus .authform__icon--twitter {
+.authform__icon-group button:focus .authform__icon--twitter {
     color: white;
 }
 
-.authform__icon-group a:focus .authform__icon--linkedin {
+.authform__icon-group button:focus .authform__icon--linkedin {
     color: white;
 }
 
@@ -454,6 +454,10 @@
     color: var(--black-light);
 }
 
+.authform__icon--linkedin {
+    height: 22px;
+    width: 22px;
+}
 
 .authform header h1 {
     font-size: 1.4rem;

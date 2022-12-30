@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { useAppSelector } from '@app/hooks';
@@ -8,10 +8,13 @@ import { useGetAccountByIdQuery } from '@features/user/userApiSlice';
 
 export const useGetUser = (): any => {
 
+    const timestampRef = useRef<number>(Date.now());
     const [searchParams, setSearchParams] = useSearchParams();
     const [login,] = useLoginMutation();
     const user = useAppSelector(state => state.auth.user);
-    useRefreshQuery();
+
+    
+    useRefreshQuery({ sessionId: timestampRef.current });
     const { isLoading, isFetching, isSuccess } = useGetAccountByIdQuery(user.id as string, { skip: !user.id });
 
     // Login user if the url contain the login token returned by OAuth
@@ -19,9 +22,14 @@ export const useGetUser = (): any => {
         let code: (string | null) = searchParams.get('code');
         
         const loginUser = async (code: string): Promise<void> => {
-            console.log('OAuth login')
             setSearchParams({});
-            await login({ code: code });
+            
+            await login({ 
+                authorizationCode: code,  
+                codeVerifier: sessionStorage.getItem('verifier') as string
+            });
+
+            sessionStorage.removeItem('verifier');
         }
 
         if (!user.id && code) {
