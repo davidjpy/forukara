@@ -1,9 +1,9 @@
 import { FC, useState, FormEvent, useEffect, useCallback, useRef } from 'react';
-import { FaUser, FaLinkedinIn } from 'react-icons/fa';
+import { FaLinkedinIn } from 'react-icons/fa';
 import { RiLockPasswordFill } from 'react-icons/ri';
 import FocusTrap from 'focus-trap-react';
 import { Options } from 'focus-trap';
-import { IoMdClose } from 'react-icons/io';
+import { IoMdClose, IoMdMail } from 'react-icons/io';
 import { FcGoogle } from 'react-icons/fc';
 import { AiOutlineTwitter } from 'react-icons/ai';
 import { GrGoogle } from 'react-icons/gr';
@@ -41,20 +41,20 @@ const LoginForm: FC = () => {
     const overlayRef = useRef<HTMLDivElement>(null);
     const loginFormMounted = useAppSelector((state) => state.auth.loginFormMounted);
     const [login, loginResult] = useLoginMutation();
-    const [userIdErr, setUserIdErr] = useState<string>('');
+    const [emailErr, setEmailErr] = useState<string>('');
     const [passwordErr, setPasswordErr] = useState<string>('');
     const [err, setErr] = useState<string>('');
     const [connectionErr, setConnectionErr] = useState<string>('');
-    const [userId, handleChangeUserId, resetUserId] = useInput('', [setUserIdErr, setErr, setConnectionErr]);
+    const [email, handleChangeEmail, resetEmail] = useInput('', [setEmailErr, setErr, setConnectionErr]);
     const [password, handleChangePassword, resetPassword] = useInput('', [setPasswordErr, setErr, setConnectionErr]);
     const [focusGoogle, setFocusGoogle] = useState<boolean>(false);
 
-    const submitNotAllowed: boolean = Boolean(err || userIdErr || passwordErr);
+    const submitNotAllowed: boolean = Boolean(err || emailErr || passwordErr);
 
     const handleResetInput = (): void => {
-        resetUserId();
+        resetEmail();
         resetPassword();
-        setUserIdErr('');
+        setEmailErr('');
         setPasswordErr('');
         setErr('');
         setConnectionErr('');
@@ -73,8 +73,11 @@ const LoginForm: FC = () => {
     const handleSubmitForm = async (e: FormEvent<HTMLFormElement>): Promise<any> => {
         e.preventDefault();
         await login({
-            username: userId,
-            password: password
+            auth: 'id',
+            body: {
+                email: email,
+                password: password
+            }
         });
     }
 
@@ -97,8 +100,8 @@ const LoginForm: FC = () => {
                         case 0:
                             setErr(message[i].error);
                             break;
-                        case 1:
-                            setUserIdErr(message[i].error);
+                        case 2:
+                            setEmailErr(message[i].error);
                             break;
                         case 3:
                             setPasswordErr(message[i].error);
@@ -137,13 +140,13 @@ const LoginForm: FC = () => {
 
     const inputFields = [
         {
-            id: 'login-username',
-            text: 'User ID',
-            icon: <FaUser aria-hidden={true} style={{ fontSize: '14px', marginBottom: '1px' }} />,
-            value: userId,
-            onChange: handleChangeUserId,
-            err: userIdErr,
-            type: 'text'
+            id: 'login-email',
+            text: 'Email',
+            icon: <IoMdMail aria-hidden={true} style={{ fontSize: '14px', marginBottom: '1px' }} />,
+            value: email,
+            onChange: handleChangeEmail,
+            err: emailErr,
+            type: 'email'
         },
         {
             id: 'login-password',
@@ -152,7 +155,7 @@ const LoginForm: FC = () => {
             value: password,
             onChange: handleChangePassword,
             err: passwordErr,
-            type: 'text'
+            type: 'password'
         }
     ];
 
@@ -172,7 +175,7 @@ const LoginForm: FC = () => {
                     <form onSubmit={handleSubmitForm} className='authform__form'>
                         {inputFields.map((item) => {
                             return (
-                                <div key={item.id} style={{ margin: item.id === 'login-username' ? '2rem 0 0 0' : item.err && '1rem 0 0 0' }}>
+                                <div key={item.id} style={{ margin: item.id === 'login-email' ? '2rem 0 0 0' : item.err && '1rem 0 0 0' }}>
                                     <input id={item.id} value={item.value} onChange={item.onChange} type={item.type} placeholder=' '
                                         onKeyDown={(e) => { e.key === 'Enter' && e.preventDefault(); }} className='authform__input' />
                                     <label htmlFor={item.id} aria-label={item.text} className='authform__placeholder'>{item.icon} {item.text + '*'}</label>

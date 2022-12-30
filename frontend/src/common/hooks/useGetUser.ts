@@ -13,20 +13,21 @@ export const useGetUser = (): any => {
     const [login,] = useLoginMutation();
     const user = useAppSelector(state => state.auth.user);
 
-    
+
     useRefreshQuery({ sessionId: timestampRef.current });
     const { isLoading, isFetching, isSuccess } = useGetAccountByIdQuery(user.id as string, { skip: !user.id });
 
     // Login user if the url contain the login token returned by OAuth
     useEffect(() => {
-        let code: (string | null) = searchParams.get('code');
-        
+        const code = searchParams.get('code');
+
         const loginUser = async (code: string): Promise<void> => {
-            setSearchParams({});
-            
-            await login({ 
-                authorizationCode: code,  
-                codeVerifier: sessionStorage.getItem('verifier') as string
+            await login({
+                auth: 'oauth',
+                body: {
+                    authorizationCode: code,
+                    codeVerifier: sessionStorage.getItem('verifier') as string
+                }
             });
 
             sessionStorage.removeItem('verifier');
@@ -34,6 +35,8 @@ export const useGetUser = (): any => {
 
         if (!user.id && code) {
             loginUser(code);
+            searchParams.delete('code');
+            setSearchParams({});
         }
     }, []);
 

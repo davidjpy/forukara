@@ -1,14 +1,14 @@
 import { apiSlice } from '@app/apiSlice';
 import { setUserInfo, setCredantial, logout } from '@features/auth/authSlice';
-import { User, LoginResponse, RefreshResponse, OAuthLogin } from '@common/utilities/types';
+import { User, LoginResponse, RefreshResponse, UserLogin } from '@common/utilities/types';
 
 export const authApiSlice = apiSlice.injectEndpoints({
     endpoints: builder => ({
-        login: builder.mutation<LoginResponse, Partial<User> | Partial<OAuthLogin>>({
-            query: ({ ...data }) => ({
-                url: '/auth/login',
+        login: builder.mutation<LoginResponse, UserLogin>({
+            query: (data) => ({
+                url: `/auth/login?auth=${data.auth}`,
                 method: 'POST',
-                body: data,
+                body: data.body,
                 validateStatus: (response, result) =>
                     (response.status === 200 || response.status === 201) && !result.isError
             }),

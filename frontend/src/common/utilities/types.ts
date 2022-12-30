@@ -28,10 +28,15 @@ export type User = {
     createdAt?: string | null;
 }
 
-export type OAuthLogin = {
-    authorizationCode?: string;
-    codeVerifier?: string;
-    codeChallenge?: string;
+export type UserLogin = {
+    auth: 'id' | 'oauth',
+    body: {
+        email?: string;
+        password?: string;
+        authorizationCode?: string;
+        codeVerifier?: string;
+        codeChallenge?: string;
+    }
 }
 
 export type Pages = 'splash' | 'home' | 'profile' | 'notifications' | 'settings' | 'help' | 'feedback' | 'contact' | null;

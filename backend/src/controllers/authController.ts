@@ -5,15 +5,17 @@ import { Request, Response } from 'express';
 
 import User from '@models/User';
 import { oAuthLoginHandler } from '@utilities/oAuthLoginHandler';
-import { IUser, ErrorResponse, ErrorCode, JwtToken } from '@utilities/types';
+import { IUser, ErrorResponse, ErrorCode, JwtToken, OAuthLogin } from '@utilities/types';
 
 // Login a user
 const login = asyncHandler(async (req: Request, res: Response): Promise<any> => {
-    const { authorizationCode, codeVerifier, username, password }: IUser = req.body;
+    const auth = req.query.auth as ('id' | 'oauth');
     let user;
 
     // Login user with OAuth 2.0 code
-    if (authorizationCode && codeVerifier) {
+    if (auth === 'oauth') {
+
+        const { authorizationCode, codeVerifier }: OAuthLogin = req.body;
 
         if (!authorizationCode || !codeVerifier) {
             return res.status(403).json({ message: 'Authorization code or code verifier missing' });
@@ -24,11 +26,12 @@ const login = asyncHandler(async (req: Request, res: Response): Promise<any> => 
     
     // Login user with local account
     else {
+        const { email, password }: IUser = req.body;
         let errorCodes: Array<ErrorResponse> = [];
 
-        // Case 1: Username missing
-        if (!username) {
-            errorCodes.push({ error: 'Username is required', code: ErrorCode.UsernameErr });
+        // Case 1: Email missing
+        if (!email) {
+            errorCodes.push({ error: 'Email is required', code: ErrorCode.EmailErr });
         }
 
         // Case 2: Password missing
@@ -40,11 +43,11 @@ const login = asyncHandler(async (req: Request, res: Response): Promise<any> => 
             return res.status(400).json({ message: errorCodes });
         }
 
-        user = await User.findOne({ username }).lean().exec();
+        user = await User.findOne({ email }).lean().exec();
 
         // Case 3: User not found
         if (!user) {
-            return res.status(404).json({ message: [{ error: `The Forukara account doesn't exist`, code: ErrorCode.UsernameErr }] });
+            return res.status(404).json({ message: [{ error: `The Forukara account doesn't exist`, code: ErrorCode.EmailErr }] });
         }
 
         // Case 4: User not verified
@@ -64,7 +67,7 @@ const login = asyncHandler(async (req: Request, res: Response): Promise<any> => 
         return res.status(404).json({ message: [{ error: `The Forukara account doesn't exist`, code: ErrorCode.UsernameErr }] });
     }
 
-    const accessTokenPayload: JwtToken = { tokenId: user._id.toString(), tokenUsername: username, tokenEmail: user.email };
+    const accessTokenPayload: JwtToken = { tokenId: user._id.toString(), tokenUsername: user.username, tokenEmail: user.email };
     const refreshTokenPayload: JwtToken = { tokenId: user._id.toString() };
 
     const accessToken = jwt.sign(accessTokenPayload, process.env.ACCESS_TOKEN_SECRET as Secret, { expiresIn: '1d' });
@@ -151,6 +154,7 @@ const googleOAuth = (req: Request, res: Response): void => {
     const challenge = req.query.challenge as string;
     const rootUrl = 'https://accounts.google.com/o/oauth2/v2/auth';
 
+    // Google OAuth authorization endpoint query params
     const options = {
         redirect_uri: process.env.CLIENT_HOST as string,
         client_id: process.env.GOOGLE_CLIENT_ID as string,
@@ -158,7 +162,6 @@ const googleOAuth = (req: Request, res: Response): void => {
         response_type: 'code',
         prompt: 'consent',
         code_challenge: challenge,
-        // code_challenge: 'YSxP-kzms1Vrh9LVXdYn4cBBZlx5ydmflebVe_Y7p6E',
         code_challenge_method: 'S256',
         scope: [
             'https://www.googleapis.com/auth/userinfo.profile',

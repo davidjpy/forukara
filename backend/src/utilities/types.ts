@@ -15,9 +15,6 @@ export interface EmailService {
 }
 
 export interface IUser {
-    authorizationCode?: string;
-    codeVerifier?: string;
-    codeChallenge?: string;
     _id?: ObjectId;
     id?: string;
     username?: string;
@@ -53,6 +50,12 @@ export interface JwtToken {
     tokenId?: string;
     tokenUsername?: string;
     tokenEmail?: string;
+}
+
+export interface OAuthLogin {
+    authorizationCode?: string;
+    codeVerifier?: string;
+    codeChallenge?: string;
 }
 
 export interface ErrorResponse {
