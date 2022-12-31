@@ -11,9 +11,13 @@ const Layout: FC = () => {
         <>
             <Nav />
             <div className='layout__wrapper'>
-                <LeftMenu />
+                <div className='layout__left'>
+                    <LeftMenu />
+                </div>
                 <Outlet />
-                <RightMenu />
+                <div className='layout__right'>
+                    <RightMenu />
+                </div>
             </div>
         </>
     );

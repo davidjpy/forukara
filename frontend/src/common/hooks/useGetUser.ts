@@ -13,14 +13,21 @@ export const useGetUser = (): any => {
     const [login,] = useLoginMutation();
     const user = useAppSelector(state => state.auth.user);
 
-
     useRefreshQuery({ sessionId: timestampRef.current });
     const { isLoading, isFetching, isSuccess } = useGetAccountByIdQuery(user.id as string, { skip: !user.id });
 
     // Login user if the url contain the login token returned by OAuth
     useEffect(() => {
-        const code = searchParams.get('code');
+        // Remove all query params and all client identifiers in session storage
+        const resetState = (): void => {
+            searchParams.delete('code');
+            searchParams.delete('state');
+            sessionStorage.removeItem('verifier');
+            sessionStorage.removeItem('state');
+            setSearchParams({});
+        }
 
+        // Login user with authorization code and code verifier
         const loginUser = async (code: string): Promise<void> => {
             await login({
                 auth: 'oauth',
@@ -29,14 +36,21 @@ export const useGetUser = (): any => {
                     codeVerifier: sessionStorage.getItem('verifier') as string
                 }
             });
-
-            sessionStorage.removeItem('verifier');
         }
 
-        if (!user.id && code) {
+        let sameClient: boolean = true;
+        const code = searchParams.get('code');
+        const state = searchParams.get('state');
+
+        // Check for any potential CSFR attack
+        if (state && state !== sessionStorage.getItem('state')) {
+            sameClient = false;
+            resetState();
+        }
+
+        if (!user.id && code && sameClient) {
             loginUser(code);
-            searchParams.delete('code');
-            setSearchParams({});
+            resetState();
         }
     }, []);
 

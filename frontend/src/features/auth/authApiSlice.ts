@@ -1,6 +1,6 @@
 import { apiSlice } from '@app/apiSlice';
 import { setUserInfo, setCredantial, logout } from '@features/auth/authSlice';
-import { User, LoginResponse, RefreshResponse, UserLogin } from '@common/utilities/types';
+import { LoginResponse, RefreshResponse, UserLogin } from '@common/utilities/types';
 
 export const authApiSlice = apiSlice.injectEndpoints({
     endpoints: builder => ({
@@ -57,7 +57,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
             async onQueryStarted(arg, { dispatch, queryFulfilled }) {
                 try {
                     await queryFulfilled;
-                    dispatch(authApiSlice.util.resetApiState());
+                    dispatch(apiSlice.util.resetApiState());
                     dispatch(logout());
                 } catch (err) {
                     console.error(err);

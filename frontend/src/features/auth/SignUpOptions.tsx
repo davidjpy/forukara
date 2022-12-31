@@ -67,7 +67,7 @@ const SignUpOptions: FC<Props> = ({ block, hadnleSignUpFormUnmounted, handleLogi
                 </div>
                 <div className='signupoptions__divider'><p>or</p></div>
                 <div className='signupoptions__wrapper'>
-                    <button onClick={() => oAuthPKCEHandler('/auth/google')} className='signupoptions__button signupoptions__button--google'>
+                    <button onClick={() => oAuthPKCEHandler('google')} className='signupoptions__button signupoptions__button--google'>
                         <div>
                             <FcGoogle aria-hidden={true} className='signupoptions__icon' />
                         </div>
@@ -77,7 +77,7 @@ const SignUpOptions: FC<Props> = ({ block, hadnleSignUpFormUnmounted, handleLogi
                         <AiOutlineTwitter aria-hidden={true} className='signupoptions__icon signupoptions__icon--twitter' />
                         Sign Up With Twitter
                     </button>
-                    <button className='signupoptions__button signupoptions__button--linkedin'>
+                    <button onClick={() => oAuthPKCEHandler('linkedin')} className='signupoptions__button signupoptions__button--linkedin'>
                         <div>
                             <FaLinkedinIn aria-hidden={true} className='signupoptions__icon signupoptions__icon--linkedin' />
                         </div>

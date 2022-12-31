@@ -158,9 +158,7 @@ const googleOAuth = (req: Request, res: Response): void => {
     const options = {
         redirect_uri: process.env.CLIENT_HOST as string,
         client_id: process.env.GOOGLE_CLIENT_ID as string,
-        access_type: 'offline',
         response_type: 'code',
-        prompt: 'consent',
         code_challenge: challenge,
         code_challenge_method: 'S256',
         scope: [
@@ -174,9 +172,36 @@ const googleOAuth = (req: Request, res: Response): void => {
     res.redirect(`${rootUrl}?${qs.toString()}`);
 }
 
+// Linkedin OAuth handler
+const linkedinOAuth = (req: Request, res: Response): void => {
+
+    const challenge = req.query.challenge as string;
+    const state = req.query.state as string;
+    const rootUrl = 'https://www.linkedin.com/oauth/native-pkce/authorization';
+
+    // Linkedin OAuth authorization endpoint query params, state is required accounting to Linkedin API
+    const options = {
+        redirect_uri: process.env.CLIENT_HOST as string,
+        client_id: process.env.LINKEDIN_CLIENT_ID as string,
+        response_type: 'code',
+        code_challenge: challenge,
+        code_challenge_method: 'S256',
+        state: state,
+        scope: [
+            'r_liteprofile', 
+            'r_emailaddress'
+        ].join(' ')
+    };
+
+    const qs = new URLSearchParams(options);
+    
+    res.redirect(`${rootUrl}?${qs.toString()}`);
+}
+
 export = {
     login,
     refresh,
     logout,
     googleOAuth,
+    linkedinOAuth
 }

@@ -196,7 +196,7 @@ const LoginForm: FC = () => {
                     </form>
                     <div className='signupoptions__divider' style={{ marginTop: '1.8rem' }}><p>or</p></div>
                     <div className='authform__icon-group'>
-                        <button onClick={() => oAuthPKCEHandler('/auth/google')} aria-label='login with google' title='Login With Google'
+                        <button onClick={() => oAuthPKCEHandler('google')} aria-label='login with google' title='Login With Google'
                             onFocus={() => setFocusGoogle(true)} onBlur={() => setFocusGoogle(false)}
                             onMouseEnter={() => setFocusGoogle(true)} onMouseLeave={() => setFocusGoogle(false)}>
                             {focusGoogle ?

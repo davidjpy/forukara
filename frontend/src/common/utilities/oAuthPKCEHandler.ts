@@ -1,15 +1,15 @@
 import { baseUrl } from '@app/apiSlice';
+import * as uuid from 'uuid'
 
 // Convert decimal to heximal
 const toHex = (dec: number): string => {
-    return ("0" + dec.toString(16)).substring(-2);
+    return ('0' + dec.toString(16)).substring(-2);
 }
 
 // Generate code verifier
 const generateCodeVerifier = (): string => {
-    const array = new Uint32Array(56 / 2);
+    const array = new Uint32Array(13);
     window.crypto.getRandomValues(array);
-
     return Array.from(array, toHex).join('');
 }
 
@@ -46,13 +46,31 @@ const generateCodeChallengeFromVerifier = async (v: string): Promise<string> => 
 }
 
 // Handle saving code verifier in local storage, and sending code challenge to authorization endpoint
-export const oAuthPKCEHandler = async (url: string): Promise<void> => {
+export const oAuthPKCEHandler = async (provider: 'google' | 'linkedin' | 'twitter'): Promise<void> => {
 
     const randomVerifier = generateCodeVerifier();
     const challenge = await generateCodeChallengeFromVerifier(randomVerifier)
     sessionStorage.setItem('verifier', randomVerifier);
 
+    let endpoint: string;
+
     // Navigating to authorization endpoint without XHR
-    const endpoint = `${baseUrl}${url}?challenge=${challenge}`;
+    switch(provider) {
+        case 'google':
+            endpoint = `${baseUrl}/auth/${provider}?challenge=${challenge}`;
+            break;
+        
+        // State is required for Linkedin authorization endpoint
+        case 'linkedin':
+            const state = uuid.v4();
+            sessionStorage.setItem('state', state);
+            endpoint = `${baseUrl}/auth/${provider}?challenge=${challenge}`;
+            break;
+        
+        case 'twitter':
+            endpoint = `${baseUrl}/auth/${provider}?challenge=${challenge}`;
+            break;
+    }
+
     window.location.href = endpoint;
 }

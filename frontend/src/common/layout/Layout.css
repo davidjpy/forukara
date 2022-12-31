@@ -7,30 +7,39 @@
     justify-content: center;
 }
 
-/* =========================================================================================== */
-/* ====================================== LeftMenu =========================================== */
-/* =========================================================================================== */
-
-.leftmenu {
+.layout__left {
     flex: 1;
     padding-top: var(--nav-height);
     background-color: rgb(245, 245, 245);
 }
 
-.leftmenu__wrapper {
+.layout__right {
+    flex: 1;
+    background-color: rgb(245, 245, 245);
+}
+
+/* =========================================================================================== */
+/* ====================================== LeftMenu =========================================== */
+/* =========================================================================================== */
+
+.leftmenu {
     position: relative;
-    margin: 2rem 2rem 2rem auto;
+    margin: 0 0 0 auto;
     min-width: 240px;
     width: 240px;
-    height: 600px;
-    border-radius: 16px;
+    height: 100%;
     background-image: linear-gradient(to left top, #e6f6f1, #e4f5f3, #e3f4f5, #e3f3f7, #e4f1f8, #e8f0fa, #edeffa, #f2eef8, #f9eef5, #fef0f1, #fff2ee, #fdf5ed);
-    outline: 1px solid rgb(220, 220, 220);
+    border-left: 1px solid var(--gray-light);
+    border-right: 1px solid var(--gray-light);
+}
+
+.leftmenu__wrapper {
+    position: sticky;
+    top: var(--nav-height);
 }
 
 .leftmenu__background {
     height: 100px;
-    border-radius: 16px 16px 0 0;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -84,8 +93,7 @@
 }
 
 .leftmenu__tablist {
-    position: absolute;
-    top: 30%;
+    margin-top: 80px;
     width: 100%;
 }
 
@@ -110,7 +118,6 @@
     gap: 5px;
     text-transform: capitalize;
     font-size: 0.9rem;
-    /* margin: 0.4rem; */
     padding: 0.6rem 0.8rem;
     cursor: pointer;
     user-select: none;
@@ -138,10 +145,7 @@
 /* ====================================== RightMenu ========================================== */
 /* =========================================================================================== */
 
-.rightmenu {
-    flex: 1;
-    background-color: rgb(245, 245, 245);
-}
+
 
 /* =========================================================================================== */
 /* ========================================= Nav ============================================= */
