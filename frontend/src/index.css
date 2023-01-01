@@ -5,6 +5,11 @@
     font-family: sans-serif, Arial, Helvetica;
 }
 
+button:focus {
+    outline: 2px solid var(--green-alien-light);
+    outline-offset: 2px;
+}
+
 :root {
     --black-opacity-light: rgba(0, 0, 0, 0.4);
     --black-opacity-moderate: rgba(0, 0, 0, 0.7);

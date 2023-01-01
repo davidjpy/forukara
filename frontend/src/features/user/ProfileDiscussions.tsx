@@ -15,9 +15,9 @@ const ProfileDiscussions: FC<Props> = ({ user }: Props) => {
         <section className='profilediscussions'>
             <header>
                 <h1>Discussions</h1>
-                <p>{user.discussions?.length} Results</p>
+                <p>{user?.discussions?.length} Results</p>
             </header>
-            {user.discussions?.length ? (
+            {user?.discussions?.length ? (
                 <div></div>
             ) : (
                 <div></div>
