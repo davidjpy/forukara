@@ -28,7 +28,7 @@
     min-width: 240px;
     width: 240px;
     height: 100%;
-    background-image: linear-gradient(to left top, #e6f6f1, #e4f5f3, #e3f4f5, #e3f3f7, #e4f1f8, #e8f0fa, #edeffa, #f2eef8, #f9eef5, #fef0f1, #fff2ee, #fdf5ed);
+    /* background-image: linear-gradient(to left top, #e6f6f1, #e4f5f3, #e3f4f5, #e3f3f7, #e4f1f8, #e8f0fa, #edeffa, #f2eef8, #f9eef5, #fef0f1, #fff2ee, #fdf5ed); */
     border-left: 1px solid var(--gray-light);
     border-right: 1px solid var(--gray-light);
 }
@@ -145,7 +145,10 @@
 /* ====================================== RightMenu ========================================== */
 /* =========================================================================================== */
 
-
+.rightmenu {
+    border-left: 1px solid var(--gray-light);
+    height: 100%;
+}
 
 /* =========================================================================================== */
 /* ========================================= Nav ============================================= */
@@ -157,10 +160,11 @@
     height: var(--nav-height);
     background-color: var(--black-light);
     z-index: 10000;
+    box-shadow: 0px 2px 8px 0px var(--black-opacity-light);
 }
 
 .nav__nav {
-    width: 1200px;
+    width: 1150px;
     height: 100%;
     margin: auto;
     display: flex;
@@ -182,6 +186,27 @@
 .nav__wrapper {
     display: flex;
     align-items: center;
+    gap: 15px;
+}
+
+.nav__wrapper figure {
+    display: flex;
+    cursor: pointer;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+}
+
+.nav__wrapper figure:hover {
+    background-color: var(--gray-opacity-light);
+}
+
+.nav__wrapper figure img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: auto;
 }
 
 .nav__text {

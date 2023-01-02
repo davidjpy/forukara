@@ -2,9 +2,9 @@ import { FC } from 'react';
 
 const ProfileActivities: FC = () => {
     return (
-        <div className='profileactivities'>
+        <section className='profileactivities'>
             
-        </div>
+        </section>
     );
 }
 

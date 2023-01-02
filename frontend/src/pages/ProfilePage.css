@@ -5,7 +5,7 @@
 .profilepage {
     min-height: 100vh;
     padding-top: calc(var(--nav-height));
-    max-width: 800px;
+    max-width: 700px;
     width: 100%;
     background-color: rgb(250, 250, 250);
 }
@@ -18,9 +18,8 @@
     gap: 12px;
     height: 50px;
     padding: 0 1rem;
-    background-color: rgba(230, 230, 230, 0.8);
+    background-color: rgb(249, 249, 249);
     border-bottom: 1px solid var(--gray-light);
-    backdrop-filter: blur(8px);
     z-index: 1;
 }
 
@@ -45,8 +44,7 @@
 .profilepage__header h1 span {
     font-family: Times New Roman, Times, serif;
     text-decoration: underline;
-    font-style: italic;
-    color: #474747;
+    color: #727272;
 }
 
 /* =========================================================================================== */
@@ -55,9 +53,10 @@
 
 .profilebackground {
     position: relative;
-    height: 550px;
+    height: 500px;
     transition: box-shadow 0.1s ease-in-out;
     transition-delay: 0.4s;
+    border-bottom: 1px solid var(--gray-light);
 }
 
 
@@ -79,6 +78,91 @@
         border-radius: 0;
     }
 } */
+
+/* =========================================================================================== */
+/* ===================================== ProfileTabBar ======================================= */
+/* =========================================================================================== */
+
+.profiletabbar {
+    bottom: 0;
+    width: 100%;
+    position: absolute;
+    /* box-shadow: 0 4px 6px 0 gray;
+    clip-path: inset(0px -1px -10px 0px); */
+}
+
+.profiletabbar__tablist {
+    position: relative;
+    list-style: none;
+    display: flex;
+    user-select: none;
+}
+
+.profiletabbar__tab {
+    position: relative;
+    text-align: center;
+    padding: 0.4rem 0;
+    cursor: pointer;
+    flex: 1;
+}
+
+.profiletabbar__tab:hover {
+    background-color: rgba(128, 128, 128, 0.2);
+}
+
+.profiletabbar__tab h1 {
+    color: rgb(230, 230, 230);
+    font-weight: 100;
+    font-size: 1rem;
+    padding: 0.4rem 0;
+    text-align: center;
+    transition: color 0.4s linear;
+}
+
+.profiletabbar__tab--active h1 {
+    color: var(--green-alien-light);
+    transition: color 0.4s linear;
+}
+
+.profiletabbar__tab p {
+    color: rgb(160, 160, 160);
+    font-weight: 600;
+    font-size: 0.8rem;
+}
+
+.profiletabbar__underline {
+    position: absolute;
+    width: calc(50% / 3);
+    border-bottom: 4px solid var(--green-alien-light);
+    bottom: 1px;
+    transition: left 0.4s ease-out;
+    border-radius: 8px;
+}
+
+.profiletabbar__underline--left {
+    left: calc(33.333% / 2 - (50% / 3) / 2);
+}
+
+.profiletabbar__underline--center {
+    left: calc(33.333% + (33.333% / 2) - (50% / 3) / 2);
+}
+
+.profiletabbar__underline--right {
+    left: calc(66.667% + (33.333% / 2) - (50% / 3) / 2);
+}
+
+@media screen and (max-width: 1000px) {
+    .profiletabbar__tab h1 {
+        font-size: 0.9rem;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .profiletabbar__tab h1 {
+        font-size: 0.7rem;
+    }
+}
+
 
 /* =========================================================================================== */
 /* ==================================== ProfileDetails ======================================= */
@@ -179,92 +263,18 @@
     font-size: 0.8rem;
 }
 
-.profiledetails__tablist {
-    position: absolute;
-    list-style: none;
-    display: flex;
-    bottom: 0;
-    left: 50%;
-    transform: translate(-50%, 0);
-    user-select: none;
-    width: 80%;
-}
-
-.profiledetails__tab {
-    position: relative;
-    text-align: center;
-    padding: 1rem 0;
-    cursor: pointer;
-    flex: 1;
-}
-
-.profiledetails__tab h1 {
-    color: rgb(160, 160, 160);
-    font-weight: 700;
-    font-size: 0.9rem;
-    padding: 0.2rem 0;
-    text-align: center;
-    transition: color 0.4s linear;
-}
-
-.profiledetails__tab--active h1 {
-    color: var(--green-alien-light);
-    transition: color 0.4s linear;
-}
-
-.profiledetails__tab p {
-    color: rgb(160, 160, 160);
-    font-weight: 600;
-    font-size: 0.8rem;
-}
-
-.profiledetails__underline {
-    position: absolute;
-    width: 60px;
-    border-top: 5px solid var(--green-alien-light);
-    bottom: 0px;
-    transition: left 0.4s ease-out;
-}
-
-.profiledetails__underline--left {
-    left: calc(33.333% / 2 - 30px);
-}
-
-.profiledetails__underline--center {
-    left: calc(33.333% + (33.333% / 2) - 30px);
-}
-
-.profiledetails__underline--right {
-    left: calc(66.667% + (33.333% / 2) - 30px);
-}
-
-@media screen and (max-width: 1000px) {
-    .profiledetails__tablist {
-        width: 100%;
-    }
-
-    .profiledetails__tab h1 {
-        font-size: 0.9rem;
-    }
-}
-
-@media screen and (max-width: 500px) {
-    .profiledetails__tab h1 {
-        font-size: 0.7rem;
-    }
-}
-
 /* =========================================================================================== */
 /* ======================================= ProfileBio ======================================== */
 /* =========================================================================================== */
 
-.profilebio {}
+.profilebio {
+    clip-path: inset(0 -1px -18px 0);
+    box-shadow: 0px 3px 8px 0px var(--black-opacity-light);
+}
 
 .profilebio__wrapper {
-    display: flex;
-    background-color: rgb(240, 240, 240);
-    box-shadow: 0px 6px 12px 0px var(--black-opacity-light);
-    margin: 2rem 0;
+    background-color: rgb(245, 245, 245);
+    padding: 1.4rem;
 }
 
 .profilebio__wrapper:first-child {
@@ -273,25 +283,13 @@
 
 .profilebio__wrapper header {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    width: 50px;
-    background: linear-gradient(rgb(53, 146, 167), 50%, var(--green-dark));
-    font-size: 2rem;
-    color: white;
 }
 
-.profilebio__content {
-    width: 92%;
-    padding: 1.4rem;
-    text-align: justify;
-}
-
-.profilebio__content h1 {
+.profilebio__wrapper header h1 {
     font-size: 0.9rem;
     color: rgb(100, 100, 100);
     width: fit-content;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 .profilebio__wrapper p {
@@ -302,24 +300,6 @@
     border-top: 2px solid var(--green-dark);
     margin: 0.2rem 0 0.5rem 0;
     width: 80%;
-}
-
-@media screen and (max-width: 800px) {
-    .profilebio header {
-        width: 60px;
-        font-size: 1.6rem;
-    }
-}
-
-@media screen and (max-width: 600px) {
-    .profilebio {
-        border-right-width: 5px;
-        font-size: 0.7rem;
-    }
-
-    .profilebio__wrapper {
-        padding: 1rem;
-    }
 }
 
 /* =========================================================================================== */

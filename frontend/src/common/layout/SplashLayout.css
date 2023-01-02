@@ -40,6 +40,26 @@
     gap: 60px;
 }
 
+.splashnav__wrapper figure {
+    display: flex;
+    cursor: pointer;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+}
+
+.splashnav__wrapper figure:hover {
+    background-color: var(--gray-opacity-light);
+}
+
+.splashnav__wrapper figure img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: auto;
+}
+
 .splashnav__button {
     cursor: pointer;
     height: 52px;

@@ -14,51 +14,29 @@ const ProfileBio: FC<Props> = ({ user }: Props) => {
         <div className='profilebio'>
             <section className='profilebio__wrapper'>
                 <header>
-                    <BsFillFileEarmarkPersonFill size={26} />
-                </header>
-                <div className='profilebio__content'>
                     <h1>
                         ABOUT ME
                         <div className='profilebio__divider'></div>
                     </h1>
-                    {user?.about ? (
-                        <p>{user?.about}</p>
-                    ) : (
-                        <p style={{ color: 'gray' }}>Write something about yourself...</p>
-                    )}
-                </div>
+                </header>
+                {user?.about ? (
+                    <p>{user?.about}</p>
+                ) : (
+                    <p style={{ color: 'gray' }}>Write something about yourself...</p>
+                )}
             </section>
             <section className='profilebio__wrapper'>
                 <header>
-                    <MdSpeakerNotes size={26} />
-                </header>
-                <div className='profilebio__content'>
                     <h1>
-                        INTERESTED TOPICS
+                        ABOUT ME
                         <div className='profilebio__divider'></div>
                     </h1>
-                    {user?.about ? (
-                        <p>{user?.about}</p>
-                    ) : (
-                        <p style={{ color: 'gray' }}>Introduce topics that you interested in...</p>
-                    )}
-                </div>
-            </section>
-            <section className='profilebio__wrapper'>
-                <header>
-                    <FaTools size={23} />
                 </header>
-                <div className='profilebio__content'>
-                    <h1>
-                        SKILLS
-                        <div className='profilebio__divider'></div>
-                    </h1>
-                    {user?.about ? (
-                        <p>{user?.about}</p>
-                    ) : (
-                        <p style={{ color: 'gray' }}>List down skills that you equipped with...</p>
-                    )}
-                </div>
+                {user?.about ? (
+                    <p>{user?.about}</p>
+                ) : (
+                    <p style={{ color: 'gray' }}>Write something about yourself...</p>
+                )}
             </section>
         </div>
     );

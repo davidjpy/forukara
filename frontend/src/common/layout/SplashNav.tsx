@@ -14,7 +14,7 @@ const SplashNav: FC = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const [logout,] = useLogoutMutation();
-    const [user, isLoading, isFetching, isSuccess] = useGetUser();
+    const [user] = useGetUser();
 
     const handleSignUpFormMounted = (): void => {
         dispatch(toggleSignUpForm(true));
@@ -28,22 +28,24 @@ const SplashNav: FC = () => {
         await logout();
     }
 
-    const handleNavigateProfile = (): void => {
-        navigate(`profile/${user.username}`);
+    const handleNavigate = (page: string): void => {
+        navigate(page);
     }
-
+    
     return (
         <>
             <nav className='splashnav'>
                 <section className='splashnav__nav'>
                     <header>
-                        <FaBlog className='splashnav__logo'/>
+                        <FaBlog className='splashnav__logo' />
                         <h1>Forukara</h1>
                     </header>
                     {user.id ? (
                         <div className='splashnav__wrapper'>
                             <button onClick={handleLogout} className='splashnav__button splashnav__button--text'>Logout</button>
-                            <p role='button' onClick={handleNavigateProfile} className='splashnav__button splashnav__button--text' style={{ textAlign: 'center' }}>{user.username}</p>
+                            <figure onClick={() => handleNavigate(`profile/${user.username}`)} aria-label='Profile'>
+                                <img src={user.avatar as string} alt={user.avatar as string} />
+                            </figure>
                         </div>
                     ) : (
                         <div className='splashnav__wrapper'>

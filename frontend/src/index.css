@@ -19,7 +19,8 @@ button:focus {
     --green-alien-light: #00DE9A;
     --green-dark: rgb(19, 81, 94);
     --gray-deep: rgb(138, 138, 138);
-    --gray-light: rgb(201, 201, 201);
+    --gray-light: rgb(200, 200, 200);
+    --gray-opacity-light: rgba(200, 200, 200, 0.3);
     --red-error: #cc0000;
     --nav-height: 60px;
     --min-height: 500px;

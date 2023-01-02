@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 import '@pages/ProfilePage.css';
 import ProfileBackground from '@features/user/ProfileBackground';
+import ProfileTabBar from '@features/user/ProfileTabBar';
 import ProfileBio from '@features/user/ProfileBio';
 import ProfileDiscussions from '@features/user/ProfileDiscussions';
 import ProfileConnections from '@features/user/ProfileConnections';

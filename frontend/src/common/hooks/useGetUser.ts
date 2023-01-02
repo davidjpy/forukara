@@ -5,8 +5,11 @@ import { useAppSelector } from '@app/hooks';
 import { useRefreshQuery } from '@features/auth/authApiSlice';
 import { useLoginMutation } from '@features/auth/authApiSlice';
 import { useGetAccountByIdQuery } from '@features/user/userApiSlice';
+import { User } from '@common/utilities/types';
 
-export const useGetUser = (): any => {
+type UserFetch = [User, boolean, boolean, boolean];
+
+export const useGetUser = (): UserFetch => {
 
     const timestampRef = useRef<number>(Date.now());
     const [searchParams, setSearchParams] = useSearchParams();

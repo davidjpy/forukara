@@ -27,10 +27,10 @@ const Nav: FC = () => {
 
     const handleLogout = async (): Promise<any> => {
         await logout();
-        handleNavigateProfile('/');
+        handleNavigate('/');
     }
 
-    const handleNavigateProfile = (page: string): void => {
+    const handleNavigate = (page: string): void => {
         navigate(page);
     }
 
@@ -45,9 +45,9 @@ const Nav: FC = () => {
                     {user.id ? (
                         <div className='nav__wrapper'>
                             <p role='button' onClick={handleLogout} className='nav__text nav__text--button nav__text--link'>Logout</p>
-                            <p role='button' onClick={() => handleNavigateProfile(`profile/${user.username}`)} className='nav__text nav__text--button nav__text--link'>
-                                {user?.username}
-                            </p>
+                            <figure onClick={() => handleNavigate(`profile/${user.username}`)} aria-label='Profile'>
+                                <img src={user.avatar as string} alt={user.avatar as string} />
+                            </figure>
                         </div>
                     ) : (
                         <div className='nav__wrapper'>
