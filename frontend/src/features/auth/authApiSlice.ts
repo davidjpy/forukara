@@ -1,3 +1,5 @@
+import * as uuid from 'uuid'
+
 import { apiSlice } from '@app/apiSlice';
 import { setUserInfo, setCredantial, logout } from '@features/auth/authSlice';
 import { LoginResponse, RefreshResponse, UserLogin } from '@common/utilities/types';
@@ -18,6 +20,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
             async onQueryStarted(arg, { dispatch, queryFulfilled }) {
                 try {
                     const { data } = await queryFulfilled;
+                    localStorage.setItem('session', uuid.v4());
                     dispatch(setCredantial(data.token));
                     dispatch(setUserInfo(data.user!));
                 } catch (err) {
@@ -26,7 +29,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
             }
         }),
 
-        refresh: builder.query<RefreshResponse, { sessionId: number }>({
+        refresh: builder.query<RefreshResponse, { sessionId: string }>({
             query: () => ({
                 url: '/auth/refresh',
                 method: 'GET',
@@ -57,6 +60,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
             async onQueryStarted(arg, { dispatch, queryFulfilled }) {
                 try {
                     await queryFulfilled;
+                    localStorage.removeItem('session');
                     dispatch(apiSlice.util.resetApiState());
                     dispatch(logout());
                 } catch (err) {

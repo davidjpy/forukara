@@ -5,8 +5,10 @@ import { loginLimiter } from '@middlewares/requestLimiter';
 
 const router = express.Router();
 
+// Local auth system
 router.route('/login')
-    .post(loginLimiter, authController.login)
+    // .post(loginLimiter, authController.login)
+    .post(authController.login)
 
 router.route('/logout')
     .post(authController.logout)

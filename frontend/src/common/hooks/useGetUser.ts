@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { useAppSelector } from '@app/hooks';
@@ -11,13 +11,9 @@ type UserFetch = [User, boolean, boolean, boolean];
 
 export const useGetUser = (): UserFetch => {
 
-    const timestampRef = useRef<number>(Date.now());
     const [searchParams, setSearchParams] = useSearchParams();
     const [login,] = useLoginMutation();
     const user = useAppSelector(state => state.auth.user);
-
-    useRefreshQuery({ sessionId: timestampRef.current });
-    const { isLoading, isFetching, isSuccess } = useGetAccountByIdQuery(user.id as string, { skip: !user.id });
 
     // Login user if the url contain the login token returned by OAuth
     useEffect(() => {
@@ -56,6 +52,10 @@ export const useGetUser = (): UserFetch => {
             resetState();
         }
     }, []);
+
+    // Create session id to prevent RTK default cache behavior from getting user info after logout
+    useRefreshQuery({ sessionId: localStorage.getItem('session') as string }, { skip: !localStorage.getItem('session') });
+    const { isLoading, isFetching, isSuccess } = useGetAccountByIdQuery(user.id as string, { skip: !user.id });
 
     return [user, isLoading, isFetching, isSuccess];
 }

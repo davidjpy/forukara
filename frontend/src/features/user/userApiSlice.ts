@@ -50,6 +50,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
                 validateStatus: (response, result) =>
                     (response.status === 200 || response.status === 201) && !result.isError
             }),
+            providesTags: ['Account'],
             transformResponse: (rawResult: { message: User }) => {
                 return rawResult.message;
             },

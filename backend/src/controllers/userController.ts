@@ -31,7 +31,7 @@ const getUserByUsername = asyncHandler(async (req: Request, res: Response): Prom
         return res.status(400).json({ message: 'All fields are required', code: ErrorCode.Failed });
     }
 
-    const user = await User.findOne({ username: username }).select(['-password', '-_id', '-email']).lean().exec();
+    const user = await User.findOne({ username: username }).select(['-password', '-email']).lean().exec();
 
     // Case 2: User not found
     if (!user) {
@@ -39,6 +39,7 @@ const getUserByUsername = asyncHandler(async (req: Request, res: Response): Prom
     }
 
     const returnPayload: IUser = { 
+        id: user._id.toString(),
         username: user.username, 
         avatar: user.avatar,
         background: user.background,
