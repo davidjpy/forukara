@@ -4,7 +4,8 @@
 
 .editprofilepage {
     padding-top: var(--nav-height);
-    background-color: rgb(250, 250, 250);;
+    background-color: rgb(250, 250, 250);
+    ;
     min-height: 100vh;
     width: 100%;
     max-width: var(--max-width);
@@ -18,23 +19,143 @@
     gap: 12px;
     height: 50px;
     padding: 0 1rem;
-    background-color: rgb(249, 249, 249);
+    background-color: rgb(250, 250, 250);
     border-bottom: 1px solid var(--gray-light);
     z-index: 1;
 }
 
 /* =========================================================================================== */
-/* ====================================== UpdateForm ========================================= */
+/* =================================== EditProfileForm ======================================= */
 /* =========================================================================================== */
 
-.updateform {
-
+.editprofileform {
+    
 }
 
-.updateform__userform {
-
+.editprofileform header {
+    padding-bottom: 0.4rem;
+    background-color: rgb(240, 240, 240);
+    padding: 1.4rem 2rem;
 }
 
-.updateform__userform div input {
-    color: black;
+.editprofileform header h1 {
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: var(--black-light);
+}
+
+.editprofileform__form {
+    margin: 2rem 0;
+}
+
+/* =========================================================================================== */
+/* ================================ EditAccount & EditBio ==================================== */
+/* =========================================================================================== */
+
+.profileform {
+    padding: 2rem;
+}
+
+.profileform__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+}
+
+.profileform__wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    background-color: rgb(245, 245, 245);
+    border-radius: 6px;
+}
+
+.profileform__wrapper header {
+    background-color: transparent;
+    margin-bottom: 1.6rem;
+    padding: 0 0 0.4rem 0;
+    border-bottom: 1px solid var(--gray-light);
+    width: 100%;;
+}
+
+.profileform__wrapper header h1 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: rgb(75, 75, 75);
+}
+
+.profileform__avatar {
+    position: relative;
+    width: 120px;
+    height: 120px;
+}
+
+.profileform__avatar img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: contain;
+}
+
+.profileform__avatar button {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: 0;
+    right: 0;
+    background-color: rgb(200, 200, 200);
+    border-radius: 50%;
+}
+
+.profileform__caption {
+    margin-top: 1rem;
+    width: 60%;
+}
+
+.profileform__caption button {
+    background-color: var(--green-dark);
+    color: white;
+    width: 100px;
+    height: 30px;
+    border-radius: 4px;
+    margin: auto;
+}
+
+.profileform__caption p {
+    text-align: justify;
+    margin-top: 1.2rem;
+    font-size: 0.9rem;
+    line-height: 20px;
+}
+
+.profileform__inputs {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: 0.4rem 0;
+}
+
+.profileform__inputs:last-child {
+    margin-bottom: 0;
+}
+
+.profileform__inputs label {
+    display: flex;
+    flex-direction: column;
+    width: 48%;
+    font-size: 0.9rem;
+}
+
+.profileform__inputs input {
+    display: flex;
+    flex-direction: column;
+    height: 34px;
+    padding: 0 0.4rem;
+    margin-top: 0.4rem;
+    border-radius: 4px;
+    border: 1px solid var(--gray-light);
 }

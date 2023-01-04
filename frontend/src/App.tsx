@@ -7,6 +7,7 @@ import HomePage from '@pages/HomePage';
 import ProfilePage from '@pages/ProfilePage';
 import EditProfilePage from '@pages/EditProfilePage';
 import ProtectedRoute from '@pages/ProtectedRoute';
+import NotFoundPage from '@pages/NotFoundPage';
 
 function App() {
     return (
@@ -16,15 +17,12 @@ function App() {
             </Route>
             <Route path='/' element={<Layout />}>
                 <Route path='home' element={<HomePage />} />
-                <Route path='profile'>
-                    <Route path=':username'>
-                        <Route index element={<ProfilePage />} />
-                        <Route element={<ProtectedRoute redirect='/home' />}>
-                            <Route path='update' element={<EditProfilePage />} />
-                        </Route>
-                    </Route>
+                <Route path='profile/:username' element={<ProfilePage />} />
+                <Route path='settings' element={<ProtectedRoute redirect='/home' />}>
+                    <Route path='edit' element={<EditProfilePage />} />
                 </Route>
             </Route>
+            <Route path='*' element={<NotFoundPage />} />
         </Routes>
     );
 }

@@ -17,15 +17,19 @@ const initialState: AuthState = {
     loginFormMounted: false,
     credantial: null,
     user: {
-        id: null,
-        username: null,
-        email: null,
-        avatar: null,
-        background: null,
-        about: null,
-        discussions: null,
-        connections: null,
-        createdAt: null
+        id: '',
+        username: '',
+        email: '',
+        avatar: '',
+        background: '',
+        about: '',
+        preferredName: '',
+        gender: '',
+        location: '',
+        occupation: '',
+        discussions: [],
+        connections: [],
+        createdAt: ''
     },
     unknownAuthErr: ''
 };

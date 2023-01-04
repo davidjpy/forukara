@@ -45,8 +45,8 @@ const LoginForm: FC = () => {
     const [passwordErr, setPasswordErr] = useState<string>('');
     const [err, setErr] = useState<string>('');
     const [connectionErr, setConnectionErr] = useState<string>('');
-    const [email, handleChangeEmail, resetEmail] = useInput('', [setEmailErr, setErr, setConnectionErr]);
-    const [password, handleChangePassword, resetPassword] = useInput('', [setPasswordErr, setErr, setConnectionErr]);
+    const [email, onChangeEmail, resetEmail] = useInput('', [setEmailErr, setErr, setConnectionErr]);
+    const [password, onChangePassword, resetPassword] = useInput('', [setPasswordErr, setErr, setConnectionErr]);
     const [focusGoogle, setFocusGoogle] = useState<boolean>(false);
 
     const submitNotAllowed: boolean = Boolean(err || emailErr || passwordErr);
@@ -144,7 +144,7 @@ const LoginForm: FC = () => {
             text: 'Email',
             icon: <IoMdMail aria-hidden={true} style={{ fontSize: '14px', marginBottom: '1px' }} />,
             value: email,
-            onChange: handleChangeEmail,
+            onChange: onChangeEmail,
             err: emailErr,
             type: 'email'
         },
@@ -153,7 +153,7 @@ const LoginForm: FC = () => {
             text: 'Password',
             icon: <RiLockPasswordFill aria-hidden={true} style={{ fontSize: '14px', marginBottom: '1px' }} />,
             value: password,
-            onChange: handleChangePassword,
+            onChange: onChangePassword,
             err: passwordErr,
             type: 'password'
         }

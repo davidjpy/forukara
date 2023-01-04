@@ -1,11 +1,6 @@
 import { RefObject, useEffect } from 'react';
 
-/**
- * @param {RefObject<HTMLDivElement>} node
- * Receive an RefObject and set its height always equal to the winodw innerHeight
- * @return {void}
- */
-
+// Receive an RefObject and set its height always equal to the winodw innerHeight
 export const useWindowResize = (node: RefObject<HTMLDivElement>): void => {
 
     // Define resize event listener whenever the component mounted or RefObject changes

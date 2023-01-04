@@ -19,7 +19,6 @@
     height: 500px;
     transition: box-shadow 0.1s ease-in-out;
     transition-delay: 0.4s;
-    /* border-bottom: 1px solid var(--gray-light); */
 }
 
 
@@ -161,7 +160,6 @@
     opacity: 0;
     text-align: center;
     padding: 2.2rem;
-
 }
 
 .profiledetails__figure--loaded {
@@ -188,8 +186,8 @@
     background-color: var(--green-alien-light);
     margin: 0 auto;
     border-radius: 50%;
-    width: 130px;
-    height: 130px;
+    width: 110px;
+    height: 110px;
 }
 
 .profiledetails__figure img {
@@ -202,7 +200,7 @@
 
 .profiledetails__figure figcaption {
     color: var(--green-alien-light);
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     margin: 1.2rem;
     letter-spacing: 2px;
     font-weight: 900;
@@ -310,7 +308,6 @@
 
 .profilesocial__svg {
     border-top: 1px solid var(--gray-light);
-    border-bottom: 1px solid var(--gray-light);
     position: relative;
     display: flex;
     align-items: center;

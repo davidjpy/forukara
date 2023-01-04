@@ -14,18 +14,22 @@ export interface OAuthBody {
 }
 
 export type User = {
-    id?: string | null;
-    username?: string | null;
-    email?: string | null;
-    password?: string | null;
-    confirmPassword?: string | null;
-    avatar?: string | null;
-    background?: string | null;
-    about?: string | null;
-    discussions?: Array<string> | null;
-    connections?: Array<string> | null;
+    id?: string
+    username?: string
+    preferredName?: string
+    email?: string
+    password?: string
+    confirmPassword?: string
+    avatar?: string
+    background?: string
+    gender?: 'Male' | 'Female' | 'Other' | string;
+    location?: string
+    occupation?: string
+    about?: string
+    discussions?: Array<string>
+    connections?: Array<string>
     status?: 'Pending' | 'Active';
-    createdAt?: string | null;
+    createdAt?: string
 }
 
 export type UserLogin = {

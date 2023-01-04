@@ -1,13 +1,5 @@
 import { useState, ChangeEvent } from 'react';
 
-/**
- * @param {string | number | boolean} initialValue  
- * Receive the initial state
- * @param {Array<any>} errorHandler 
- * Receive the optional error handler function
- * @returns {ResultValue}
- */
-
 type ResultValue = [any, (e: ChangeEvent<HTMLInputElement>) => void, () => void]
 
 // Return functions and components that a generic input field will use

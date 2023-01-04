@@ -12,7 +12,7 @@ const ProfileBio: FC<Props> = ({ user }: Props) => {
             <section className='profilebio__wrapper'>
                 <header>
                     <h1>
-                        ABOUT ME
+                        About Me
                         <div className='profilebio__divider'></div>
                     </h1>
                 </header>

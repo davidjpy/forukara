@@ -25,7 +25,7 @@ const ProfileDetails: FC<Props> = ({ user, isLoading }: Props) => {
             <div className={isLoading ? 'profiledetails__wrapper' : 'profiledetails__wrapper profiledetails__wrapper--loaded'}>
                 {
                     account.id === user?.id &&
-                    <button onClick={() => navigate('update')} title='Edit your profile' aria-label='Edit Your Profile' className='profiledetails__button'>
+                    <button onClick={() => navigate('/settings/edit')} title='Edit your profile' aria-label='Edit Your Profile' className='profiledetails__button'>
                         <MdEdit aria-hidden={true} size={20} className='profiledetails__icon' />
                     </button>
                 }

@@ -18,43 +18,6 @@
     background-color: rgb(245, 245, 245);
 }
 
-.layout__header {
-    position: sticky;
-    top: var(--nav-height);
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    height: 50px;
-    padding: 0 1rem;
-    background-color: rgb(249, 249, 249);
-    border-bottom: 1px solid var(--gray-light);
-    z-index: 1;
-}
-
-.layout__header button {
-    border: none;
-    background-color: transparent;
-    padding: 4px;
-    cursor: pointer;
-}
-
-.layout__header button:hover {
-    background-color: var(--gray-light);
-}
-
-.layout__header h1 {
-    color: black;
-    font-size: 1rem;
-    font-weight: 400;
-    font-family: Times New Roman, Times, serif;
-}
-
-.layout__header h1 span {
-    font-family: Times New Roman, Times, serif;
-    text-decoration: underline;
-    color: #727272;
-}
-
 /* =========================================================================================== */
 /* ====================================== LeftMenu =========================================== */
 /* =========================================================================================== */

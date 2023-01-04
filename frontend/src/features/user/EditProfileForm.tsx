@@ -1,9 +1,16 @@
 import { FC, FormEvent, useRef } from 'react';
 
 import { useInput } from '@common/hooks/useInput';
+import { User } from '@common/utilities/types';
+import EditBio from './EditBio';
+import EditAccount from './EditAccount';
+
+type Props = {
+    account: User;
+}
 
 // Update user profile
-const UpdateForm: FC = () => {
+const EditProfileForm: FC<Props> = ({ account }: Props) => {
 
     const avatarRef = useRef<HTMLInputElement>(null);
     const backgroundRef = useRef<HTMLInputElement>(null);
@@ -38,13 +45,18 @@ const UpdateForm: FC = () => {
     const [username, handleChangeUsername, resetUsername] = useInput('');
     const [email, handleChangeEmail, resetEmail] = useInput('');
     const [password, handleChangePassword, resetPassword] = useInput('');
-    
+
     return (
-        <section className='updateform'>
+        <section className='editprofileform'>
             <header>
-                <h1>Update User</h1>
+                <h1>Edit Profile</h1>
             </header>
-            <form onSubmit={handleSubmit} className='updateform__userform' >
+            <EditAccount
+                account={account}
+            />
+            <EditBio />
+
+            {/* <form onSubmit={handleSubmit} className='editprofileform__form' >
                 <div>
                     <label htmlFor='update-id'>Id</label>
                     <input id='update-id' type='text' value={id} onChange={handleChangeId} />
@@ -77,9 +89,9 @@ const UpdateForm: FC = () => {
                 </div>
 
                 <input type='submit' />
-            </form>
+            </form> */}
         </section>
     );
 }
 
-export default UpdateForm;  
+export default EditProfileForm;  

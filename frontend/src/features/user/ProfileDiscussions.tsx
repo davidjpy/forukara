@@ -12,16 +12,15 @@ type Props = {
 const ProfileDiscussions: FC<Props> = ({ user, account }: Props) => {
     return (
         <section className='profilesocial'>
-            {user?.discussions?.length ? (
-                <div className='profilesocial__wrapper'>
-                    <header>
-                        <h1>
-                            DISCUSSIONS - <span>Results {user?.discussions?.length} </span>
-                            <div className='profilesocial__divider'></div>
-                        </h1>
-                    </header>
-                </div>
-            ) : (
+            <div className='profilesocial__wrapper'>
+                <header>
+                    <h1>
+                        Discussions - <span>Results {user?.discussions?.length} </span>
+                        <div className='profilesocial__divider'></div>
+                    </h1>
+                </header>
+            </div>
+            {!user.discussions?.length &&
                 <div className='profilesocial__svg'>
                     <Publish width='50%' height='90%' style={{ margin: '3rem 4rem' }} />
                     <header className='profilesocial__svg-header profilesocial__svg-header--discussions'>
@@ -41,7 +40,7 @@ const ProfileDiscussions: FC<Props> = ({ user, account }: Props) => {
                         )}
                     </div>
                 </div>
-            )}
+            }
         </section>
     );
 }

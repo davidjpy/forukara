@@ -12,16 +12,15 @@ type Props = {
 const ProfileConnections: FC<Props> = ({ user, account }: Props) => {
     return (
         <section className='profilesocial'>
-            {user?.discussions?.length ? (
-                <div className='profilesocial__wrapper'>
-                    <header>
-                        <h1>
-                            CONNECTIONS - <span>Results {user?.discussions?.length} </span>
-                            <div className='profilesocial__divider'></div>
-                        </h1>
-                    </header>
-                </div>
-            ) : (
+            <div className='profilesocial__wrapper'>
+                <header>
+                    <h1>
+                        Connections - <span>Results {user?.discussions?.length} </span>
+                        <div className='profilesocial__divider'></div>
+                    </h1>
+                </header>
+            </div>
+            {!user?.connections?.length &&
                 <div className='profilesocial__svg profilesocial__svg--end'>
                     <Connect width='67%' height='90%' style={{ margin: '2.6rem 1.6rem 3rem 0' }} />
                     <header className='profilesocial__svg-header profilesocial__svg-header--connections'>
@@ -43,7 +42,7 @@ const ProfileConnections: FC<Props> = ({ user, account }: Props) => {
                         )}
                     </div>
                 </div>
-            )}
+            }
         </section>
     );
 }

@@ -48,10 +48,10 @@ const SignUpForm: FC = () => {
     const [resendEmailErr, setResendEmailErr] = useState<string>('');
     const [confirmPasswordErr, setConfirmPasswordErr] = useState<string>('');
     const [connectionErr, setConnectionErr] = useState<string>('');
-    const [userId, handleChangeUserId, resetUserId] = useInput('', [setUserIdErr, setErr, setConnectionErr]);
-    const [email, handleChangeEmail, resetEmail] = useInput('', [setEmailErr, setErr, setConnectionErr]);
-    const [password, handleChangePassword, resetPassword] = useInput('', [setPasswordErr, setErr, setConnectionErr]);
-    const [confirmPassword, handleChangeConfirmPassword, resetConfirmPassword] = useInput('', [setConfirmPasswordErr, setErr, setConnectionErr]);
+    const [userId, onChangeUserId, resetUserId] = useInput('', [setUserIdErr, setErr, setConnectionErr]);
+    const [email, onChangeEmail, resetEmail] = useInput('', [setEmailErr, setErr, setConnectionErr]);
+    const [password, onChangePassword, resetPassword] = useInput('', [setPasswordErr, setErr, setConnectionErr]);
+    const [confirmPassword, onChangeConfirmPassword, resetConfirmPassword] = useInput('', [setConfirmPasswordErr, setErr, setConnectionErr]);
 
     const submitNotAllowed: boolean = Boolean(err || userIdErr || emailErr || passwordErr || confirmPasswordErr);
 
@@ -168,7 +168,7 @@ const SignUpForm: FC = () => {
             text: 'User ID',
             icon: <FaUser style={{ fontSize: '14px', marginBottom: '1px' }} />,
             value: userId,
-            onChange: handleChangeUserId,
+            onChange: onChangeUserId,
             err: userIdErr,
             type: 'text'
         },
@@ -177,7 +177,7 @@ const SignUpForm: FC = () => {
             text: 'Email',
             icon: <IoMdMail style={{ fontSize: '14px', marginBottom: '1px' }} />,
             value: email,
-            onChange: handleChangeEmail,
+            onChange: onChangeEmail,
             err: emailErr,
             type: 'email'
         },
@@ -186,7 +186,7 @@ const SignUpForm: FC = () => {
             text: 'Password',
             icon: <RiLockPasswordFill style={{ fontSize: '14px', marginBottom: '1px' }} />,
             value: password,
-            onChange: handleChangePassword,
+            onChange: onChangePassword,
             err: passwordErr,
             type: 'password'
         },
@@ -195,7 +195,7 @@ const SignUpForm: FC = () => {
             text: 'Confirm Password',
             icon: <RiLockPasswordFill style={{ fontSize: '14px', marginBottom: '1px' }} />,
             value: confirmPassword,
-            onChange: handleChangeConfirmPassword,
+            onChange: onChangeConfirmPassword,
             err: confirmPasswordErr,
             type: 'password'
         }
