@@ -178,7 +178,7 @@ const LoginForm: FC = () => {
                                 <div key={item.id} style={{ margin: item.id === 'login-email' ? '2rem 0 0 0' : item.err && '1rem 0 0 0' }}>
                                     <input id={item.id} value={item.value} onChange={item.onChange} type={item.type} placeholder=' '
                                         onKeyDown={(e) => { e.key === 'Enter' && e.preventDefault(); }} className='authform__input' />
-                                    <label htmlFor={item.id} aria-label={item.text} className='authform__placeholder'>{item.icon} {item.text + '*'}</label>
+                                    <label htmlFor={item.id} aria-label={item.text} className='authform__placeholder'>{item.icon} {item.text}<span>*</span></label>
                                     {item.err && <p className='authform__text authform__text--red' style={{ margin: '8px 0 0 8px', fontSize: '0.8rem' }}>{item.err}</p>}
                                 </div>
                             );

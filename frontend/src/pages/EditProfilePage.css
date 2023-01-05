@@ -150,6 +150,10 @@
     font-size: 0.9rem;
 }
 
+.profileform__inputs label span {
+    color: var(--red-error);
+}
+
 .profileform__inputs input {
     display: flex;
     flex-direction: column;
@@ -158,4 +162,77 @@
     margin-top: 0.4rem;
     border-radius: 4px;
     border: 1px solid var(--gray-light);
+    color: black;
 }
+
+.profileform__reminder {
+    margin: 1rem auto 0 0;
+    font-size: 0.9rem;
+    color: rgb(130, 130, 130);
+}
+
+.profileform__reminder span {
+    color: var(--red-error);
+}
+
+.profileform__inputs--link {
+    flex-direction: column;
+}
+
+.profileform__inputs--link label {
+    width: 100%;
+}
+
+.profileform__inputs--link p {
+    margin-bottom: 0.4rem;
+}
+
+.profileform__inputs--link input  {
+    height: 40px;
+    width: 100%;
+    margin-top: 0;
+    padding-left: 45px;
+}
+
+
+.profileform__inputs--link input:focus ~ .profileform__icon-wrapper {
+    border: 2px solid black;
+}
+
+.profileform__icon-wrapper {
+    display: flex;
+    position: absolute;
+    height: 100%;
+    width: 40px;
+    top: 0;
+    border-radius: 4px 0 0 4px;
+    border: 1px solid var(--gray-light);
+}
+
+.profileform__icon {
+    margin: auto;
+}
+
+.profileform__button-group {
+    margin-left: auto;
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.profileform__button--gray {
+    background-color: rgb(165, 165, 165);
+    color: white;
+    width: 100px;
+    height: 35px;
+    border-radius: 6px;
+}
+
+.profileform__button--green {
+    background-color: var(--green-dark);
+    color: white;
+    width: 100px;
+    height: 35px;
+    border-radius: 6px;
+}
+

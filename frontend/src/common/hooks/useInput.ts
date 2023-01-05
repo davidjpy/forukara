@@ -20,6 +20,6 @@ export const useInput = (initialValue: string | number | boolean, errorHandler?:
             }
         }
     }
-
+    
     return [value, handleOnChange, reset];
 }

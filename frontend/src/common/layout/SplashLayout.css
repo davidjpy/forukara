@@ -526,6 +526,10 @@
     pointer-events: none;
 }
 
+.authform__form label span {
+    color: var(--red-error);
+}
+
 .authform__form input[type='text'],
 input[type='email'],
 input[type='password'] {

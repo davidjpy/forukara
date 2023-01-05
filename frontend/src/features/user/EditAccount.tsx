@@ -1,8 +1,8 @@
-import { FC } from 'react';
+import { FC, useEffect, useState, ChangeEvent } from 'react';
 import { MdDeleteForever } from 'react-icons/md';
+import { AiOutlineTwitter } from 'react-icons/ai';
 
 import { User } from '@common/utilities/types';
-import { useInput } from '@common/hooks/useInput';
 
 type Props = {
     account: User;
@@ -10,12 +10,27 @@ type Props = {
 
 const EditAccount: FC<Props> = ({ account }: Props) => {
 
-    const [name, nameOnChange, resetName] = useInput(account.username as string);
-    const [pName, pNameOnChange, resetPName] = useInput(account.preferredName as string);
-    const [location, locationOnChange, resetLocation] = useInput(account.location as string);
-    const [occupation, occupationOnChange, resetOccupation] = useInput(account.occupation as string);
-    const [email, emailOnChange, resetEmail] = useInput(account.email as string);
-    const [gender, genderOnChange, resetGender] = useInput(account.gender as string);
+    const [name, setName] = useState<string>('');
+    const [pName, setPName] = useState<string>('');
+    const [location, setLocation] = useState<string>('');
+    const [occupation, setOccupation] = useState<string>('');
+    const [title, setTitle] = useState<string>('');
+    const [gender, setGender] = useState<string>('');
+
+    useEffect(() => {
+        if (account.username) {
+            setName(account.username);
+            setPName(account.preferredName || '');
+            setLocation(account.location || '');
+            setOccupation(account.occupation || '');
+            setTitle(account.title || '');
+            setGender(account.gender || '');
+        }
+    }, [account]);
+
+    const onChange = (e: ChangeEvent<HTMLInputElement>, setter: React.Dispatch<React.SetStateAction<string>>): void => {
+        setter(e.target.value);
+    }
 
     return (
         <form className='profileform'>
@@ -47,34 +62,82 @@ const EditAccount: FC<Props> = ({ account }: Props) => {
                     </h1>
                 </header>
                 <div className='profileform__inputs'>
-                    <label htmlFor='edit-name'>
-                        Full Name
-                        <input id='edit-name' placeholder='Enter your name...' type='text' />
+                    <label>
+                        <p>Username <span>*</span></p>
+                        <input value={name} onChange={(e) => onChange(e, setName)}
+                            placeholder='Enter your name...' type='text'
+                        />
                     </label>
-                    <label htmlFor='edit-preferred-name'>
+                    <label>
                         Preferred Name
-                        <input id='edit-preferred-name' placeholder='Enter your preferred name...' type='text' />
+                        <input value={pName} onChange={(e) => onChange(e, setPName)}
+                            placeholder='Enter your preferred name...' type='text'
+                        />
+                    </label>
+                </div>
+                <div className='profileform__inputs'>
+                    <label>
+                        <p>Title</p>
+                        <input value={title} onChange={(e) => onChange(e, setTitle)}
+                            placeholder='Enter your title...' type='text'
+                        />
+                    </label>
+                    <label>
+                        Gender
+                        <input value={gender} onChange={(e) => onChange(e, setGender)}
+                            placeholder='Enter your gender...' type='text'
+                        />
                     </label>
                 </div>
                 <div className='profileform__inputs'>
                     <label>
                         Location
-                        <input placeholder='Enter your living city...' type='text' />
+                        <input value={location} onChange={(e) => onChange(e, setLocation)}
+                            placeholder='Enter your living city...' type='text'
+                        />
                     </label>
                     <label>
                         Occupation
-                        <input placeholder='Enter your occupation...' type='text' />
+                        <input value={occupation} onChange={(e) => onChange(e, setOccupation)}
+                            placeholder='Enter your occupation...' type='text'
+                        />
                     </label>
                 </div>
-                <div className='profileform__inputs'>
+                <p className='profileform__reminder'><span>*</span> Indicates a required field</p>
+            </section>
+            <section className='profileform__wrapper'>
+                <header>
+                    <h1>
+                        SOCIAL MEDIA
+                    </h1>
+                </header>
+                <div className='profileform__inputs profileform__inputs--link'>
                     <label>
-                        Email
-                        <input placeholder='Enter your email...' type='text' />
+                        <p>Twitter</p>
+                        <div style={{ position: 'relative' }}>
+                            <input value={name} onChange={(e) => onChange(e, setName)}
+                                placeholder='Enter your name...' type='text'
+                            />
+                            <div className='profileform__icon-wrapper' style={{ backgroundColor: '#00acee' }}>
+                                <AiOutlineTwitter color='white' size={20} className='profileform__icon' />
+                            </div>
+                        </div>
                     </label>
                     <label>
-                        Gender
-                        <input placeholder='Enter your gender...' type='text' />
+                        <p>Twitter</p>
+                        <div style={{ position: 'relative' }}>
+                            <input value={name} onChange={(e) => onChange(e, setName)}
+                                placeholder='Enter your name...' type='text'
+                            />
+                            <div className='profileform__icon-wrapper' style={{ backgroundColor: '#00acee' }}>
+                                <AiOutlineTwitter color='white' size={20} className='profileform__icon' />
+                            </div>
+                        </div>
                     </label>
+                </div>
+                <div className='profileform__button-group'>
+                    <button className='profileform__button profileform__button--gray'>Cancel</button>
+                    <button className='profileform__button profileform__button--green'>Save</button>
                 </div>
             </section>
         </form>
