@@ -11,22 +11,22 @@ type Props = {
 
 const ProfileConnections: FC<Props> = ({ user, account }: Props) => {
     return (
-        <section className='profilesocial'>
-            <div className='profilesocial__wrapper'>
+        <section className='profile-soc'>
+            <div className='profile-soc__wrapper'>
                 <header>
                     <h1>
                         Connections - <span>Results {user?.discussions?.length} </span>
-                        <div className='profilesocial__divider'></div>
+                        <div className='profile-soc__divider'></div>
                     </h1>
                 </header>
             </div>
             {!user?.connections?.length &&
-                <div className='profilesocial__svg profilesocial__svg--end'>
+                <div className='profile-soc__svg profile-soc__svg--end'>
                     <Connect width='67%' height='90%' style={{ margin: '2.6rem 1.6rem 3rem 0' }} />
-                    <header className='profilesocial__svg-header profilesocial__svg-header--connections'>
+                    <header className='profile-soc__svg-header profile-soc__svg-header--connections'>
                         <h1>Oh no!</h1>
                     </header>
-                    <div className='profilesocial__text profilesocial__text--connections'>
+                    <div className='profile-soc__txt profile-soc__txt--connections'>
                         {user?.id === account.id ? (
                             <>
                                 <p>You don't seem to have made any connections yet. To find people who share your interests, click the button below.</p>

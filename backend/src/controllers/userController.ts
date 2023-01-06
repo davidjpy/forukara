@@ -79,7 +79,7 @@ const getAccountById = asyncHandler(async (req: Request, res: Response): Promise
         connections: user.connections,
         createdAt: user.createdAt 
     };
-
+    
     res.json({ message: returnPayload });
 });
 

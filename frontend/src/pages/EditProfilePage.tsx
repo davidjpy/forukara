@@ -9,7 +9,7 @@ const EditProfilePage: FC = () => {
     const account = useAppSelector((state) => state.auth.user);
 
     return (
-        <div className='editprofilepage'>
+        <div className='edt-profile'>
             <EditProfileForm 
                 account={account}
             />

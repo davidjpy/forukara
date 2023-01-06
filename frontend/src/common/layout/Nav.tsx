@@ -44,15 +44,15 @@ const Nav: FC = () => {
                     </header>
                     {user.id ? (
                         <div className='nav__wrapper'>
-                            <p role='button' onClick={handleLogout} className='nav__text nav__text--button nav__text--link'>Logout</p>
+                            <p role='button' onClick={handleLogout} className='nav__txt nav__txt--btn nav__txt--link'>Logout</p>
                             <figure onClick={() => handleNavigate(`profile/${user.username}`)} aria-label='Profile'>
                                 <img src={user.avatar as string} alt={user.avatar as string} />
                             </figure>
                         </div>
                     ) : (
                         <div className='nav__wrapper'>
-                            <p role='button' onClick={handleLoginFormMounted} className='nav__text nav__text--button nav__text--link'>Login</p>
-                            <button onClick={handleSignUpFormMounted} className='nav__button nav__button--green-alien-light'>
+                            <p role='button' onClick={handleLoginFormMounted} className='nav__txt nav__txt--btn nav__txt--link'>Login</p>
+                            <button onClick={handleSignUpFormMounted} className='nav__btn nav__btn--green-alien-light'>
                                 Register
                             </button>
                         </div>

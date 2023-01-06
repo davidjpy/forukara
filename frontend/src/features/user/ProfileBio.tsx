@@ -8,12 +8,12 @@ type Props = {
 
 const ProfileBio: FC<Props> = ({ user }: Props) => {
     return (
-        <div className='profilebio'>
-            <section className='profilebio__wrapper'>
+        <div className='profile-bio'>
+            <section className='profile-bio__wrapper'>
                 <header>
                     <h1>
                         About Me
-                        <div className='profilebio__divider'></div>
+                        <div className='profile-bio__divider'></div>
                     </h1>
                 </header>
                 {user?.about ? (

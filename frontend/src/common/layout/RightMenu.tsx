@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 const RightMenu: FC = () => {
     return (
-        <div className='rightmenu'>
+        <div className='rt-menu'>
             RightMenu
         </div>
     );

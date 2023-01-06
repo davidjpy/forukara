@@ -18,9 +18,17 @@ export interface IUser {
     _id?: ObjectId;
     id?: string;
     username?: string;
+    preferredName?: string;
     password?: string;
     email?: string;
     avatar?: string;
+    gender?: 'Male' | 'Female' | 'Other' | string;
+    location?: string;
+    title?: string;
+    occupation?: string;
+    twitter?: string;
+    facebook?: string;
+    linkedin?: string;
     background?: string;
     about?: string;
     discussions?: Array<ObjectId> | Array<LeanDocument<ObjectId>>;

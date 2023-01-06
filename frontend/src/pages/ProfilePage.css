@@ -2,7 +2,7 @@
 /* ====================================== ProfilePage ======================================== */
 /* =========================================================================================== */
 
-.profilepage {
+.profile-page {
     min-height: 100vh;
     padding-top: calc(var(--nav-height));
     max-width: var(--max-width);
@@ -14,7 +14,7 @@
 /* ================================== ProfileBackground ====================================== */
 /* =========================================================================================== */
 
-.profilebackground {
+.profile-bg {
     position: relative;
     height: 500px;
     transition: box-shadow 0.1s ease-in-out;
@@ -22,7 +22,7 @@
 }
 
 
-.profilebackground__background {
+.profile-bg__bg {
     height: 100%;
     background-position: center;
     background-size: cover;
@@ -39,20 +39,20 @@
 /* ===================================== ProfileTabBar ======================================= */
 /* =========================================================================================== */
 
-.profiletabbar {
+.profile-bar {
     bottom: 0;
     width: 100%;
     position: absolute;
 }
 
-.profiletabbar__tablist {
+.profile-bar__tablist {
     position: relative;
     list-style: none;
     display: flex;
     user-select: none;
 }
 
-.profiletabbar__tab {
+.profile-bar__tab {
     position: relative;
     text-align: center;
     padding: 0.4rem 0;
@@ -60,11 +60,11 @@
     flex: 1;
 }
 
-.profiletabbar__tab:hover {
+.profile-bar__tab:hover {
     background-color: rgba(128, 128, 128, 0.2);
 }
 
-.profiletabbar__tab h1 {
+.profile-bar__tab h1 {
     color: rgb(230, 230, 230);
     font-weight: 100;
     font-size: 1rem;
@@ -73,18 +73,18 @@
     transition: color 0.4s linear;
 }
 
-.profiletabbar__tab--active h1 {
+.profile-bar__tab--active h1 {
     color: var(--green-alien-light);
     transition: color 0.4s linear;
 }
 
-.profiletabbar__tab p {
+.profile-bar__tab p {
     color: rgb(160, 160, 160);
     font-weight: 600;
     font-size: 0.8rem;
 }
 
-.profiletabbar__underline {
+.profile-bar__underline {
     position: absolute;
     width: calc(50% / 3);
     border-bottom: 4px solid var(--green-alien-light);
@@ -93,26 +93,26 @@
     border-radius: 8px;
 }
 
-.profiletabbar__underline--left {
+.profile-bar__underline--left {
     left: calc(33.333% / 2 - (50% / 3) / 2);
 }
 
-.profiletabbar__underline--center {
+.profile-bar__underline--center {
     left: calc(33.333% + (33.333% / 2) - (50% / 3) / 2);
 }
 
-.profiletabbar__underline--right {
+.profile-bar__underline--right {
     left: calc(66.667% + (33.333% / 2) - (50% / 3) / 2);
 }
 
 @media screen and (max-width: 1000px) {
-    .profiletabbar__tab h1 {
+    .profile-bar__tab h1 {
         font-size: 0.9rem;
     }
 }
 
 @media screen and (max-width: 500px) {
-    .profiletabbar__tab h1 {
+    .profile-bar__tab h1 {
         font-size: 0.7rem;
     }
 }
@@ -122,7 +122,7 @@
 /* ==================================== ProfileDetails ======================================= */
 /* =========================================================================================== */
 
-.profiledetails {
+.profile-dls {
     position: absolute;
     background: linear-gradient(rgba(0, 0, 0, 0), 40%, rgba(0, 0, 0, 0.9));
     width: 100%;
@@ -134,11 +134,11 @@
     transition: height 0.5s ease-in-out;
 }
 
-.profiledetails--loaded {
+.profile-dls--loaded {
     height: 100%;
 }
 
-.profiledetails__wrapper {
+.profile-dls__wrapper {
     position: relative;
     height: 100%;
     opacity: 0;
@@ -146,11 +146,11 @@
     transition-delay: 0.5s;
 }
 
-.profiledetails__wrapper--loaded {
+.profile-dls__wrapper--loaded {
     opacity: 1;
 }
 
-.profiledetails__figure {
+.profile-dls__figure {
     position: absolute;
     width: 100%;
     top: 55%;
@@ -162,12 +162,12 @@
     padding: 2.2rem;
 }
 
-.profiledetails__figure--loaded {
+.profile-dls__figure--loaded {
     opacity: 1;
     top: 46%;
 }
 
-.profiledetails__button {
+.profile-dls__btn {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -182,7 +182,7 @@
     background-color: var(--black-opacity-light);
 }
 
-.profiledetails__figure div {
+.profile-dls__figure div {
     background-color: var(--green-alien-light);
     margin: 0 auto;
     border-radius: 50%;
@@ -190,7 +190,7 @@
     height: 110px;
 }
 
-.profiledetails__figure img {
+.profile-dls__figure img {
     margin: 2.5%;
     border-radius: 50%;
     width: 95%;
@@ -198,7 +198,7 @@
     object-fit: cover;
 }
 
-.profiledetails__figure figcaption {
+.profile-dls__figure figcaption {
     color: var(--green-alien-light);
     font-size: 1.2rem;
     margin: 1.2rem;
@@ -206,14 +206,14 @@
     font-weight: 900;
 }
 
-.profiledetails__icon {
+.profile-dls__icon {
     color: var(--green-alien-light);
     margin: 0 0.4rem;
     font-size: 1rem;
 }
 
 
-.profiledetails__figure p {
+.profile-dls__figure p {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -223,7 +223,7 @@
     margin: 0.6rem 0;
 }
 
-.profiledetails__figure span {
+.profile-dls__figure span {
     text-align: start;
     color: var(--green-alien-light);
     font-weight: 800;
@@ -234,29 +234,29 @@
 /* ======================================= ProfileBio ======================================== */
 /* =========================================================================================== */
 
-.profilebio {
+.profile-bio {
     clip-path: inset(0 -1px -18px 0);
     box-shadow: 0px 3px 8px 0px var(--black-opacity-light);
 }
 
-.profilebio__wrapper {
+.profile-bio__wrapper {
     border-left: 30px solid var(--green-dark);
     background-color: rgb(245, 245, 245);
     padding: 1.4rem;
 }
 
-.profilebio__wrapper header {
+.profile-bio__wrapper header {
     display: flex;
 }
 
-.profilebio__wrapper header h1 {
+.profile-bio__wrapper header h1 {
     font-size: 1.2rem;
     width: fit-content;
     font-family: 'Times New Roman', Times, serif;
     font-weight: 100;
 }
 
-.profilebio__wrapper p {
+.profile-bio__wrapper p {
     line-height: 22px;
 }
 
@@ -270,7 +270,7 @@
 /* ========================= ProfileDiscussions & ProfileConnections ========================= */
 /* =========================================================================================== */
 
-.profilesocial__wrapper {
+.profile-soc__wrapper {
     border-left: 30px solid var(--green-dark);
     background-color: rgb(245, 245, 245);
     padding: 1.4rem;
@@ -278,35 +278,35 @@
     box-shadow: 0px 3px 8px 0px var(--black-opacity-light);
 }
 
-.profilesocial__wrapper header {
+.profile-soc__wrapper header {
     display: flex;
     align-items: center;
 }
 
-.profilesocial__wrapper header h1 {
+.profile-soc__wrapper header h1 {
     font-size: 1.2rem;
     width: fit-content;
     font-family: 'Times New Roman', Times, serif;
     font-weight: 100;
 }
 
-.profilesocial__wrapper header span {
+.profile-soc__wrapper header span {
     font-size: 1rem;
     font-family: 'Times New Roman', Times, serif;
     color: rgb(100, 100, 100);
 }
 
-.profilesocial__wrapper p {
+.profile-soc__wrapper p {
     line-height: 22px;
 }
 
-.profilesocial__divider {
+.profile-soc__divider {
     border-top: 2px solid var(--green-dark);
     margin: 0.2rem 0 0 0;
     width: 50%;
 }
 
-.profilesocial__svg {
+.profile-soc__svg {
     border-top: 1px solid var(--gray-light);
     position: relative;
     display: flex;
@@ -314,46 +314,46 @@
     justify-content: flex-start;
 }
 
-.profilesocial__svg--end {
+.profile-soc__svg--end {
     justify-content: end;
 }
 
-.profilesocial__svg-header {
+.profile-soc__svg-header {
     position: absolute;
 }
 
-.profilesocial__svg-header h1 {
+.profile-soc__svg-header h1 {
     font-size: 2.6rem;
     color: var(--green-dark);
 }
 
-.profilesocial__svg-header--discussions {
+.profile-soc__svg-header--discussions {
     left: 70%;
     top: 125px;
 }
 
-.profilesocial__svg-header--connections {
+.profile-soc__svg-header--connections {
     left: 8%;
     top: 140px;
 }
 
-.profilesocial__text {
+.profile-soc__txt {
     position: absolute;
 }
 
-.profilesocial__text--discussions {
+.profile-soc__txt--discussions {
     left: 48%;
     top: 235px;
     width: 47%;
 }
 
-.profilesocial__text--connections {
+.profile-soc__txt--connections {
     left: 8%;
     top: 276px;
     width: 47%;
 }
 
-.profilesocial__text p {
+.profile-soc__txt p {
     font-size: 1rem;
     color: var(--green-dark);
     line-height: 25px;
@@ -361,7 +361,7 @@
     text-align: justify;
 }
 
-.profilesocial__text button {
+.profile-soc__txt button {
     cursor: pointer;
     position: absolute;
     width: 100%;
@@ -375,6 +375,6 @@
     color: white;
 }
 
-.profilesocial__text button:hover {
+.profile-soc__txt button:hover {
     opacity: 0.9;
 }

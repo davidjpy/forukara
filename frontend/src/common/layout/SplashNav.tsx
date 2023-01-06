@@ -34,23 +34,23 @@ const SplashNav: FC = () => {
     
     return (
         <>
-            <nav className='splashnav'>
-                <section className='splashnav__nav'>
+            <nav className='sp-nav'>
+                <section className='sp-nav__nav'>
                     <header>
-                        <FaBlog className='splashnav__logo' />
+                        <FaBlog className='sp-nav__logo' />
                         <h1>Forukara</h1>
                     </header>
                     {user.id ? (
-                        <div className='splashnav__wrapper'>
-                            <button onClick={handleLogout} className='splashnav__button splashnav__button--text'>Logout</button>
+                        <div className='sp-nav__wrapper'>
+                            <button onClick={handleLogout} className='sp-nav__btn sp-nav__btn--txt'>Logout</button>
                             <figure onClick={() => handleNavigate(`profile/${user.username}`)} aria-label='Profile'>
                                 <img src={user.avatar as string} alt={user.avatar as string} />
                             </figure>
                         </div>
                     ) : (
-                        <div className='splashnav__wrapper'>
-                            <button onClick={handleLoginFormMounted} className='splashnav__button splashnav__button--text'>Login</button>
-                            <button onClick={handleSignUpFormMounted} className='splashnav__button splashnav__button--slide'>&nbsp;</button>
+                        <div className='sp-nav__wrapper'>
+                            <button onClick={handleLoginFormMounted} className='sp-nav__btn sp-nav__btn--txt'>Login</button>
+                            <button onClick={handleSignUpFormMounted} className='sp-nav__btn sp-nav__btn--slide'>&nbsp;</button>
                         </div>
                     )}
                 </section>

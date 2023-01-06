@@ -26,6 +26,9 @@ export type User = {
     location?: string;
     title?: string;
     occupation?: string;
+    twitter?: string;
+    facebook?: string;
+    linkedin?: string;
     about?: string;
     discussions?: Array<string>;
     connections?: Array<string>;

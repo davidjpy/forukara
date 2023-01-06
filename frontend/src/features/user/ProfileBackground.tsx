@@ -11,9 +11,9 @@ type Props = {
 
 const ProfileBackground: FC<Props> = ({ user, isLoading }: Props) => {
     return (
-        <section className='profilebackground'>
+        <section className='profile-bg'>
             <div role='img' aria-label='background image' title='background image'
-                className='profilebackground__background'
+                className='profile-bg__bg'
                 style={{ backgroundImage: `url(${!user?.background ? default_background : user?.background})` }}
             />
             <ProfileDetails

@@ -70,7 +70,7 @@ const SignUpSuccess: FC<Props> = ({ emailCopy, resendEmailErr, setResendEmailErr
 
     return (
         <FocusTrap active={signUpFormMounted && block === 'success'} focusTrapOptions={focusTrapOptions}>
-            <section className='signupsuccess'
+            <section className='sign-succ'
                 style={{
                     left:
                         block === 'options' ? '200%' :
@@ -79,22 +79,22 @@ const SignUpSuccess: FC<Props> = ({ emailCopy, resendEmailErr, setResendEmailErr
                 }}
             >
                 <button aria-label='close signup form' title='Close Signup Form' onClick={hadnleSignUpFormUnmounted}
-                    className='authform__button authform__button--cross' style={{ display: block === 'success' ? 'block' : 'none' }}
+                    className='auth__btn auth__btn--cross' style={{ display: block === 'success' ? 'block' : 'none' }}
                 >
                     <IoMdClose aria-hidden={true} />
                 </button>
-                <p className='authform__text authform__text--green-alien-light'>Congratulation!</p>
-                <p className='authform__text authform__text--white'>Your account has been successfully created. Verify your email address by checking the verification email we just delivered to your inbox</p>
-                <p id='resend-email' className='authform__text authform__text--white'>If the email is not reaching you. To get another email, click {counterRef?.current === counterTime ?
+                <p className='auth__txt auth__txt--green-alien-light'>Congratulation!</p>
+                <p className='auth__txt auth__txt--white'>Your account has been successfully created. Verify your email address by checking the verification email we just delivered to your inbox</p>
+                <p id='resend-email' className='auth__txt auth__txt--white'>If the email is not reaching you. To get another email, click {counterRef?.current === counterTime ?
                     (
                         <span role='button' title='Get Another Verification Email' aria-label='get another verification email' tabIndex={0} 
                             onClick={handleResendEmail} onKeyDown={(e) => onkeyDownHandler(e, 'Enter', handleResendEmail)}
-                            className='authform__text authform__text--green-alien-light authform__text--link'>here</span>
+                            className='auth__txt auth__txt--green-alien-light auth__txt--link'>here</span>
                     ) : (
-                        <span className='authform__text authform__text--gray'>here ({counterRef?.current})</span>
+                        <span className='auth__txt auth__txt--gray'>here ({counterRef?.current})</span>
                     )}</p>
-                {resendEmailErr && <p className='authform__text authform__text--red' style={{ margin: '0 0 1rem 0' }}>{resendEmailErr}</p>}
-                <p className='authform__text authform__text--red'>The account will be deleted in ten minutes if not verified*</p>
+                {resendEmailErr && <p className='auth__txt auth__txt--red' style={{ margin: '0 0 1rem 0' }}>{resendEmailErr}</p>}
+                <p className='auth__txt auth__txt--red'>The account will be deleted in ten minutes if not verified*</p>
             </section>
         </FocusTrap>
 

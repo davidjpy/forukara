@@ -45,7 +45,7 @@ const SignUpOptions: FC<Props> = ({ block, hadnleSignUpFormUnmounted, handleLogi
             active={signUpFormMounted && block === 'options'}
             focusTrapOptions={focusTrapOptions}
         >
-            <section className='signupoptions'
+            <section className='opts'
                 style={{
                     left:
                         block === 'options' ? 0 :
@@ -55,39 +55,39 @@ const SignUpOptions: FC<Props> = ({ block, hadnleSignUpFormUnmounted, handleLogi
                 }}
             >
                 <button aria-label='close signup form' title='Close Signup Form' onClick={hadnleSignUpFormUnmounted}
-                    className='authform__button authform__button--cross' style={{ display: block === 'options' ? 'block' : 'none' }}
+                    className='auth__btn auth__btn--cross' style={{ display: block === 'options' ? 'block' : 'none' }}
                 >
                     <IoMdClose aria-hidden={true} />
                 </button>
-                <div className='signupoptions__wrapper'>
-                    <button onClick={() => handleNextBlock('form')} className='signupoptions__button signupoptions__button--transparent' style={{ margin: '0.6rem 0 0 0' }}>
-                        <MdEmail aria-hidden={true} className='signupoptions__icon' />
+                <div className='opts__wrapper'>
+                    <button onClick={() => handleNextBlock('form')} className='opts__btn opts__btn--transparent' style={{ margin: '0.6rem 0 0 0' }}>
+                        <MdEmail aria-hidden={true} className='opts__icon' />
                         Sign up with email
                     </button>
                 </div>
-                <div className='signupoptions__divider'><p>or</p></div>
-                <div className='signupoptions__wrapper'>
-                    <button onClick={() => oAuthPKCEHandler('google')} className='signupoptions__button signupoptions__button--google'>
+                <div className='opts__divider'><p>or</p></div>
+                <div className='opts__wrapper'>
+                    <button onClick={() => oAuthPKCEHandler('google')} className='opts__btn opts__btn--google'>
                         <div>
-                            <FcGoogle aria-hidden={true} className='signupoptions__icon' />
+                            <FcGoogle aria-hidden={true} className='opts__icon' />
                         </div>
                         Sign up with Google
                     </button>
-                    <button className='signupoptions__button signupoptions__button--twitter'>
-                        <AiOutlineTwitter aria-hidden={true} className='signupoptions__icon signupoptions__icon--twitter' />
+                    <button className='opts__btn opts__btn--twitter'>
+                        <AiOutlineTwitter aria-hidden={true} className='opts__icon opts__icon--twitter' />
                         Sign Up With Twitter
                     </button>
-                    <button onClick={() => oAuthPKCEHandler('linkedin')} className='signupoptions__button signupoptions__button--linkedin'>
+                    <button onClick={() => oAuthPKCEHandler('linkedin')} className='opts__btn opts__btn--linkedin'>
                         <div>
-                            <FaLinkedinIn aria-hidden={true} className='signupoptions__icon signupoptions__icon--linkedin' />
+                            <FaLinkedinIn aria-hidden={true} className='opts__icon opts__icon--linkedin' />
                         </div>
                         Sign Up With Linkedin
                     </button>
                 </div>
-                <p className='authform__text authform__text--white' style={{ textAlign: 'center', margin: '30px 0 50px 0' }}>
+                <p className='auth__txt auth__txt--white' style={{ textAlign: 'center', margin: '30px 0 50px 0' }}>
                     Already have an account?
                     <span role='button' aria-label='open login form' tabIndex={0} onClick={handleLoginFormMounted} onKeyDown={(e) => onkeyDownHandler(e, 'Enter', handleLoginFormMounted)}
-                        className='authform__text--green-alien-light authform__text--link' style={{ marginLeft: '5px' }} >Login</span>
+                        className='auth__txt--green-alien-light auth__txt--link' style={{ marginLeft: '5px' }} >Login</span>
                 </p>
             </section>
         </FocusTrap>

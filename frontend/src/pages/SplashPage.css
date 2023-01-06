@@ -2,7 +2,7 @@
 /* ====================================== SplashPage ========================================= */
 /* =========================================================================================== */
 
-.splashpage {
+.sp-page {
     width: 100%;
     background-image: url('@media/images/splash_background.webp');
     background-position: center;
@@ -13,7 +13,7 @@
     min-width: var(--min-width);
 }
 
-.splashpage__overlay {
+.sp-page__overlay {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -25,7 +25,7 @@
     min-width: var(--min-width);
 }
 
-.splashpage__slogan {
+.sp-page__slogan {
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -39,17 +39,17 @@
     padding: 1rem;
 }
 
-.splashpage__header {
+.sp-page__header {
     font-size: 2rem;
     font-weight: bolder;
     color: white;
 }
 
-.splashpage__header--large {
+.sp-page__header--lg {
     font-size: 2.8rem;
 }
 
-.splashpage__header--dynamic {
+.sp-page__header--dynamic {
     margin: 0 20px;
     color: var(--green-alien-light);
     border-right: 3px solid black;
@@ -68,7 +68,7 @@
     }
 }
 
-.splashpage__slogan button {
+.sp-page__slogan button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -86,54 +86,54 @@
     transition: all 0.2s ease-in-out;
 }
 
-.splashpage__slogan button:hover {
+.sp-page__slogan button:hover {
     background-color: var(--green-alien-deep);
 }
 
-.splashpage__slogan button:active {
+.sp-page__slogan button:active {
     background-color: #13684e;
 }
 
-.splashpage__icon {
+.sp-page__icon {
     margin-left: 5px;
 }
 
-.splashpage__slogan header {
+.sp-page__slogan header {
     display: flex;
     align-items: center;
     margin: 30px;
 }
 
 @media screen and (max-width: 1600px) {
-    .splashpage__header {
+    .sp-page__header {
         font-size: 1.8rem;
     }
 
-    .splashpage__header--large {
+    .sp-page__header--lg {
         font-size: 2.8rem;
     }
 }
 
 @media screen and (max-width: 1000px) {
-    .splashpage__header {
+    .sp-page__header {
         font-size: 1.4rem;
     }
 
-    .splashpage__header--large {
+    .sp-page__header--lg {
         font-size: 2.4rem;
     }
 }
 
 @media screen and (max-width: 800px) {
-    .splashpage__header {
+    .sp-page__header {
         font-size: 1.2rem;
     }
 
-    .splashpage__header--large {
+    .sp-page__header--lg {
         font-size: 1.8rem;
     }
 
-    .splashpage__slogan button {
+    .sp-page__slogan button {
         font-size: 0.8rem;
         width: 145px;
         height: 55px;
@@ -141,29 +141,29 @@
 }
 
 @media screen and (max-width: 600px) {
-    .splashpage__header {
+    .sp-page__header {
         font-size: 1rem;
     }
 
-    .splashpage__header--large {
+    .sp-page__header--lg {
         font-size: 1.4rem;
     }
 
-    .splashpage__header--dynamic {
+    .sp-page__header--dynamic {
         margin: 0 10px;
     }
 }
 
 @media screen and (max-width: 400px) {
-    .splashpage__header {
+    .sp-page__header {
         font-size: 0.8rem;
     }
 
-    .splashpage__header--large {
+    .sp-page__header--lg {
         font-size: 1rem;
     }
 
-    .splashpage__header--dynamic {
+    .sp-page__header--dynamic {
         margin: 0 0 0 5px
     }
 }

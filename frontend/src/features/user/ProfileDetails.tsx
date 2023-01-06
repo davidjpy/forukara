@@ -21,25 +21,25 @@ const ProfileDetails: FC<Props> = ({ user, isLoading }: Props) => {
     const navigate = useNavigate();
 
     return (
-        <section className={isLoading ? 'profiledetails' : 'profiledetails profiledetails--loaded'}>
-            <div className={isLoading ? 'profiledetails__wrapper' : 'profiledetails__wrapper profiledetails__wrapper--loaded'}>
+        <section className={isLoading ? 'profile-dls' : 'profile-dls profile-dls--loaded'}>
+            <div className={isLoading ? 'profile-dls__wrapper' : 'profile-dls__wrapper profile-dls__wrapper--loaded'}>
                 {
                     account.id === user?.id &&
-                    <button onClick={() => navigate('/settings/edit')} title='Edit your profile' aria-label='Edit Your Profile' className='profiledetails__button'>
-                        <MdEdit aria-hidden={true} size={20} className='profiledetails__icon' />
+                    <button onClick={() => navigate('/settings/edit')} title='Edit your profile' aria-label='Edit Your Profile' className='profile-dls__btn'>
+                        <MdEdit aria-hidden={true} size={20} className='profile-dls__icon' />
                     </button>
                 }
-                <figure className={isLoading ? 'profiledetails__figure' : 'profiledetails__figure profiledetails__figure--loaded'}>
+                <figure className={isLoading ? 'profile-dls__figure' : 'profile-dls__figure profile-dls__figure--loaded'}>
                     <div>
                         <img alt={!user?.avatar ? default_avatar : user?.avatar} src={!user?.avatar ? default_avatar : user?.avatar} />
                     </div>
                     <figcaption>{user?.username}</figcaption>
                     <p>
-                        <ImLocation2 className='profiledetails__icon' />
+                        <ImLocation2 className='profile-dls__icon' />
                         Tokyo, Japan
                     </p>
                     <p>
-                        <FaCalendarAlt className='profiledetails__icon' />
+                        <FaCalendarAlt className='profile-dls__icon' />
                         {user?.createdAt && moment(`${user.createdAt}`).format('Do MMMM, YYYY')}
                     </p>
                 </figure>

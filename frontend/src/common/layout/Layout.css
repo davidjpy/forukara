@@ -22,7 +22,7 @@
 /* ====================================== LeftMenu =========================================== */
 /* =========================================================================================== */
 
-.leftmenu {
+.lt-menu {
     position: relative;
     margin: 0 0 0 auto;
     min-width: 240px;
@@ -33,19 +33,19 @@
     border-right: 1px solid var(--gray-light);
 }
 
-.leftmenu__wrapper {
+.lt-menu__wrapper {
     position: sticky;
     top: var(--nav-height);
 }
 
-.leftmenu__background {
+.lt-menu__bg {
     height: 100px;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
 }
 
-.leftmenu__wrapper figure {
+.lt-menu__wrapper figure {
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -56,14 +56,14 @@
     transform: translate(-50%, 0);
 }
 
-.leftmenu__wrapper figure div {
+.lt-menu__wrapper figure div {
     border-radius: 50%;
     background: linear-gradient(to left top, #e6f6f1, #e4f5f3, #e3f4f5, #e3f3f7, #e4f1f8, #e8f0fa, #edeffa, #f2eef8, #f9eef5, #fef0f1, #fff2ee, #fdf5ed);;
     width: 85px;
     height: 85px;   
 }
 
-.leftmenu__wrapper figure div img {
+.lt-menu__wrapper figure div img {
     border-radius: 50%;
     width: 92%;
     height: 92%;
@@ -71,14 +71,14 @@
     object-fit: contain;
 }
 
-.leftmenu__wrapper figure figcaption {
+.lt-menu__wrapper figure figcaption {
     text-align: center;
     margin: 0.5rem;
     font-size: 1rem;
     font-weight: 600;
 }
 
-.leftmenu__wrapper figure figcaption button {
+.lt-menu__wrapper figure figcaption button {
     padding: 0.4rem 1rem;
     background-color: var(--green-alien-light);
     border: none;
@@ -88,31 +88,31 @@
     transition: background-color 0.1s linear;
 }
 
-.leftmenu__wrapper figure figcaption button:hover {
+.lt-menu__wrapper figure figcaption button:hover {
     background-color: var(--green-alien-deep);
 }
 
-.leftmenu__tablist {
+.lt-menu__tablist {
     margin-top: 80px;
     width: 100%;
 }
 
-.leftmenu__tablist section header {
+.lt-menu__tablist section header {
     margin: 1.2rem 0.8rem 0.4rem 0.8rem;
 }
 
-.leftmenu__tablist section header h1 {
+.lt-menu__tablist section header h1 {
     font-weight: 100;
     text-transform: uppercase;
     font-size: 0.8rem;
     color: var(--gray-deep);
 }
 
-.leftmenu__tablist ul {
+.lt-menu__tablist ul {
     list-style-type: none;
 }
 
-.leftmenu__listitem {
+.lt-menu__li {
     display: flex;
     align-items: center;
     gap: 5px;
@@ -123,20 +123,20 @@
     user-select: none;
 }
 
-.leftmenu__listitem:hover {
+.lt-menu__li:hover {
     background-color: var(--gray-light);
 }
 
-.leftmenu__listitem--active {
+.lt-menu__li--active {
     color: white;
     background-color: var(--green-dark);
 }
 
-.leftmenu__listitem--active:hover {
+.lt-menu__li--active:hover {
     background-color: var(--green-dark);
 }
 
-.leftmenu__divider {
+.lt-menu__divider {
     width: 100%;
     border-top: 1px solid rgb(220, 220, 220);
 }
@@ -145,7 +145,7 @@
 /* ====================================== RightMenu ========================================== */
 /* =========================================================================================== */
 
-.rightmenu {
+.rt-menu {
     border-left: 1px solid var(--gray-light);
     height: 100%;
 }
@@ -209,23 +209,23 @@
     margin: auto;
 }
 
-.nav__text {
+.nav__txt {
     color: white;
     font-size: 0.8rem;
 }
 
-.nav__text--link:hover {
+.nav__txt--link:hover {
     cursor: pointer;
     text-decoration: underline;
 }
 
-.nav__text--button {
+.nav__txt--btn {
     letter-spacing: 0.6px;
     user-select: none;
     margin: 0 1.2rem;
 }
 
-.nav__button {
+.nav__btn {
     font-size: 0.8rem;
     padding: 0.6rem 0.8rem;
     margin-left: 0.2rem;
@@ -237,12 +237,12 @@
     user-select: none;
 }
 
-.nav__button--green-alien-light {
+.nav__btn--green-alien-light {
     background-color: var(--green-alien-light);
     transition: background-color 0.2s ease-in-out;
 }
 
-.nav__button--green-alien-light:hover {
+.nav__btn--green-alien-light:hover {
     background-color: var(--green-alien-deep);
 }
 

@@ -47,7 +47,7 @@ const EditProfileForm: FC<Props> = ({ account }: Props) => {
     const [password, handleChangePassword, resetPassword] = useInput('');
 
     return (
-        <section className='editprofileform'>
+        <section className='edt-form'>
             <header>
                 <h1>Edit Profile</h1>
             </header>

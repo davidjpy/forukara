@@ -115,9 +115,9 @@ const LoginForm: FC = () => {
     useEffect(() => {
         let ref = overlayRef.current;
         const fadeOut = (): void => {
-            if (ref && ref.classList.contains('authform__overlay--fade') && !loginFormMounted) {
+            if (ref && ref.classList.contains('auth__overlay--fade') && !loginFormMounted) {
                 ref.style.display = 'none';
-                ref.classList.remove('authform__overlay--fade');
+                ref.classList.remove('auth__overlay--fade');
             }
         }
 
@@ -162,58 +162,58 @@ const LoginForm: FC = () => {
     return (
         <FocusTrap active={loginFormMounted} focusTrapOptions={focusTrapOptions}>
             <div ref={overlayRef}
-                className={loginFormMounted ? 'authform__overlay' : 'authform__overlay authform__overlay--fade'}>
-                <section ref={wrapperRef} className='authform authform--login'>
+                className={loginFormMounted ? 'auth__overlay' : 'auth__overlay auth__overlay--fade'}>
+                <section ref={wrapperRef} className='auth auth--login'>
                     <button aria-label='close login form' title='Close Login Form' onClick={handleLoginFormUnmounted}
-                        className='authform__button authform__button--cross' style={{ top: '1.5rem' }}
+                        className='auth__btn auth__btn--cross' style={{ top: '1.5rem' }}
                     >
                         <IoMdClose aria-hidden={true} />
                     </button>
                     <header>
                         <h1>Login</h1>
                     </header>
-                    <form onSubmit={handleSubmitForm} className='authform__form'>
+                    <form onSubmit={handleSubmitForm} className='auth__form'>
                         {inputFields.map((item) => {
                             return (
                                 <div key={item.id} style={{ margin: item.id === 'login-email' ? '2rem 0 0 0' : item.err && '1rem 0 0 0' }}>
                                     <input id={item.id} value={item.value} onChange={item.onChange} type={item.type} placeholder=' '
-                                        onKeyDown={(e) => { e.key === 'Enter' && e.preventDefault(); }} className='authform__input' />
-                                    <label htmlFor={item.id} aria-label={item.text} className='authform__placeholder'>{item.icon} {item.text}<span>*</span></label>
-                                    {item.err && <p className='authform__text authform__text--red' style={{ margin: '8px 0 0 8px', fontSize: '0.8rem' }}>{item.err}</p>}
+                                        onKeyDown={(e) => { e.key === 'Enter' && e.preventDefault(); }} className='auth__input' />
+                                    <label htmlFor={item.id} aria-label={item.text} className='auth__placeholder'>{item.icon} {item.text}<span>*</span></label>
+                                    {item.err && <p className='auth__txt auth__txt--red' style={{ margin: '8px 0 0 8px', fontSize: '0.8rem' }}>{item.err}</p>}
                                 </div>
                             );
                         })}
-                        {err && <p className='authform__text authform__text--red' style={{ margin: '8px 0 0 8px', fontSize: '0.8rem' }}>{err}</p>}
-                        {connectionErr && <p className='authform__text authform__text--red' style={{ margin: '8px 0 0 8px', fontSize: '0.8rem' }}>{connectionErr}</p>}
+                        {err && <p className='auth__txt auth__txt--red' style={{ margin: '8px 0 0 8px', fontSize: '0.8rem' }}>{err}</p>}
+                        {connectionErr && <p className='auth__txt auth__txt--red' style={{ margin: '8px 0 0 8px', fontSize: '0.8rem' }}>{connectionErr}</p>}
                         {loginResult.isLoading ? (
                             <div style={{ position: 'relative', margin: 0 }}>
                                 <input aria-label='Loading' type='submit' disabled={true} value='' />
-                                <div className='authform__loader' style={{ position: 'absolute' }} />
+                                <div className='auth__loader' style={{ position: 'absolute' }} />
                             </div>
                         ) : (
                             <input aria-label='Login' type='submit' disabled={submitNotAllowed} value='Login' />
                         )}
                     </form>
-                    <div className='signupoptions__divider' style={{ marginTop: '1.8rem' }}><p>or</p></div>
-                    <div className='authform__icon-group'>
+                    <div className='opts__divider' style={{ marginTop: '1.8rem' }}><p>or</p></div>
+                    <div className='auth__icon-group'>
                         <button onClick={() => oAuthPKCEHandler('google')} aria-label='login with google' title='Login With Google'
                             onFocus={() => setFocusGoogle(true)} onBlur={() => setFocusGoogle(false)}
                             onMouseEnter={() => setFocusGoogle(true)} onMouseLeave={() => setFocusGoogle(false)}>
                             {focusGoogle ?
-                                <FcGoogle aria-hidden={true} className='authform__icon' /> :
-                                <GrGoogle aria-hidden={true} className='authform__icon' style={{ width: '20px', height: '20px' }} />}
+                                <FcGoogle aria-hidden={true} className='auth__icon' /> :
+                                <GrGoogle aria-hidden={true} className='auth__icon' style={{ width: '20px', height: '20px' }} />}
                         </button>
                         <button aria-label='login with twitter' title='Login With Twitter'>
-                            <AiOutlineTwitter aria-hidden={true} className='authform__icon authform__icon--twitter' />
+                            <AiOutlineTwitter aria-hidden={true} className='auth__icon auth__icon--twitter' />
                         </button>
                         <button aria-label='login with linkedin' title='Login With Linkedin'>
-                            <FaLinkedinIn aria-hidden={true} className='authform__icon authform__icon--linkedin' />
+                            <FaLinkedinIn aria-hidden={true} className='auth__icon auth__icon--linkedin' />
                         </button>
                     </div>
-                    <p className='authform__text authform__text--white' style={{ textAlign: 'center' }}>
+                    <p className='auth__txt auth__txt--white' style={{ textAlign: 'center' }}>
                         Don't have an account?
                         <span role='button' aria-label='open signup form' tabIndex={0} onClick={handleSignUpFormMounted} onKeyDown={(e) => onkeyDownHandler(e, 'Enter', handleSignUpFormMounted)}
-                            className='authform__text--green-alien-light authform__text--link' style={{ marginLeft: '5px' }} >Sign up</span>
+                            className='auth__txt--green-alien-light auth__txt--link' style={{ marginLeft: '5px' }} >Sign up</span>
                     </p>
                 </section>
             </div>

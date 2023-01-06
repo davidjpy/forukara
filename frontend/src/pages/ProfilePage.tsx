@@ -27,7 +27,7 @@ const ProfilePage: FC = () => {
     }, [isFetching, user]);
 
     return (
-        <div className='profilepage'>
+        <div className='profile-page'>
             <ProfileBackground
                 user={user as User}
                 isLoading={isLoading}

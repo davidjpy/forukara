@@ -84,14 +84,14 @@ const SignUpForm: FC = () => {
 
     const handleSubmitForm = async (e: FormEvent<HTMLFormElement>): Promise<any> => {
         e.preventDefault();
-        // setBlock('success');
-        setEmailCopy(email);
-        await createUser({
-            username: userId,
-            email: email,
-            password: password,
-            confirmPassword: confirmPassword
-        });
+        setBlock('success');
+        // setEmailCopy(email);
+        // await createUser({
+        //     username: userId,
+        //     email: email,
+        //     password: password,
+        //     confirmPassword: confirmPassword
+        // });
     }
 
     const handleNextBlock = (block: 'options' | 'form' | 'success'): void => {
@@ -139,9 +139,9 @@ const SignUpForm: FC = () => {
     useEffect(() => {
         let ref = overlayRef.current;
         const fadeOut = (): void => {
-            if (ref && ref.classList.contains('authform__overlay--fade') && !signUpFormMounted) {
+            if (ref && ref.classList.contains('auth__overlay--fade') && !signUpFormMounted) {
                 ref.style.display = 'none';
-                ref.classList.remove('authform__overlay--fade');
+                ref.classList.remove('auth__overlay--fade');
             }
         }
 
@@ -203,12 +203,12 @@ const SignUpForm: FC = () => {
 
     return (
         <div ref={overlayRef}
-            className={signUpFormMounted ? 'authform__overlay' : 'authform__overlay authform__overlay--fade'}>
-            <section ref={wrapperRef} className='authform authform--signup'>
+            className={signUpFormMounted ? 'auth__overlay' : 'auth__overlay auth__overlay--fade'}>
+            <section ref={wrapperRef} className='auth auth--signup'>
                 <header>
                     <h1>Sign Up</h1>
                 </header>
-                <div className='authform__wrapper'>
+                <div className='auth__wrapper'>
                     <SignUpOptions
                         block={block}
                         handleLoginFormMounted={handleLoginFormMounted}
@@ -221,7 +221,7 @@ const SignUpForm: FC = () => {
                         focusTrapOptions={focusTrapOptions}
                     >
                         <form onSubmit={handleSubmitForm}
-                            className='authform__form'
+                            className='auth__form'
                             style={{
                                 left:
                                     block === 'options' ? 'calc(100% + 2rem)' :
@@ -230,13 +230,13 @@ const SignUpForm: FC = () => {
                             }}
                         >
                             <button aria-label='close signup form' title='Close Signup Form' onClick={hadnleSignUpFormUnmounted} type='button'
-                                className='authform__button authform__button--cross'
+                                className='auth__btn auth__btn--cross'
                                 style={{ display: block === 'form' ? 'block' : 'none', right: '0' }}
                             >
                                 <IoMdClose aria-hidden={true} />
                             </button>
                             <button aria-label='back to signup options' title='Back to Signup Options' onClick={() => {handleNextBlock('options'); handleResetInput()}} type='button'
-                                className='authform__button authform__button--leftarrow'
+                                className='auth__btn auth__btn--leftarrow'
                                 style={{ display: block === 'form' ? 'block' : 'none' }}
                             >
                                 <BsArrowLeft aria-hidden={true} />
@@ -245,26 +245,26 @@ const SignUpForm: FC = () => {
                                 return (
                                     <div key={item.id} style={{ margin: item.id === 'register-username' ? '2rem 0 0 0' : item.err && '1rem 0 0 0' }}>
                                         <input id={item.id} value={item.value} onChange={item.onChange} type={item.type} placeholder=' '
-                                            onKeyDown={(e) => { e.key === 'Enter' && e.preventDefault(); }} className='authform__input' />
-                                        <label htmlFor={item.id} aria-label={item.text} className='authform__placeholder'>{item.icon} {item.text}<span>*</span></label>
-                                        {item.err && <p className='authform__text authform__text--red' style={{ margin: '8px 0 0 8px', fontSize: '0.8rem' }}>{item.err}</p>}
+                                            onKeyDown={(e) => { e.key === 'Enter' && e.preventDefault(); }} className='auth__input' />
+                                        <label htmlFor={item.id} aria-label={item.text} className='auth__placeholder'>{item.icon} {item.text}<span>*</span></label>
+                                        {item.err && <p className='auth__txt auth__txt--red' style={{ margin: '8px 0 0 8px', fontSize: '0.8rem' }}>{item.err}</p>}
                                     </div>
                                 );
                             })}
-                            {err && <p className='authform__text authform__text--red' style={{ margin: '8px 0 0 8px', fontSize: '0.8rem' }}>{err}</p>}
-                            {connectionErr && <p className='authform__text authform__text--red' style={{ margin: '8px 0 0 8px', fontSize: '0.8rem' }}>{connectionErr}</p>}
+                            {err && <p className='auth__txt auth__txt--red' style={{ margin: '8px 0 0 8px', fontSize: '0.8rem' }}>{err}</p>}
+                            {connectionErr && <p className='auth__txt auth__txt--red' style={{ margin: '8px 0 0 8px', fontSize: '0.8rem' }}>{connectionErr}</p>}
                             {createUserResult.isLoading ? (
                                 <div style={{ position: 'relative', margin: 0 }}>
                                     <input aria-label='Loading' type='submit' disabled={true} value='' />
-                                    <div className='authform__loader' style={{ position: 'absolute' }} />
+                                    <div className='auth__loader' style={{ position: 'absolute' }} />
                                 </div>
                             ) : (
                                 <input aria-label='Sign up' type='submit' disabled={submitNotAllowed} value='Create Account' />
                             )}
-                            <p className='authform__text authform__text--white' style={{ textAlign: 'center', margin: '30px 0 50px 0' }}>
+                            <p className='auth__txt auth__txt--white' style={{ textAlign: 'center', margin: '30px 0 50px 0' }}>
                                 Already have an account?
                                 <span role='button' aria-label='open login form' tabIndex={0} onClick={handleLoginFormMounted} onKeyDown={(e) => onkeyDownHandler(e, 'Enter', handleLoginFormMounted)}
-                                    className='authform__text--green-alien-light authform__text--link' style={{ marginLeft: '5px' }}>Login</span>
+                                    className='auth__txt--green-alien-light auth__txt--link' style={{ marginLeft: '5px' }}>Login</span>
                             </p>
                         </form>
                     </FocusTrap>

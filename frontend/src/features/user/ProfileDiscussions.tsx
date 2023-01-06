@@ -11,22 +11,22 @@ type Props = {
 
 const ProfileDiscussions: FC<Props> = ({ user, account }: Props) => {
     return (
-        <section className='profilesocial'>
-            <div className='profilesocial__wrapper'>
+        <section className='profile-soc'>
+            <div className='profile-soc__wrapper'>
                 <header>
                     <h1>
                         Discussions - <span>Results {user?.discussions?.length} </span>
-                        <div className='profilesocial__divider'></div>
+                        <div className='profile-soc__divider'></div>
                     </h1>
                 </header>
             </div>
             {!user.discussions?.length &&
-                <div className='profilesocial__svg'>
+                <div className='profile-soc__svg'>
                     <Publish width='50%' height='90%' style={{ margin: '3rem 4rem' }} />
-                    <header className='profilesocial__svg-header profilesocial__svg-header--discussions'>
+                    <header className='profile-soc__svg-header profile-soc__svg-header--discussions'>
                         <h1>Oops!</h1>
                     </header>
-                    <div className='profilesocial__text profilesocial__text--discussions'>
+                    <div className='profile-soc__txt profile-soc__txt--discussions'>
                         {user?.id === account.id ? (
                             <>
                                 <p>You don't appear to have started any discussions yet. Click the button below to start your first discussion.</p>

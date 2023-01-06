@@ -9,6 +9,10 @@ const userSchema = new mongoose.Schema<IUser>(
             type: String,
             required: true,
         },
+        preferredName: {
+            type: String,
+            default: ''
+        },
         password: {
             type: String,
             default: null
@@ -17,13 +21,41 @@ const userSchema = new mongoose.Schema<IUser>(
             type: String,
             required: true,
         },
+        location: {
+            type: String,
+            default: ''
+        },
+        occupation: {
+            type: String,
+            default: ''
+        },
+        gender: {
+            type: String,
+            default: ''
+        },
+        title: {
+            type: String,
+            default: ''
+        },
+        twitter: {
+            type: String,
+            default: ''
+        },
+        linkedin: {
+            type: String,
+            default: ''
+        },
+        facebook: {
+            type: String,
+            default: ''
+        },
         avatar: {
             type: String,
-            default: null
+            default: ''
         },
         background: {
             type: String,
-            default: null
+            default: ''
         },
         about: {
             type: String,

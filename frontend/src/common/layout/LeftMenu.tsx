@@ -58,10 +58,10 @@ const LeftMenu: FC = () => {
     }, [location]);
 
     return (
-        <section className='leftmenu'>
-            <div className='leftmenu__wrapper'>
+        <section className='lt-menu'>
+            <div className='lt-menu__wrapper'>
                 <div role='img' aria-label='background image' title='background image'
-                    className='leftmenu__background' style={{ backgroundImage: `url(${!user?.background ? default_background : user?.background})` }}
+                    className='lt-menu__bg' style={{ backgroundImage: `url(${!user?.background ? default_background : user?.background})` }}
                 />
                 <figure>
                     <div>
@@ -79,18 +79,18 @@ const LeftMenu: FC = () => {
                         </figcaption>
                     )}
                 </figure>
-                <div className='leftmenu__tablist'>
+                <div className='lt-menu__tablist'>
                     <section>
                         <header style={{ marginTop: 0 }}>
                             <h1>Content</h1>
                         </header>
-                        <div className='leftmenu__divider'></div>
+                        <div className='lt-menu__divider'></div>
                         <ul role='tablist'>
                             {contentList.map((item) => {
                                 return (
                                     <li key={item.tab} role='tab' aria-controls={item.tab}
                                         onClick={() => handleNavigatePage(item.navigate, 'content')}
-                                        className={page === item.navigate ? 'leftmenu__listitem leftmenu__listitem leftmenu__listitem--active' : 'leftmenu__listitem'}
+                                        className={page === item.navigate ? 'lt-menu__li lt-menu__li lt-menu__li--active' : 'lt-menu__li'}
                                     >
                                         {item.icon}{item.tab}
                                     </li>
@@ -102,13 +102,13 @@ const LeftMenu: FC = () => {
                         <header>
                             <h1>Account</h1>
                         </header>
-                        <div className='leftmenu__divider'></div>
+                        <div className='lt-menu__divider'></div>
                         <ul role='tablist'>
                             {accountList.map((item) => {
                                 return (
                                     <li key={item.tab} role='tab' aria-controls={item.tab}
                                         onClick={() => handleNavigatePage(item.navigate, 'account')}
-                                        className={page === item.navigate ? 'leftmenu__listitem leftmenu__listitem leftmenu__listitem--active' : 'leftmenu__listitem'}
+                                        className={page === item.navigate ? 'lt-menu__li lt-menu__li lt-menu__li--active' : 'lt-menu__li'}
                                     >
                                         {item.icon}{item.tab}
                                     </li>
@@ -120,13 +120,13 @@ const LeftMenu: FC = () => {
                         <header>
                             <h1>Support</h1>
                         </header>
-                        <div className='leftmenu__divider'></div>
+                        <div className='lt-menu__divider'></div>
                         <ul role='tablist'>
                             {supportList.map((item) => {
                                 return (
                                     <li key={item.tab} role='tab' aria-controls={item.tab}
                                         onClick={() => handleNavigatePage(item.navigate, 'support')}
-                                        className={page === item.navigate ? 'leftmenu__listitem leftmenu__listitem leftmenu__listitem--active' : 'leftmenu__listitem'}
+                                        className={page === item.navigate ? 'lt-menu__li lt-menu__li lt-menu__li--active' : 'lt-menu__li'}
                                     >
                                         {item.icon}{item.tab}
                                     </li>

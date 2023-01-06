@@ -10,36 +10,36 @@ const ProfileTabBar: FC = () => {
     }
 
     return (
-        <section className='profiletabbar'>
-            <ul role='tablist' className='profiletabbar__tablist'>
+        <section className='profile-bar'>
+            <ul role='tablist' className='profile-bar__tablist'>
                 <li role='tab' aria-controls='biography' onClick={() => handleSwitchTab('biography')}
                     className={searchParams.get('search') === 'biography' ?
-                        'profiletabbar__tab profiletabbar__tab--active' :
-                        'profiletabbar__tab'
+                        'profile-bar__tab profile-bar__tab--active' :
+                        'profile-bar__tab'
                     }>
                     <h1>Biography</h1>
                 </li>
                 <li role='tab' aria-controls='discussions' onClick={() => handleSwitchTab('discussions')}
                     className={searchParams.get('search') === 'discussions' ?
-                        'profiletabbar__tab profiletabbar__tab--active' :
-                        'profiletabbar__tab'
+                        'profile-bar__tab profile-bar__tab--active' :
+                        'profile-bar__tab'
                     }>
                     <h1>Discussions</h1>
                 </li>
                 <li role='tab' aria-controls='connections' onClick={() => handleSwitchTab('connections')}
                     className={searchParams.get('search') === 'connections' ?
-                        'profiletabbar__tab profiletabbar__tab--active' :
-                        'profiletabbar__tab'
+                        'profile-bar__tab profile-bar__tab--active' :
+                        'profile-bar__tab'
                     }>
                     <h1>Connections</h1>
                 </li>
                 <div
                     className={
                         searchParams.get('search') === 'biography' ?
-                            'profiletabbar__underline profiletabbar__underline--left' :
+                            'profile-bar__underline profile-bar__underline--left' :
                             searchParams.get('search') === 'discussions' ?
-                                'profiletabbar__underline profiletabbar__underline--center' :
-                                'profiletabbar__underline profiletabbar__underline--right'
+                                'profile-bar__underline profile-bar__underline--center' :
+                                'profile-bar__underline profile-bar__underline--right'
                     }>
                 </div>
             </ul>
