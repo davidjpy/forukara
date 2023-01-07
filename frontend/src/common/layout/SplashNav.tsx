@@ -8,6 +8,7 @@ import { toggleSignUpForm, toggleLoginForm } from '@features/auth/authSlice'
 import { useLogoutMutation } from '@features/auth/authApiSlice';
 import { useNavigate } from 'react-router-dom';
 import { useGetUser } from '@common/hooks/useGetUser';
+import default_avatar from '@media/images/default_avatar.webp';
 
 const SplashNav: FC = () => {
 
@@ -43,8 +44,8 @@ const SplashNav: FC = () => {
                     {user.id ? (
                         <div className='sp-nav__wrapper'>
                             <button onClick={handleLogout} className='sp-nav__btn sp-nav__btn--txt'>Logout</button>
-                            <figure onClick={() => handleNavigate(`profile/${user.username}`)} aria-label='Profile'>
-                                <img src={user.avatar as string} alt={user.avatar as string} />
+                            <figure onClick={() => handleNavigate(`profile/${user.profile.username}`)} aria-label='Profile'>
+                                <img src={user.profile.avatar as string || default_avatar} alt={user.profile.avatar as string || default_avatar} />
                             </figure>
                         </div>
                     ) : (

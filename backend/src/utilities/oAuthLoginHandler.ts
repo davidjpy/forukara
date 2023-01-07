@@ -18,16 +18,18 @@ export const oAuthLoginHandler = async (authorizationCode: string, codeVerifier:
     const profile = jwt.decode(authResults.id_token) as OAuthProfile;
 
     // Check for any matches for Google email
-    let user = await User.findOne({ email: profile.email }).lean().exec();
-
+    let user = await User.findOne({ 'profile.email': profile.email }).lean().exec();
+    
     // Create user with provided email
     if (!user) {
         const userObj: IUser = {
-            username: profile.name.trim(),
-            email: profile.email,
-            avatar: profile.picture,
-            status: 'Active',
-            expiredIn: null
+            profile: {
+                username: profile.name.trim(),
+                email: profile.email,
+                avatar: profile.picture,
+                status: 'Active',
+                expiredIn: null
+            }
         };
 
         user = await User.create(userObj);

@@ -16,8 +16,8 @@ const ProfileBio: FC<Props> = ({ user }: Props) => {
                         <div className='profile-bio__divider'></div>
                     </h1>
                 </header>
-                {user?.about ? (
-                    <p>{user?.about}</p>
+                {user?.profile.biography.about ? (
+                    <p>{user?.profile.biography.about}</p>
                 ) : (
                     <p style={{ color: 'gray' }}>Write something about yourself...</p>
                 )}

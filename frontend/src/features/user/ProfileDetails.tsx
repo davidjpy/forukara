@@ -20,6 +20,8 @@ const ProfileDetails: FC<Props> = ({ user, isLoading }: Props) => {
     const account = useAppSelector((state) => state.auth.user);
     const navigate = useNavigate();
 
+    console.log(user)
+
     return (
         <section className={isLoading ? 'profile-dls' : 'profile-dls profile-dls--loaded'}>
             <div className={isLoading ? 'profile-dls__wrapper' : 'profile-dls__wrapper profile-dls__wrapper--loaded'}>
@@ -31,9 +33,9 @@ const ProfileDetails: FC<Props> = ({ user, isLoading }: Props) => {
                 }
                 <figure className={isLoading ? 'profile-dls__figure' : 'profile-dls__figure profile-dls__figure--loaded'}>
                     <div>
-                        <img alt={!user?.avatar ? default_avatar : user?.avatar} src={!user?.avatar ? default_avatar : user?.avatar} />
+                        <img alt={!user?.profile.avatar ? default_avatar : user?.profile.avatar} src={!user?.profile.avatar ? default_avatar : user?.profile.avatar} />
                     </div>
-                    <figcaption>{user?.username}</figcaption>
+                    <figcaption>{user?.profile.username}</figcaption>
                     <p>
                         <ImLocation2 className='profile-dls__icon' />
                         Tokyo, Japan

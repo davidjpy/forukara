@@ -10,7 +10,7 @@ import { toggleLoginForm } from '@features/auth/authSlice';
 import { switchPage } from '@features/generic/genericSlice';
 import default_background from '@media/images/default_background.webp';
 import default_avatar from '@media/images/default_avatar.webp';
-import { Pages } from '@common/utilities/types';
+import { Pages, User } from '@common/utilities/types';
 
 const contentList = [
     { tab: 'home', icon: <AiOutlineHome style={{ marginBottom: '2px' }} />, navigate: 'home' }
@@ -33,7 +33,7 @@ const LeftMenu: FC = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const location = useLocation();
-    const user = useAppSelector((state) => state.auth.user);
+    const user = useAppSelector((state) => state.auth.user) as User;
     const page = useAppSelector((state) => state.generic.page);
 
     const handleNavigatePage = (page: string, type: 'content' | 'account' | 'support'): void => {
@@ -41,7 +41,7 @@ const LeftMenu: FC = () => {
             handleToggleLoginForm(true);
         } else {
             if (page === 'profile') {
-                navigate(`profile/${user.username}`);
+                navigate(`profile/${user!.profile.username}`);
             } else {
                 navigate(`${page}`);
             }
@@ -61,15 +61,15 @@ const LeftMenu: FC = () => {
         <section className='lt-menu'>
             <div className='lt-menu__wrapper'>
                 <div role='img' aria-label='background image' title='background image'
-                    className='lt-menu__bg' style={{ backgroundImage: `url(${!user?.background ? default_background : user?.background})` }}
+                    className='lt-menu__bg' style={{ backgroundImage: `url(${!user?.profile.background ? default_background : user?.profile.background})` }}
                 />
                 <figure>
                     <div>
-                        <img alt='profile avatar' src={!user?.avatar ? default_avatar : user?.avatar} />
+                        <img alt='profile avatar' src={!user?.profile.avatar ? default_avatar : user?.profile.avatar} />
                     </div>
                     {user.id ? (
                         <figcaption>
-                            {user?.username}
+                            {user?.profile.username}
                         </figcaption>
                     ) : (
                         <figcaption>

@@ -36,7 +36,7 @@ const ProfileDiscussions: FC<Props> = ({ user, account }: Props) => {
                                 </button>
                             </>
                         ) : (
-                            <p>{user?.username} does not appear to have started any discussions yet.</p>
+                            <p>{user?.profile.username} does not appear to have started any discussions yet.</p>
                         )}
                     </div>
                 </div>

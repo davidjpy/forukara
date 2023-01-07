@@ -5,7 +5,7 @@ import { Request, Response } from 'express';
 
 import User from '@models/User';
 import { oAuthLoginHandler } from '@utilities/oAuthLoginHandler';
-import { IUser, ErrorResponse, ErrorCode, JwtToken, OAuthLogin } from '@utilities/types';
+import { IUser, ErrorResponse, ErrorCode, JwtToken, OAuthLogin, ProfileInfo } from '@utilities/types';
 
 // Login a user
 const login = asyncHandler(async (req: Request, res: Response): Promise<any> => {
@@ -26,7 +26,7 @@ const login = asyncHandler(async (req: Request, res: Response): Promise<any> => 
     
     // Login user with local account
     else {
-        const { email, password }: IUser = req.body;
+        const { email, password }: ProfileInfo = req.body;
         let errorCodes: Array<ErrorResponse> = [];
 
         // Case 1: Email missing
@@ -51,16 +51,16 @@ const login = asyncHandler(async (req: Request, res: Response): Promise<any> => 
         }
 
         // Case 4: User not verified
-        if (user.status !== 'Active') {
+        if (user.profile.status !== 'Active') {
             return res.status(401).json({ message: [{ error: `Account's email address was not verified` }] });
         }
 
         // Case 5: User password was not setted
-        if (!user.password) {
+        if (!user.profile.password) {
             return res.status(401).json({ message: [{ error: 'Your password is incorrect. Please try again', code: ErrorCode.PasswordErr }] });
         }
 
-        const isValidPassword = await bcrypt.compare(password!, user.password!);
+        const isValidPassword = await bcrypt.compare(password!, user.profile.password!);
 
         // Case 6: Incorrect password
         if (!isValidPassword) {
@@ -72,7 +72,7 @@ const login = asyncHandler(async (req: Request, res: Response): Promise<any> => 
         return res.status(404).json({ message: [{ error: `The Forukara account doesn't exist`, code: ErrorCode.UsernameErr }] });
     }
 
-    const accessTokenPayload: JwtToken = { tokenId: user._id.toString(), tokenUsername: user.username, tokenEmail: user.email };
+    const accessTokenPayload: JwtToken = { tokenId: user._id.toString(), tokenUsername: user.profile.username, tokenEmail: user.profile.email };
     const refreshTokenPayload: JwtToken = { tokenId: user._id.toString() };
 
     const accessToken = jwt.sign(accessTokenPayload, process.env.ACCESS_TOKEN_SECRET as Secret, { expiresIn: '1d' });
@@ -87,11 +87,26 @@ const login = asyncHandler(async (req: Request, res: Response): Promise<any> => 
         maxAge: 7 * 24 * 60 * 60 * 1000
     });
 
+
+    const { profile: { username, preferredName, avatar, background, gender, location, title, occupation, biography, socialMedia }, connections, discussions, createdAt } = user;
+
     const userPayload: IUser = {
         id: user._id.toString(),
-        username: user.username,
-        email: user.email,
-        createdAt: user.createdAt
+        profile: {
+            username: username,
+            preferredName: preferredName,
+            avatar: avatar,
+            background: background,
+            gender: gender,
+            location: location,
+            title: title,
+            occupation: occupation,
+            biography: biography,
+            socialMedia: socialMedia
+        },
+        discussions: discussions,
+        connections: connections,
+        createdAt: createdAt,
     };
 
     res.json({ message: { token: accessToken, user: userPayload } });
@@ -125,7 +140,7 @@ const refresh = asyncHandler(async (req: Request, res: Response): Promise<any> =
         }
 
         // Assign new token
-        const accessTokenPayload: JwtToken = { tokenId: user._id.toString(), tokenUsername: user.username, tokenEmail: user.email };
+        const accessTokenPayload: JwtToken = { tokenId: user._id.toString(), tokenUsername: user.profile.username, tokenEmail: user.profile.email };
         const accessToken = jwt.sign(accessTokenPayload, process.env.ACCESS_TOKEN_SECRET as Secret, { expiresIn: '1d' });
 
         res.json({ message: { token: accessToken, id: user._id.toString() } });

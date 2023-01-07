@@ -14,30 +14,66 @@ export interface EmailService {
     subject: string;
 }
 
-export interface IUser {
-    _id?: ObjectId;
-    id?: string;
+export type ProfileSocialMedia = {
+    twitter?: string;
+    facebook?: string;
+    linkedin?: string;
+}
+
+export type ProfileBio = {
+    about?: string;
+}
+
+export type ProfileInfo = {
     username?: string;
     preferredName?: string;
     password?: string;
+    confirmPassword?: string;
     email?: string;
     avatar?: string;
+    background?: string;
     gender?: 'Male' | 'Female' | 'Other' | string;
     location?: string;
     title?: string;
     occupation?: string;
-    twitter?: string;
-    facebook?: string;
-    linkedin?: string;
-    background?: string;
-    about?: string;
+    status?: 'Pending' | 'Active';
+    expiredIn?: Date | null;
+    biography?: ProfileBio;
+    socialMedia?: ProfileSocialMedia;
+}
+
+export interface IUser {
+    id?: string;
+    profile: ProfileInfo;
     discussions?: Array<ObjectId> | Array<LeanDocument<ObjectId>>;
     connections?: Array<ObjectId> | Array<LeanDocument<ObjectId>>;
-    confirmPassword?: string;
-    status?: 'Pending' | 'Active';
     createdAt?: Date;
-    expiredIn?: Date | null;
 }
+
+// export interface IUser {
+//     _id?: ObjectId;
+//     id?: string;
+//     username?: string;
+//     preferredName?: string;
+//     password?: string;
+//     email?: string;
+//     avatar?: string;
+//     gender?: 'Male' | 'Female' | 'Other' | string;
+//     location?: string;
+//     title?: string;
+//     occupation?: string;
+//     twitter?: string;
+//     facebook?: string;
+//     linkedin?: string;
+//     background?: string;
+//     about?: string;
+//     discussions?: Array<ObjectId> | Array<LeanDocument<ObjectId>>;
+//     connections?: Array<ObjectId> | Array<LeanDocument<ObjectId>>;
+//     confirmPassword?: string;
+//     status?: 'Pending' | 'Active';
+//     createdAt?: Date;
+//     expiredIn?: Date | null;
+// }
 
 export interface IPost {
     id?: ObjectId;

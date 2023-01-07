@@ -8,11 +8,11 @@ import path from 'path';
 
 import User from '@models/User';
 import emailService from '@utilities/emailService';
-import { IUser, JwtToken, ErrorResponse, ErrorCode } from '@utilities/types';
+import { IUser, JwtToken, ErrorResponse, ErrorCode, ProfileInfo, ProfileSocialMedia } from '@utilities/types';
 
 // Get all users
 const getAllUsers = asyncHandler(async (req: Request, res: Response): Promise<any> => {
-    const users: Array<IUser> = await User.find().select('-password').lean();
+    const users: Array<IUser> = await User.find().select(['-profile.password']).lean();
 
     // Case 1: No users found
     if (!users?.length) {
@@ -31,23 +31,36 @@ const getUserByUsername = asyncHandler(async (req: Request, res: Response): Prom
         return res.status(400).json({ message: 'All fields are required', code: ErrorCode.Failed });
     }
 
-    const user = await User.findOne({ username: username }).select(['-password', '-email']).lean().exec();
+    const user = await User.findOne({ 'profile.username': username }).select(['-profile.password', '-profile.email']).lean().exec();
 
     // Case 2: User not found
     if (!user) {
         return res.status(404).json({ message: 'User not found', code: ErrorCode.Failed });
     }
+    console.log(user)
+    const { profile: { preferredName, avatar, background, gender, location, title, occupation, biography, socialMedia }, connections, discussions, createdAt } = user;
 
     const returnPayload: IUser = {
         id: user._id.toString(),
-        username: user.username,
-        avatar: user.avatar,
-        background: user.background,
-        about: user.about,
-        discussions: user.discussions,
-        connections: user.connections,
-        createdAt: user.createdAt
+        profile: {
+            username: username,
+            preferredName: preferredName,
+            avatar: avatar,
+            background: background,
+            gender: gender,
+            location: location,
+            title: title,
+            occupation: occupation,
+            biography: biography,
+            socialMedia: socialMedia
+        },
+        discussions: discussions,
+        connections: connections,
+        createdAt: createdAt,
     };
+
+    console.log(returnPayload)
+
 
     res.json({ message: returnPayload });
 });
@@ -61,23 +74,33 @@ const getAccountById = asyncHandler(async (req: Request, res: Response): Promise
         return res.status(400).json({ message: 'All fields are required', code: ErrorCode.Failed });
     }
 
-    const user = await User.findById(id).select(['-password']).lean().exec();
+    const user = await User.findById(id).select(['-profile.password']).lean().exec();
 
     // Case 2: User not found
     if (!user) {
         return res.status(404).json({ message: 'User not found', code: ErrorCode.Failed });
     }
 
+    const { profile: { email, username, preferredName, avatar, background, gender, location, title, occupation, biography, socialMedia }, connections, discussions, createdAt } = user;
+
     const returnPayload: IUser = {
         id: user._id.toString(),
-        email: user.email,
-        username: user.username,
-        avatar: user.avatar,
-        background: user.background,
-        about: user.about,
-        discussions: user.discussions,
-        connections: user.connections,
-        createdAt: user.createdAt
+        profile: {
+            email: email,
+            username: username,
+            preferredName: preferredName,
+            avatar: avatar,
+            background: background,
+            gender: gender,
+            location: location,
+            title: title,
+            occupation: occupation,
+            biography: biography,
+            socialMedia: socialMedia
+        },
+        discussions: discussions,
+        connections: connections,
+        createdAt: createdAt,
     };
 
     res.json({ message: returnPayload });
@@ -85,7 +108,7 @@ const getAccountById = asyncHandler(async (req: Request, res: Response): Promise
 
 // Create new user
 const createUser = asyncHandler(async (req: Request, res: Response): Promise<any> => {
-    const { username, password, confirmPassword, email }: IUser = req.body;
+    const { username, password, confirmPassword, email }: ProfileInfo = req.body;
 
     // Buffer array for holding the missing error messages
     let errorCodes: Array<ErrorResponse> = [];
@@ -125,8 +148,8 @@ const createUser = asyncHandler(async (req: Request, res: Response): Promise<any
         return res.status(400).json({ message: [{ error: 'Invalid email address', code: ErrorCode.EmailErr }] });
     }
 
-    const duplicateUsername = await User.findOne({ username }).lean().exec();
-    const duplicateEmail = await User.findOne({ email }).lean().exec();
+    const duplicateUsername = await User.findOne({ 'profile.username': username }).lean().exec();
+    const duplicateEmail = await User.findOne({ 'profile.email': email }).lean().exec();
 
     // Case 7: Username already taken
     if (duplicateUsername) {
@@ -140,11 +163,11 @@ const createUser = asyncHandler(async (req: Request, res: Response): Promise<any
 
     // Encrypt password before storing it to MongoDB
     const hashedPwd = await bcrypt.hash(password!, 10);
-    const userObj = { username, 'password': hashedPwd, email };
+    const userObj: IUser = { profile: {username, 'password': hashedPwd, email} };
 
     const user = await User.create(userObj);
 
-    const payload: JwtToken = { tokenId: user._id.toString(), tokenUsername: user.username!, tokenEmail: user.email! };
+    const payload: JwtToken = { tokenId: user._id.toString(), tokenUsername: user.profile.username!, tokenEmail: user.profile.email! };
 
     // Token for email verification endpoint
     const token = jwt.sign(payload, process.env.VERIFICATION_SECRET_KEY as Secret, { expiresIn: '300s' });
@@ -172,7 +195,7 @@ const createUser = asyncHandler(async (req: Request, res: Response): Promise<any
 // Update account info
 const updateAccountById = asyncHandler(async (req: Request, res: Response): Promise<any> => {
     const id: string = req.params.id;
-    const { username, preferredName, location, title, gender, twitter, linkedin, facebook, avatar, background }: IUser = req.body;
+    const { username, preferredName, location, title, gender, avatar, background, twitter, linkedin, facebook }: ProfileInfo & ProfileSocialMedia = req.body;
 
     // Case 1: Missing fields
     if (!id || !username) {
@@ -186,31 +209,26 @@ const updateAccountById = asyncHandler(async (req: Request, res: Response): Prom
         return res.status(400).json({ message: 'User not found', code: ErrorCode.Failed });
     }
 
-    const duplicateUsername = await User.findOne({ username }).lean().exec();
+    const duplicateUsername = await User.findOne({ 'profile.username': username }).lean().exec();
 
     // Case 3: Username already taken
     if (duplicateUsername && duplicateUsername?._id.toString() !== id) {
         return res.status(409).json({ message: 'Username has already taken', code: ErrorCode.UsernameErr });
     }
 
-    // // Case 3: Email already taken
-    // if (duplicateEmail && duplicateEmail?._id.toString() !== id) {
-    //     return res.status(409).json({ message: 'Email has already taken', code: ErrorCode.EmailErr });
-    // }
-
-    user.username = username;
-    user.preferredName = preferredName;
-    user.location = location;
-    user.title = title;
-    user.gender = gender;
-    user.twitter = twitter;
-    user.linkedin = linkedin;
-    user.facebook = facebook;
+    user.profile.username = username;
+    user.profile.preferredName = preferredName;
+    user.profile.location = location;
+    user.profile.title = title;
+    user.profile.gender = gender;
+    user.profile.socialMedia = {
+        twitter: twitter,
+        linkedin: linkedin,
+        facebook: facebook
+    };
 
     // Handle the image upload
     const { avatarFile, backgroundFile }: any = req.files;
-
-    console.log(avatar, background)
 
     if (avatarFile) {
         // Convert small avatar image to a smaller size
@@ -224,13 +242,13 @@ const updateAccountById = asyncHandler(async (req: Request, res: Response): Prom
             })
             .toFile(`${avatarFile[0].destination}/${path.parse(avatarFile[0].filename).name}.webp`);
 
-        user.avatar = `${process.env.HOST}/images/${path.parse(avatarFile[0].filename).name}.webp`;
-    } 
+        user.profile.avatar = `${process.env.HOST}/images/${path.parse(avatarFile[0].filename).name}.webp`;
+    }
     else if (avatar) {
-        user.avatar = avatar;
+        user.profile.avatar = avatar;
     }
     else {
-        user.avatar = '';
+        user.profile.avatar = '';
     }
 
     if (backgroundFile) {
@@ -245,17 +263,17 @@ const updateAccountById = asyncHandler(async (req: Request, res: Response): Prom
             })
             .toFile(`${backgroundFile[0].destination}/${path.parse(backgroundFile[0].filename).name}.webp`);
 
-        user.background = `${process.env.HOST}/images/${path.parse(backgroundFile[0].filename).name}.webp`;
+        user.profile.background = `${process.env.HOST}/images/${path.parse(backgroundFile[0].filename).name}.webp`;
     } else if (background) {
-        user.background = background;
+        user.profile.background = background;
     }
     else {
-        user.background = '';
+        user.profile.background = '';
     }
 
     const updatedUser = await user.save();
 
-    res.json({ message: `User ${updatedUser.username} has been updated` });
+    res.json({ message: `User ${updatedUser.profile.username} has been updated` });
 });
 
 // Delete existing user
@@ -276,7 +294,7 @@ const deleteUser = asyncHandler(async (req: Request, res: Response): Promise<any
 
     const result = await user.deleteOne();
 
-    res.json({ message: `User ${result.username} deleted` });
+    res.json({ message: `User ${result.profile.username} deleted` });
 });
 
 // Email verification 
@@ -293,7 +311,7 @@ const verifiyUser = asyncHandler(async (req: Request, res: Response): Promise<an
             return res.status(401).json({ message: 'The verification link is invalid', code: ErrorCode.Failed });
         }
 
-        const user = await User.findOne({ _id: tokenId, username: tokenUsername, email: tokenEmail }).exec();
+        const user = await User.findOne({ _id: tokenId, 'profile.username': tokenUsername, 'profile.email': tokenEmail }).exec();
 
         // Case 2: User not found
         if (!user) {
@@ -301,15 +319,15 @@ const verifiyUser = asyncHandler(async (req: Request, res: Response): Promise<an
         }
 
         // Case 3: User already verified
-        if (user.status === 'Active') {
+        if (user.profile.status === 'Active') {
             return res.status(404).json({ message: 'Account was already verified', code: ErrorCode.Failed });
         }
 
-        user.status = 'Active';
-        user.expiredIn = null;
+        user.profile.status = 'Active';
+        user.profile.expiredIn = null;
         await user.save();
 
-        res.json({ message: `Account ${user.username} verified` });
+        res.json({ message: `Account ${user.profile.username} verified` });
     } catch (err) {
         // Case 4: Unable to decrypt jwt token
         return res.status(401).json({ message: 'The verification link is invalid', code: ErrorCode.Failed });
@@ -318,14 +336,14 @@ const verifiyUser = asyncHandler(async (req: Request, res: Response): Promise<an
 
 // Get another verification email
 const resendVerification = asyncHandler(async (req: Request, res: Response): Promise<any> => {
-    const { email }: IUser = req.body;
-
+    const { email }: ProfileInfo = req.body;
+    console.log(email)
     // Case 1: Email missing
     if (!email) {
         return res.status(400).json({ message: { error: 'Email not found', code: ErrorCode.EmailErr } });
     }
 
-    const user = await User.findOne({ email: email }).select('-password').lean().exec();
+    const user = await User.findOne({ 'profile.email': email }).select(['-profile.password']).lean().exec();
 
     // Case 2: User already deleted due to ten minute TTL index
     if (!user) {
@@ -333,11 +351,11 @@ const resendVerification = asyncHandler(async (req: Request, res: Response): Pro
     }
 
     // Case 3: User already verified
-    if (user.status === 'Active') {
+    if (user.profile.status === 'Active') {
         return res.status(400).json({ message: { error: 'Account has been verified' }, code: ErrorCode.Failed });
     }
 
-    const payload: JwtToken = { tokenId: user._id.toString(), tokenUsername: user.username!, tokenEmail: user.email! }
+    const payload: JwtToken = { tokenId: user._id.toString(), tokenUsername: user.profile.username!, tokenEmail: user.profile.email! }
 
     // Create another token for email verification endpoint
     const token = jwt.sign(payload, process.env.VERIFICATION_SECRET_KEY as Secret, { expiresIn: '300s' });
@@ -346,7 +364,7 @@ const resendVerification = asyncHandler(async (req: Request, res: Response): Pro
     const emailOptions = {
         HTMLTemplate: 'emailVerification.html',
         replacement: {
-            username: user.username,
+            username: user.profile.username,
             url: `${process.env.HOST}/users/verifications/${token}/`
         },
         target: email,
@@ -371,7 +389,6 @@ const testing = asyncHandler(async (req: Request, res: Response): Promise<any> =
 
 export = {
     getAllUsers,
-    // getUserByUsername,
     getUserByUsername,
     createUser,
     deleteUser,

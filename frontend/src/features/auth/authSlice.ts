@@ -18,18 +18,27 @@ const initialState: AuthState = {
     credantial: null,
     user: {
         id: '',
-        username: '',
-        email: '',
-        avatar: '',
-        background: '',
-        about: '',
-        preferredName: '',
-        gender: '',
-        location: '',
-        occupation: '',
+        profile: {
+            username: '',
+            email: '',
+            avatar: '',
+            background: '',
+            preferredName: '',
+            gender: '',
+            location: '',
+            occupation: '',
+            biography: {
+                about: '',
+            },
+            socialMedia: {
+                twitter: '',
+                linkedin: '',
+                facebook: ''
+            }
+        },
         discussions: [],
         connections: [],
-        createdAt: ''
+        createdAt: '',
     },
     unknownAuthErr: ''
 };
@@ -49,7 +58,7 @@ export const authSlice = createSlice({
         },
 
         // Set current user info
-        setUserInfo: (state, action: PayloadAction<User>) => {
+        setUserInfo: (state, action: PayloadAction<Partial<User>>) => {
             state.user = { ...state.user, ...action.payload };
         },
 

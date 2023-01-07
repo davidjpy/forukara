@@ -46,8 +46,8 @@ const Nav: FC = () => {
                     {user.id ? (
                         <div className='nav__wrapper'>
                             <p role='button' onClick={handleLogout} className='nav__txt nav__txt--btn nav__txt--link'>Logout</p>
-                            <figure onClick={() => handleNavigate(`profile/${user.username}`)} aria-label='Profile'>
-                                <img src={user.avatar as string || default_avatar} alt={user.avatar as string} />
+                            <figure onClick={() => handleNavigate(`profile/${user.profile.username}`)} aria-label='Profile'>
+                                <img src={user.profile.avatar as string || default_avatar} alt={user.profile.avatar as string} />
                             </figure>
                         </div>
                     ) : (

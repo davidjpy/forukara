@@ -1,8 +1,3 @@
-export interface LoginResponse {
-    token: string;
-    user: User;
-}
-
 export interface RefreshResponse {
     token: string;
     id: string;
@@ -13,38 +8,64 @@ export interface OAuthBody {
     challenge: string;
 }
 
-export type User = {
-    id?: string;
+export type ProfileSocialMedia = {
+    twitter?: string;
+    facebook?: string;
+    linkedin?: string;
+}
+
+export type ProfileBio = {
+    about?: string;
+}
+
+export type ProfileInfo = {
     username?: string;
     preferredName?: string;
-    email?: string;
     password?: string;
     confirmPassword?: string;
+    email?: string;
     avatar?: string;
     background?: string;
     gender?: 'Male' | 'Female' | 'Other' | string;
     location?: string;
     title?: string;
     occupation?: string;
-    twitter?: string;
-    facebook?: string;
-    linkedin?: string;
-    about?: string;
-    discussions?: Array<string>;
-    connections?: Array<string>;
     status?: 'Pending' | 'Active';
-    createdAt?: string;
+    expiredIn?: Date | null;
+    biography: ProfileBio;
+    socialMedia: ProfileSocialMedia;
 }
 
-export type UserLogin = {
-    auth: 'id' | 'oauth',
-    body: {
-        email?: string;
-        password?: string;
-        authorizationCode?: string;
-        codeVerifier?: string;
-        codeChallenge?: string;
-    }
+export interface User {
+    id?: string;
+    profile: ProfileInfo;
+    discussions: Array<string>;
+    connections: Array<string>;
+    createdAt?: Date | string;
 }
+
+// export type User = {
+//     id?: string;
+//     username?: string;
+//     preferredName?: string;
+//     email?: string;
+//     password?: string;
+//     confirmPassword?: string;
+//     avatar?: string;
+//     background?: string;
+//     gender?: 'Male' | 'Female' | 'Other' | string;
+//     location?: string;
+//     title?: string;
+//     occupation?: string;
+//     twitter?: string;
+//     facebook?: string;
+//     linkedin?: string;
+//     about?: string;
+//     discussions?: Array<string>;
+//     connections?: Array<string>;
+//     status?: 'Pending' | 'Active';
+//     createdAt?: string;
+// }
+
 
 export type Pages = 'splash' | 'home' | 'profile' | 'notifications' | 'settings' | 'help' | 'feedback' | 'contact' | null;

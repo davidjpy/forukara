@@ -7,6 +7,7 @@ import { ImUpload } from 'react-icons/im';
 import { User } from '@common/utilities/types';
 import default_background from '@media/images/default_background.webp';
 import default_avatar from '@media/images/default_avatar.webp';
+import { useEditAccountMutation } from './userApiSlice';
 
 type Props = {
     account: User;
@@ -21,6 +22,7 @@ const EditAccount: FC<Props> = ({ account }: Props) => {
 
     const avatarRef = useRef<HTMLInputElement>(null);
     const bgRef = useRef<HTMLInputElement>(null);
+    const [submit, submitResult] = useEditAccountMutation();
 
     // Input states
     const [name, setName] = useState<string>('');
@@ -42,22 +44,24 @@ const EditAccount: FC<Props> = ({ account }: Props) => {
     const [facebook, setFacebook] = useState<string>('');
 
     useEffect(() => {
-        if (account.username) {
-            setName(account.username);
-            setPName(account.preferredName || '');
-            setLocation(account.location || '');
-            setOccupation(account.occupation || '');
-            setTitle(account.title || '');
-            setGender(account.gender || '');
-            setTwitter(account.twitter || '');
-            setLinkedin(account.linkedin || '');
-            setFacebook(account.facebook || '');
-            if (account.avatar) {
-                setAvatar({ name: account.avatar, url: account.avatar });
+        if (account.profile.username) {
+            const { profile } = account;
+            
+            setName(profile.username as string);
+            setPName(profile.preferredName || '');
+            setLocation(profile.location || '');
+            setOccupation(profile.occupation || '');
+            setTitle(profile.title || '');
+            setGender(profile.gender || '');
+            setTwitter(profile.socialMedia.twitter || '');
+            setLinkedin(profile.socialMedia.linkedin || '');
+            setFacebook(profile.socialMedia.facebook || '');
+            if (profile.avatar) {
+                setAvatar({ name: profile.avatar, url: profile.avatar });
             }
 
-            if (account.background) {
-                setBg({ name: account.background, url: account.background });
+            if (profile.background) {
+                setBg({ name: profile.background, url: profile.background });
             }
         }
     }, [account]);
@@ -79,10 +83,11 @@ const EditAccount: FC<Props> = ({ account }: Props) => {
         setter({ name: '', url: '' });
     }
 
-    const submitForm = async (e: React.FormEvent<HTMLFormElement>) => {
+    const submitForm = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
         e.preventDefault();
-
+    
         let formData = new FormData();
+
         formData.append('username', name);
         formData.append('preferredName', pName);
         formData.append('location', location);
@@ -106,14 +111,15 @@ const EditAccount: FC<Props> = ({ account }: Props) => {
             formData.append('background', bg.url)
         }
 
-        await fetch(`http://127.0.0.1:3500/users/account/${account.id as string}`, {
-            method: 'PATCH',
-            mode: 'cors',
-            body: formData
-        }).then(res => {
-            console.log(res)
-        })
+        await submit({
+            id: account.id as string,
+            user: formData
+        });
     }
+
+    useEffect(() => {
+        console.log(submitResult);
+    }, [submitResult]);
 
     return (
         <form onSubmit={submitForm} className='edt-profile-form'>

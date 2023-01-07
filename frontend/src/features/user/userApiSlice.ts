@@ -1,10 +1,15 @@
 import { apiSlice } from '@app/apiSlice';
-import { User } from '@common/utilities/types';
+import { User, ProfileInfo } from '@common/utilities/types';
 import { setUserInfo } from '@features/auth/authSlice';
+
+type EditProfile = {
+    id: string;
+    user: FormData;
+}
 
 export const userApiSlice = apiSlice.injectEndpoints({
     endpoints: builder => ({
-        createUser: builder.mutation<User, Partial<User>>({
+        createUser: builder.mutation<User, Partial<ProfileInfo>>({
             query: ({ ...data }) => ({
                 url: '/users',
                 method: 'POST',
@@ -16,12 +21,12 @@ export const userApiSlice = apiSlice.injectEndpoints({
                 try {
                     await queryFulfilled;
                 } catch (err) {
-
+                    console.error(err);
                 }
             }
         }),
 
-        resendEmail: builder.mutation<any, Partial<User>>({
+        resendEmail: builder.mutation<any, Partial<ProfileInfo>>({
             query: (data) => ({
                 url: '/users/verifications/resend',
                 method: 'POST',
@@ -63,6 +68,17 @@ export const userApiSlice = apiSlice.injectEndpoints({
                 }
             },
         }),
+
+        editAccount: builder.mutation<void, EditProfile>({
+            query: ({ id, user }) => ({
+                url: `/users/account/${id}`,
+                method: 'PATCH',
+                body: user,
+                validateStatus: (response, result) =>
+                    (response.status === 200 || response.status === 201) && !result.isError
+            }),
+            invalidatesTags: ['Account']
+        })
     })
 });
 
@@ -70,5 +86,6 @@ export const {
     useCreateUserMutation,
     useResendEmailMutation,
     useGetUserByUsernameQuery,
-    useGetAccountByIdQuery
+    useGetAccountByIdQuery,
+    useEditAccountMutation
 } = userApiSlice;

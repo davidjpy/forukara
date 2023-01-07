@@ -37,7 +37,7 @@ const ProfileConnections: FC<Props> = ({ user, account }: Props) => {
                             </>
                         ) : (
                             <>
-                                <p>{user?.username} does not appear to have made any connections yet.</p>
+                                <p>{user?.profile.username} does not appear to have made any connections yet.</p>
                             </>
                         )}
                     </div>

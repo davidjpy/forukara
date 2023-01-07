@@ -2,7 +2,23 @@ import * as uuid from 'uuid'
 
 import { apiSlice } from '@app/apiSlice';
 import { setUserInfo, setCredantial, logout } from '@features/auth/authSlice';
-import { LoginResponse, RefreshResponse, UserLogin } from '@common/utilities/types';
+import { RefreshResponse, User } from '@common/utilities/types';
+
+type UserLogin = {
+    auth: 'id' | 'oauth',
+    body: {
+        email?: string;
+        password?: string;
+        authorizationCode?: string;
+        codeVerifier?: string;
+        codeChallenge?: string;
+    }
+}
+
+export interface LoginResponse {
+    token: string;
+    user: User;
+}
 
 export const authApiSlice = apiSlice.injectEndpoints({
     endpoints: builder => ({
