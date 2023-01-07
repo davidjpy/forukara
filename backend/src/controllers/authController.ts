@@ -55,9 +55,14 @@ const login = asyncHandler(async (req: Request, res: Response): Promise<any> => 
             return res.status(401).json({ message: [{ error: `Account's email address was not verified` }] });
         }
 
+        // Case 5: User password was not setted
+        if (!user.password) {
+            return res.status(401).json({ message: [{ error: 'Your password is incorrect. Please try again', code: ErrorCode.PasswordErr }] });
+        }
+
         const isValidPassword = await bcrypt.compare(password!, user.password!);
 
-        // Case 5: Incorrect password
+        // Case 6: Incorrect password
         if (!isValidPassword) {
             return res.status(401).json({ message: [{ error: 'Your password is incorrect. Please try again', code: ErrorCode.PasswordErr }] });
         }

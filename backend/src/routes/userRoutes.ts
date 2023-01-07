@@ -27,7 +27,8 @@ router.route('/')
 // CRUD operations for private account
 router.route('/account/:id')
     .get(verifyToken, userController.getAccountById)
-    .patch(verifyToken, upload.fields([{ name: 'avatar', maxCount: 1 }, { name: 'background', maxCount: 1 }]), userController.updateAccountById)
+    .patch(upload.fields([{ name: 'avatarFile', maxCount: 1 }, { name: 'backgroundFile', maxCount: 1 }]), userController.updateAccountById)
+    // .patch(verifyToken, upload.fields([{ name: 'avatar', maxCount: 1 }, { name: 'background', maxCount: 1 }]), userController.updateAccountById)
 
 
 router.route('/test')

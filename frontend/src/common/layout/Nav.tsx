@@ -9,6 +9,7 @@ import { toggleSignUpForm, toggleLoginForm } from '@features/auth/authSlice'
 import { useLogoutMutation } from '@features/auth/authApiSlice';
 import { useNavigate } from 'react-router-dom';
 import { useGetUser } from '@common/hooks/useGetUser';
+import default_avatar from '@media/images/default_avatar.webp';
 
 const Nav: FC = () => {
 
@@ -46,7 +47,7 @@ const Nav: FC = () => {
                         <div className='nav__wrapper'>
                             <p role='button' onClick={handleLogout} className='nav__txt nav__txt--btn nav__txt--link'>Logout</p>
                             <figure onClick={() => handleNavigate(`profile/${user.username}`)} aria-label='Profile'>
-                                <img src={user.avatar as string} alt={user.avatar as string} />
+                                <img src={user.avatar as string || default_avatar} alt={user.avatar as string} />
                             </figure>
                         </div>
                     ) : (

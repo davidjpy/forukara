@@ -68,7 +68,7 @@
     width: 92%;
     height: 92%;
     margin: 4%;
-    object-fit: contain;
+    object-fit: cover;
 }
 
 .lt-menu__wrapper figure figcaption {

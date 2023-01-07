@@ -1,4 +1,4 @@
-import { FC, useEffect, useState, ChangeEvent } from 'react';
+import { FC, useEffect, useState, useRef, ChangeEvent } from 'react';
 import { MdDeleteForever } from 'react-icons/md';
 import { AiOutlineTwitter, AiFillFacebook } from 'react-icons/ai';
 import { FaLinkedinIn } from 'react-icons/fa';
@@ -6,12 +6,21 @@ import { ImUpload } from 'react-icons/im';
 
 import { User } from '@common/utilities/types';
 import default_background from '@media/images/default_background.webp';
+import default_avatar from '@media/images/default_avatar.webp';
 
 type Props = {
     account: User;
 }
 
+type Image = {
+    name: string;
+    url: string;
+}
+
 const EditAccount: FC<Props> = ({ account }: Props) => {
+
+    const avatarRef = useRef<HTMLInputElement>(null);
+    const bgRef = useRef<HTMLInputElement>(null);
 
     // Input states
     const [name, setName] = useState<string>('');
@@ -20,12 +29,17 @@ const EditAccount: FC<Props> = ({ account }: Props) => {
     const [occupation, setOccupation] = useState<string>('');
     const [title, setTitle] = useState<string>('');
     const [gender, setGender] = useState<string>('');
+    const [avatar, setAvatar] = useState<Image>({
+        name: '',
+        url: ''
+    });
+    const [bg, setBg] = useState<Image>({
+        name: '',
+        url: ''
+    });
     const [twitter, setTwitter] = useState<string>('');
     const [linkedin, setLinkedin] = useState<string>('');
     const [facebook, setFacebook] = useState<string>('');
-
-    // Util states
-    const [hideAvatar, setHideAvatar] = useState<boolean>(false);
 
     useEffect(() => {
         if (account.username) {
@@ -38,6 +52,13 @@ const EditAccount: FC<Props> = ({ account }: Props) => {
             setTwitter(account.twitter || '');
             setLinkedin(account.linkedin || '');
             setFacebook(account.facebook || '');
+            if (account.avatar) {
+                setAvatar({ name: account.avatar, url: account.avatar });
+            }
+
+            if (account.background) {
+                setBg({ name: account.background, url: account.background });
+            }
         }
     }, [account]);
 
@@ -45,8 +66,57 @@ const EditAccount: FC<Props> = ({ account }: Props) => {
         setter(e.target.value);
     }
 
+    const setFile = (ref: React.RefObject<HTMLInputElement>, setter: React.Dispatch<React.SetStateAction<Image>>): void => {
+        if (ref.current && ref.current.files?.length) {
+            const name = ref.current.files[0].name
+            const img = URL.createObjectURL(ref.current.files[0]);
+            setter({ name: name, url: img });
+        }
+    }
+
+    const deleteFile = (e: React.MouseEvent<HTMLElement>, setter: React.Dispatch<React.SetStateAction<Image>>): void => {
+        e.preventDefault();
+        setter({ name: '', url: '' });
+    }
+
+    const submitForm = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        let formData = new FormData();
+        formData.append('username', name);
+        formData.append('preferredName', pName);
+        formData.append('location', location);
+        formData.append('title', title);
+        formData.append('gender', gender);
+        formData.append('twitter', twitter);
+        formData.append('linkedin', linkedin);
+        formData.append('facebook', facebook);
+
+        // If user upload a new picture, attach the avatar as file
+        // Else attach the avatar as string url
+        if (avatarRef.current && avatarRef.current.files?.length) {
+            formData.append('avatarFile', avatarRef.current.files[0]);
+        } else if (avatar.url) {
+            formData.append('avatar', avatar.url)
+        }
+
+        if (bgRef.current && bgRef.current.files?.length) {
+            formData.append('backgroundFile', bgRef.current.files[0]);
+        } else if (bg.url) {
+            formData.append('background', bg.url)
+        }
+
+        await fetch(`http://127.0.0.1:3500/users/account/${account.id as string}`, {
+            method: 'PATCH',
+            mode: 'cors',
+            body: formData
+        }).then(res => {
+            console.log(res)
+        })
+    }
+
     return (
-        <form className='edt-profile-form'>
+        <form onSubmit={submitForm} className='edt-profile-form'>
             <figure aria-label='profile image' className='edt-profile-form__wrapper'>
                 <section>
                     <header style={{ marginRight: 'auto' }}>
@@ -55,13 +125,14 @@ const EditAccount: FC<Props> = ({ account }: Props) => {
                         </h1>
                     </header>
                     <div className='edt-profile-form__avatar'>
-                        <img src={account.avatar as string | undefined} alt='avatar' />
-                        <button aria-label='delete profile avatar' title='Delete profile avatar' className='edt-profile-form__btn'>
+                        <img src={avatar.url || default_avatar} alt='avatar' />
+                        <button onClick={(e) => deleteFile(e, setAvatar)} aria-label='delete profile avatar' title='Delete profile avatar' className='edt-profile-form__btn'>
                             <MdDeleteForever aria-hidden={true} size={20} />
                         </button>
                     </div>
-                    <input type='file' id='upload-bg-img' className='edt-profile-form__upload' />
-                    <label htmlFor='upload-bg-img'><ImUpload aria-hidden={true} style={{ marginRight: '6px' }} />Upload Avatar</label>
+                    {avatar.name && <a href={avatar.url} target='_blank' rel='noreferrer'>{avatar.name.length > 40 ? avatar.name.slice(0, 40) + '...' : avatar.name}</a>}
+                    <input type='file' id='upload-avatar-img' accept='image/png, image/gif, image/jpeg' ref={avatarRef} name='avatarFile' onChange={() => setFile(avatarRef, setAvatar)} className='edt-profile-form__upload' />
+                    <label htmlFor='upload-avatar-img'><ImUpload aria-hidden={true} style={{ marginRight: '6px' }} />Upload Avatar</label>
                 </section>
                 <section style={{ marginBottom: '0' }}>
                     <header style={{ marginRight: 'auto' }}>
@@ -69,15 +140,16 @@ const EditAccount: FC<Props> = ({ account }: Props) => {
                             BACKGROUND PICTURE
                         </h1>
                     </header>
-                    <div className='edt-profile-form__bg' style={{ backgroundImage: `url(${!account.background ? default_background : account.background})` }}>
-                        <button aria-label='delete profile background image' title='Delete profile background image' className='edt-profile-form__btn'
+                    <div className='edt-profile-form__bg' style={{ backgroundImage: `url(${!bg.url ? default_background : bg.url})` }}>
+                        <button onClick={(e) => deleteFile(e, setBg)} aria-label='delete profile background image' title='Delete profile background image' className='edt-profile-form__btn'
                             style={{ right: '5px', top: '5px', backgroundColor: 'var(--black-opacity-light)' }}
                         >
                             <MdDeleteForever aria-hidden={true} color='rgb(200, 200, 200)' size={20} />
                         </button>
                     </div>
                     <div className='edt-profile-form__caption'>
-                        <input type='file' id='upload-bg-img' className='edt-profile-form__upload edt-profile-form__upload--long' />
+                        {bg.name && <a href={bg.url} target='_blank' rel='noreferrer'>{bg.name.length > 40 ? bg.name.slice(0, 40) + '...' : bg.name}</a>}
+                        <input type='file' id='upload-bg-img' accept='image/png, image/gif, image/jpeg' ref={bgRef} name='backgroundFile' onChange={() => setFile(bgRef, setBg)} className='edt-profile-form__upload edt-profile-form__upload--long' />
                         <label htmlFor='upload-bg-img'><ImUpload aria-hidden={true} style={{ marginRight: '6px' }} />Upload Background</label>
                         <p>
                             Even though the uploaded images will be resized and scaled automatically, please do keep the file size minimal.
@@ -178,7 +250,7 @@ const EditAccount: FC<Props> = ({ account }: Props) => {
                 </div>
                 <div className='edt-profile-form__btn-grp' style={{ paddingTop: '2rem', marginLeft: 'auto' }}>
                     <button className='edt-profile-form__btn edt-profile-form__btn--gray'>Cancel</button>
-                    <button className='edt-profile-form__btn edt-profile-form__btn--green'>Save</button>
+                    <input className='edt-profile-form__btn edt-profile-form__btn--green' type='submit' value='Save' />
                 </div>
             </section>
         </form>

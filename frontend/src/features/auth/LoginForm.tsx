@@ -51,7 +51,7 @@ const LoginForm: FC = () => {
 
     const submitNotAllowed: boolean = Boolean(err || emailErr || passwordErr);
 
-    const handleResetInput = (): void => {
+    const resetInput = (): void => {
         resetEmail();
         resetPassword();
         setEmailErr('');
@@ -60,17 +60,17 @@ const LoginForm: FC = () => {
         setConnectionErr('');
     }
 
-    const handleLoginFormUnmounted = useCallback((): void => {
+    const unmountLogin = useCallback((): void => {
         dispatch(toggleLoginForm(false));
-        handleResetInput();
+        resetInput();
     }, [dispatch]);
 
-    const handleSignUpFormMounted = (): void => {
-        handleLoginFormUnmounted();
+    const mountSignUp = (): void => {
+        unmountLogin();
         dispatch(toggleSignUpForm(true));
     }
 
-    const handleSubmitForm = async (e: FormEvent<HTMLFormElement>): Promise<any> => {
+    const submitForm = async (e: FormEvent<HTMLFormElement>): Promise<any> => {
         e.preventDefault();
         await login({
             auth: 'id',
@@ -83,8 +83,8 @@ const LoginForm: FC = () => {
 
     useEffect(() => {
         if (loginResult.isSuccess) {
-            handleLoginFormUnmounted();
-            handleResetInput();
+            unmountLogin();
+            resetInput();
         }
 
         if (loginResult.isError) {
@@ -110,7 +110,7 @@ const LoginForm: FC = () => {
                 }
             }
         }
-    }, [loginResult, handleLoginFormUnmounted]);
+    }, [loginResult, unmountLogin]);
 
     useEffect(() => {
         let ref = overlayRef.current;
@@ -136,7 +136,7 @@ const LoginForm: FC = () => {
         }
     }, [loginFormMounted]);
 
-    const wrapperRef = useClickOutside(handleLoginFormUnmounted);
+    const wrapperRef = useClickOutside(unmountLogin);
 
     const inputFields = [
         {
@@ -164,7 +164,7 @@ const LoginForm: FC = () => {
             <div ref={overlayRef}
                 className={loginFormMounted ? 'auth__overlay' : 'auth__overlay auth__overlay--fade'}>
                 <section ref={wrapperRef} className='auth auth--login'>
-                    <button aria-label='close login form' title='Close Login Form' onClick={handleLoginFormUnmounted}
+                    <button aria-label='close login form' title='Close Login Form' onClick={unmountLogin}
                         className='auth__btn auth__btn--cross' style={{ top: '1.5rem' }}
                     >
                         <IoMdClose aria-hidden={true} />
@@ -172,7 +172,7 @@ const LoginForm: FC = () => {
                     <header>
                         <h1>Login</h1>
                     </header>
-                    <form onSubmit={handleSubmitForm} className='auth__form'>
+                    <form onSubmit={submitForm} className='auth__form'>
                         {inputFields.map((item) => {
                             return (
                                 <div key={item.id} style={{ margin: item.id === 'login-email' ? '2rem 0 0 0' : item.err && '1rem 0 0 0' }}>
@@ -212,7 +212,7 @@ const LoginForm: FC = () => {
                     </div>
                     <p className='auth__txt auth__txt--white' style={{ textAlign: 'center' }}>
                         Don't have an account?
-                        <span role='button' aria-label='open signup form' tabIndex={0} onClick={handleSignUpFormMounted} onKeyDown={(e) => onkeyDownHandler(e, 'Enter', handleSignUpFormMounted)}
+                        <span role='button' aria-label='open signup form' tabIndex={0} onClick={mountSignUp} onKeyDown={(e) => onkeyDownHandler(e, 'Enter', mountSignUp)}
                             className='auth__txt--green-alien-light auth__txt--link' style={{ marginLeft: '5px' }} >Sign up</span>
                     </p>
                 </section>

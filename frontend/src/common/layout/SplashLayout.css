@@ -553,11 +553,6 @@ input[type='password'] {
     background-color: var(--green-alien-deep);
 }
 
-.auth__form input[type='submit']:focus {
-    outline: var(--green-alien-focus);
-    outline-offset: 1px;
-}
-
 .auth__form input[type='submit']:disabled {
     background-color: gray;
     cursor: not-allowed;

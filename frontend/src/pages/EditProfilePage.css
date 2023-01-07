@@ -93,6 +93,13 @@
     ;
 }
 
+.edt-profile-form__wrapper a {
+    display: block;
+    text-align: center;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
 .edt-profile-form__wrapper header h1 {
     font-size: 0.9rem;
     font-weight: 700;
@@ -129,7 +136,7 @@
     height: 100%;
     border-radius: 50%;
     margin: auto;
-    object-fit: contain;
+    object-fit: cover;
 }
 
 .edt-profile-form__bg button,

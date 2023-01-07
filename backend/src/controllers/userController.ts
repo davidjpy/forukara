@@ -38,15 +38,15 @@ const getUserByUsername = asyncHandler(async (req: Request, res: Response): Prom
         return res.status(404).json({ message: 'User not found', code: ErrorCode.Failed });
     }
 
-    const returnPayload: IUser = { 
+    const returnPayload: IUser = {
         id: user._id.toString(),
-        username: user.username, 
+        username: user.username,
         avatar: user.avatar,
         background: user.background,
         about: user.about,
         discussions: user.discussions,
         connections: user.connections,
-        createdAt: user.createdAt 
+        createdAt: user.createdAt
     };
 
     res.json({ message: returnPayload });
@@ -71,15 +71,15 @@ const getAccountById = asyncHandler(async (req: Request, res: Response): Promise
     const returnPayload: IUser = {
         id: user._id.toString(),
         email: user.email,
-        username: user.username, 
+        username: user.username,
         avatar: user.avatar,
         background: user.background,
         about: user.about,
         discussions: user.discussions,
         connections: user.connections,
-        createdAt: user.createdAt 
+        createdAt: user.createdAt
     };
-    
+
     res.json({ message: returnPayload });
 });
 
@@ -135,7 +135,7 @@ const createUser = asyncHandler(async (req: Request, res: Response): Promise<any
 
     // Case 8: Email address already taken
     if (duplicateEmail) {
-        return res.status(409).json({ message: [{ error: 'Email already in use', code: ErrorCode.EmailErr}] });
+        return res.status(409).json({ message: [{ error: 'Email already in use', code: ErrorCode.EmailErr }] });
     }
 
     // Encrypt password before storing it to MongoDB
@@ -152,11 +152,11 @@ const createUser = asyncHandler(async (req: Request, res: Response): Promise<any
     // Verification email options
     const emailOptions = {
         HTMLTemplate: 'emailVerification.html',
-        replacement: { 
-            username: username!, 
-            url: `${process.env.HOST}/users/verifications/${token}/` 
+        replacement: {
+            username: username!,
+            url: `${process.env.HOST}/users/verifications/${token}/`
         },
-        target: email!, 
+        target: email!,
         subject: 'Verify Your Forukara Account'
     }
 
@@ -171,33 +171,11 @@ const createUser = asyncHandler(async (req: Request, res: Response): Promise<any
 
 // Update account info
 const updateAccountById = asyncHandler(async (req: Request, res: Response): Promise<any> => {
-    const { id, username, password, email }: IUser = req.body;  
-    const { avatar, background }: any = req.files;
-
-    // Convert small avatar image to a smaller size
-    await sharp(avatar[0].path)
-        .resize({
-            height: 400,
-            width: 400
-        })
-        .webp({
-            quality: 60
-        })
-        .toFile(`${avatar[0].destination}/${path.parse(avatar[0].filename).name}.webp`);
-
-    // Convert large background image to 16:9 ratio with lower dpi
-    await sharp(background[0].path)
-        .resize({
-            width: 1920,
-            height: 1080
-        })
-        .webp({
-            quality: 60
-        })
-        .toFile(`${background[0].destination}/${path.parse(background[0].filename).name}.webp`);
+    const id: string = req.params.id;
+    const { username, preferredName, location, title, gender, twitter, linkedin, facebook, avatar, background }: IUser = req.body;
 
     // Case 1: Missing fields
-    if (!id || !username || !email) {
+    if (!id || !username) {
         return res.status(400).json({ message: 'All fields are required', code: ErrorCode.Failed });
     }
 
@@ -209,26 +187,70 @@ const updateAccountById = asyncHandler(async (req: Request, res: Response): Prom
     }
 
     const duplicateUsername = await User.findOne({ username }).lean().exec();
-    const duplicateEmail = await User.findOne({ email }).lean().exec();
 
     // Case 3: Username already taken
     if (duplicateUsername && duplicateUsername?._id.toString() !== id) {
         return res.status(409).json({ message: 'Username has already taken', code: ErrorCode.UsernameErr });
     }
 
-    // Case 3: Email already taken
-    if (duplicateEmail && duplicateEmail?._id.toString() !== id) {
-        return res.status(409).json({ message: 'Email has already taken', code: ErrorCode.EmailErr });
-    }
+    // // Case 3: Email already taken
+    // if (duplicateEmail && duplicateEmail?._id.toString() !== id) {
+    //     return res.status(409).json({ message: 'Email has already taken', code: ErrorCode.EmailErr });
+    // }
 
     user.username = username;
-    user.email = email;
-    user.avatar = `${process.env.HOST}/images/${path.parse(avatar[0].filename).name}.webp`;
-    user.background = `${process.env.HOST}/images/${path.parse(background[0].filename).name}.webp`;
+    user.preferredName = preferredName;
+    user.location = location;
+    user.title = title;
+    user.gender = gender;
+    user.twitter = twitter;
+    user.linkedin = linkedin;
+    user.facebook = facebook;
 
-    // Encrypt password before storing it to MongoDB
-    if (password) {
-        user.password = await bcrypt.hash(password, 10);
+    // Handle the image upload
+    const { avatarFile, backgroundFile }: any = req.files;
+
+    console.log(avatar, background)
+
+    if (avatarFile) {
+        // Convert small avatar image to a smaller size
+        await sharp(avatarFile[0].path)
+            .resize({
+                height: 400,
+                width: 400
+            })
+            .webp({
+                quality: 60
+            })
+            .toFile(`${avatarFile[0].destination}/${path.parse(avatarFile[0].filename).name}.webp`);
+
+        user.avatar = `${process.env.HOST}/images/${path.parse(avatarFile[0].filename).name}.webp`;
+    } 
+    else if (avatar) {
+        user.avatar = avatar;
+    }
+    else {
+        user.avatar = '';
+    }
+
+    if (backgroundFile) {
+        // Convert large background image to 16:9 ratio with lower dpi
+        await sharp(backgroundFile[0].path)
+            .resize({
+                width: 1920,
+                height: 1080
+            })
+            .webp({
+                quality: 60
+            })
+            .toFile(`${backgroundFile[0].destination}/${path.parse(backgroundFile[0].filename).name}.webp`);
+
+        user.background = `${process.env.HOST}/images/${path.parse(backgroundFile[0].filename).name}.webp`;
+    } else if (background) {
+        user.background = background;
+    }
+    else {
+        user.background = '';
     }
 
     const updatedUser = await user.save();
@@ -312,7 +334,7 @@ const resendVerification = asyncHandler(async (req: Request, res: Response): Pro
 
     // Case 3: User already verified
     if (user.status === 'Active') {
-        return res.status(400).json({ message: { error: 'Account has been verified'}, code: ErrorCode.Failed });
+        return res.status(400).json({ message: { error: 'Account has been verified' }, code: ErrorCode.Failed });
     }
 
     const payload: JwtToken = { tokenId: user._id.toString(), tokenUsername: user.username!, tokenEmail: user.email! }
@@ -323,11 +345,11 @@ const resendVerification = asyncHandler(async (req: Request, res: Response): Pro
     // Verification email options
     const emailOptions = {
         HTMLTemplate: 'emailVerification.html',
-        replacement: { 
-            username: user.username, 
-            url: `${process.env.HOST}/users/verifications/${token}/` 
+        replacement: {
+            username: user.username,
+            url: `${process.env.HOST}/users/verifications/${token}/`
         },
-        target: email, 
+        target: email,
         subject: 'Verify Your Forukara Account'
     }
 

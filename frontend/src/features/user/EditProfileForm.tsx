@@ -32,7 +32,7 @@ const EditProfileForm: FC<Props> = ({ account }: Props) => {
             formData.append('background', backgroundRef.current.files[0])
         }
 
-        await fetch('http://127.0.0.1:3500/users', {
+        await fetch('http://127.0.0.1:3500/account/${id}', {
             method: 'PATCH',
             mode: 'cors',
             body: formData
