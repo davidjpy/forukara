@@ -20,8 +20,6 @@ const ProfileDetails: FC<Props> = ({ user, isLoading }: Props) => {
     const account = useAppSelector((state) => state.auth.user);
     const navigate = useNavigate();
 
-    console.log(user)
-
     return (
         <section className={isLoading ? 'profile-dls' : 'profile-dls profile-dls--loaded'}>
             <div className={isLoading ? 'profile-dls__wrapper' : 'profile-dls__wrapper profile-dls__wrapper--loaded'}>

@@ -58,7 +58,7 @@
 
 .lt-menu__wrapper figure div {
     border-radius: 50%;
-    background: linear-gradient(to left top, #e6f6f1, #e4f5f3, #e3f4f5, #e3f3f7, #e4f1f8, #e8f0fa, #edeffa, #f2eef8, #f9eef5, #fef0f1, #fff2ee, #fdf5ed);;
+    background: rgb(245, 245, 245);
     width: 85px;
     height: 85px;   
 }
@@ -89,7 +89,7 @@
 }
 
 .lt-menu__wrapper figure figcaption button:hover {
-    background-color: var(--green-alien-deep);
+    background-color: var(--green-alien-dark);
 }
 
 .lt-menu__tablist {
@@ -105,7 +105,7 @@
     font-weight: 100;
     text-transform: uppercase;
     font-size: 0.8rem;
-    color: var(--gray-deep);
+    color: var(--gray-dark);
 }
 
 .lt-menu__tablist ul {
@@ -243,7 +243,7 @@
 }
 
 .nav__btn--green-alien-light:hover {
-    background-color: var(--green-alien-deep);
+    background-color: var(--green-alien-dark);
 }
 
 @media screen and (max-width: 1400px) {

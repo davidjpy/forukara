@@ -15,15 +15,20 @@ button:focus {
     outline-offset: 2px;
 }
 
+a:focus {
+    outline: var(--green-alien-focus);
+    outline-offset: 2px;
+}
+
 :root {
     --black-opacity-light: rgba(0, 0, 0, 0.4);
     --black-opacity-moderate: rgba(0, 0, 0, 0.7);
-    --black-opacity-deep: rgba(0, 0, 0, 0.85);
+    --black-opacity-dark: rgba(0, 0, 0, 0.85);
     --black-light: #202020;
-    --green-alien-deep: #23ac83;
+    --green-alien-dark: #23ac83;
     --green-alien-light: #00DE9A;
     --green-dark: rgb(19, 81, 94);
-    --gray-deep: rgb(138, 138, 138);
+    --gray-dark: rgb(138, 138, 138);
     --gray-light: rgb(200, 200, 200);
     --gray-opacity-light: rgba(200, 200, 200, 0.3);
     --red-error: #cc0000;
@@ -33,4 +38,3 @@ button:focus {
     --max-width: 700px;
     --green-alien-focus: 2px solid #23ac83
 }
-

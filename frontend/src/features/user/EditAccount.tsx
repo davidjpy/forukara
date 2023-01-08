@@ -8,6 +8,7 @@ import { User } from '@common/utilities/types';
 import default_background from '@media/images/default_background.webp';
 import default_avatar from '@media/images/default_avatar.webp';
 import { useEditAccountMutation } from './userApiSlice';
+import { useNavigate } from 'react-router-dom';
 
 type Props = {
     account: User;
@@ -22,7 +23,8 @@ const EditAccount: FC<Props> = ({ account }: Props) => {
 
     const avatarRef = useRef<HTMLInputElement>(null);
     const bgRef = useRef<HTMLInputElement>(null);
-    const [submit, submitResult] = useEditAccountMutation();
+    const [editInfo, editInfoResult] = useEditAccountMutation();
+    const navigate = useNavigate();
 
     // Input states
     const [name, setName] = useState<string>('');
@@ -66,6 +68,10 @@ const EditAccount: FC<Props> = ({ account }: Props) => {
         }
     }, [account]);
 
+    const handleNavigate = (url: string): void => {
+        navigate(url);
+    }
+
     const onChange = (e: ChangeEvent<HTMLInputElement>, setter: React.Dispatch<React.SetStateAction<string>>): void => {
         setter(e.target.value);
     }
@@ -93,6 +99,7 @@ const EditAccount: FC<Props> = ({ account }: Props) => {
         formData.append('location', location);
         formData.append('title', title);
         formData.append('gender', gender);
+        formData.append('occupation', occupation);
         formData.append('twitter', twitter);
         formData.append('linkedin', linkedin);
         formData.append('facebook', facebook);
@@ -111,15 +118,13 @@ const EditAccount: FC<Props> = ({ account }: Props) => {
             formData.append('background', bg.url)
         }
 
-        await submit({
+        await editInfo({
             id: account.id as string,
-            user: formData
+            data: formData
         });
-    }
 
-    useEffect(() => {
-        console.log(submitResult);
-    }, [submitResult]);
+        handleNavigate(`/profile/${account.profile.username}`);
+    }
 
     return (
         <form onSubmit={submitForm} className='edt-profile-form'>
@@ -255,7 +260,7 @@ const EditAccount: FC<Props> = ({ account }: Props) => {
                     </label>
                 </div>
                 <div className='edt-profile-form__btn-grp' style={{ paddingTop: '2rem', marginLeft: 'auto' }}>
-                    <button className='edt-profile-form__btn edt-profile-form__btn--gray'>Cancel</button>
+                    <button onClick={() => handleNavigate(`/profile/${account.profile.username}`)} className='edt-profile-form__btn edt-profile-form__btn--gray'>Cancel</button>
                     <input className='edt-profile-form__btn edt-profile-form__btn--green' type='submit' value='Save' />
                 </div>
             </section>

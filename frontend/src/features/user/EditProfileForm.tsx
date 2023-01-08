@@ -1,95 +1,59 @@
-import { FC, FormEvent, useRef } from 'react';
+import { FC } from 'react';
 
-import { useInput } from '@common/hooks/useInput';
-import { User } from '@common/utilities/types';
 import EditBio from './EditBio';
 import EditAccount from './EditAccount';
-
-type Props = {
-    account: User;
-}
+import { useSearchParams } from 'react-router-dom';
+import { useAppSelector } from '@app/hooks';
 
 // Update user profile
-const EditProfileForm: FC<Props> = ({ account }: Props) => {
+const EditProfileForm: FC = () => {
 
-    const avatarRef = useRef<HTMLInputElement>(null);
-    const backgroundRef = useRef<HTMLInputElement>(null);
+    const account = useAppSelector((state) => state.auth.user);
+    const [searchParams, setSearchParams] = useSearchParams();
 
-    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-
-        let formData = new FormData();
-        formData.append('id', id);
-        formData.append('username', username);
-        formData.append('email', email);
-        formData.append('password', password);
-
-        if (avatarRef.current?.files) {
-            formData.append('avatar', avatarRef.current.files[0])
-        }
-
-        if (backgroundRef.current?.files) {
-            formData.append('background', backgroundRef.current.files[0])
-        }
-
-        await fetch('http://127.0.0.1:3500/account/${id}', {
-            method: 'PATCH',
-            mode: 'cors',
-            body: formData
-        }).then(res => {
-            console.log(res)
-        })
+    const handleSwitchTab = (tab: 'biography' | 'account'): void => {
+        setSearchParams({ section: tab }, { replace: true });
     }
 
-    const [id, handleChangeId, resetId] = useInput('');
-    const [username, handleChangeUsername, resetUsername] = useInput('');
-    const [email, handleChangeEmail, resetEmail] = useInput('');
-    const [password, handleChangePassword, resetPassword] = useInput('');
-
     return (
-        <section className='edt-form'>
-            <header>
-                <h1>Edit Profile</h1>
+        <section>
+            <header className='edt-form__header'>
+                <div className='edt-form__header--wrapper'>
+                    <h1>Edit Profile</h1>
+                    <span>@{account.profile.username}</span>
+                </div>
+                <div className='edt-form__tablist'>
+                    <p onClick={() => handleSwitchTab('account')}
+                        className={!searchParams.get('section') || searchParams.get('section') === 'account'
+                            ? 'edt-form__tab edt-form__tab--active'
+                            : 'edt-form__tab'
+                        }>
+                        Account
+                    </p>
+                    <p onClick={() => handleSwitchTab('biography')} className={searchParams.get('section') === 'biography'
+                        ? 'edt-form__tab edt-form__tab--active'
+                        : 'edt-form__tab'
+                    }>
+                        Biography
+                    </p>
+                    <div className={
+                        searchParams.get('section') === 'biography'
+                            ? 'edt-form__divider edt-form__divider--right'
+                            : 'edt-form__divider edt-form__divider--left'
+                    }>
+                    </div>
+                </div>
             </header>
-            <EditAccount
-                account={account}
-            />
-            <EditBio />
 
-            {/* <form onSubmit={handleSubmit} className='editprofileform__form' >
-                <div>
-                    <label htmlFor='update-id'>Id</label>
-                    <input id='update-id' type='text' value={id} onChange={handleChangeId} />
-                </div>
-
-                <div>
-                    <label htmlFor='update-username'>Username</label>
-                    <input id='update-username' type='text' value={username} onChange={handleChangeUsername} />
-                </div>
-
-                <div>
-                    <label htmlFor='update-email'>email</label>
-                    <input id='update-email' type='email' value={email} onChange={handleChangeEmail} />
-                </div>
-
-
-                <div>
-                    <label htmlFor='update-password'>password</label>
-                    <input id='update-password' type='password' value={password} onChange={handleChangePassword} />
-                </div>
-
-                <div>
-                    <label htmlFor='update-avatar'>avatar</label>
-                    <input id='update-avatar' ref={avatarRef} type='file' name='avatar' />
-                </div>
-
-                <div>
-                    <label htmlFor='update-background'>background</label>
-                    <input id='update-background' ref={backgroundRef} type='file' name='background' />
-                </div>
-
-                <input type='submit' />
-            </form> */}
+            {
+                searchParams.get('section') === 'biography'
+                    ? <EditBio
+                        account={account}
+                    />
+                    : <EditAccount
+                        account={account}
+                    />
+            }
         </section>
     );
 }

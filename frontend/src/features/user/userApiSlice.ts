@@ -1,10 +1,10 @@
 import { apiSlice } from '@app/apiSlice';
-import { User, ProfileInfo } from '@common/utilities/types';
+import { User, ProfileInfo, ProfileBio } from '@common/utilities/types';
 import { setUserInfo } from '@features/auth/authSlice';
 
 type EditProfile = {
     id: string;
-    user: FormData;
+    data: FormData | ProfileBio;
 }
 
 export const userApiSlice = apiSlice.injectEndpoints({
@@ -43,6 +43,11 @@ export const userApiSlice = apiSlice.injectEndpoints({
                 validateStatus: (response, result) =>
                     (response.status === 200 || response.status === 201) && !result.isError
             }),
+            providesTags: (result, error, arg) => {
+                return result
+                    ? [{ type: 'User', id: result.id }]
+                    : ['User']
+            },
             transformResponse: (rawResult: { message: User }) => {
                 return rawResult.message;
             },
@@ -70,14 +75,29 @@ export const userApiSlice = apiSlice.injectEndpoints({
         }),
 
         editAccount: builder.mutation<void, EditProfile>({
-            query: ({ id, user }) => ({
-                url: `/users/account/${id}`,
+            query: ({ id, data }) => ({
+                url: `/users/account/${id}/info`,
                 method: 'PATCH',
-                body: user,
+                body: data,
                 validateStatus: (response, result) =>
                     (response.status === 200 || response.status === 201) && !result.isError
             }),
-            invalidatesTags: ['Account']
+            invalidatesTags: (result, error, arg) => {
+                return arg.id ? [{ type: 'User', id: arg.id }, 'Account'] : ['User', 'Account']
+            }
+        }),
+
+        editBio: builder.mutation<void, EditProfile>({
+            query: ({ id, data }) => ({
+                url: `/users/account/${id}/bio`,
+                method: 'PATCH',
+                body: data,
+                validateStatus: (response, result) =>
+                    (response.status === 200 || response.status === 201) && !result.isError
+            }),
+            invalidatesTags: (result, error, arg) => {
+                return arg.id ? [{ type: 'User', id: arg.id }, 'Account'] : ['User', 'Account']
+            }
         })
     })
 });
@@ -87,5 +107,6 @@ export const {
     useResendEmailMutation,
     useGetUserByUsernameQuery,
     useGetAccountByIdQuery,
-    useEditAccountMutation
+    useEditAccountMutation,
+    useEditBioMutation
 } = userApiSlice;

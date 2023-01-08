@@ -6,6 +6,7 @@ import { verifyToken } from '@middlewares/verifyToken';
 import { upload } from '@middlewares/uploadImage';
 
 const router = express.Router();
+const accountRouter = express.Router({ mergeParams: true });
 
 // Verifiy new user
 router.route('/verifications/:token')
@@ -25,11 +26,16 @@ router.route('/')
     .delete(userController.deleteUser)
 
 // CRUD operations for private account
-router.route('/account/:id')
-    .get(verifyToken, userController.getAccountById)
-    .patch(upload.fields([{ name: 'avatarFile', maxCount: 1 }, { name: 'backgroundFile', maxCount: 1 }]), userController.updateAccountById)
-    // .patch(verifyToken, upload.fields([{ name: 'avatar', maxCount: 1 }, { name: 'background', maxCount: 1 }]), userController.updateAccountById)
+router.use('/account/:id', accountRouter)
 
+accountRouter.route('/')
+    .get(verifyToken, userController.getAccountById)
+
+accountRouter.route('/info')
+    .patch(verifyToken, upload.fields([{ name: 'avatarFile', maxCount: 1 }, { name: 'backgroundFile', maxCount: 1 }]), userController.updateAccountInfoById)
+
+accountRouter.route('/bio')
+    .patch(verifyToken, userController.updateAccountBioById)
 
 router.route('/test')
     .get(userController.testing)

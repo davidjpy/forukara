@@ -290,14 +290,14 @@
 .opts__divider {
     position: relative;
     width: 100%;
-    border-top: 1px solid var(--gray-deep);
+    border-top: 1px solid var(--gray-dark);
     color: white;
     text-align: center;
 }
 
 .opts__divider p {
     background-color: black;
-    color: var(--gray-deep);
+    color: var(--gray-dark);
     position: absolute;
     top: -10px; 
     left: 50%;
@@ -374,7 +374,7 @@
     align-items: center;
     justify-content: center;
     position: absolute;
-    color: var(--gray-deep);
+    color: var(--gray-dark);
     background-color: transparent;
     cursor: pointer;
     border: none;
@@ -416,7 +416,7 @@
 
 .auth__icon-group button {
     display: flex;
-    background-color: var(--gray-deep);
+    background-color: var(--gray-dark);
     align-items: center;
     justify-content: center;
     margin: 0 0.4rem;
@@ -550,7 +550,7 @@ input[type='password'] {
 }
 
 .auth__form input[type='submit']:hover {
-    background-color: var(--green-alien-deep);
+    background-color: var(--green-alien-dark);
 }
 
 .auth__form input[type='submit']:disabled {

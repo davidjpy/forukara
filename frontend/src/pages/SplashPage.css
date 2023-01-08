@@ -87,7 +87,7 @@
 }
 
 .sp-page__slogan button:hover {
-    background-color: var(--green-alien-deep);
+    background-color: var(--green-alien-dark);
 }
 
 .sp-page__slogan button:active {

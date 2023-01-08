@@ -1,11 +1,10 @@
 /* =========================================================================================== */
-/* ====================================== EditProfilePage ========================================= */
+/* ==================================== EditProfilePage ====================================== */
 /* =========================================================================================== */
 
 .edt-profile {
     padding-top: var(--nav-height);
     background-color: rgb(250, 250, 250);
-    ;
     min-height: 100vh;
     width: 100%;
     max-width: var(--max-width);
@@ -26,27 +25,72 @@
 
 .edt-profile__txt {
     font-size: 0.9rem;
-
 }
 
 /* =========================================================================================== */
-/* =================================== Editedt-profile-form ======================================= */
+/* ===================================== EditProfileForm ===================================== */
 /* =========================================================================================== */
 
-.edt-form header {
-    padding-bottom: 0.4rem;
+.edt-form__header {
     background-color: rgb(240, 240, 240);
-    padding: 1.4rem 2rem;
+    border-bottom: 1px solid var(--gray-light);
 }
 
-.edt-form header h1 {
-    font-weight: 700;
-    font-size: 1.4rem;
+.edt-form__header--wrapper {
+    padding: 2rem;
+}
+
+.edt-form__header--wrapper h1 {
+    font-size: 1.6rem;
     color: var(--black-light);
+    margin-bottom: 0.4rem;
 }
 
-.edt-form__form {
-    margin: 2rem 0;
+.edt-form__header--wrapper span {
+    display: inline-block;
+    color: var(--gray-dark);
+    font-weight: 100;
+    font-size: 1rem;
+}
+
+.edt-form__tablist {
+    display: flex;
+    position: relative;
+    width: 100%;
+}
+
+.edt-form__tab {
+    cursor: pointer;
+    font-size: 1rem;
+    color: var(--gray-dark);
+    width: 125px;
+    text-align: center;
+    padding: 0.8rem 0;
+}
+
+.edt-form__tab:hover {
+    background-color: rgba(128, 128, 128, 0.2);
+}
+
+.edt-form__tab--active {
+    color: black;
+}
+
+.edt-form__divider {
+    position: absolute;
+    width: 85px;
+    border-bottom: 4px solid var(--green-dark);
+    bottom: 0;
+    border-radius: 8px;
+    transition: left 0.4s ease-out;
+}
+
+.edt-form__divider--left {
+    left: calc(0px + (125px - 85px) / 2);
+}
+
+.edt-form__divider--right {
+    left: calc(125px + (125px - 85px) / 2);
 }
 
 /* =========================================================================================== */
@@ -90,14 +134,14 @@
     padding: 0 0 0.4rem 0;
     border-bottom: 1px solid var(--gray-light);
     width: 100%;
-    ;
 }
 
 .edt-profile-form__wrapper a {
     display: block;
     text-align: center;
     font-size: 0.9rem;
-    margin-bottom: 1rem;
+    width: fit-content;
+    margin: 0 auto 1rem auto;
 }
 
 .edt-profile-form__wrapper header h1 {
@@ -163,14 +207,14 @@
 
 .edt-profile-form__upload {
     width: 0.1px;
-	height: 0.1px;
-	opacity: 0;
-	overflow: hidden;
-	position: absolute;
-	z-index: -1;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
 }
 
-.edt-profile-form__upload + label {
+.edt-profile-form__upload+label {
     font-size: 0.9em;
     color: white;
     background-color: var(--green-dark);
@@ -183,12 +227,17 @@
     margin: auto;
 }
 
-.edt-profile-form__upload--long + label {
+.edt-profile-form__upload--long+label {
     width: 190px;
 }
 
-.edt-profile-form__upload + label {
-	cursor: pointer;
+.edt-profile-form__upload+label {
+    cursor: pointer;
+}
+
+.edt-profile-form__upload:focus+label {
+    outline: var(--green-alien-focus);
+    outline-offset: 2px;
 }
 
 .edt-profile-form__inputs {
@@ -223,6 +272,32 @@
     border: 1px solid var(--gray-light);
     color: black;
 }
+
+.edt-profile-form__inputs input:focus {
+    outline: 2px solid var(--green-dark);
+    outline-offset: -2px;
+}
+
+.edt-profile-form__inputs textarea {
+    padding: 0.4rem;
+    margin-top: 0.4rem;
+    border-radius: 4px;
+    font-size: 1rem;
+    border: 1px solid var(--gray-light);
+    color: black;
+    height: 200px;
+    resize: none;
+}
+
+.edt-profile-form__inputs textarea:focus {
+    outline: 2px solid var(--green-dark);
+    outline-offset: -2px;
+}
+
+.edt-profile-form__inputs textarea::placeholder {
+    font-size: 0.9rem;
+}
+
 
 .edt-profile-form__reminder {
     margin: 1rem auto 0 0;
@@ -259,7 +334,7 @@
 }
 
 .edt-profile-form__inputs--link input:focus~.edt-profile-form__icon-wrapper {
-    border: 2px solid black;
+    border: 2px solid var(--green-dark);
 }
 
 .edt-profile-form__icon-wrapper {

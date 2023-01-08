@@ -8,7 +8,7 @@ import path from 'path';
 
 import User from '@models/User';
 import emailService from '@utilities/emailService';
-import { IUser, JwtToken, ErrorResponse, ErrorCode, ProfileInfo, ProfileSocialMedia } from '@utilities/types';
+import { IUser, JwtToken, ErrorResponse, ErrorCode, ProfileInfo, ProfileSocialMedia, ProfileBio } from '@utilities/types';
 
 // Get all users
 const getAllUsers = asyncHandler(async (req: Request, res: Response): Promise<any> => {
@@ -37,7 +37,7 @@ const getUserByUsername = asyncHandler(async (req: Request, res: Response): Prom
     if (!user) {
         return res.status(404).json({ message: 'User not found', code: ErrorCode.Failed });
     }
-    console.log(user)
+
     const { profile: { preferredName, avatar, background, gender, location, title, occupation, biography, socialMedia }, connections, discussions, createdAt } = user;
 
     const returnPayload: IUser = {
@@ -58,9 +58,6 @@ const getUserByUsername = asyncHandler(async (req: Request, res: Response): Prom
         connections: connections,
         createdAt: createdAt,
     };
-
-    console.log(returnPayload)
-
 
     res.json({ message: returnPayload });
 });
@@ -193,9 +190,9 @@ const createUser = asyncHandler(async (req: Request, res: Response): Promise<any
 });
 
 // Update account info
-const updateAccountById = asyncHandler(async (req: Request, res: Response): Promise<any> => {
+const updateAccountInfoById = asyncHandler(async (req: Request, res: Response): Promise<any> => {
     const id: string = req.params.id;
-    const { username, preferredName, location, title, gender, avatar, background, twitter, linkedin, facebook }: ProfileInfo & ProfileSocialMedia = req.body;
+    const { username, preferredName, location, occupation, title, gender, avatar, background, twitter, linkedin, facebook }: ProfileInfo & ProfileSocialMedia = req.body;
 
     // Case 1: Missing fields
     if (!id || !username) {
@@ -221,6 +218,8 @@ const updateAccountById = asyncHandler(async (req: Request, res: Response): Prom
     user.profile.location = location;
     user.profile.title = title;
     user.profile.gender = gender;
+    user.profile.occupation = occupation;
+
     user.profile.socialMedia = {
         twitter: twitter,
         linkedin: linkedin,
@@ -269,6 +268,33 @@ const updateAccountById = asyncHandler(async (req: Request, res: Response): Prom
     }
     else {
         user.profile.background = '';
+    }
+
+    const updatedUser = await user.save();
+
+    res.json({ message: `User ${updatedUser.profile.username} has been updated` });
+});
+
+const updateAccountBioById = asyncHandler(async (req: Request, res: Response): Promise<any> => {
+    const id: string = req.params.id;
+    const { about }: ProfileBio = req.body;
+
+    console.log(id, req.body)
+
+    // Case 1: Missing fields
+    if (!id) {
+        return res.status(400).json({ message: 'All fields are required', code: ErrorCode.Failed });
+    }
+
+    const user = await User.findById(id).exec();
+
+    // Case 2: User not found
+    if (!user) {
+        return res.status(400).json({ message: 'User not found', code: ErrorCode.Failed });
+    }
+
+    user.profile.biography = {
+        about: about
     }
 
     const updatedUser = await user.save();
@@ -337,7 +363,7 @@ const verifiyUser = asyncHandler(async (req: Request, res: Response): Promise<an
 // Get another verification email
 const resendVerification = asyncHandler(async (req: Request, res: Response): Promise<any> => {
     const { email }: ProfileInfo = req.body;
-    console.log(email)
+
     // Case 1: Email missing
     if (!email) {
         return res.status(400).json({ message: { error: 'Email not found', code: ErrorCode.EmailErr } });
@@ -393,7 +419,8 @@ export = {
     createUser,
     deleteUser,
     getAccountById,
-    updateAccountById,
+    updateAccountInfoById,
+    updateAccountBioById,
     verifiyUser,
     resendVerification,
     testing
