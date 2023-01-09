@@ -32,9 +32,10 @@ a:focus {
     --gray-light: rgb(200, 200, 200);
     --gray-opacity-light: rgba(200, 200, 200, 0.3);
     --red-error: #cc0000;
+    --blue-primary: #2684FF;
     --nav-height: 60px;
     --min-height: 500px;
     --min-width: 300px;
     --max-width: 700px;
-    --green-alien-focus: 2px solid #23ac83
+    --green-alien-focus: 2px solid #23ac83;
 }

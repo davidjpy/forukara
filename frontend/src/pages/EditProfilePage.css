@@ -80,9 +80,9 @@
     position: absolute;
     width: 85px;
     border-bottom: 4px solid var(--green-dark);
-    bottom: 0;
     border-radius: 8px;
     transition: left 0.4s ease-out;
+    bottom: 1px;
 }
 
 .edt-form__divider--left {
@@ -157,14 +157,15 @@
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+    margin-top: 2rem;
 }
 
 .edt-profile-form__avatar {
     position: relative;
-    width: 120px;
-    height: 120px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
-    margin: 0 auto 1.4rem auto;
+    margin: 2rem auto 1.4rem auto;
 }
 
 .edt-profile-form__avatar div {
@@ -236,7 +237,7 @@
 }
 
 .edt-profile-form__upload:focus+label {
-    outline: var(--green-alien-focus);
+    outline: 2px solid var(--green-alien-dark);
     outline-offset: 2px;
 }
 
@@ -245,10 +246,6 @@
     justify-content: space-between;
     width: 100%;
     margin: 0.4rem 0;
-}
-
-.edt-profile-form__inputs:last-child {
-    margin-bottom: 0;
 }
 
 .edt-profile-form__inputs label {
@@ -274,7 +271,7 @@
 }
 
 .edt-profile-form__inputs input:focus {
-    outline: 2px solid var(--green-dark);
+    outline: 2px solid var(--blue-primary);
     outline-offset: -2px;
 }
 
@@ -287,10 +284,11 @@
     color: black;
     height: 200px;
     resize: none;
+    text-align: justify;
 }
 
 .edt-profile-form__inputs textarea:focus {
-    outline: 2px solid var(--green-dark);
+    outline: 2px solid var(--blue-primary);
     outline-offset: -2px;
 }
 
@@ -298,6 +296,14 @@
     font-size: 0.9rem;
 }
 
+.edt-profile-form__st {
+    width: 100%;
+    margin: 0.4rem 0;
+}
+
+.edt-profile-form__st label {
+    font-size: 0.9rem;
+}
 
 .edt-profile-form__reminder {
     margin: 1rem auto 0 0;
@@ -334,7 +340,7 @@
 }
 
 .edt-profile-form__inputs--link input:focus~.edt-profile-form__icon-wrapper {
-    border: 2px solid var(--green-dark);
+    border: 2px solid var(--blue-primary);
 }
 
 .edt-profile-form__icon-wrapper {

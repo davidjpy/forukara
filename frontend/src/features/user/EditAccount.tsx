@@ -48,7 +48,7 @@ const EditAccount: FC<Props> = ({ account }: Props) => {
     useEffect(() => {
         if (account.profile.username) {
             const { profile } = account;
-            
+
             setName(profile.username as string);
             setPName(profile.preferredName || '');
             setLocation(profile.location || '');
@@ -91,7 +91,7 @@ const EditAccount: FC<Props> = ({ account }: Props) => {
 
     const submitForm = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
         e.preventDefault();
-    
+
         let formData = new FormData();
 
         formData.append('username', name);
@@ -229,7 +229,7 @@ const EditAccount: FC<Props> = ({ account }: Props) => {
                         <p>Twitter Profile</p>
                         <div style={{ position: 'relative' }}>
                             <input value={twitter} onChange={(e) => onChange(e, setTwitter)}
-                                placeholder='Enter your Twitter profile...' type='text'
+                                placeholder='Enter your Twitter profile...' type='url'
                             />
                             <div className='edt-profile-form__icon-wrapper' style={{ backgroundColor: '#00acee' }}>
                                 <AiOutlineTwitter aria-hidden={true} color='white' size={20} className='edt-profile-form__icon' />
@@ -240,7 +240,7 @@ const EditAccount: FC<Props> = ({ account }: Props) => {
                         <p>Linkedin Profile</p>
                         <div style={{ position: 'relative' }}>
                             <input value={linkedin} onChange={(e) => onChange(e, setLinkedin)}
-                                placeholder='Enter your Linkedin profile...' type='text'
+                                placeholder='Enter your Linkedin profile...' type='url'
                             />
                             <div className='edt-profile-form__icon-wrapper' style={{ backgroundColor: '#0A66C2' }}>
                                 <FaLinkedinIn aria-hidden={true} color='white' size={20} className='edt-profile-form__icon' />
@@ -251,7 +251,7 @@ const EditAccount: FC<Props> = ({ account }: Props) => {
                         <p>Facebook Profile</p>
                         <div style={{ position: 'relative' }}>
                             <input value={facebook} onChange={(e) => onChange(e, setFacebook)}
-                                placeholder='Enter your Facebook profile...' type='text'
+                                placeholder='Enter your Facebook profile...' type='url'
                             />
                             <div className='edt-profile-form__icon-wrapper' style={{ backgroundColor: '#3b5998' }}>
                                 <AiFillFacebook aria-hidden={true} color='white' size={26} className='edt-profile-form__icon' />

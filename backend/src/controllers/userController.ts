@@ -59,7 +59,7 @@ const getUserByUsername = asyncHandler(async (req: Request, res: Response): Prom
         createdAt: createdAt,
     };
 
-    res.json({ message: returnPayload });
+    res.json({ message: returnPayload });   
 });
 
 // Get account info by id

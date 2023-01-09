@@ -29,6 +29,7 @@ export type ProfileInfo = {
     gender?: 'Male' | 'Female' | 'Other' | string;
     location?: string;
     title?: string;
+    languages?: Array<string>;
     occupation?: string;
     status?: 'Pending' | 'Active';
     expiredIn?: Date | null;

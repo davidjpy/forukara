@@ -265,6 +265,9 @@
 
 .profile-bio__content p {
     font-size: 1rem;
+    color: rgb(77, 77, 77);
+    text-align: justify;
+    line-height: 24px;
 }
 
 /* =========================================================================================== */

@@ -4,26 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import '@pages/SplashPage.css';
 import { useWindowResize } from '@common/hooks/useWindowResize';
-
-const textOptions: Array<string> = [
-    'Construction Worker',
-    'Social Worker',
-    'Business Owner',
-    'Veterinarian',
-    'Photographer',
-    'Equipment Operator',
-    'Videographer',
-    'Firefighter',
-    'Mathematician',
-    'Computer Scientist',
-    'Hair Stylist',
-    'Executive Manager',
-    'Surveyor',
-    'Software Developer',
-    'Hospitality Worker',
-    'Medical Professional',
-    'Mechanic',
-];
+import { TEXTOPTIONS } from '@common/utilities/constants';
 
 const SplashPage: FC = () => {
 
@@ -45,9 +26,9 @@ const SplashPage: FC = () => {
 
         const typingInterval = setInterval(() => {
             if (dynamicTxtRef.current) {
-                dynamicTxtRef.current.textContent = textOptions[optionIndex].slice(0, charIndex);
+                dynamicTxtRef.current.textContent = TEXTOPTIONS[optionIndex].slice(0, charIndex);
 
-                if (charIndex === textOptions[optionIndex].length) {
+                if (charIndex === TEXTOPTIONS[optionIndex].length) {
                     setTimeout(() => {
                         increment = false;
                     }, 400);
@@ -62,7 +43,7 @@ const SplashPage: FC = () => {
                     charIndex--;
                 }
 
-                if (optionIndex > textOptions.length - 1) {
+                if (optionIndex > TEXTOPTIONS.length - 1) {
                     optionIndex = 0;
                 }
             }
