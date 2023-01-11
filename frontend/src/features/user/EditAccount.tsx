@@ -178,7 +178,7 @@ const EditAccount: FC<Props> = ({ account }: Props) => {
                     <label>
                         <p>Username <span>*</span></p>
                         <input value={name} onChange={(e) => onChange(e, setName)}
-                            placeholder='Enter your name...' type='text'
+                            placeholder='Enter your name...' type='text' required
                         />
                     </label>
                     <label>

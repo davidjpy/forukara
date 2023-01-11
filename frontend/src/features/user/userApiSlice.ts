@@ -98,7 +98,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
             invalidatesTags: (result, error, arg) => {
                 return arg.id ? [{ type: 'User', id: arg.id }, 'Account'] : ['User', 'Account']
             }
-        })
+        }),
     })
 });
 
@@ -108,5 +108,5 @@ export const {
     useGetUserByUsernameQuery,
     useGetAccountByIdQuery,
     useEditAccountMutation,
-    useEditBioMutation
+    useEditBioMutation,
 } = userApiSlice;
