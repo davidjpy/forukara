@@ -68,5 +68,6 @@ export interface User {
 //     createdAt?: string;
 // }
 
+export type AuthProvider = 'google' | 'linkedin' | 'twitter' | 'email';
 
 export type Pages = 'splash' | 'home' | 'profile' | 'notifications' | 'settings' | 'help' | 'feedback' | 'contact' | null;

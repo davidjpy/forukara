@@ -115,3 +115,5 @@ export enum ErrorCode {
     ConfirmPasswordErr = 4,
     AuthErr = 5
 }
+
+export type AuthProvider = 'google' | 'linkedin' | 'twitter' | 'email';

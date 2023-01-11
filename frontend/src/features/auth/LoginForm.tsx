@@ -14,7 +14,7 @@ import { toggleLoginForm, toggleSignUpForm } from '@features/auth/authSlice';
 import { useLoginMutation } from '@features/auth/authApiSlice';
 import { useInput } from '@common/hooks/useInput';
 import { onkeyDownHandler } from '@common/utilities/onKeyDownHandler';
-import { oAuthPKCEHandler } from '@common/utilities/oAuthPKCEHandler';
+import { oAuthHandler } from '@common/utilities/oAuthHandler';
 
 const focusTrapOptions: Options = {
     checkCanFocusTrap: (trapContainers) => {
@@ -73,7 +73,7 @@ const LoginForm: FC = () => {
     const submitForm = async (e: FormEvent<HTMLFormElement>): Promise<any> => {
         e.preventDefault();
         await login({
-            auth: 'id',
+            auth: { mode: 'id', provider: 'email' },
             body: {
                 email: email,
                 password: password
@@ -196,7 +196,7 @@ const LoginForm: FC = () => {
                     </form>
                     <div className='opts__divider' style={{ marginTop: '1.8rem' }}><p>or</p></div>
                     <div className='auth__icon-group'>
-                        <button onClick={() => oAuthPKCEHandler('google')} aria-label='login with google' title='Login With Google'
+                        <button onClick={() => oAuthHandler('google')} aria-label='login with google' title='Login With Google'
                             onFocus={() => setFocusGoogle(true)} onBlur={() => setFocusGoogle(false)}
                             onMouseEnter={() => setFocusGoogle(true)} onMouseLeave={() => setFocusGoogle(false)}>
                             {focusGoogle ?

@@ -259,7 +259,7 @@ const EditAccount: FC<Props> = ({ account }: Props) => {
                         </div>
                     </label>
                 </div>
-                <div className='edt-profile-form__btn-grp' style={{ paddingTop: '2rem', marginLeft: 'auto' }}>
+                <div className='edt-profile-form__btn-grp' style={{ marginTop: '3rem', marginLeft: 'auto' }}>
                     <button onClick={() => handleNavigate(`/profile/${account.profile.username}`)} className='edt-profile-form__btn edt-profile-form__btn--gray'>Cancel</button>
                     <input className='edt-profile-form__btn edt-profile-form__btn--green' type='submit' value='Save' />
                 </div>

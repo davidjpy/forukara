@@ -46,17 +46,18 @@ const generateCodeChallengeFromVerifier = async (v: string): Promise<string> => 
 }
 
 // Handle saving code verifier in local storage, and sending code challenge to authorization endpoint
-export const oAuthPKCEHandler = async (provider: 'google' | 'linkedin' | 'twitter'): Promise<void> => {
-
-    const randomVerifier = generateCodeVerifier();
-    const challenge = await generateCodeChallengeFromVerifier(randomVerifier)
-    sessionStorage.setItem('verifier', randomVerifier);
+export const oAuthHandler = async (provider: 'google' | 'linkedin' | 'twitter'): Promise<void> => {
 
     let endpoint: string;
 
     // Navigating to authorization endpoint without XHR
     switch(provider) {
         case 'google':
+            const randomVerifier = generateCodeVerifier();
+            const challenge = await generateCodeChallengeFromVerifier(randomVerifier)
+            sessionStorage.setItem('verifier', randomVerifier);
+            sessionStorage.setItem('provider', 'google');
+
             endpoint = `${baseUrl}/auth/${provider}?challenge=${challenge}`;
             break;
         
@@ -64,11 +65,13 @@ export const oAuthPKCEHandler = async (provider: 'google' | 'linkedin' | 'twitte
         case 'linkedin':
             const state = uuid.v4();
             sessionStorage.setItem('state', state);
-            endpoint = `${baseUrl}/auth/${provider}?challenge=${challenge}`;
+            sessionStorage.setItem('provider', 'linkedin');
+
+            endpoint = `${baseUrl}/auth/${provider}?state=${state}`;
             break;
         
         case 'twitter':
-            endpoint = `${baseUrl}/auth/${provider}?challenge=${challenge}`;
+            endpoint = `${baseUrl}/auth/${provider}`;
             break;
     }
 

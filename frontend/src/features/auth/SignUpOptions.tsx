@@ -8,7 +8,7 @@ import FocusTrap from 'focus-trap-react';
 import { IoMdClose } from 'react-icons/io';
 
 import { onkeyDownHandler } from '@common/utilities/onKeyDownHandler';
-import { oAuthPKCEHandler } from '@common/utilities/oAuthPKCEHandler';
+import { oAuthHandler } from '@common/utilities/oAuthHandler';
 
 type Props = {
     block: 'options' | 'form' | 'success';
@@ -67,7 +67,7 @@ const SignUpOptions: FC<Props> = ({ block, hadnleSignUpFormUnmounted, handleLogi
                 </div>
                 <div className='opts__divider'><p>or</p></div>
                 <div className='opts__wrapper'>
-                    <button onClick={() => oAuthPKCEHandler('google')} className='opts__btn opts__btn--google'>
+                    <button onClick={() => oAuthHandler('google')} className='opts__btn opts__btn--google'>
                         <div>
                             <FcGoogle aria-hidden={true} className='opts__icon' />
                         </div>
@@ -77,7 +77,7 @@ const SignUpOptions: FC<Props> = ({ block, hadnleSignUpFormUnmounted, handleLogi
                         <AiOutlineTwitter aria-hidden={true} className='opts__icon opts__icon--twitter' />
                         Sign Up With Twitter
                     </button>
-                    <button onClick={() => oAuthPKCEHandler('linkedin')} className='opts__btn opts__btn--linkedin'>
+                    <button onClick={() => oAuthHandler('linkedin')} className='opts__btn opts__btn--linkedin'>
                         <div>
                             <FaLinkedinIn aria-hidden={true} className='opts__icon opts__icon--linkedin' />
                         </div>

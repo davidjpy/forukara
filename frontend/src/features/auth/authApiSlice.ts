@@ -2,10 +2,10 @@ import * as uuid from 'uuid'
 
 import { apiSlice } from '@app/apiSlice';
 import { setUserInfo, setCredantial, logout } from '@features/auth/authSlice';
-import { RefreshResponse, User } from '@common/utilities/types';
+import { RefreshResponse, User, AuthProvider } from '@common/utilities/types';
 
 type UserLogin = {
-    auth: 'id' | 'oauth',
+    auth: { mode: 'id' | 'oauth', provider: AuthProvider },
     body: {
         email?: string;
         password?: string;
@@ -24,7 +24,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
     endpoints: builder => ({
         login: builder.mutation<LoginResponse, UserLogin>({
             query: (data) => ({
-                url: `/auth/login?auth=${data.auth}`,
+                url: `/auth/login?auth=${data.auth.mode}&provider=${data.auth.provider}`,
                 method: 'POST',
                 body: data.body,
                 validateStatus: (response, result) =>

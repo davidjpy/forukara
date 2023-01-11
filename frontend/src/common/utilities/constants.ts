@@ -516,414 +516,1592 @@ export const INTERESTS = [
 ];
 
 export const SKILLS = [
-    { "value": "Building Information Modelling", "label": "Building Information Modelling" },
-    { "value": "Project Management", "label": "Project Management" },
-    { "value": "Risk Management", "label": "Risk Management" },
-    { "value": "Management", "label": "Management" },
-    { "value": "Customer Service", "label": "Customer Service" },
-    { "value": "Auditing", "label": "Auditing" },
-    { "value": "Leadership", "label": "Leadership" },
-    { "value": "Internal Controls", "label": "Internal Controls" },
-    { "value": "Training", "label": "Training" },
-    { "value": "Business Analysis", "label": "Business Analysis" },
-    { "value": "Finance", "label": "Finance" },
-    { "value": "Project Planning", "label": "Project Planning" },
-    { "value": "Analysis", "label": "Analysis" },
-    { "value": "Internal Audit", "label": "Internal Audit" },
-    { "value": "Employee Relations", "label": "Employee Relations" },
-    { "value": "Security", "label": "Security" },
-    { "value": "Strategy", "label": "Strategy" },
-    { "value": "Coaching", "label": "Coaching" },
-    { "value": "Governance", "label": "Governance" },
-    { "value": "Banking", "label": "Banking" },
-    { "value": "Business Planning", "label": "Business Planning" },
-    { "value": "Budget Management", "label": "Budget Management" },
-    { "value": "Strategic Planning", "label": "Strategic Planning" },
-    { "value": "Team Leadership", "label": "Team Leadership" },
-    { "value": "Communication", "label": "Communication" },
-    { "value": "Team Management", "label": "Team Management" },
-    { "value": "Time Management", "label": "Time Management" },
-    { "value": "Program Management", "label": "Program Management" },
-    { "value": "Problem Solving", "label": "Problem Solving" },
-    { "value": "Business Development", "label": "Business Development" },
-    { "value": "Digital Marketing", "label": "Digital Marketing" },
-    { "value": "Change Management", "label": "Change Management" },
-    { "value": "Microsoft Office", "label": "Microsoft Office" },
-    { "value": "Agency Management", "label": "Agency Management" },
-    { "value": "Advertising", "label": "Advertising" },
-    { "value": "Process Improvement", "label": "Process Improvement" },
-    { "value": "Vendor Management", "label": "Vendor Management" },
-    { "value": "Financial Management", "label": "Financial Management" },
-    { "value": "Financial Reporting", "label": "Financial Reporting" },
-    { "value": "Public Speaking", "label": "Public Speaking" },
-    { "value": "Marketing", "label": "Marketing" },
-    { "value": "Accounting", "label": "Accounting" },
-    { "value": "Negotiation", "label": "Negotiation" },
-    { "value": "Financial Analysis", "label": "Financial Analysis" },
-    { "value": "Business Strategy", "label": "Business Strategy" },
-    { "value": "Teamwork", "label": "Teamwork" },
-    { "value": "Operations Management", "label": "Operations Management" },
-    { "value": "Supply Chain Management", "label": "Supply Chain Management" },
-    { "value": "Contract Management", "label": "Contract Management" },
-    { "value": "Engineering", "label": "Engineering" },
-    { "value": "Logistics", "label": "Logistics" },
-    { "value": "Purchasing", "label": "Purchasing" },
-    { "value": "Contract Negotiation", "label": "Contract Negotiation" },
-    { "value": "Supply Chain", "label": "Supply Chain" },
-    { "value": "Budgets", "label": "Budgets" },
-    { "value": "Networking", "label": "Networking" },
-    { "value": "Operating Systems", "label": "Operating Systems" },
-    { "value": "Virtualization", "label": "Virtualization" },
-    { "value": "Cloud Computing", "label": "Cloud Computing" },
-    { "value": "Linux", "label": "Linux" },
-    { "value": "Databases", "label": "Databases" },
-    { "value": "System Administration", "label": "System Administration" },
-    { "value": "Data Center", "label": "Data Center" },
-    { "value": "Network Security", "label": "Network Security" },
-    { "value": "Windows Server", "label": "Windows Server" },
-    { "value": "Integration", "label": "Integration" },
-    { "value": "Windows", "label": "Windows" },
-    { "value": "IT Management", "label": "IT Management" },
-    { "value": "Active Directory", "label": "Active Directory" },
-    { "value": "Troubleshooting", "label": "Troubleshooting" },
-    { "value": "Servers", "label": "Servers" },
-    { "value": "Disaster Recovery", "label": "Disaster Recovery" },
-    { "value": "SQL", "label": "SQL" },
-    { "value": "Java", "label": "Java" },
-    { "value": "Python", "label": "Python" },
-    { "value": "C++", "label": "C++" },
-    { "value": "Javascript", "label": "Javascript" },
-    { "value": "C", "label": "C" },
-    { "value": "MySQL", "label": "MySQL" },
-    { "value": "Oracle", "label": "Oracle" },
-    { "value": "XML", "label": "XML" },
-    { "value": "Software Development", "label": "Software Development" },
-    { "value": "Agile Methodologies", "label": "Agile Methodologies" },
-    { "value": "Adobe Photoshop", "label": "Adobe Photoshop" },
-    { "value": "Social Media", "label": "Social Media" },
-    { "value": "AutoCAD", "label": "AutoCAD" },
-    { "value": "Photoshop", "label": "Photoshop" },
-    { "value": "Photography", "label": "Photography" },
-    { "value": "Wordpress", "label": "Wordpress" },
-    { "value": "Sketchup", "label": "Sketchup" },
-    { "value": "HTML", "label": "HTML" },
-    { "value": "Illustrator", "label": "Illustrator" },
-    { "value": "Microsoft Word", "label": "Microsoft Word" },
-    { "value": "Microsoft Excel", "label": "Microsoft Excel" },
-    { "value": "Indesign", "label": "Indesign" },
-    { "value": "Presentation", "label": "Presentation" },
-    { "value": "Dreamweaver", "label": "Dreamweaver" },
-    { "value": "2D & 3D Animation", "label": "2D & 3D Animation" },
-    { "value": "Flash", "label": "Flash" },
-    { "value": "Powerpoint", "label": "Powerpoint" },
-    { "value": "Premiere", "label": "Premiere" },
-    { "value": "Excel", "label": "Excel" },
-    { "value": "Revit", "label": "Revit" },
-    { "value": "Quark", "label": "Quark" },
-    { "value": "Distributed Architectures", "label": "Distributed Architectures" },
-    { "value": "Autocad", "label": "Autocad" },
-    { "value": "SOA", "label": "SOA" },
-    { "value": "API Integration", "label": "API Integration" },
-    { "value": "Architectural Design", "label": "Architectural Design" },
-    { "value": "Web Applications", "label": "Web Applications" },
-    { "value": "Enterprise Architecture", "label": "Enterprise Architecture" },
-    { "value": "Web Services", "label": "Web Services" },
-    { "value": "Scrum", "label": "Scrum" },
-    { "value": "Software Engineering", "label": "Software Engineering" },
-    { "value": "Programming", "label": "Programming" },
-    { "value": "CAD", "label": "CAD" },
-    { "value": "Rendering", "label": "Rendering" },
-    { "value": "GD&T", "label": "GD&T" },
-    { "value": "FEA", "label": "FEA" },
-    { "value": "Construction", "label": "Construction" },
-    { "value": "DFMA", "label": "DFMA" },
-    { "value": "Solidworks", "label": "Solidworks" },
-    { "value": "Design", "label": "Design" },
-    { "value": "User Experience Design", "label": "User Experience Design" },
-    { "value": "User Interface Design", "label": "User Interface Design" },
-    { "value": "AR/VR", "label": "AR/VR" },
-    { "value": "Game Development", "label": "Game Development" },
-    { "value": "Application Development", "label": "Application Development" },
-    { "value": "Writing", "label": "Writing" },
-    { "value": "Database", "label": "Database" },
-    { "value": "Drawing", "label": "Drawing" },
-    { "value": "Painting", "label": "Painting" },
-    { "value": "Graphic Design", "label": "Graphic Design" },
-    { "value": "Illustration", "label": "Illustration" },
-    { "value": "Sketching", "label": "Sketching" },
-    { "value": "InDesign", "label": "InDesign" },
-    { "value": "CSS", "label": "CSS" },
-    { "value": "PHP", "label": "PHP" },
-    { "value": "After Effects", "label": "After Effects" },
-    { "value": "How to List Photos", "label": "How to List Photos" },
-    { "value": "Video Editing", "label": "Video Editing" },
-    { "value": "Final Cut Pro", "label": "Final Cut Pro" },
-    { "value": "Video", "label": "Video" },
-    { "value": "Ms Powerpoint", "label": "Ms Powerpoint" },
-    { "value": "Ms Word", "label": "Ms Word" },
-    { "value": "Adobe Page Maker", "label": "Adobe Page Maker" },
-    { "value": "Editing", "label": "Editing" },
-    { "value": "Television", "label": "Television" },
-    { "value": "Social Media Marketing", "label": "Social Media Marketing" },
-    { "value": "Adobe Creative Suite", "label": "Adobe Creative Suite" },
-    { "value": "Digital Media", "label": "Digital Media" },
-    { "value": "Public Relations", "label": "Public Relations" },
-    { "value": "Product Development", "label": "Product Development" },
-    { "value": "Product Management", "label": "Product Management" },
-    { "value": "User Experience", "label": "User Experience" },
-    { "value": "Concept Design", "label": "Concept Design" },
-    { "value": "Product Marketing", "label": "Product Marketing" },
-    { "value": "Entrepreneurship", "label": "Entrepreneurship" },
-    { "value": "Web Design", "label": "Web Design" },
-    { "value": "Industrial Design", "label": "Industrial Design" },
-    { "value": "Business Management", "label": "Business Management" },
-    { "value": "Microsoft Office Suite", "label": "Microsoft Office Suite" },
-    { "value": "Finance/Accounting/Payroll", "label": "Finance/Accounting/Payroll" },
-    { "value": "Client Relations", "label": "Client Relations" },
-    { "value": "Relationship Management", "label": "Relationship Management" },
-    { "value": "Web Analytics", "label": "Web Analytics" },
-    { "value": "Content Marketing", "label": "Content Marketing" },
-    { "value": "Computer Skills", "label": "Computer Skills" },
-    { "value": "Customer Service Management", "label": "Customer Service Management" },
-    { "value": "Creative", "label": "Creative" },
-    { "value": "Goal Oriented", "label": "Goal Oriented" },
-    { "value": "Community Management", "label": "Community Management" },
-    { "value": "Physics", "label": "Physics" },
-    { "value": "English", "label": "English" },
-    { "value": "Data Analysis", "label": "Data Analysis" },
-    { "value": "Machine Learning", "label": "Machine Learning" },
-    { "value": "Adaptability", "label": "Adaptability" },
-    { "value": "Computer Science", "label": "Computer Science" },
-    { "value": "Construction Management", "label": "Construction Management" },
-    { "value": "Project Controls", "label": "Project Controls" },
-    { "value": "Creativity", "label": "Creativity" },
-    { "value": "Organization", "label": "Organization" },
-    { "value": "Competitive Analysis", "label": "Competitive Analysis" },
-    { "value": "Marketing Strategy", "label": "Marketing Strategy" },
-    { "value": "Sales", "label": "Sales" },
-    { "value": "Basic Theory", "label": "Basic Theory" },
-    { "value": "Object-Oriented Programming", "label": "Object-Oriented Programming" },
-    { "value": "Research", "label": "Research" },
-    { "value": "R", "label": "R" },
-    { "value": "Matlab", "label": "Matlab" },
-    { "value": "SPSS", "label": "SPSS" },
-    { "value": "Data Visualization", "label": "Data Visualization" },
-    { "value": "Hive", "label": "Hive" },
-    { "value": "Spark", "label": "Spark" },
-    { "value": "Tableau", "label": "Tableau" },
-    { "value": "Mongodb", "label": "Mongodb" },
-    { "value": "Git", "label": "Git" },
-    { "value": "Big Data", "label": "Big Data" },
-    { "value": "Scala", "label": "Scala" },
-    { "value": "Hadoop", "label": "Hadoop" },
-    { "value": "Kafka", "label": "Kafka" },
-    { "value": "AWS", "label": "AWS" },
-    { "value": "Mlib", "label": "Mlib" },
-    { "value": "Sqoop", "label": "Sqoop" },
-    { "value": "Mapreduce", "label": "Mapreduce" },
-    { "value": "Docker", "label": "Docker" },
-    { "value": "Hbase", "label": "Hbase" },
-    { "value": "MongoDB", "label": "MongoDB" },
-    { "value": "Database Management", "label": "Database Management" },
-    { "value": "ETL", "label": "ETL" },
-    { "value": "Data Modelling", "label": "Data Modelling" },
-    { "value": "Data", "label": "Data" },
-    { "value": "Reporting", "label": "Reporting" },
-    { "value": "Problem-Solving", "label": "Problem-Solving" },
-    { "value": "Leadership And Management", "label": "Leadership And Management" },
-    { "value": "Data Visualisation", "label": "Data Visualisation" },
-    { "value": "Business Intelligence Dashboards", "label": "Business Intelligence Dashboards" },
-    { "value": "Business Intelligence", "label": "Business Intelligence" },
-    { "value": "Programming Languages", "label": "Programming Languages" },
-    { "value": "Operating System", "label": "Operating System" },
-    { "value": "Development Tools", "label": "Development Tools" },
-    { "value": "Web Technologies", "label": "Web Technologies" },
-    { "value": "Web Development", "label": "Web Development" },
-    { "value": "Frameworks", "label": "Frameworks" },
-    { "value": "Applications", "label": "Applications" },
-    { "value": "Version Control", "label": "Version Control" },
-    { "value": "ArcGIS", "label": "ArcGIS" },
-    { "value": "Sigma Plot", "label": "Sigma Plot" },
-    { "value": "Market Analysis", "label": "Market Analysis" },
-    { "value": "Qualitative Research", "label": "Qualitative Research" },
-    { "value": "Data Management", "label": "Data Management" },
-    { "value": "Report Writing", "label": "Report Writing" },
-    { "value": "Quantitative Research", "label": "Quantitative Research" },
-    { "value": "Academic Writing", "label": "Academic Writing" },
-    { "value": "Research Design", "label": "Research Design" },
-    { "value": "Proofreading", "label": "Proofreading" },
-    { "value": "Content Management System", "label": "Content Management System" },
-    { "value": "Blogging", "label": "Blogging" },
-    { "value": "Teaching", "label": "Teaching" },
-    { "value": "Copywriting", "label": "Copywriting" },
-    { "value": "Foreign Languages", "label": "Foreign Languages" },
-    { "value": "React", "label": "React" },
-    { "value": "Typescript", "label": "Typescript" },
-    { "value": "C#", "label": "C#" },
-    { "value": "JQuery", "label": "JQuery" },
-    { "value": "Node.Js", "label": "Node.Js" },
-    { "value": "Bootstrap", "label": "Bootstrap" },
-    { "value": "HTML5", "label": "HTML5" },
-    { "value": "Testing", "label": "Testing" },
-    { "value": "Embedded Systems", "label": "Embedded Systems" },
-    { "value": "Embedded C", "label": "Embedded C" },
-    { "value": "Coding", "label": "Coding" },
-    { "value": "Embedded Software", "label": "Embedded Software" },
-    { "value": "Algorithms", "label": "Algorithms" },
-    { "value": "Continuous Integration", "label": "Continuous Integration" },
-    { "value": "Frontend", "label": "Frontend" },
-    { "value": "Backend", "label": "Backend" },
-    { "value": "Front-End", "label": "Front-End" },
-    { "value": "Data Warehousing", "label": "Data Warehousing" },
-    { "value": "Database Design", "label": "Database Design" },
-    { "value": "Data Modeling", "label": "Data Modeling" },
-    { "value": "Microsoft Sql Server", "label": "Microsoft Sql Server" },
-    { "value": "Requirements Analysis", "label": "Requirements Analysis" },
-    { "value": "Unix", "label": "Unix" },
-    { "value": "Android", "label": "Android" },
-    { "value": "GIT", "label": "GIT" },
-    { "value": "CSS3", "label": "CSS3" },
-    { "value": "Wireframing", "label": "Wireframing" },
-    { "value": "UX Design", "label": "UX Design" },
-    { "value": "Usability Testing", "label": "Usability Testing" },
-    { "value": "Information Architecture", "label": "Information Architecture" },
-    { "value": "Visual Design", "label": "Visual Design" },
-    { "value": "Figma", "label": "Figma" },
-    { "value": "User Research", "label": "User Research" },
-    { "value": "UI Design", "label": "UI Design" },
-    { "value": "Interaction Design", "label": "Interaction Design" },
-    { "value": "Lumion", "label": "Lumion" },
-    { "value": "Ms Office", "label": "Ms Office" },
-    { "value": "3ds Max", "label": "3ds Max" },
-    { "value": "Archicad", "label": "Archicad" },
-    { "value": "3d Max", "label": "3d Max" },
-    { "value": "Rhino", "label": "Rhino" },
-    { "value": "Adobe Illustrator", "label": "Adobe Illustrator" },
-    { "value": "Etabs", "label": "Etabs" },
-    { "value": "OOP", "label": "OOP" },
-    { "value": "Design Patterns", "label": "Design Patterns" },
-    { "value": "Sql", "label": "Sql" },
-    { "value": "jQuery", "label": "jQuery" },
-    { "value": "TDD", "label": "TDD" },
-    { "value": ".NET", "label": ".NET" },
-    { "value": "UML", "label": "UML" },
-    { "value": "Winforms", "label": "Winforms" },
-    { "value": "Linq", "label": "Linq" },
-    { "value": "WPF", "label": "WPF" },
-    { "value": "UX", "label": "UX" },
-    { "value": "IDE", "label": "IDE" },
-    { "value": "Ruby On Rails", "label": "Ruby On Rails" },
-    { "value": "Jquery", "label": "Jquery" },
-    { "value": "React.Js", "label": "React.Js" },
-    { "value": "DevOps", "label": "DevOps" },
-    { "value": "React Native", "label": "React Native" },
-    { "value": "Solidity", "label": "Solidity" },
-    { "value": "Ethereum", "label": "Ethereum" },
-    { "value": "Vue.Js", "label": "Vue.Js" },
-    { "value": "Laravel", "label": "Laravel" },
-    { "value": "Ruby", "label": "Ruby" },
-    { "value": "Postgresql3", "label": "Postgresql3" },
-    { "value": "Data Science", "label": "Data Science" },
-    { "value": "Continuous Improvement", "label": "Continuous Improvement" },
-    { "value": "Lean Manufacturing", "label": "Lean Manufacturing" },
-    { "value": "Vehicles", "label": "Vehicles" },
-    { "value": "Manufacturing", "label": "Manufacturing" },
-    { "value": "Sales Management", "label": "Sales Management" },
-    { "value": "Customer Satisfaction", "label": "Customer Satisfaction" },
-    { "value": "New Business Development", "label": "New Business Development" },
-    { "value": "Kaizen", "label": "Kaizen" },
-    { "value": "Team Building", "label": "Team Building" },
-    { "value": "Welding", "label": "Welding" },
-    { "value": "HVAC", "label": "HVAC" },
-    { "value": "Mechanical", "label": "Mechanical" },
-    { "value": "Carpentry", "label": "Carpentry" },
-    { "value": "Electronics", "label": "Electronics" },
-    { "value": "Instrumentation", "label": "Instrumentation" },
-    { "value": "Computer", "label": "Computer" },
-    { "value": "Automation", "label": "Automation" },
-    { "value": "Mechanics", "label": "Mechanics" },
-    { "value": "Software", "label": "Software" },
-    { "value": "Assembly Language", "label": "Assembly Language" },
-    { "value": "Hardware Design", "label": "Hardware Design" },
-    { "value": "RTOS", "label": "RTOS" },
-    { "value": "Technical Support", "label": "Technical Support" },
-    { "value": "Six Sigma", "label": "Six Sigma" },
-    { "value": "Ajax", "label": "Ajax" },
-    { "value": "Microsoft SQL Server", "label": "Microsoft SQL Server" },
-    { "value": "SAP", "label": "SAP" },
-    { "value": "ASP.NET", "label": "ASP.NET" },
-    { "value": "Clean Architecture", "label": "Clean Architecture" },
-    { "value": "Html5", "label": "Html5" },
-    { "value": "Modular front-end", "label": "Modular front-end" },
-    { "value": "Angular", "label": "Angular" },
-    { "value": "CSS Selectors", "label": "CSS Selectors" },
-    { "value": "Redux", "label": "Redux" },
-    { "value": "DOM", "label": "DOM" },
-    { "value": "JSX", "label": "JSX" },
-    { "value": "Arduino", "label": "Arduino" },
-    { "value": "Computer Vision", "label": "Computer Vision" },
-    { "value": "Software Programming Languages", "label": "Software Programming Languages" },
-    { "value": "Java/JavaEE Technologies", "label": "Java/JavaEE Technologies" },
-    { "value": "Software Architecture", "label": "Software Architecture" },
-    { "value": "Electrical", "label": "Electrical" },
-    { "value": "Machining", "label": "Machining" },
-    { "value": "Plumbing", "label": "Plumbing" },
-    { "value": "Fabrication", "label": "Fabrication" },
-    { "value": "Mechanic", "label": "Mechanic" },
-    { "value": "Forklift", "label": "Forklift" },
-    { "value": "Metal Fabrication", "label": "Metal Fabrication" },
-    { "value": "Blueprint Reading", "label": "Blueprint Reading" },
-    { "value": "C API", "label": "C API" },
-    { "value": "GTK", "label": "GTK" },
-    { "value": "Debugging tools", "label": "Debugging tools" },
-    { "value": "ALSA", "label": "ALSA" },
-    { "value": "Boost", "label": "Boost" },
-    { "value": "POCO", "label": "POCO" },
-    { "value": "Qt", "label": "Qt" },
-    { "value": "GCC", "label": "GCC" },
-    { "value": "ICC", "label": "ICC" },
-    { "value": "MS Access", "label": "MS Access" },
-    { "value": "MS Powerpoint", "label": "MS Powerpoint" },
-    { "value": "SAS", "label": "SAS" },
-    { "value": "Electrical Engineering", "label": "Electrical Engineering" },
-    { "value": "Commissioning", "label": "Commissioning" },
-    { "value": "Scada", "label": "Scada" },
-    { "value": "PLC", "label": "PLC" },
-    { "value": "Enterprise Software", "label": "Enterprise Software" },
-    { "value": "CRM", "label": "CRM" },
-    { "value": "Pre-Sales", "label": "Pre-Sales" },
-    { "value": "Cloud Platforms", "label": "Cloud Platforms" },
-    { "value": "Containerization Platforms", "label": "Containerization Platforms" },
-    { "value": "Virtualization Platforms", "label": "Virtualization Platforms" },
-    { "value": "Automation And Orchestration", "label": "Automation And Orchestration" },
-    { "value": "Development And Scripting", "label": "Development And Scripting" },
-    { "value": "Linux Platforms", "label": "Linux Platforms" },
-    { "value": "Windows Platforms", "label": "Windows Platforms" },
-    { "value": "Packet Capture", "label": "Packet Capture" },
-    { "value": "Devops", "label": "Devops" },
-    { "value": "Cloud", "label": "Cloud" },
-    { "value": "Warehouse Management", "label": "Warehouse Management" },
-    { "value": "Languages", "label": "Languages" },
-    { "value": "Transportation Management", "label": "Transportation Management" },
-    { "value": "ETL Tools", "label": "ETL Tools" },
-    { "value": "Process Development", "label": "Process Development" },
-    { "value": "Customer Relationship", "label": "Customer Relationship" },
-    { "value": "Key Accounts Management", "label": "Key Accounts Management" },
-    { "value": "Distribution Management", "label": "Distribution Management" },
-    { "value": "Microsoft Access", "label": "Microsoft Access" },
-    { "value": "Microsoft Power Point", "label": "Microsoft Power Point" },
-    { "value": "Office 365", "label": "Office 365" },
-    { "value": "Spreadsheet", "label": "Spreadsheet" },
-    { "value": "Pivot tables", "label": "Pivot tables" },
-    { "value": "Document Management", "label": "Document Management" },
-    { "value": "Communication Skills", "label": "Communication Skills" },
-    { "value": "Talent Management", "label": "Talent Management" },
-    { "value": "ADM", "label": "ADM" },
-    { "value": "MS Office", "label": "MS Office" },
-    { "value": "Payroll", "label": "Payroll" },
-    { "value": "Departments", "label": "Departments" },
-    { "value": "Growth", "label": "Growth" },
-    { "value": "System", "label": "System" },
-    { "value": "Organizational Development", "label": "Organizational Development" },
-    { "value": "Revenue Analysis", "label": "Revenue Analysis" }
+    {
+        "value": "Project Management",
+        "label": "Project Management"
+    },
+    {
+        "value": "Risk Management",
+        "label": "Risk Management"
+    },
+    {
+        "value": "Management",
+        "label": "Management"
+    },
+    {
+        "value": "Customer Service",
+        "label": "Customer Service"
+    },
+    {
+        "value": "Auditing",
+        "label": "Auditing"
+    },
+    {
+        "value": "Leadership",
+        "label": "Leadership"
+    },
+    {
+        "value": "Internal Controls",
+        "label": "Internal Controls"
+    },
+    {
+        "value": "Training",
+        "label": "Training"
+    },
+    {
+        "value": "Business Analysis",
+        "label": "Business Analysis"
+    },
+    {
+        "value": "Finance",
+        "label": "Finance"
+    },
+    {
+        "value": "Project Planning",
+        "label": "Project Planning"
+    },
+    {
+        "value": "Analysis",
+        "label": "Analysis"
+    },
+    {
+        "value": "Internal Audit",
+        "label": "Internal Audit"
+    },
+    {
+        "value": "Employee Relations",
+        "label": "Employee Relations"
+    },
+    {
+        "value": "Security",
+        "label": "Security"
+    },
+    {
+        "value": "Strategy",
+        "label": "Strategy"
+    },
+    {
+        "value": "Coaching",
+        "label": "Coaching"
+    },
+    {
+        "value": "Governance",
+        "label": "Governance"
+    },
+    {
+        "value": "Banking",
+        "label": "Banking"
+    },
+    {
+        "value": "Business Planning",
+        "label": "Business Planning"
+    },
+    {
+        "value": "Budget Management",
+        "label": "Budget Management"
+    },
+    {
+        "value": "Strategic Planning",
+        "label": "Strategic Planning"
+    },
+    {
+        "value": "Team Leadership",
+        "label": "Team Leadership"
+    },
+    {
+        "value": "Communication",
+        "label": "Communication"
+    },
+    {
+        "value": "Team Management",
+        "label": "Team Management"
+    },
+    {
+        "value": "Time Management",
+        "label": "Time Management"
+    },
+    {
+        "value": "Program Management",
+        "label": "Program Management"
+    },
+    {
+        "value": "Problem Solving",
+        "label": "Problem Solving"
+    },
+    {
+        "value": "Business Development",
+        "label": "Business Development"
+    },
+    {
+        "value": "Digital Marketing",
+        "label": "Digital Marketing"
+    },
+    {
+        "value": "Change Management",
+        "label": "Change Management"
+    },
+    {
+        "value": "Microsoft Office",
+        "label": "Microsoft Office"
+    },
+    {
+        "value": "Agency Management",
+        "label": "Agency Management"
+    },
+    {
+        "value": "Advertising",
+        "label": "Advertising"
+    },
+    {
+        "value": "Process Improvement",
+        "label": "Process Improvement"
+    },
+    {
+        "value": "Vendor Management",
+        "label": "Vendor Management"
+    },
+    {
+        "value": "Financial Management",
+        "label": "Financial Management"
+    },
+    {
+        "value": "Financial Reporting",
+        "label": "Financial Reporting"
+    },
+    {
+        "value": "Public Speaking",
+        "label": "Public Speaking"
+    },
+    {
+        "value": "Marketing",
+        "label": "Marketing"
+    },
+    {
+        "value": "Accounting",
+        "label": "Accounting"
+    },
+    {
+        "value": "Negotiation",
+        "label": "Negotiation"
+    },
+    {
+        "value": "Financial Analysis",
+        "label": "Financial Analysis"
+    },
+    {
+        "value": "Business Strategy",
+        "label": "Business Strategy"
+    },
+    {
+        "value": "Teamwork",
+        "label": "Teamwork"
+    },
+    {
+        "value": "Operations Management",
+        "label": "Operations Management"
+    },
+    {
+        "value": "Supply Chain Management",
+        "label": "Supply Chain Management"
+    },
+    {
+        "value": "Contract Management",
+        "label": "Contract Management"
+    },
+    {
+        "value": "Engineering",
+        "label": "Engineering"
+    },
+    {
+        "value": "Logistics",
+        "label": "Logistics"
+    },
+    {
+        "value": "Purchasing",
+        "label": "Purchasing"
+    },
+    {
+        "value": "Contract Negotiation",
+        "label": "Contract Negotiation"
+    },
+    {
+        "value": "Supply Chain",
+        "label": "Supply Chain"
+    },
+    {
+        "value": "Budgets",
+        "label": "Budgets"
+    },
+    {
+        "value": "Networking",
+        "label": "Networking"
+    },
+    {
+        "value": "Operating Systems",
+        "label": "Operating Systems"
+    },
+    {
+        "value": "Virtualization",
+        "label": "Virtualization"
+    },
+    {
+        "value": "Cloud Computing",
+        "label": "Cloud Computing"
+    },
+    {
+        "value": "Linux",
+        "label": "Linux"
+    },
+    {
+        "value": "Databases",
+        "label": "Databases"
+    },
+    {
+        "value": "System Administration",
+        "label": "System Administration"
+    },
+    {
+        "value": "Data Center",
+        "label": "Data Center"
+    },
+    {
+        "value": "Network Security",
+        "label": "Network Security"
+    },
+    {
+        "value": "Windows Server",
+        "label": "Windows Server"
+    },
+    {
+        "value": "Integration",
+        "label": "Integration"
+    },
+    {
+        "value": "Windows",
+        "label": "Windows"
+    },
+    {
+        "value": "IT Management",
+        "label": "IT Management"
+    },
+    {
+        "value": "Active Directory",
+        "label": "Active Directory"
+    },
+    {
+        "value": "Troubleshooting",
+        "label": "Troubleshooting"
+    },
+    {
+        "value": "Servers",
+        "label": "Servers"
+    },
+    {
+        "value": "Disaster Recovery",
+        "label": "Disaster Recovery"
+    },
+    {
+        "value": "SQL",
+        "label": "SQL"
+    },
+    {
+        "value": "Java",
+        "label": "Java"
+    },
+    {
+        "value": "Python",
+        "label": "Python"
+    },
+    {
+        "value": "C++",
+        "label": "C++"
+    },
+    {
+        "value": "Javascript",
+        "label": "Javascript"
+    },
+    {
+        "value": "C",
+        "label": "C"
+    },
+    {
+        "value": "MySQL",
+        "label": "MySQL"
+    },
+    {
+        "value": "Oracle",
+        "label": "Oracle"
+    },
+    {
+        "value": "XML",
+        "label": "XML"
+    },
+    {
+        "value": "Software Development",
+        "label": "Software Development"
+    },
+    {
+        "value": "Agile Methodologies",
+        "label": "Agile Methodologies"
+    },
+    {
+        "value": "Adobe Photoshop",
+        "label": "Adobe Photoshop"
+    },
+    {
+        "value": "Social Media",
+        "label": "Social Media"
+    },
+    {
+        "value": "AutoCAD",
+        "label": "AutoCAD"
+    },
+    {
+        "value": "Photoshop",
+        "label": "Photoshop"
+    },
+    {
+        "value": "Photography",
+        "label": "Photography"
+    },
+    {
+        "value": "Wordpress",
+        "label": "Wordpress"
+    },
+    {
+        "value": "Sketchup",
+        "label": "Sketchup"
+    },
+    {
+        "value": "HTML",
+        "label": "HTML"
+    },
+    {
+        "value": "Illustrator",
+        "label": "Illustrator"
+    },
+    {
+        "value": "Microsoft Word",
+        "label": "Microsoft Word"
+    },
+    {
+        "value": "Microsoft Excel",
+        "label": "Microsoft Excel"
+    },
+    {
+        "value": "Indesign",
+        "label": "Indesign"
+    },
+    {
+        "value": "Presentation",
+        "label": "Presentation"
+    },
+    {
+        "value": "Dreamweaver",
+        "label": "Dreamweaver"
+    },
+    {
+        "value": "2D & 3D Animation",
+        "label": "2D & 3D Animation"
+    },
+    {
+        "value": "Flash",
+        "label": "Flash"
+    },
+    {
+        "value": "Powerpoint",
+        "label": "Powerpoint"
+    },
+    {
+        "value": "Premiere",
+        "label": "Premiere"
+    },
+    {
+        "value": "Excel",
+        "label": "Excel"
+    },
+    {
+        "value": "Revit",
+        "label": "Revit"
+    },
+    {
+        "value": "Quark",
+        "label": "Quark"
+    },
+    {
+        "value": "Distributed Architectures",
+        "label": "Distributed Architectures"
+    },
+    {
+        "value": "SOA",
+        "label": "SOA"
+    },
+    {
+        "value": "API Integration",
+        "label": "API Integration"
+    },
+    {
+        "value": "Architectural Design",
+        "label": "Architectural Design"
+    },
+    {
+        "value": "Web Applications",
+        "label": "Web Applications"
+    },
+    {
+        "value": "Enterprise Architecture",
+        "label": "Enterprise Architecture"
+    },
+    {
+        "value": "Web Services",
+        "label": "Web Services"
+    },
+    {
+        "value": "Scrum",
+        "label": "Scrum"
+    },
+    {
+        "value": "Software Engineering",
+        "label": "Software Engineering"
+    },
+    {
+        "value": "Programming",
+        "label": "Programming"
+    },
+    {
+        "value": "CAD",
+        "label": "CAD"
+    },
+    {
+        "value": "Rendering",
+        "label": "Rendering"
+    },
+    {
+        "value": "GD&T",
+        "label": "GD&T"
+    },
+    {
+        "value": "FEA",
+        "label": "FEA"
+    },
+    {
+        "value": "Construction",
+        "label": "Construction"
+    },
+    {
+        "value": "DFMA",
+        "label": "DFMA"
+    },
+    {
+        "value": "Solidworks",
+        "label": "Solidworks"
+    },
+    {
+        "value": "Design",
+        "label": "Design"
+    },
+    {
+        "value": "User Experience Design",
+        "label": "User Experience Design"
+    },
+    {
+        "value": "User Interface Design",
+        "label": "User Interface Design"
+    },
+    {
+        "value": "AR/VR",
+        "label": "AR/VR"
+    },
+    {
+        "value": "Game Development",
+        "label": "Game Development"
+    },
+    {
+        "value": "Application Development",
+        "label": "Application Development"
+    },
+    {
+        "value": "Writing",
+        "label": "Writing"
+    },
+    {
+        "value": "Database",
+        "label": "Database"
+    },
+    {
+        "value": "Drawing",
+        "label": "Drawing"
+    },
+    {
+        "value": "Painting",
+        "label": "Painting"
+    },
+    {
+        "value": "Graphic Design",
+        "label": "Graphic Design"
+    },
+    {
+        "value": "Illustration",
+        "label": "Illustration"
+    },
+    {
+        "value": "Sketching",
+        "label": "Sketching"
+    },
+    {
+        "value": "CSS",
+        "label": "CSS"
+    },
+    {
+        "value": "PHP",
+        "label": "PHP"
+    },
+    {
+        "value": "After Effects",
+        "label": "After Effects"
+    },
+    {
+        "value": "How to List Photos",
+        "label": "How to List Photos"
+    },
+    {
+        "value": "Video Editing",
+        "label": "Video Editing"
+    },
+    {
+        "value": "Final Cut Pro",
+        "label": "Final Cut Pro"
+    },
+    {
+        "value": "Video",
+        "label": "Video"
+    },
+    {
+        "value": "Ms Powerpoint",
+        "label": "Ms Powerpoint"
+    },
+    {
+        "value": "Ms Word",
+        "label": "Ms Word"
+    },
+    {
+        "value": "Adobe Page Maker",
+        "label": "Adobe Page Maker"
+    },
+    {
+        "value": "Editing",
+        "label": "Editing"
+    },
+    {
+        "value": "Television",
+        "label": "Television"
+    },
+    {
+        "value": "Social Media Marketing",
+        "label": "Social Media Marketing"
+    },
+    {
+        "value": "Adobe Creative Suite",
+        "label": "Adobe Creative Suite"
+    },
+    {
+        "value": "Digital Media",
+        "label": "Digital Media"
+    },
+    {
+        "value": "Public Relations",
+        "label": "Public Relations"
+    },
+    {
+        "value": "Product Development",
+        "label": "Product Development"
+    },
+    {
+        "value": "Product Management",
+        "label": "Product Management"
+    },
+    {
+        "value": "User Experience",
+        "label": "User Experience"
+    },
+    {
+        "value": "Concept Design",
+        "label": "Concept Design"
+    },
+    {
+        "value": "Product Marketing",
+        "label": "Product Marketing"
+    },
+    {
+        "value": "Entrepreneurship",
+        "label": "Entrepreneurship"
+    },
+    {
+        "value": "Web Design",
+        "label": "Web Design"
+    },
+    {
+        "value": "Industrial Design",
+        "label": "Industrial Design"
+    },
+    {
+        "value": "Business Management",
+        "label": "Business Management"
+    },
+    {
+        "value": "Microsoft Office Suite",
+        "label": "Microsoft Office Suite"
+    },
+    {
+        "value": "Finance/Accounting/Payroll",
+        "label": "Finance/Accounting/Payroll"
+    },
+    {
+        "value": "Client Relations",
+        "label": "Client Relations"
+    },
+    {
+        "value": "Relationship Management",
+        "label": "Relationship Management"
+    },
+    {
+        "value": "Web Analytics",
+        "label": "Web Analytics"
+    },
+    {
+        "value": "Content Marketing",
+        "label": "Content Marketing"
+    },
+    {
+        "value": "Computer Skills",
+        "label": "Computer Skills"
+    },
+    {
+        "value": "Customer Service Management",
+        "label": "Customer Service Management"
+    },
+    {
+        "value": "Creative",
+        "label": "Creative"
+    },
+    {
+        "value": "Goal Oriented",
+        "label": "Goal Oriented"
+    },
+    {
+        "value": "Community Management",
+        "label": "Community Management"
+    },
+    {
+        "value": "Physics",
+        "label": "Physics"
+    },
+    {
+        "value": "English",
+        "label": "English"
+    },
+    {
+        "value": "Data Analysis",
+        "label": "Data Analysis"
+    },
+    {
+        "value": "Machine Learning",
+        "label": "Machine Learning"
+    },
+    {
+        "value": "Adaptability",
+        "label": "Adaptability"
+    },
+    {
+        "value": "Computer Science",
+        "label": "Computer Science"
+    },
+    {
+        "value": "Construction Management",
+        "label": "Construction Management"
+    },
+    {
+        "value": "Project Controls",
+        "label": "Project Controls"
+    },
+    {
+        "value": "Creativity",
+        "label": "Creativity"
+    },
+    {
+        "value": "Organization",
+        "label": "Organization"
+    },
+    {
+        "value": "Competitive Analysis",
+        "label": "Competitive Analysis"
+    },
+    {
+        "value": "Marketing Strategy",
+        "label": "Marketing Strategy"
+    },
+    {
+        "value": "Sales",
+        "label": "Sales"
+    },
+    {
+        "value": "Basic Theory",
+        "label": "Basic Theory"
+    },
+    {
+        "value": "Object-Oriented Programming",
+        "label": "Object-Oriented Programming"
+    },
+    {
+        "value": "Research",
+        "label": "Research"
+    },
+    {
+        "value": "R",
+        "label": "R"
+    },
+    {
+        "value": "Matlab",
+        "label": "Matlab"
+    },
+    {
+        "value": "SPSS",
+        "label": "SPSS"
+    },
+    {
+        "value": "Data Visualization",
+        "label": "Data Visualization"
+    },
+    {
+        "value": "Hive",
+        "label": "Hive"
+    },
+    {
+        "value": "Spark",
+        "label": "Spark"
+    },
+    {
+        "value": "Tableau",
+        "label": "Tableau"
+    },
+    {
+        "value": "Mongodb",
+        "label": "Mongodb"
+    },
+    {
+        "value": "Git",
+        "label": "Git"
+    },
+    {
+        "value": "Big Data",
+        "label": "Big Data"
+    },
+    {
+        "value": "Scala",
+        "label": "Scala"
+    },
+    {
+        "value": "Hadoop",
+        "label": "Hadoop"
+    },
+    {
+        "value": "Kafka",
+        "label": "Kafka"
+    },
+    {
+        "value": "AWS",
+        "label": "AWS"
+    },
+    {
+        "value": "Mlib",
+        "label": "Mlib"
+    },
+    {
+        "value": "Sqoop",
+        "label": "Sqoop"
+    },
+    {
+        "value": "Mapreduce",
+        "label": "Mapreduce"
+    },
+    {
+        "value": "Docker",
+        "label": "Docker"
+    },
+    {
+        "value": "Hbase",
+        "label": "Hbase"
+    },
+    {
+        "value": "Database Management",
+        "label": "Database Management"
+    },
+    {
+        "value": "ETL",
+        "label": "ETL"
+    },
+    {
+        "value": "Data Modelling",
+        "label": "Data Modelling"
+    },
+    {
+        "value": "Data",
+        "label": "Data"
+    },
+    {
+        "value": "Reporting",
+        "label": "Reporting"
+    },
+    {
+        "value": "Problem-Solving",
+        "label": "Problem-Solving"
+    },
+    {
+        "value": "Leadership And Management",
+        "label": "Leadership And Management"
+    },
+    {
+        "value": "Data Visualisation",
+        "label": "Data Visualisation"
+    },
+    {
+        "value": "Business Intelligence Dashboards",
+        "label": "Business Intelligence Dashboards"
+    },
+    {
+        "value": "Business Intelligence",
+        "label": "Business Intelligence"
+    },
+    {
+        "value": "Programming Languages",
+        "label": "Programming Languages"
+    },
+    {
+        "value": "Operating System",
+        "label": "Operating System"
+    },
+    {
+        "value": "Development Tools",
+        "label": "Development Tools"
+    },
+    {
+        "value": "Web Technologies",
+        "label": "Web Technologies"
+    },
+    {
+        "value": "Web Development",
+        "label": "Web Development"
+    },
+    {
+        "value": "Frameworks",
+        "label": "Frameworks"
+    },
+    {
+        "value": "Applications",
+        "label": "Applications"
+    },
+    {
+        "value": "Version Control",
+        "label": "Version Control"
+    },
+    {
+        "value": "ArcGIS",
+        "label": "ArcGIS"
+    },
+    {
+        "value": "Sigma Plot",
+        "label": "Sigma Plot"
+    },
+    {
+        "value": "Market Analysis",
+        "label": "Market Analysis"
+    },
+    {
+        "value": "Qualitative Research",
+        "label": "Qualitative Research"
+    },
+    {
+        "value": "Data Management",
+        "label": "Data Management"
+    },
+    {
+        "value": "Report Writing",
+        "label": "Report Writing"
+    },
+    {
+        "value": "Quantitative Research",
+        "label": "Quantitative Research"
+    },
+    {
+        "value": "Academic Writing",
+        "label": "Academic Writing"
+    },
+    {
+        "value": "Research Design",
+        "label": "Research Design"
+    },
+    {
+        "value": "Proofreading",
+        "label": "Proofreading"
+    },
+    {
+        "value": "Content Management System",
+        "label": "Content Management System"
+    },
+    {
+        "value": "Blogging",
+        "label": "Blogging"
+    },
+    {
+        "value": "Teaching",
+        "label": "Teaching"
+    },
+    {
+        "value": "Copywriting",
+        "label": "Copywriting"
+    },
+    {
+        "value": "Foreign Languages",
+        "label": "Foreign Languages"
+    },
+    {
+        "value": "React",
+        "label": "React"
+    },
+    {
+        "value": "Typescript",
+        "label": "Typescript"
+    },
+    {
+        "value": "C#",
+        "label": "C#"
+    },
+    {
+        "value": "JQuery",
+        "label": "JQuery"
+    },
+    {
+        "value": "Node.Js",
+        "label": "Node.Js"
+    },
+    {
+        "value": "Bootstrap",
+        "label": "Bootstrap"
+    },
+    {
+        "value": "HTML5",
+        "label": "HTML5"
+    },
+    {
+        "value": "Testing",
+        "label": "Testing"
+    },
+    {
+        "value": "Embedded Systems",
+        "label": "Embedded Systems"
+    },
+    {
+        "value": "Embedded C",
+        "label": "Embedded C"
+    },
+    {
+        "value": "Coding",
+        "label": "Coding"
+    },
+    {
+        "value": "Embedded Software",
+        "label": "Embedded Software"
+    },
+    {
+        "value": "Algorithms",
+        "label": "Algorithms"
+    },
+    {
+        "value": "Continuous Integration",
+        "label": "Continuous Integration"
+    },
+    {
+        "value": "Frontend",
+        "label": "Frontend"
+    },
+    {
+        "value": "Backend",
+        "label": "Backend"
+    },
+    {
+        "value": "Front-End",
+        "label": "Front-End"
+    },
+    {
+        "value": "Data Warehousing",
+        "label": "Data Warehousing"
+    },
+    {
+        "value": "Database Design",
+        "label": "Database Design"
+    },
+    {
+        "value": "Data Modeling",
+        "label": "Data Modeling"
+    },
+    {
+        "value": "Microsoft Sql Server",
+        "label": "Microsoft Sql Server"
+    },
+    {
+        "value": "Requirements Analysis",
+        "label": "Requirements Analysis"
+    },
+    {
+        "value": "Unix",
+        "label": "Unix"
+    },
+    {
+        "value": "Android",
+        "label": "Android"
+    },
+    {
+        "value": "CSS3",
+        "label": "CSS3"
+    },
+    {
+        "value": "Wireframing",
+        "label": "Wireframing"
+    },
+    {
+        "value": "UX Design",
+        "label": "UX Design"
+    },
+    {
+        "value": "Usability Testing",
+        "label": "Usability Testing"
+    },
+    {
+        "value": "Information Architecture",
+        "label": "Information Architecture"
+    },
+    {
+        "value": "Visual Design",
+        "label": "Visual Design"
+    },
+    {
+        "value": "Figma",
+        "label": "Figma"
+    },
+    {
+        "value": "User Research",
+        "label": "User Research"
+    },
+    {
+        "value": "UI Design",
+        "label": "UI Design"
+    },
+    {
+        "value": "Interaction Design",
+        "label": "Interaction Design"
+    },
+    {
+        "value": "Lumion",
+        "label": "Lumion"
+    },
+    {
+        "value": "Ms Office",
+        "label": "Ms Office"
+    },
+    {
+        "value": "3ds Max",
+        "label": "3ds Max"
+    },
+    {
+        "value": "Archicad",
+        "label": "Archicad"
+    },
+    {
+        "value": "3d Max",
+        "label": "3d Max"
+    },
+    {
+        "value": "Rhino",
+        "label": "Rhino"
+    },
+    {
+        "value": "Adobe Illustrator",
+        "label": "Adobe Illustrator"
+    },
+    {
+        "value": "Etabs",
+        "label": "Etabs"
+    },
+    {
+        "value": "OOP",
+        "label": "OOP"
+    },
+    {
+        "value": "Design Patterns",
+        "label": "Design Patterns"
+    },
+    {
+        "value": "TDD",
+        "label": "TDD"
+    },
+    {
+        "value": ".NET",
+        "label": ".NET"
+    },
+    {
+        "value": "UML",
+        "label": "UML"
+    },
+    {
+        "value": "Winforms",
+        "label": "Winforms"
+    },
+    {
+        "value": "Linq",
+        "label": "Linq"
+    },
+    {
+        "value": "WPF",
+        "label": "WPF"
+    },
+    {
+        "value": "UX",
+        "label": "UX"
+    },
+    {
+        "value": "IDE",
+        "label": "IDE"
+    },
+    {
+        "value": "Ruby On Rails",
+        "label": "Ruby On Rails"
+    },
+    {
+        "value": "React.Js",
+        "label": "React.Js"
+    },
+    {
+        "value": "DevOps",
+        "label": "DevOps"
+    },
+    {
+        "value": "React Native",
+        "label": "React Native"
+    },
+    {
+        "value": "Solidity",
+        "label": "Solidity"
+    },
+    {
+        "value": "Ethereum",
+        "label": "Ethereum"
+    },
+    {
+        "value": "Vue.Js",
+        "label": "Vue.Js"
+    },
+    {
+        "value": "Laravel",
+        "label": "Laravel"
+    },
+    {
+        "value": "Ruby",
+        "label": "Ruby"
+    },
+    {
+        "value": "Postgresql3",
+        "label": "Postgresql3"
+    },
+    {
+        "value": "Data Science",
+        "label": "Data Science"
+    },
+    {
+        "value": "Continuous Improvement",
+        "label": "Continuous Improvement"
+    },
+    {
+        "value": "Lean Manufacturing",
+        "label": "Lean Manufacturing"
+    },
+    {
+        "value": "Vehicles",
+        "label": "Vehicles"
+    },
+    {
+        "value": "Manufacturing",
+        "label": "Manufacturing"
+    },
+    {
+        "value": "Sales Management",
+        "label": "Sales Management"
+    },
+    {
+        "value": "Customer Satisfaction",
+        "label": "Customer Satisfaction"
+    },
+    {
+        "value": "New Business Development",
+        "label": "New Business Development"
+    },
+    {
+        "value": "Kaizen",
+        "label": "Kaizen"
+    },
+    {
+        "value": "Team Building",
+        "label": "Team Building"
+    },
+    {
+        "value": "Welding",
+        "label": "Welding"
+    },
+    {
+        "value": "HVAC",
+        "label": "HVAC"
+    },
+    {
+        "value": "Mechanical",
+        "label": "Mechanical"
+    },
+    {
+        "value": "Carpentry",
+        "label": "Carpentry"
+    },
+    {
+        "value": "Electronics",
+        "label": "Electronics"
+    },
+    {
+        "value": "Instrumentation",
+        "label": "Instrumentation"
+    },
+    {
+        "value": "Computer",
+        "label": "Computer"
+    },
+    {
+        "value": "Automation",
+        "label": "Automation"
+    },
+    {
+        "value": "Mechanics",
+        "label": "Mechanics"
+    },
+    {
+        "value": "Software",
+        "label": "Software"
+    },
+    {
+        "value": "Assembly Language",
+        "label": "Assembly Language"
+    },
+    {
+        "value": "Hardware Design",
+        "label": "Hardware Design"
+    },
+    {
+        "value": "RTOS",
+        "label": "RTOS"
+    },
+    {
+        "value": "Technical Support",
+        "label": "Technical Support"
+    },
+    {
+        "value": "Six Sigma",
+        "label": "Six Sigma"
+    },
+    {
+        "value": "Ajax",
+        "label": "Ajax"
+    },
+    {
+        "value": "SAP",
+        "label": "SAP"
+    },
+    {
+        "value": "ASP.NET",
+        "label": "ASP.NET"
+    },
+    {
+        "value": "Clean Architecture",
+        "label": "Clean Architecture"
+    },
+    {
+        "value": "Modular front-end",
+        "label": "Modular front-end"
+    },
+    {
+        "value": "Angular",
+        "label": "Angular"
+    },
+    {
+        "value": "CSS Selectors",
+        "label": "CSS Selectors"
+    },
+    {
+        "value": "Redux",
+        "label": "Redux"
+    },
+    {
+        "value": "DOM",
+        "label": "DOM"
+    },
+    {
+        "value": "JSX",
+        "label": "JSX"
+    },
+    {
+        "value": "Arduino",
+        "label": "Arduino"
+    },
+    {
+        "value": "Computer Vision",
+        "label": "Computer Vision"
+    },
+    {
+        "value": "Software Programming Languages",
+        "label": "Software Programming Languages"
+    },
+    {
+        "value": "Java/JavaEE Technologies",
+        "label": "Java/JavaEE Technologies"
+    },
+    {
+        "value": "Software Architecture",
+        "label": "Software Architecture"
+    },
+    {
+        "value": "Electrical",
+        "label": "Electrical"
+    },
+    {
+        "value": "Machining",
+        "label": "Machining"
+    },
+    {
+        "value": "Plumbing",
+        "label": "Plumbing"
+    },
+    {
+        "value": "Fabrication",
+        "label": "Fabrication"
+    },
+    {
+        "value": "Mechanic",
+        "label": "Mechanic"
+    },
+    {
+        "value": "Forklift",
+        "label": "Forklift"
+    },
+    {
+        "value": "Metal Fabrication",
+        "label": "Metal Fabrication"
+    },
+    {
+        "value": "Blueprint Reading",
+        "label": "Blueprint Reading"
+    },
+    {
+        "value": "C API",
+        "label": "C API"
+    },
+    {
+        "value": "GTK",
+        "label": "GTK"
+    },
+    {
+        "value": "Debugging tools",
+        "label": "Debugging tools"
+    },
+    {
+        "value": "ALSA",
+        "label": "ALSA"
+    },
+    {
+        "value": "Boost",
+        "label": "Boost"
+    },
+    {
+        "value": "POCO",
+        "label": "POCO"
+    },
+    {
+        "value": "Qt",
+        "label": "Qt"
+    },
+    {
+        "value": "GCC",
+        "label": "GCC"
+    },
+    {
+        "value": "ICC",
+        "label": "ICC"
+    },
+    {
+        "value": "MS Access",
+        "label": "MS Access"
+    },
+    {
+        "value": "SAS",
+        "label": "SAS"
+    },
+    {
+        "value": "Electrical Engineering",
+        "label": "Electrical Engineering"
+    },
+    {
+        "value": "Commissioning",
+        "label": "Commissioning"
+    },
+    {
+        "value": "Scada",
+        "label": "Scada"
+    },
+    {
+        "value": "PLC",
+        "label": "PLC"
+    },
+    {
+        "value": "Enterprise Software",
+        "label": "Enterprise Software"
+    },
+    {
+        "value": "CRM",
+        "label": "CRM"
+    },
+    {
+        "value": "Pre-Sales",
+        "label": "Pre-Sales"
+    },
+    {
+        "value": "Cloud Platforms",
+        "label": "Cloud Platforms"
+    },
+    {
+        "value": "Containerization Platforms",
+        "label": "Containerization Platforms"
+    },
+    {
+        "value": "Virtualization Platforms",
+        "label": "Virtualization Platforms"
+    },
+    {
+        "value": "Automation And Orchestration",
+        "label": "Automation And Orchestration"
+    },
+    {
+        "value": "Development And Scripting",
+        "label": "Development And Scripting"
+    },
+    {
+        "value": "Linux Platforms",
+        "label": "Linux Platforms"
+    },
+    {
+        "value": "Windows Platforms",
+        "label": "Windows Platforms"
+    },
+    {
+        "value": "Packet Capture",
+        "label": "Packet Capture"
+    },
+    {
+        "value": "Cloud",
+        "label": "Cloud"
+    },
+    {
+        "value": "Warehouse Management",
+        "label": "Warehouse Management"
+    },
+    {
+        "value": "Languages",
+        "label": "Languages"
+    },
+    {
+        "value": "Transportation Management",
+        "label": "Transportation Management"
+    },
+    {
+        "value": "ETL Tools",
+        "label": "ETL Tools"
+    },
+    {
+        "value": "Process Development",
+        "label": "Process Development"
+    },
+    {
+        "value": "Customer Relationship",
+        "label": "Customer Relationship"
+    },
+    {
+        "value": "Key Accounts Management",
+        "label": "Key Accounts Management"
+    },
+    {
+        "value": "Distribution Management",
+        "label": "Distribution Management"
+    },
+    {
+        "value": "Microsoft Access",
+        "label": "Microsoft Access"
+    },
+    {
+        "value": "Microsoft Power Point",
+        "label": "Microsoft Power Point"
+    },
+    {
+        "value": "Office 365",
+        "label": "Office 365"
+    },
+    {
+        "value": "Spreadsheet",
+        "label": "Spreadsheet"
+    },
+    {
+        "value": "Pivot tables",
+        "label": "Pivot tables"
+    },
+    {
+        "value": "Document Management",
+        "label": "Document Management"
+    },
+    {
+        "value": "Communication Skills",
+        "label": "Communication Skills"
+    },
+    {
+        "value": "Talent Management",
+        "label": "Talent Management"
+    },
+    {
+        "value": "ADM",
+        "label": "ADM"
+    },
+    {
+        "value": "Payroll",
+        "label": "Payroll"
+    },
+    {
+        "value": "Departments",
+        "label": "Departments"
+    },
+    {
+        "value": "Growth",
+        "label": "Growth"
+    },
+    {
+        "value": "System",
+        "label": "System"
+    },
+    {
+        "value": "Organizational Development",
+        "label": "Organizational Development"
+    },
+    {
+        "value": "Revenue Analysis",
+        "label": "Revenue Analysis"
+    }
 ];

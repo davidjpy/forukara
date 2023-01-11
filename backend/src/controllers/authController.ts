@@ -5,27 +5,47 @@ import { Request, Response } from 'express';
 
 import User from '@models/User';
 import { oAuthLoginHandler } from '@utilities/oAuthLoginHandler';
-import { IUser, ErrorResponse, ErrorCode, JwtToken, OAuthLogin, ProfileInfo } from '@utilities/types';
+import { IUser, ErrorResponse, ErrorCode, JwtToken, OAuthLogin, ProfileInfo, AuthProvider } from '@utilities/types';
 
 // Login a user
 const login = asyncHandler(async (req: Request, res: Response): Promise<any> => {
     const auth = req.query.auth as ('id' | 'oauth');
+    const provider = req.query.provider as AuthProvider;
+
     let user;
 
     // Login user with OAuth 2.0 code
     if (auth === 'oauth') {
 
-        const { authorizationCode, codeVerifier }: OAuthLogin = req.body;
+        // Goolge PKCE OAuth login
+        if (provider === 'google') {
+            const { authorizationCode, codeVerifier }: OAuthLogin = req.body;
 
-        if (!authorizationCode || !codeVerifier) {
-            return res.status(403).json({ message: 'Authorization code or code verifier missing' });
+            if (!authorizationCode || !codeVerifier) {
+                return res.status(403).json({ message: 'Authorization code or code verifier missing' });
+            }
+
+            user = await oAuthLoginHandler(authorizationCode, codeVerifier, 'google');
         }
 
-        user = await oAuthLoginHandler(authorizationCode, codeVerifier);
+        // Linkedin Stateful login
+        if (provider === 'linkedin') {
+            const { authorizationCode }: OAuthLogin = req.body;
+
+            if (!authorizationCode) {
+                return res.status(403).json({ message: 'Authorization code or code verifier missing' });
+            }
+
+            user = await oAuthLoginHandler(authorizationCode, null, 'linkedin');
+        }
+
+        if (provider === 'twitter') {
+
+        }
     }
-    
+
     // Login user with local account
-    else {
+    if (auth === 'id') {
         const { email, password }: ProfileInfo = req.body;
         let errorCodes: Array<ErrorResponse> = [];
 
@@ -188,33 +208,30 @@ const googleOAuth = (req: Request, res: Response): void => {
     };
 
     const qs = new URLSearchParams(options);
-    
+
     res.redirect(`${rootUrl}?${qs.toString()}`);
 }
 
 // Linkedin OAuth handler
 const linkedinOAuth = (req: Request, res: Response): void => {
 
-    const challenge = req.query.challenge as string;
     const state = req.query.state as string;
-    const rootUrl = 'https://www.linkedin.com/oauth/native-pkce/authorization';
+    const rootUrl = 'https://www.linkedin.com/oauth/v2/authorization';
 
     // Linkedin OAuth authorization endpoint query params, state is required accounting to Linkedin API
     const options = {
         redirect_uri: process.env.CLIENT_HOST as string,
         client_id: process.env.LINKEDIN_CLIENT_ID as string,
         response_type: 'code',
-        code_challenge: challenge,
-        code_challenge_method: 'S256',
         state: state,
         scope: [
-            'r_liteprofile', 
+            // 'r_liteprofile',
             'r_emailaddress'
         ].join(' ')
     };
 
     const qs = new URLSearchParams(options);
-    
+
     res.redirect(`${rootUrl}?${qs.toString()}`);
 }
 
