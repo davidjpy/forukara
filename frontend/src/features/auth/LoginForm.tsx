@@ -206,7 +206,7 @@ const LoginForm: FC = () => {
                         <button aria-label='login with twitter' title='Login With Twitter'>
                             <AiOutlineTwitter aria-hidden={true} className='auth__icon auth__icon--twitter' />
                         </button>
-                        <button aria-label='login with linkedin' title='Login With Linkedin'>
+                        <button onClick={() => oAuthHandler('linkedin')} aria-label='login with linkedin' title='Login With Linkedin'>
                             <FaLinkedinIn aria-hidden={true} className='auth__icon auth__icon--linkedin' />
                         </button>
                     </div>

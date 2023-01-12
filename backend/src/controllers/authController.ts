@@ -42,7 +42,13 @@ const login = asyncHandler(async (req: Request, res: Response): Promise<any> => 
         if (provider === 'twitter') {
 
         }
+
+        // If the oAuthLoginHandler returned a string error
+        if (typeof user === 'string') {
+            return res.status(404).json({ message: [{ error: user, code: ErrorCode.EmailErr }] });
+        }
     }
+
 
     // Login user with local account
     if (auth === 'id') {
@@ -225,7 +231,7 @@ const linkedinOAuth = (req: Request, res: Response): void => {
         response_type: 'code',
         state: state,
         scope: [
-            // 'r_liteprofile',
+            'r_liteprofile',
             'r_emailaddress'
         ].join(' ')
     };
