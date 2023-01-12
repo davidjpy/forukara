@@ -18,7 +18,7 @@ Forukara is a MERN stack project with the classic implementation of MVC framwork
      3. ##### JWT token based OAuth 2.0 from scratch
         1. Google
            1. PKCE Authorzation code grant flow
-           2. Code verifer validation in Google server
+           2. Code verifier validation in Google server
         2. Linkedin
            1. Authorzation code grant flow
            2. UUID State validation  in client for any potential CSFR
