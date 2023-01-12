@@ -5,10 +5,10 @@ Forukara is a place where individuals from all backgrounds and occupations may c
 ## Overviews & Stacks (Things that are already done)
 Forukara is a MERN stack project with the classic implementation of MVC framwork.
 * ### Typescript & React.js 
-  1. Vanilla javascript for animations and effects                   
-  2. Redux Toolkit for global states and actions
-  3. RTK query for memorized selector and data caching
-  4. Craco for configurating webpack & babel in CRA
+  1. #### Vanilla javascript for animations and effects                   
+  2. #### Redux Toolkit for global states and actions
+  3. #### RTK query for memorized selector and data caching
+  4. #### Craco for configurating webpack & babel in CRA
 
 * ### Node.js & Express.js
   1. #### Authentication and Authorization
@@ -27,6 +27,6 @@ Forukara is a MERN stack project with the classic implementation of MVC framwork
   3. #### Basic CRUD operations
 
 * ### MongoDB
-  1. TTL index for deleting acount without validated email
+  1. #### TTL index for deleting acount without validated email
 
 ## More to come! (The react & node app are probably gonna be deployed in Netlify and Vercel)
