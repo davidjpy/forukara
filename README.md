@@ -12,14 +12,14 @@ Forukara is a MERN stack project with the classic implementation of MVC framwork
 
 * ### Node.js & Express.js
   1. #### Authentication and Authorization
-     1. Rate Limiter for preventing excessive requests from the same IP address.
-     3. JWT token based Email Login
-        1. ##### Email verification
-     3. JWT token based OAuth 2.0 from scratch
-        1. ##### Google
+     1. ##### Rate Limiter for preventing excessive requests from the same IP address.
+     3. ##### JWT token based Email Login
+        1. Email verification
+     3. ##### JWT token based OAuth 2.0 from scratch
+        1. Google
            1. PKCE Authorzation code grant flow
            2. Code verifer validation in Google server
-        2. ##### Linkedin
+        2. Linkedin
            1. Authorzation code grant flow
            2. UUID State validation  in client for any potential CSFR
   2. #### logger middleware for debuging
