@@ -11,10 +11,19 @@ Forukara is a MERN stack project with the classic implementation of MVC framwork
   4. Craco for configurating webpack & babel in CRA
 
 * Node.js & Express.js
-  1. jwt token & bcrypt for authentication and authorization
-     1. Server validation with custom error code
-     2. Nodemailer for email verification
-     3. Rate Limiter for blocking off too many request from the same IP
+  1. Authentication and Authorization
+     1. Rate Limiter for blocking off too many request from the same IP
+     2. JWT token based Email Login
+        1. Email verification
+        
+     3. JWT token based OAuth 2.0 from scratch
+        1. Google
+           2. PKCE Authorzation grant flow
+           
+        1. Linkedin
+           2. 
+     
+     
   2. logger middleware for debuging
      1. Request logger, error logger and DB error logger
   3. Basic CRUD operations
