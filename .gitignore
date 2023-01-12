@@ -25,3 +25,5 @@ yarn-error.log*
 
 backend/src/public/images/*jpg
 backend/src/public/images/*webp
+backend/src/public/images/*png
+backend/src/public/images/*PNG

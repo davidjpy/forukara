@@ -15,7 +15,12 @@ export type ProfileSocialMedia = {
 }
 
 export type ProfileBio = {
+    summary?: string;
     about?: string;
+    hashtag?: Array<string>;
+    topics?: Array<string>;
+    skills?: Array<string>;
+    languages?: Array<string>;
 }
 
 export type ProfileInfo = {
@@ -44,29 +49,6 @@ export interface User {
     connections: Array<string>;
     createdAt?: Date | string;
 }
-
-// export type User = {
-//     id?: string;
-//     username?: string;
-//     preferredName?: string;
-//     email?: string;
-//     password?: string;
-//     confirmPassword?: string;
-//     avatar?: string;
-//     background?: string;
-//     gender?: 'Male' | 'Female' | 'Other' | string;
-//     location?: string;
-//     title?: string;
-//     occupation?: string;
-//     twitter?: string;
-//     facebook?: string;
-//     linkedin?: string;
-//     about?: string;
-//     discussions?: Array<string>;
-//     connections?: Array<string>;
-//     status?: 'Pending' | 'Active';
-//     createdAt?: string;
-// }
 
 export type AuthProvider = 'google' | 'linkedin' | 'twitter' | 'email';
 

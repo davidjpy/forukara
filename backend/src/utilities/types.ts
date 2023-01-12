@@ -21,7 +21,12 @@ export type ProfileSocialMedia = {
 }
 
 export type ProfileBio = {
+    summary?: string;
     about?: string;
+    hashtag?: Array<string>;
+    topics?: Array<string>;
+    skills?: Array<string>;
+    languages?: Array<string>;
 }
 
 export type ProfileInfo = {
@@ -49,31 +54,6 @@ export interface IUser {
     connections?: Array<ObjectId> | Array<LeanDocument<ObjectId>>;
     createdAt?: Date;
 }
-
-// export interface IUser {
-//     _id?: ObjectId;
-//     id?: string;
-//     username?: string;
-//     preferredName?: string;
-//     password?: string;
-//     email?: string;
-//     avatar?: string;
-//     gender?: 'Male' | 'Female' | 'Other' | string;
-//     location?: string;
-//     title?: string;
-//     occupation?: string;
-//     twitter?: string;
-//     facebook?: string;
-//     linkedin?: string;
-//     background?: string;
-//     about?: string;
-//     discussions?: Array<ObjectId> | Array<LeanDocument<ObjectId>>;
-//     connections?: Array<ObjectId> | Array<LeanDocument<ObjectId>>;
-//     confirmPassword?: string;
-//     status?: 'Pending' | 'Active';
-//     createdAt?: Date;
-//     expiredIn?: Date | null;
-// }
 
 export interface IPost {
     id?: ObjectId;

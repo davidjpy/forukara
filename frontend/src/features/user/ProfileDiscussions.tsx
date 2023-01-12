@@ -20,7 +20,7 @@ const ProfileDiscussions: FC<Props> = ({ user, account }: Props) => {
                     </h1>
                 </header>
             </div>
-            {!user.discussions?.length &&
+            {!user?.discussions?.length &&
                 <div className='profile-soc__svg'>
                     <Publish width='50%' height='90%' style={{ margin: '3rem 4rem' }} />
                     <header className='profile-soc__svg-header profile-soc__svg-header--discussions'>

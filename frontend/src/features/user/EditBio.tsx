@@ -74,11 +74,12 @@ const EditBio: FC<Props> = ({ account }: Props) => {
 
     const navigate = useNavigate();
     const [editBio, editBioResult] = useEditBioMutation();
-    const [tag, setTag] = useState<Array<SelectOption>>([]);
-    const [topics, setTopics] = useState<Array<SelectOption>>([]);
-    const [skill, setSkill] = useState<Array<SelectOption>>([]);
-    const [lang, setLang] = useState<Array<SelectOption>>([]);
+    const [tag, setTag] = useState<Array<string>>([]);
+    const [topics, setTopics] = useState<Array<string>>([]);
+    const [skill, setSkill] = useState<Array<string>>([]);
+    const [lang, setLang] = useState<Array<string>>([]);
     const [about, setAbout] = useState('');
+    const [summary, setSummary] = useState<string>('');
 
     const handleNavigate = (url: string): void => {
         navigate(url);
@@ -88,8 +89,9 @@ const EditBio: FC<Props> = ({ account }: Props) => {
         setter(e.target.value);
     }
 
-    const onSelectChange = (e: MultiValue<unknown>, setter: React.Dispatch<React.SetStateAction<SelectOption[]>>): void => {
-        setter(e as unknown as Array<SelectOption>);
+    const onSelectChange = (e: MultiValue<unknown>, setter: React.Dispatch<React.SetStateAction<string[]>>): void => {
+        const data = (e as unknown as Array<SelectOption>).map((item) => item.value);
+        setter(data);
     }
 
     const submitForm = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
@@ -98,7 +100,12 @@ const EditBio: FC<Props> = ({ account }: Props) => {
         await editBio({
             id: account.id as string,
             data: {
-                about: about
+                summary: summary,
+                about: about,
+                hashtag: tag,
+                topics: topics,
+                skills: skill,
+                languages: lang
             }
         });
 
@@ -108,9 +115,21 @@ const EditBio: FC<Props> = ({ account }: Props) => {
     useEffect(() => {
         if (account.profile.username) {
             setAbout(account.profile.biography.about || '');
+            setSummary(account.profile.biography.summary || '');
+            setTag(account.profile.biography.hashtag || []);
+            setTopics(account.profile.biography.topics || []);
+            setLang(account.profile.biography.languages || []);
+            setSkill(account.profile.biography.skills || []);
         }
     }, [account]);
 
+    useEffect(() => {
+        console.log(editBioResult)
+    }, [editBioResult])
+
+    useEffect(() => {
+        console.log(account)
+    }, [])
 
     return (
         <form onSubmit={submitForm} className='edt-profile-form' style={{ height: 'calc(1200px)' }}>
@@ -121,7 +140,7 @@ const EditBio: FC<Props> = ({ account }: Props) => {
                 <div className='edt-profile-form__inputs'>
                     <label style={{ width: '100%' }}>
                         Sumary
-                        <input
+                        <input value={summary} onChange={(e) => onChange(e, setSummary)}
                             placeholder='Summarize yourself in one sentence....' type='text'
                         />
                     </label>
@@ -142,7 +161,11 @@ const EditBio: FC<Props> = ({ account }: Props) => {
                             options={HASHTAG}
                             styles={selectStyles}
                             onChange={(e) => onSelectChange(e, setTag)}
-                            value={tag}
+                            value={tag.map((item) => {
+                                return (
+                                    { label: item, value: item }
+                                )
+                            })}
                             menuShouldScrollIntoView={false}
                         />
                     </label>
@@ -157,7 +180,11 @@ const EditBio: FC<Props> = ({ account }: Props) => {
                             options={INTERESTS}
                             styles={selectStyles}
                             onChange={(e) => onSelectChange(e, setTopics)}
-                            value={topics}
+                            value={topics.map((item) => {
+                                return (
+                                    { label: item, value: item }
+                                )
+                            })}
                             menuShouldScrollIntoView={false}
                         />
                     </label>
@@ -177,7 +204,11 @@ const EditBio: FC<Props> = ({ account }: Props) => {
                             options={SKILLS}
                             styles={selectStyles}
                             onChange={(e) => onSelectChange(e, setSkill)}
-                            value={skill}
+                            value={skill.map((item) => {
+                                return (
+                                    { label: item, value: item }
+                                )
+                            })}
                             menuShouldScrollIntoView={false}
                         />
                     </label>
@@ -192,7 +223,11 @@ const EditBio: FC<Props> = ({ account }: Props) => {
                             options={LANGUAGES}
                             styles={selectStyles}
                             onChange={(e) => onSelectChange(e, setLang)}
-                            value={lang}
+                            value={lang.map((item) => {
+                                return (
+                                    { label: item, value: item }
+                                )
+                            })}
                             menuShouldScrollIntoView={false}
                         />
                     </label>

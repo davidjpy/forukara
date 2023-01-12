@@ -9,12 +9,12 @@ type Props = {
 
 const ProtectedRoute: FC<Props> = ({ redirect }: Props) => {
 
-    const user = useAppSelector((state) => state.auth.user);
+    const auth = localStorage.getItem('auth');
 
     // Redirect if user not authenticated
-    // if (!user.id) {
-    //     return <Navigate to={redirect} replace />
-    // }
+    if (!auth) {
+        return <Navigate to={redirect} replace />
+    }
 
     return <Outlet />
 }

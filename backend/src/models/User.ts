@@ -56,9 +56,29 @@ const userSchema = new mongoose.Schema<IUser>(
                 expires: 600
             },
             biography: {
+                summary: {
+                    type: String,
+                    default: ''
+                },
                 about: {
                     type: String,
                     default: ''
+                },
+                hashtag: {
+                    type: Array<String>,
+                    default: []
+                },
+                topics: {
+                    type: Array<String>,
+                    default: []
+                },
+                skills: {
+                    type: Array<String>,
+                    default: []
+                },
+                languages: {
+                    type: Array<String>,
+                    default: []
                 },
             },
             socialMedia: {

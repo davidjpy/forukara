@@ -37,6 +37,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
                 try {
                     const { data } = await queryFulfilled;
                     localStorage.setItem('session', uuid.v4());
+                    localStorage.setItem('auth', 'true');
                     dispatch(setCredantial(data.token));
                     dispatch(setUserInfo(data.user!));
                 } catch (err) {
@@ -77,6 +78,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
                 try {
                     await queryFulfilled;
                     localStorage.removeItem('session');
+                    localStorage.removeItem('auth');
                     dispatch(apiSlice.util.resetApiState());
                     dispatch(logout());
                 } catch (err) {

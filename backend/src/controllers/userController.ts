@@ -277,9 +277,7 @@ const updateAccountInfoById = asyncHandler(async (req: Request, res: Response): 
 
 const updateAccountBioById = asyncHandler(async (req: Request, res: Response): Promise<any> => {
     const id: string = req.params.id;
-    const { about }: ProfileBio = req.body;
-
-    console.log(id, req.body)
+    const { summary, about, hashtag, topics, skills, languages }: ProfileBio = req.body;
 
     // Case 1: Missing fields
     if (!id) {
@@ -294,7 +292,12 @@ const updateAccountBioById = asyncHandler(async (req: Request, res: Response): P
     }
 
     user.profile.biography = {
-        about: about
+        summary: summary,
+        about: about,
+        hashtag: hashtag,
+        topics: topics,
+        skills: skills,
+        languages: languages
     }
 
     const updatedUser = await user.save();

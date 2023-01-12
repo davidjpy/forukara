@@ -106,13 +106,13 @@ const EditAccount: FC<Props> = ({ account }: Props) => {
 
         // If user upload a new picture, attach the avatar as file
         // Else attach the avatar as string url
-        if (avatarRef.current && avatarRef.current.files?.length) {
+        if (avatarRef.current && avatarRef.current.files?.length && avatar.name) {
             formData.append('avatarFile', avatarRef.current.files[0]);
         } else if (avatar.url) {
             formData.append('avatar', avatar.url)
         }
 
-        if (bgRef.current && bgRef.current.files?.length) {
+        if (bgRef.current && bgRef.current.files?.length && bg.name) {
             formData.append('backgroundFile', bgRef.current.files[0]);
         } else if (bg.url) {
             formData.append('background', bg.url)
