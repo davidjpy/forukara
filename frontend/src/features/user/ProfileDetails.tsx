@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { FaCalendarAlt, FaLinkedinIn, FaFacebookF, FaYoutube } from 'react-icons/fa';
 import { ImLocation2 } from 'react-icons/im'
 import { MdEdit, MdWork } from 'react-icons/md';
-import { AiOutlineTwitter, AiFillInstagram, AiOutlineInstagram } from 'react-icons/ai';
+import { AiOutlineTwitter, AiOutlineInstagram } from 'react-icons/ai';
 import moment from 'moment';
 
 import { User } from '@common/utilities/types';
@@ -33,8 +33,8 @@ const ProfileDetails: FC<Props> = ({ user, isLoading }: Props) => {
                 <figure className={isLoading ? 'profile-dls__figure' : 'profile-dls__figure profile-dls__figure--loaded'}>
                     <div className='profile-dls__btn-groups'>
                         <a aria-label='twitter profile' title='Open twitter profile in new tab' target='_blank'
-                            href={user?.profile.socialMedia.twitter} tabIndex={user?.profile.socialMedia.twitter ? 0 : -1}
-                            className={user?.profile.socialMedia.twitter
+                            href={user?.profile.socialMedia!.twitter ? user?.profile.socialMedia!.twitter : undefined} tabIndex={user?.profile.socialMedia!.twitter ? 0 : -1}
+                            className={user?.profile.socialMedia!.twitter
                                 ? 'profile-dls__btn profile-dls__btn--tw profile-dls__btn--tw-active'
                                 : 'profile-dls__btn profile-dls__btn--tw profile-dls__btn-disabled'
                             }
@@ -42,17 +42,17 @@ const ProfileDetails: FC<Props> = ({ user, isLoading }: Props) => {
                             <AiOutlineTwitter aria-hidden={true} size={20} />
                         </a>
                         <a aria-label='linkedin profile' title='Open Linkedin profile in new tab' target='_blank'
-                            href={user?.profile.socialMedia.linkedin} tabIndex={user?.profile.socialMedia.linkedin ? 0 : -1}
-                            className={user?.profile.socialMedia.linkedin
+                            href={user?.profile.socialMedia!.linkedin? user?.profile.socialMedia!.linkedin : undefined} tabIndex={user?.profile.socialMedia!.linkedin ? 0 : -1}
+                            className={user?.profile.socialMedia!.linkedin
                                 ? 'profile-dls__btn profile-dls__btn--ln profile-dls__btn--ln-active'
                                 : 'profile-dls__btn profile-dls__btn--ln profile-dls__btn-disabled'
                             }
                         >
                             <FaLinkedinIn aria-hidden={true} size={20} />
                         </a>
-                        <a aria-label='youtube profile' title='Open Youtube profile in new tab' target='_blank'
-                            href={user?.profile.socialMedia.youtube} tabIndex={user?.profile.socialMedia.youtube ? 0 : -1}
-                            className={user?.profile.socialMedia.youtube
+                        <a aria-label='youtube profile' title='Open Youtube channel in new tab' target='_blank'
+                            href={user?.profile.socialMedia!.youtube ? user?.profile.socialMedia.youtube : undefined} tabIndex={user?.profile.socialMedia!.youtube ? 0 : -1}
+                            className={user?.profile.socialMedia!.youtube
                                 ? 'profile-dls__btn profile-dls__btn--yt profile-dls__btn--yt-active'
                                 : 'profile-dls__btn profile-dls__btn--yt profile-dls__btn-disabled'
                             }
@@ -60,8 +60,8 @@ const ProfileDetails: FC<Props> = ({ user, isLoading }: Props) => {
                             <FaYoutube aria-hidden={true} size={23} />
                         </a>
                         <a aria-label='facebook profile' title='Open Facebook profile in new tab' target='_blank'
-                            href={user?.profile.socialMedia.facebook} tabIndex={user?.profile.socialMedia.facebook ? 0 : -1}
-                            className={user?.profile.socialMedia.facebook
+                            href={user?.profile.socialMedia!.facebook ? user?.profile.socialMedia.facebook : undefined} tabIndex={user?.profile.socialMedia!.facebook ? 0 : -1}
+                            className={user?.profile.socialMedia!.facebook
                                 ? 'profile-dls__btn profile-dls__btn--fb profile-dls__btn--fb-active'
                                 : 'profile-dls__btn profile-dls__btn--fb profile-dls__btn-disabled'
                             }
@@ -69,8 +69,8 @@ const ProfileDetails: FC<Props> = ({ user, isLoading }: Props) => {
                             <FaFacebookF aria-hidden={true} size={20} />
                         </a>
                         <a aria-label='instagram profile' title='Open Instagram profile in new tab' target='_blank'
-                            href={user?.profile.socialMedia.instagram} tabIndex={user?.profile.socialMedia.instagram ? 0 : -1}
-                            className={user?.profile.socialMedia.instagram
+                            href={user?.profile.socialMedia!.instagram ? user?.profile.socialMedia.instagram : undefined} tabIndex={user?.profile.socialMedia!.instagram ? 0 : -1}
+                            className={user?.profile.socialMedia!.instagram
                                 ? 'profile-dls__btn profile-dls__btn--ig profile-dls__btn--ig-active'
                                 : 'profile-dls__btn profile-dls__btn--ig profile-dls__btn-disabled'
                             }

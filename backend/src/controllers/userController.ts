@@ -192,7 +192,7 @@ const createUser = asyncHandler(async (req: Request, res: Response): Promise<any
 // Update account info
 const updateAccountInfoById = asyncHandler(async (req: Request, res: Response): Promise<any> => {
     const id: string = req.params.id;
-    const { username, preferredName, location, occupation, title, gender, avatar, background, twitter, linkedin, facebook }: ProfileInfo & ProfileSocialMedia = req.body;
+    const { username, preferredName, location, occupation, title, gender, avatar, background, socialMedia }: ProfileInfo = req.body;
 
     // Case 1: Missing fields
     if (!id || !username) {
@@ -220,11 +220,7 @@ const updateAccountInfoById = asyncHandler(async (req: Request, res: Response): 
     user.profile.gender = gender;
     user.profile.occupation = occupation;
 
-    user.profile.socialMedia = {
-        twitter: twitter,
-        linkedin: linkedin,
-        facebook: facebook
-    };
+    user.profile.socialMedia = JSON.parse(socialMedia as string);
 
     // Handle the image upload
     const { avatarFile, backgroundFile }: any = req.files;

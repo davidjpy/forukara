@@ -4,7 +4,7 @@ import { AiOutlineTwitter, AiFillFacebook } from 'react-icons/ai';
 import { FaLinkedinIn } from 'react-icons/fa';
 import { ImUpload } from 'react-icons/im';
 
-import { User } from '@common/utilities/types';
+import { User, ProfileSocialMedia } from '@common/utilities/types';
 import default_background from '@media/images/default_background.webp';
 import default_avatar from '@media/images/default_avatar.webp';
 import { useEditAccountMutation } from './userApiSlice';
@@ -44,6 +44,8 @@ const EditAccount: FC<Props> = ({ account }: Props) => {
     const [twitter, setTwitter] = useState<string>('');
     const [linkedin, setLinkedin] = useState<string>('');
     const [facebook, setFacebook] = useState<string>('');
+    const [instagram, setInstagram] = useState<string>('');
+    const [youtube, setYoutube] = useState<string>('');
 
     useEffect(() => {
         if (account.profile.username) {
@@ -58,6 +60,9 @@ const EditAccount: FC<Props> = ({ account }: Props) => {
             setTwitter(profile.socialMedia.twitter || '');
             setLinkedin(profile.socialMedia.linkedin || '');
             setFacebook(profile.socialMedia.facebook || '');
+            setInstagram(profile.socialMedia.instagram || '');
+            setYoutube(profile.socialMedia.youtube || '');
+            
             if (profile.avatar) {
                 setAvatar({ name: profile.avatar, url: profile.avatar });
             }
@@ -94,15 +99,21 @@ const EditAccount: FC<Props> = ({ account }: Props) => {
 
         let formData = new FormData();
 
+        const socialMedia: ProfileSocialMedia = {
+            twitter: twitter,
+            linkedin: linkedin,
+            facebook: facebook,
+            instagram: instagram,
+            youtube: youtube
+        };
+
         formData.append('username', name);
         formData.append('preferredName', pName);
         formData.append('location', location);
         formData.append('title', title);
         formData.append('gender', gender);
         formData.append('occupation', occupation);
-        formData.append('twitter', twitter);
-        formData.append('linkedin', linkedin);
-        formData.append('facebook', facebook);
+        formData.append('socialMedia', JSON.stringify(socialMedia));
 
         // If user upload a new picture, attach the avatar as file
         // Else attach the avatar as string url
@@ -251,6 +262,28 @@ const EditAccount: FC<Props> = ({ account }: Props) => {
                         <p>Facebook Profile</p>
                         <div style={{ position: 'relative' }}>
                             <input value={facebook} onChange={(e) => onChange(e, setFacebook)}
+                                placeholder='Enter your Facebook profile...' type='url'
+                            />
+                            <div className='edt-profile-form__icon-wrapper' style={{ backgroundColor: '#3b5998' }}>
+                                <AiFillFacebook aria-hidden={true} color='white' size={26} className='edt-profile-form__icon' />
+                            </div>
+                        </div>
+                    </label>
+                    <label>
+                        <p>Instagram Profile</p>
+                        <div style={{ position: 'relative' }}>
+                            <input value={instagram} onChange={(e) => onChange(e, setInstagram)}
+                                placeholder='Enter your Facebook profile...' type='url'
+                            />
+                            <div className='edt-profile-form__icon-wrapper' style={{ backgroundColor: '#3b5998' }}>
+                                <AiFillFacebook aria-hidden={true} color='white' size={26} className='edt-profile-form__icon' />
+                            </div>
+                        </div>
+                    </label>
+                    <label>
+                        <p>Youtube Channel</p>
+                        <div style={{ position: 'relative' }}>
+                            <input value={youtube} onChange={(e) => onChange(e, setYoutube)}
                                 placeholder='Enter your Facebook profile...' type='url'
                             />
                             <div className='edt-profile-form__icon-wrapper' style={{ backgroundColor: '#3b5998' }}>

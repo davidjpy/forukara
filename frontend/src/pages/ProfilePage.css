@@ -272,7 +272,7 @@
 }
 
 .profile-dls__btn-disabled {
-    cursor: not-allowed;
+    cursor: auto
 }
 
 .profile-dls__btn-disabled:focus {

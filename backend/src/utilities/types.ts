@@ -18,6 +18,8 @@ export type ProfileSocialMedia = {
     twitter?: string;
     facebook?: string;
     linkedin?: string;
+    youtube?: string;
+    instagram?: string;
 }
 
 export type ProfileBio = {

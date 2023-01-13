@@ -94,6 +94,14 @@ const userSchema = new mongoose.Schema<IUser>(
                     type: String,
                     default: ''
                 },
+                youtube: {
+                    type: String,
+                    default: ''
+                },
+                instagram: {
+                    type: String,
+                    default: ''
+                }
             }
         },
         discussions: {
