@@ -123,14 +123,6 @@ const EditBio: FC<Props> = ({ account }: Props) => {
         }
     }, [account]);
 
-    useEffect(() => {
-        console.log(editBioResult)
-    }, [editBioResult])
-
-    useEffect(() => {
-        console.log(account)
-    }, [])
-
     return (
         <form onSubmit={submitForm} className='edt-profile-form' style={{ height: 'calc(1200px)' }}>
             <section className='edt-profile-form__wrapper'>

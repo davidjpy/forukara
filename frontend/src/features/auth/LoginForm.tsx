@@ -204,10 +204,10 @@ const LoginForm: FC = () => {
                                 <GrGoogle aria-hidden={true} className='auth__icon' style={{ width: '20px', height: '20px' }} />}
                         </button>
                         <button aria-label='login with twitter' title='Login With Twitter'>
-                            <AiOutlineTwitter aria-hidden={true} className='auth__icon auth__icon--twitter' />
+                            <AiOutlineTwitter aria-hidden={true} className='auth__icon auth__icon--tw' />
                         </button>
                         <button onClick={() => oAuthHandler('linkedin')} aria-label='login with linkedin' title='Login With Linkedin'>
-                            <FaLinkedinIn aria-hidden={true} className='auth__icon auth__icon--linkedin' />
+                            <FaLinkedinIn aria-hidden={true} className='auth__icon auth__icon--ln' />
                         </button>
                     </div>
                     <p className='auth__txt auth__txt--white' style={{ textAlign: 'center' }}>

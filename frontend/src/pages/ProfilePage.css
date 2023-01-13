@@ -16,7 +16,7 @@
 
 .profile-bg {
     position: relative;
-    height: 500px;
+    height: 600px;
     transition: box-shadow 0.1s ease-in-out;
     transition-delay: 0.4s;
 }
@@ -153,7 +153,7 @@
 .profile-dls__figure {
     position: absolute;
     width: 100%;
-    top: 55%;
+    top: 60%;
     left: 50%;
     transform: translate(-50%, -50%);
     transition: opacity 1s ease-in-out, top 1s ease-in-out;
@@ -164,30 +164,40 @@
 
 .profile-dls__figure--loaded {
     opacity: 1;
-    top: 46%;
+    top: 50%;
 }
 
 .profile-dls__btn {
+    position: absolute;
     display: flex;
     align-items: center;
     justify-content: center;
-    position: absolute;
-    right: 20px;
-    top: 20px;
     border: none;
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.2);
+    color: rgba(128, 128, 128, 0.6);
     cursor: pointer;
-    background-color: var(--black-opacity-light);
 }
 
-.profile-dls__figure div {
+.profile-dls__btn--edit {
+    right: 20px;
+    top: 20px;
+    width: 35px;
+    height: 35px;
+    background-color: var(--black-opacity-light);
+    transform: none;
+    color: var(--green-alien-light);
+}
+
+.profile-dls__at-wrapper {
     background-color: var(--green-alien-light);
     margin: 0 auto;
     border-radius: 50%;
-    width: 125px;
-    height: 125px;
+    width: 140px;
+    height: 140px;
 }
 
 .profile-dls__figure img {
@@ -200,10 +210,24 @@
 
 .profile-dls__figure figcaption {
     color: var(--green-alien-light);
-    font-size: 1.2rem;
-    margin: 1.2rem;
+    font-size: 1.4rem;
+    margin: 1rem 0;
     letter-spacing: 2px;
     font-weight: 900;
+}
+
+.profile-dls__ul {
+    list-style-type: none;
+}
+
+.profile-dls__ul li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(200, 200, 200);
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    margin: 1rem 0;
 }
 
 .profile-dls__icon {
@@ -212,22 +236,81 @@
     font-size: 1rem;
 }
 
-
-.profile-dls__figure p {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: rgb(200, 200, 200);
-    font-size: 0.9rem;
-    letter-spacing: 1px;
-    margin: 0.6rem 0;
+.profile-dls__btn-groups {
+    position: absolute;
+    height: 120px;
+    width: 235px;
+    left: 50%;
+    top: -7%;
+    transform: translate(-50%, 0);
+    z-index: 1;
 }
 
-.profile-dls__figure span {
-    text-align: start;
-    color: var(--green-alien-light);
-    font-weight: 800;
-    font-size: 0.8rem;
+.profile-dls__btn--tw {
+    left: 6%;
+    top: 75%;
+}
+
+.profile-dls__btn--ln {
+    left: 23%;
+    top: 36%;
+}
+
+.profile-dls__btn--yt {
+    left: 50%;
+    top: 21%;
+}
+
+.profile-dls__btn--fb {
+    left: 77%;
+    top: 36%;
+}
+
+.profile-dls__btn--ig {
+    left: 94%;
+    top: 75%;
+}
+
+.profile-dls__btn-disabled {
+    cursor: not-allowed;
+}
+
+.profile-dls__btn-disabled:focus {
+    outline: none;
+}
+
+.profile-dls__btn--tw-active:hover,
+.profile-dls__btn--tw-active:focus {
+    color: white;
+    background-color: var(--blue-tw);
+}
+
+.profile-dls__btn--ln-active:hover,
+.profile-dls__btn--ln-active:focus {
+    color: white;
+    background-color: var(--blue-ln);
+}
+
+.profile-dls__btn--yt-active:hover,
+.profile-dls__btn--yt-active:focus {
+    color: white;
+    background-color: var(--red-yt);
+}
+
+.profile-dls__btn--fb-active:hover,
+.profile-dls__btn--fb-active:focus {
+    color: white;
+    background-color: var(--blue-fb);
+}
+
+.profile-dls__btn--ig-active:hover,
+.profile-dls__btn--ig-active:focus {
+    color: white;
+    background: #f09433;
+    background: -moz-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    background: -webkit-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f09433', endColorstr='#bc1888', GradientType=1);
 }
 
 /* =========================================================================================== */
@@ -265,7 +348,7 @@
 
 .profile-bio__content p {
     font-size: 1rem;
-    color: rgb(77, 77, 77);
+    color: rgb(80, 80, 80);
     text-align: justify;
     line-height: 24px;
 }

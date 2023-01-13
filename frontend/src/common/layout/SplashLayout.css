@@ -243,16 +243,17 @@
     background-color: rgba(120, 120, 120, 0.2);
 }
 
-.opts__btn--google {
-    background-color: rgb(53, 115, 216);
+.opts__btn--goog {
+    background-color: var(--blue-goog)
 }
 
-.opts__btn--twitter {
-    background-color: rgb(5, 132, 206);
+.opts__btn--tw {
+    background-color: var(--blue-tw);
 }
 
-.opts__btn--linkedin {
-    background-color: rgb(60, 90, 154);
+.opts__btn--ln {
+    background-color: var(--blue-ln);
+    /* background-color: rgb(60, 90, 154); */
 }
 
 .opts__btn div {
@@ -274,7 +275,7 @@
     width: 20px;
 }
 
-.opts__icon--twitter {
+.opts__icon--tw {
     position: absolute;
     height: 26px;
     width: 26px;
@@ -283,8 +284,8 @@
     transform: translate(0, -50%);
 }
 
-.opts__icon--linkedin {
-    color: rgb(60, 90, 154);
+.opts__icon--ln {
+    color: var(--blue-ln);
 }
 
 .opts__divider {
@@ -431,18 +432,18 @@
 }
 
 .auth__icon-group button:nth-child(2):hover {
-    background-color: rgb(5, 132, 206);
+    background-color: var(--blue-tw);
 }
 
-.auth__icon-group button:nth-child(2):hover .auth__icon--twitter {
+.auth__icon-group button:nth-child(2):hover .auth__icon--tw {
     color: white;
 }
 
 .auth__icon-group button:last-child:hover {
-    background-color: rgb(60, 90, 154);
+    background-color: var(--blue-ln);
 }
 
-.auth__icon-group button:last-child:hover .auth__icon--linkedin {
+.auth__icon-group button:last-child:hover .auth__icon--ln {
     color: white;
 }
 
@@ -453,18 +454,18 @@
 }
 
 .auth__icon-group button:nth-child(2):focus {
-    background-color: rgb(5, 132, 206);
+    background-color: var(--blue-ln);
 }
 
 .auth__icon-group button:last-child:focus {
-    background-color: rgb(60, 90, 154);
+    background-color: var(--blue-ln)
 }
 
-.auth__icon-group button:focus .auth__icon--twitter {
+.auth__icon-group button:focus .auth__icon--tw {
     color: white;
 }
 
-.auth__icon-group button:focus .auth__icon--linkedin {
+.auth__icon-group button:focus .auth__icon--ln {
     color: white;
 }
 
@@ -474,7 +475,7 @@
     color: var(--black-light);
 }
 
-.auth__icon--linkedin {
+.auth__icon--ln {
     height: 22px;
     width: 22px;
 }

@@ -67,19 +67,19 @@ const SignUpOptions: FC<Props> = ({ block, hadnleSignUpFormUnmounted, handleLogi
                 </div>
                 <div className='opts__divider'><p>or</p></div>
                 <div className='opts__wrapper'>
-                    <button onClick={() => oAuthHandler('google')} className='opts__btn opts__btn--google'>
+                    <button onClick={() => oAuthHandler('google')} className='opts__btn opts__btn--goog'>
                         <div>
                             <FcGoogle aria-hidden={true} className='opts__icon' />
                         </div>
                         Sign up with Google
                     </button>
-                    <button className='opts__btn opts__btn--twitter'>
-                        <AiOutlineTwitter aria-hidden={true} className='opts__icon opts__icon--twitter' />
+                    <button className='opts__btn opts__btn--tw'>
+                        <AiOutlineTwitter aria-hidden={true} className='opts__icon opts__icon--tw' />
                         Sign Up With Twitter
                     </button>
-                    <button onClick={() => oAuthHandler('linkedin')} className='opts__btn opts__btn--linkedin'>
+                    <button onClick={() => oAuthHandler('linkedin')} className='opts__btn opts__btn--ln'>
                         <div>
-                            <FaLinkedinIn aria-hidden={true} className='opts__icon opts__icon--linkedin' />
+                            <FaLinkedinIn aria-hidden={true} className='opts__icon opts__icon--ln' />
                         </div>
                         Sign Up With Linkedin
                     </button>
