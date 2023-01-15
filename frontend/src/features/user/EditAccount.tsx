@@ -1,23 +1,83 @@
 import { FC, useEffect, useState, useRef, ChangeEvent } from 'react';
 import { MdDeleteForever } from 'react-icons/md';
-import { AiOutlineTwitter, AiFillFacebook } from 'react-icons/ai';
-import { FaLinkedinIn } from 'react-icons/fa';
+import { AiOutlineTwitter, AiFillFacebook, AiOutlineInstagram } from 'react-icons/ai';
+import { FaLinkedinIn, FaYoutube } from 'react-icons/fa';
 import { ImUpload } from 'react-icons/im';
+import Select, { StylesConfig } from 'react-select';
+import CreatableSelect from 'react-select/creatable';
 
 import { User, ProfileSocialMedia } from '@common/utilities/types';
 import default_background from '@media/images/default_background.webp';
 import default_avatar from '@media/images/default_avatar.webp';
 import { useEditAccountMutation } from './userApiSlice';
 import { useNavigate } from 'react-router-dom';
+import { GENDER, HONORIFICS } from '@common/utilities/constants';
 
 type Props = {
     account: User;
-}
+};
 
 type Image = {
     name: string;
     url: string;
-}
+};
+
+type SelectOption = {
+    value: string;
+    label: string;
+};
+
+const selectStyles: StylesConfig = {
+    control: (styles) => ({
+        ...styles,
+        backgroundColor: 'white',
+        marginTop: '0.4rem',
+        height: '38px',
+        ':hover': {
+            borderColor: '#2684FF'
+        }
+    }),
+    valueContainer: (styles) => ({
+        ...styles,
+        padding: '0 4px',
+        height: '36px',
+    }),
+    input: (styles) => ({
+        ...styles,
+        padding: 0,
+        margin: 0,
+        height: '36px',
+        color: 'black'
+    }),
+    option: (styles) => ({
+        ...styles,
+        ':hover': {
+            cursor: 'pointer'
+        }
+    }),
+    clearIndicator: (styles) => ({
+        ...styles,
+        padding: '0.1rem',
+        marginRight: '0.3rem',
+        ':hover': {
+            cursor: 'pointer',
+            backgroundColor: 'rgb(230, 230, 230)',
+            color: 'black',
+            borderRadius: '6px'
+        }
+    }),
+    dropdownIndicator: (styles) => ({
+        ...styles,
+        padding: '0.1rem',
+        margin: '0.3rem',
+        ':hover': {
+            cursor: 'pointer',
+            backgroundColor: 'rgb(230, 230, 230)',
+            color: 'black',
+            borderRadius: '6px'
+        }
+    })
+};
 
 const EditAccount: FC<Props> = ({ account }: Props) => {
 
@@ -62,7 +122,7 @@ const EditAccount: FC<Props> = ({ account }: Props) => {
             setFacebook(profile.socialMedia.facebook || '');
             setInstagram(profile.socialMedia.instagram || '');
             setYoutube(profile.socialMedia.youtube || '');
-            
+
             if (profile.avatar) {
                 setAvatar({ name: profile.avatar, url: profile.avatar });
             }
@@ -71,14 +131,23 @@ const EditAccount: FC<Props> = ({ account }: Props) => {
                 setBg({ name: profile.background, url: profile.background });
             }
         }
+        console.log(account)
     }, [account]);
 
     const handleNavigate = (url: string): void => {
         navigate(url);
     }
 
-    const onChange = (e: ChangeEvent<HTMLInputElement>, setter: React.Dispatch<React.SetStateAction<string>>): void => {
-        setter(e.target.value);
+    const onChange = (e: ChangeEvent<HTMLInputElement> | SelectOption, setter: React.Dispatch<React.SetStateAction<string>>): void => {
+        if (e === null) {
+            setter('');
+        }
+        else if ('value' in e) {
+            setter(e.value);
+        }
+        else {
+            setter(e.target.value);
+        }
     }
 
     const setFile = (ref: React.RefObject<HTMLInputElement>, setter: React.Dispatch<React.SetStateAction<Image>>): void => {
@@ -201,20 +270,6 @@ const EditAccount: FC<Props> = ({ account }: Props) => {
                 </div>
                 <div className='edt-profile-form__inputs'>
                     <label>
-                        <p>Title</p>
-                        <input value={title} onChange={(e) => onChange(e, setTitle)}
-                            placeholder='Enter your title...' type='text'
-                        />
-                    </label>
-                    <label>
-                        Gender
-                        <input value={gender} onChange={(e) => onChange(e, setGender)}
-                            placeholder='Enter your gender...' type='text'
-                        />
-                    </label>
-                </div>
-                <div className='edt-profile-form__inputs'>
-                    <label>
                         Location
                         <input value={location} onChange={(e) => onChange(e, setLocation)}
                             placeholder='Enter your living city...' type='text'
@@ -224,6 +279,32 @@ const EditAccount: FC<Props> = ({ account }: Props) => {
                         Occupation
                         <input value={occupation} onChange={(e) => onChange(e, setOccupation)}
                             placeholder='Enter your occupation...' type='text'
+                        />
+                    </label>
+                </div>
+                <div className='edt-profile-form__inputs'>
+                    <label>
+                        <p>Title</p>
+                        <Select
+                            styles={selectStyles}
+                            options={HONORIFICS}
+                            value={{ label: title, value: title }}
+                            onChange={(e) => onChange(e as SelectOption, setTitle)}
+                            isClearable={true}
+                            placeholder='Select your title...'
+                            menuShouldScrollIntoView={false}
+                        />
+                    </label>
+                    <label>
+                        Gender
+                        <CreatableSelect
+                            styles={selectStyles}
+                            options={GENDER}
+                            value={{ label: gender, value: gender }}
+                            onChange={(e) => onChange(e as SelectOption, setGender)}
+                            isClearable={true}
+                            placeholder='Select or create your gender...'
+                            menuShouldScrollIntoView={false}
                         />
                     </label>
                 </div>
@@ -259,6 +340,17 @@ const EditAccount: FC<Props> = ({ account }: Props) => {
                         </div>
                     </label>
                     <label>
+                        <p>Youtube Channel</p>
+                        <div style={{ position: 'relative' }}>
+                            <input value={youtube} onChange={(e) => onChange(e, setYoutube)}
+                                placeholder='Enter your Facebook profile...' type='url'
+                            />
+                            <div className='edt-profile-form__icon-wrapper' style={{ backgroundColor: '#FF0000' }}>
+                                <FaYoutube aria-hidden={true} color='white' size={24} className='edt-profile-form__icon' />
+                            </div>
+                        </div>
+                    </label>
+                    <label>
                         <p>Facebook Profile</p>
                         <div style={{ position: 'relative' }}>
                             <input value={facebook} onChange={(e) => onChange(e, setFacebook)}
@@ -275,19 +367,8 @@ const EditAccount: FC<Props> = ({ account }: Props) => {
                             <input value={instagram} onChange={(e) => onChange(e, setInstagram)}
                                 placeholder='Enter your Facebook profile...' type='url'
                             />
-                            <div className='edt-profile-form__icon-wrapper' style={{ backgroundColor: '#3b5998' }}>
-                                <AiFillFacebook aria-hidden={true} color='white' size={26} className='edt-profile-form__icon' />
-                            </div>
-                        </div>
-                    </label>
-                    <label>
-                        <p>Youtube Channel</p>
-                        <div style={{ position: 'relative' }}>
-                            <input value={youtube} onChange={(e) => onChange(e, setYoutube)}
-                                placeholder='Enter your Facebook profile...' type='url'
-                            />
-                            <div className='edt-profile-form__icon-wrapper' style={{ backgroundColor: '#3b5998' }}>
-                                <AiFillFacebook aria-hidden={true} color='white' size={26} className='edt-profile-form__icon' />
+                            <div className='edt-profile-form__icon-wrapper edt-profile-form__icon-wrapper--ig' style={{ backgroundColor: '#3b5998' }}>
+                                <AiOutlineInstagram aria-hidden={true} color='white' size={28} className='edt-profile-form__icon' />
                             </div>
                         </div>
                     </label>

@@ -19,6 +19,8 @@
     height: 600px;
     transition: box-shadow 0.1s ease-in-out;
     transition-delay: 0.4s;
+    clip-path: inset(0 -1px -18px 0);
+    box-shadow: 0px 3px 8px 0px var(--black-opacity-light);
 }
 
 
@@ -177,7 +179,7 @@
     height: 40px;
     border-radius: 50%;
     transform: translate(-50%, -50%);
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.55);
     color: rgba(128, 128, 128, 0.6);
     cursor: pointer;
 }
@@ -241,7 +243,7 @@
     height: 120px;
     width: 235px;
     left: 50%;
-    top: -7%;
+    top: -7.5%;
     transform: translate(-50%, 0);
     z-index: 1;
 }
@@ -318,39 +320,69 @@
 /* =========================================================================================== */
 
 .profile-bio {
-    clip-path: inset(0 -1px -18px 0);
+    padding: 2rem;
 }
 
 .profile-bio__wrapper {
+    padding: 2rem 2rem 2rem 1.5rem;
+    margin-bottom: 2rem;
+    outline: 1px solid var(--gray-light);
     background-color: rgb(245, 245, 245);
-    padding: 2rem;
-    border-bottom: 1px solid var(--gray-light);
+    border-left: 20px solid var(--green-dark);
 }
 
 .profile-bio__wrapper header {
-    width: fit-content;
+    padding: 0 0 0.4rem 0;
+    border-bottom: 1px solid var(--gray-light);
+    width: 100%;
 }
 
 .profile-bio__wrapper header h1 {
-    font-size: 1.2rem;
+    font-size: 0.9rem;
     font-weight: 700;
+    color: rgb(75, 75, 75);
 }
 
-.profile-bio__divider {
-    border-top: 2px solid var(--green-dark);
-    margin: 0.2rem 0 0 0;
-    width: 80%;
+.profile-bio__header {
+    text-align: center;
+    margin: 2rem auto;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.2rem;
+    text-transform: capitalize;
+    width: fit-content;
+    color: var(--green-dark);
 }
 
-.profile-bio__content {
-    margin-top: 1rem;
-}
-
-.profile-bio__content p {
-    font-size: 1rem;
-    color: rgb(80, 80, 80);
+.profile-bio__pg {
     text-align: justify;
     line-height: 24px;
+}
+
+.profile-bio__tags {
+    display: flex;
+    margin-top: 1rem;
+    gap: 10px 12px;
+    flex-flow: row wrap;
+}
+
+.profile-bio__tags div,
+.profile-bio__tags p {
+    background-color: rgb(225, 225, 225);
+    padding: 0.4rem 0.8rem;
+    border-radius: 10px;
+    font-size: 0.9rem;
+}
+
+.profile-bio__tags p {
+    color: gray;
+}
+
+.profile-bio__ed {
+    font-style: italic;
+    text-align: end;
+    font-size: 1rem;
+    color: rgb(80, 80, 80);
+    margin-top: 2rem;
 }
 
 /* =========================================================================================== */
@@ -430,13 +462,13 @@
 
 .profile-soc__txt--discussions {
     left: 48%;
-    top: 235px;
+    top: 265px;
     width: 47%;
 }
 
 .profile-soc__txt--connections {
     left: 8%;
-    top: 276px;
+    top: 330px;
     width: 47%;
 }
 

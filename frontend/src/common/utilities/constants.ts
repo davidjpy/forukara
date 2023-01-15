@@ -2105,3 +2105,17 @@ export const SKILLS = [
         "label": "Revenue Analysis"
     }
 ];
+
+export const HONORIFICS = [
+    { label: 'Mr.', value: 'Mr.' },
+    { label: 'Mrs.', value: 'Mrs.' },
+    { label: 'Miss', value: 'Miss' },
+    { label: 'Mx.', value: 'Mx.' },
+    { label: 'Dr.', value: 'Dr.' },
+];
+
+export const GENDER = [
+    { label: 'male', value: 'male' },
+    { label: 'female', value: 'female' },
+    { label: 'others', value: 'others' }
+]

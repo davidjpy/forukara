@@ -42,7 +42,7 @@ const ProfileDetails: FC<Props> = ({ user, isLoading }: Props) => {
                             <AiOutlineTwitter aria-hidden={true} size={20} />
                         </a>
                         <a aria-label='linkedin profile' title='Open Linkedin profile in new tab' target='_blank'
-                            href={user?.profile.socialMedia!.linkedin? user?.profile.socialMedia!.linkedin : undefined} tabIndex={user?.profile.socialMedia!.linkedin ? 0 : -1}
+                            href={user?.profile.socialMedia!.linkedin ? user?.profile.socialMedia!.linkedin : undefined} tabIndex={user?.profile.socialMedia!.linkedin ? 0 : -1}
                             className={user?.profile.socialMedia!.linkedin
                                 ? 'profile-dls__btn profile-dls__btn--ln profile-dls__btn--ln-active'
                                 : 'profile-dls__btn profile-dls__btn--ln profile-dls__btn-disabled'
