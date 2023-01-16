@@ -86,12 +86,12 @@ export const useGetUser = (): [User, boolean, boolean] => {
         }
     }, [loginResult]);
 
-
     // Create session id to prevent RTK default cache behavior from getting user info after logout
     useRefreshQuery({ sessionId: localStorage.getItem('session') as string }, { skip: !localStorage.getItem('session') });
-    const { isLoading, isFetching } = useGetAccountByIdQuery(user.id as string, { skip: !user.id });
+    const { isLoading, isFetching, isSuccess } = useGetAccountByIdQuery(user.id as string, { skip: !user.id });
 
-    const loading = Boolean(isLoading || isFetching);
+    // Set loading to true if isLoading, isFetching and user is authenticated, and set loading to false if user info is fetched
+    const loading = Boolean((isLoading || isFetching || localStorage.getItem('auth')) && !isSuccess);
 
     return [user, loading, authing];
 }

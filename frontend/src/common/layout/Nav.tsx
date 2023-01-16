@@ -37,6 +37,8 @@ const Nav: FC = () => {
         navigate(page);
     }
 
+    console.log(loading, authing)
+
     return (
         <>
             <nav className='nav'>
