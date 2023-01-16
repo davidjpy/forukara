@@ -1,5 +1,7 @@
 import { FC } from 'react';
 import { FaBlog } from 'react-icons/fa';
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 import SignUpForm from '@features/auth/SignUpForm';
 import LoginForm from '@features/auth/LoginForm';
@@ -15,7 +17,7 @@ const SplashNav: FC = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const [logout,] = useLogoutMutation();
-    const [user] = useGetUser();
+    const [user, loading, authing] = useGetUser();
 
     const handleSignUpFormMounted = (): void => {
         dispatch(toggleSignUpForm(true));
@@ -32,7 +34,9 @@ const SplashNav: FC = () => {
     const handleNavigate = (page: string): void => {
         navigate(page);
     }
-    
+
+    const isLoading = Boolean(loading || authing);
+
     return (
         <>
             <nav className='sp-nav'>
@@ -41,25 +45,48 @@ const SplashNav: FC = () => {
                         <FaBlog className='sp-nav__logo' />
                         <h1>Forukara</h1>
                     </header>
-                    {user.id ? (
+                    {isLoading &&
                         <div className='sp-nav__wrapper'>
-                            <button onClick={handleLogout} className='sp-nav__btn sp-nav__btn--txt'>Logout</button>
-                            <figure onClick={() => handleNavigate(`profile/${user.profile.username}`)} aria-label='Profile'>
-                                <img src={user.profile.avatar as string || default_avatar} alt={user.profile.avatar as string || default_avatar} />
-                            </figure>
+                            <Skeleton
+                                width={100}
+                                height={35}
+                                baseColor='#CCCCCC'
+
+                                style={{ marginRight: '1.4rem' }}
+                            />
+                            <Skeleton
+                                circle
+                                height={50}
+                                width={50}
+                                baseColor='#CCCCCC'
+                            />
                         </div>
-                    ) : (
-                        <div className='sp-nav__wrapper'>
-                            <button onClick={handleLoginFormMounted} className='sp-nav__btn sp-nav__btn--txt'>Login</button>
-                            <button onClick={handleSignUpFormMounted} className='sp-nav__btn sp-nav__btn--slide'>&nbsp;</button>
-                        </div>
-                    )}
+                    }
+                    <div className='sp-nav__wrapper'>
+                        {(user.profile.username && !loading) && (
+                            <>
+                                <button onClick={handleLogout} className='sp-nav__btn-txt'>Logout</button>
+                                <figure onClick={() => handleNavigate(`profile/${user.profile.username}`)} aria-label='Profile'>
+                                    <img src={user.profile.avatar as string || default_avatar} alt={user.profile.avatar as string || default_avatar} />
+                                </figure>
+                            </>
+                        )}
+
+                        {((!localStorage.getItem('auth')) && !authing) && (
+                            <>
+                                <button onClick={handleLoginFormMounted} className='sp-nav__btn-txt'>Login</button>
+                                <button onClick={handleSignUpFormMounted} className='sp-nav__btn sp-nav__btn--slide'>&nbsp;</button>
+                            </>
+                        )}
+                    </div>
                 </section>
-            </nav>
+            </nav >
             <LoginForm />
             <SignUpForm />
         </>
     );
 }
 
-export default SplashNav; 
+export default SplashNav;
+
+

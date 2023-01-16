@@ -61,6 +61,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
                     const { data } = await queryFulfilled;
                     dispatch(setCredantial(data.token));
                     dispatch(setUserInfo({ id: data.id }));
+                    localStorage.setItem('auth', 'true');
                 } catch (err) {
                     console.error(err);
                 }
@@ -92,6 +93,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
 export const {
     useLoginMutation,
     useRefreshQuery,
+    useLazyRefreshQuery,
     useLogoutMutation,
 } = authApiSlice;
 

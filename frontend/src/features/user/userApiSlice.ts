@@ -107,6 +107,7 @@ export const {
     useResendEmailMutation,
     useGetUserByUsernameQuery,
     useGetAccountByIdQuery,
+    useLazyGetAccountByIdQuery,
     useEditAccountMutation,
     useEditBioMutation,
 } = userApiSlice;

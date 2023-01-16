@@ -1,19 +1,17 @@
-import { useEffect } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { useAppSelector } from '@app/hooks';
-import { useRefreshQuery } from '@features/auth/authApiSlice';
-import { useLoginMutation } from '@features/auth/authApiSlice';
+import { useLoginMutation, useRefreshQuery } from '@features/auth/authApiSlice';
 import { useGetAccountByIdQuery } from '@features/user/userApiSlice';
 import { User, AuthProvider } from '@common/utilities/types';
 
-type UserFetch = [User, boolean, boolean, boolean];
-
-export const useGetUser = (): UserFetch => {
+export const useGetUser = (): [User, boolean, boolean] => {
 
     const [searchParams, setSearchParams] = useSearchParams();
-    const [login,] = useLoginMutation();
+    const [login, loginResult] = useLoginMutation();
     const user = useAppSelector(state => state.auth.user);
+    const [authing, setAuthing] = useState(false);
 
     // Login user if the url contain the login token returned by OAuth
     useEffect(() => {
@@ -68,13 +66,31 @@ export const useGetUser = (): UserFetch => {
         if (!user.id && code && sameClient) {
             loginUser(code);
         }
-        
+
         resetState();
     }, []);
 
+    // Set autheticating to true if user redirected from the consent screen
+    useLayoutEffect(() => {
+        const code = searchParams.get('code');
+
+        if (code) {
+            setAuthing(true);
+        }
+    }, []);
+
+    // Set autheticating to false if successed
+    useEffect(() => {
+        if (loginResult.isSuccess) {
+            setAuthing(false)
+        }
+    }, [loginResult]);
+
     // Create session id to prevent RTK default cache behavior from getting user info after logout
     useRefreshQuery({ sessionId: localStorage.getItem('session') as string }, { skip: !localStorage.getItem('session') });
-    const { isLoading, isFetching, isSuccess } = useGetAccountByIdQuery(user.id as string, { skip: !user.id });
+    const { isLoading, isFetching } = useGetAccountByIdQuery(user.id as string, { skip: !user.id });
 
-    return [user, isLoading, isFetching, isSuccess];
+    const loading = Boolean(isLoading || isFetching);
+
+    return [user, loading, authing];
 }

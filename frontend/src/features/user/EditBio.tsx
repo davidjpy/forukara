@@ -124,7 +124,7 @@ const EditBio: FC<Props> = ({ account }: Props) => {
     }, [account]);
 
     return (
-        <form onSubmit={submitForm} className='edt-profile-form' style={{ height: 'calc(1200px)' }}>
+        <form onSubmit={submitForm} className='edt-profile-form' style={{ height: '1250px' }}>
             <section className='edt-profile-form__wrapper'>
                 <header>
                     <h1>INTRODUCTION</h1>

@@ -37,7 +37,6 @@
 .sp-nav__wrapper {
     display: flex;
     align-items: center;
-    gap: 60px;
 }
 
 .sp-nav__wrapper figure {
@@ -58,6 +57,7 @@
     border-radius: 50%;
     object-fit: cover;
     margin: auto;
+    color: rgb(190, 190, 190);
 }
 
 .sp-nav__btn {
@@ -69,15 +69,19 @@
     user-select: none;
 }
 
-.sp-nav__btn--txt {
-    height: auto;
-    width: auto;
+.sp-nav__btn-txt {
     letter-spacing: 0.6px;
     background-color: transparent;
     border: none;
+    font-size: 1rem;
+    color: white;
+    user-select: none;
+    cursor: pointer;
+    margin-right: 3rem;
 }
 
-.sp-nav__btn--txt:hover {
+
+.sp-nav__btn-txt:hover {
     text-decoration: underline;
 }
 
@@ -144,12 +148,12 @@
 }
 
 @media screen and (max-width: 800px) {
-    .sp-nav__wrapper {
-        gap: 20px;
-    }
-
     .sp-nav__btn {
         width: 110px;
+    }
+
+    .sp-nav__btn-txt {
+        margin-right: 2rem;
     }
 }
 
@@ -166,22 +170,22 @@
     .sp-nav__logo {
         font-size: 1.6rem;
     }
+}
 
+@media screen and (max-width: 500px) {
     .sp-nav__wrapper {
         font-size: 0.9rem;
-    }
-
-    .sp-nav__btn:first-child {
-        width: 50px;
     }
 
     .sp-nav__btn {
         font-size: 0.8rem;
         width: 90px;
     }
-}
 
-@media screen and (max-width: 500px) {
+    .sp-nav__btn-txt {
+        font-size: 0.8rem;
+    }
+    
     .sp-nav__nav header h1 {
         display: none;
     }

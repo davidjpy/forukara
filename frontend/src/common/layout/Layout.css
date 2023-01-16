@@ -28,9 +28,9 @@
     min-width: 240px;
     width: 240px;
     height: 100%;
-    /* background-image: linear-gradient(to left top, #e6f6f1, #e4f5f3, #e3f4f5, #e3f3f7, #e4f1f8, #e8f0fa, #edeffa, #f2eef8, #f9eef5, #fef0f1, #fff2ee, #fdf5ed); */
     border-left: 1px solid var(--gray-light);
     border-right: 1px solid var(--gray-light);
+    background-image: linear-gradient(to left top, #e6f6f1, #e4f5f3, #e3f4f5, #e3f3f7, #e4f1f8, #e8f0fa, #edeffa, #f2eef8, #f9eef5, #fef0f1, #fff2ee, #fdf5ed);
 }
 
 .lt-menu__wrapper {
