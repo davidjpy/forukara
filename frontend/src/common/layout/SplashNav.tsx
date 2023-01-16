@@ -35,8 +35,6 @@ const SplashNav: FC = () => {
         navigate(page);
     }
 
-    const isLoading = Boolean(loading || authing);
-
     return (
         <>
             <nav className='sp-nav'>
@@ -45,7 +43,7 @@ const SplashNav: FC = () => {
                         <FaBlog className='sp-nav__logo' />
                         <h1>Forukara</h1>
                     </header>
-                    {isLoading &&
+                    {(loading || authing) &&
                         <div className='sp-nav__wrapper'>
                             <Skeleton
                                 width={100}

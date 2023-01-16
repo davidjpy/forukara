@@ -38,6 +38,11 @@
     top: var(--nav-height);
 }
 
+.lt-menu__user {
+    background-color: saddlebrown;
+    z-index: 100;
+}
+
 .lt-menu__bg {
     height: 100px;
     background-position: center;
@@ -93,7 +98,8 @@
 }
 
 .lt-menu__tablist {
-    margin-top: 80px;
+    position: absolute;
+    top: 180px;
     width: 100%;
 }
 
@@ -139,6 +145,14 @@
 .lt-menu__divider {
     width: 100%;
     border-top: 1px solid rgb(220, 220, 220);
+}
+
+.lt-menu__fig-sk {
+    position: absolute;
+    top: 45px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    z-index: 1;
 }
 
 /* =========================================================================================== */

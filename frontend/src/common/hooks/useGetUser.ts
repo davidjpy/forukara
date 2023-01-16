@@ -11,7 +11,7 @@ export const useGetUser = (): [User, boolean, boolean] => {
     const [searchParams, setSearchParams] = useSearchParams();
     const [login, loginResult] = useLoginMutation();
     const user = useAppSelector(state => state.auth.user);
-    const [authing, setAuthing] = useState(false);
+    const [authing, setAuthing] = useState<boolean>(false);
 
     // Login user if the url contain the login token returned by OAuth
     useEffect(() => {
@@ -82,9 +82,10 @@ export const useGetUser = (): [User, boolean, boolean] => {
     // Set autheticating to false if successed
     useEffect(() => {
         if (loginResult.isSuccess) {
-            setAuthing(false)
+            setAuthing(false);
         }
     }, [loginResult]);
+
 
     // Create session id to prevent RTK default cache behavior from getting user info after logout
     useRefreshQuery({ sessionId: localStorage.getItem('session') as string }, { skip: !localStorage.getItem('session') });

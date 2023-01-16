@@ -1,5 +1,7 @@
 import { FC } from 'react';
 import { FaBlog } from 'react-icons/fa';
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 import '@common/layout/Layout.css'
 import SignUpForm from '@features/auth/SignUpForm';
@@ -16,7 +18,7 @@ const Nav: FC = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const [logout,] = useLogoutMutation();
-    const [user] = useGetUser();
+    const [user, loading, authing] = useGetUser();
 
     const handleSignUpFormMounted = (): void => {
         dispatch(toggleSignUpForm(true));
@@ -43,21 +45,42 @@ const Nav: FC = () => {
                         <FaBlog className='nav__logo' />
                         <p className='nav__header'>Forukara</p>
                     </header>
-                    {user.id ? (
-                        <div className='nav__wrapper'>
-                            <p role='button' onClick={handleLogout} className='nav__txt nav__txt--btn nav__txt--link'>Logout</p>
-                            <figure onClick={() => handleNavigate(`profile/${user.profile.username}`)} aria-label='Profile'>
-                                <img src={user.profile.avatar as string || default_avatar} alt={user.profile.avatar as string} />
-                            </figure>
+                    {(loading || authing) &&
+                        <div className='nav__wrapper' style={{ gap: 0 }}>
+                            <Skeleton
+                                width={80}
+                                height={30}
+                                baseColor='#CCCCCC'
+                                style={{ marginRight: '1.4rem' }}
+                            />
+                            <Skeleton
+                                circle
+                                height={40}
+                                width={40}
+                                baseColor='#CCCCCC'
+                            />
                         </div>
-                    ) : (
-                        <div className='nav__wrapper'>
-                            <p role='button' onClick={handleLoginFormMounted} className='nav__txt nav__txt--btn nav__txt--link'>Login</p>
-                            <button onClick={handleSignUpFormMounted} className='nav__btn nav__btn--green-alien-light'>
-                                Register
-                            </button>
-                        </div>
-                    )}
+                    }
+
+                    <div className='nav__wrapper'>
+                        {(user.profile.username && !loading) && (
+                            <>
+                                <p role='button' onClick={handleLogout} className='nav__txt nav__txt--btn nav__txt--link'>Logout</p>
+                                <figure onClick={() => handleNavigate(`profile/${user.profile.username}`)} aria-label='Profile'>
+                                    <img src={user.profile.avatar as string || default_avatar} alt={user.profile.avatar as string} />
+                                </figure>
+                            </>
+                        )}
+
+                        {((!localStorage.getItem('auth')) && !authing) && (
+                            <>
+                                <p role='button' onClick={handleLoginFormMounted} className='nav__txt nav__txt--btn nav__txt--link'>Login</p>
+                                <button onClick={handleSignUpFormMounted} className='nav__btn nav__btn--green-alien-light'>
+                                    Register
+                                </button>
+                            </>
+                        )}
+                    </div>
                 </section>
             </nav>
             <SignUpForm />

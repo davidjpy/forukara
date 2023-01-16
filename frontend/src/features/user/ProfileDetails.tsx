@@ -89,18 +89,26 @@ const ProfileDetails: FC<Props> = ({ user, isLoading }: Props) => {
                         }
                     </figcaption>
                     <ul className='profile-dls__ul'>
-                        <li>
-                            <MdWork aria-hidden={true} className='profile-dls__icon' />
-                            {user?.profile.occupation}
-                        </li>
-                        <li>
-                            <ImLocation2 aria-hidden={true} className='profile-dls__icon' />
-                            {user?.profile.location}
-                        </li>
-                        <li>
-                            <FaCalendarAlt aria-hidden={true} className='profile-dls__icon' />
-                            {user?.createdAt && moment(`${user.createdAt}`).format('Do MMM, YYYY')}
-                        </li>
+                        {user?.profile.occupation &&
+                            <li>
+                                <MdWork aria-hidden={true} className='profile-dls__icon' />
+                                {user?.profile.occupation}
+                            </li>
+                        }
+
+                        {user?.profile.location &&
+                            <li>
+                                <ImLocation2 aria-hidden={true} className='profile-dls__icon' />
+                                {user?.profile.location}
+                            </li>
+                        }
+                        
+                        {user?.createdAt &&
+                            <li>
+                                <FaCalendarAlt aria-hidden={true} className='profile-dls__icon' />
+                                {user?.createdAt && moment(`${user.createdAt}`).format('Do MMM, YYYY')}
+                            </li>
+                        }
                     </ul>
                 </figure>
                 <ProfileTabBar />

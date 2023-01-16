@@ -40,7 +40,7 @@ const initialState: AuthState = {
         connections: [],
         createdAt: '',
     },
-    unknownAuthErr: ''
+    unknownAuthErr: '',
 };
 
 export const authSlice = createSlice({

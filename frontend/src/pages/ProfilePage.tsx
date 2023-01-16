@@ -26,10 +26,6 @@ const ProfilePage: FC = () => {
         }
     }, [isFetching, user]);
 
-    useEffect(() => {
-        console.log(user);
-    }, [user])
-
     return (
         <div className='profile-page'>
             <ProfileBackground
