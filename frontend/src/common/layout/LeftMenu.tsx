@@ -38,7 +38,7 @@ const LeftMenu: FC = () => {
     const user = useAppSelector((state) => state.auth.user) as User;
     const page = useAppSelector((state) => state.generic.page);
 
-    const loading = useAppSelector((state) => {
+    const isLoading = useAppSelector((state) => {
         return Object.values(state.api.queries).find((item) => item?.endpointName === 'getAccountById')?.status !== 'fulfilled'
     });
 
@@ -66,7 +66,7 @@ const LeftMenu: FC = () => {
     return (
         <section className='lt-menu'>
             <div className='lt-menu__wrapper'>
-                {loading && localStorage.getItem('auth') ? (
+                {isLoading && localStorage.getItem('auth') ? (
                     <>
                         <Skeleton
                             height={100}

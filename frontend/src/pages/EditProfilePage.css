@@ -10,13 +10,11 @@
     max-width: var(--max-width);
 }
 
-/* =========================================================================================== */
-/* ===================================== EditProfileForm ===================================== */
-/* =========================================================================================== */
-
 .edt-form__header {
     background-color: rgb(240, 240, 240);
     border-bottom: 1px solid var(--gray-light);
+    height: 165px;
+    position: relative;
 }
 
 .edt-form__header--wrapper {
@@ -38,8 +36,9 @@
 
 .edt-form__tablist {
     display: flex;
-    position: relative;
+    position: absolute;
     width: 100%;
+    bottom: 0;
 }
 
 .edt-form__tab {

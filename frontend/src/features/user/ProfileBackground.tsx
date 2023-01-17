@@ -6,10 +6,9 @@ import default_background from '@media/images/default_background.webp';
 
 type Props = {
     user: User;
-    isLoading: boolean;
 }
 
-const ProfileBackground: FC<Props> = ({ user, isLoading }: Props) => {
+const ProfileBackground: FC<Props> = ({ user }: Props) => {
     return (
         <section className='profile-bg'>
             <div role='img' aria-label='background image' title='background image'
@@ -18,7 +17,6 @@ const ProfileBackground: FC<Props> = ({ user, isLoading }: Props) => {
             />
             <ProfileDetails
                 user={user}
-                isLoading={isLoading}
             />
         </section>
     );

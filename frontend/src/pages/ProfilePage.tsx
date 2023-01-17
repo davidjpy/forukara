@@ -101,7 +101,6 @@ const ProfilePage: FC = () => {
                 <>
                     <ProfileBackground
                         user={user as User}
-                        isLoading={isLoading}
                     />
                     {
                         searchParams.get('search') === 'discussions' ?

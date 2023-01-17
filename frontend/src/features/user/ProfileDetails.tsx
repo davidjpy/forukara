@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState, useEffect } from 'react';
 import { FaCalendarAlt, FaLinkedinIn, FaFacebookF, FaYoutube } from 'react-icons/fa';
 import { ImLocation2 } from 'react-icons/im'
 import { MdEdit, MdWork } from 'react-icons/md';
@@ -13,24 +13,30 @@ import { useNavigate } from 'react-router-dom';
 
 type Props = {
     user: User;
-    isLoading: boolean;
 };
 
-const ProfileDetails: FC<Props> = ({ user, isLoading }: Props) => {
+const ProfileDetails: FC<Props> = ({ user }: Props) => {
 
+    const [isInitLoaded, setIsInitLoaded] = useState<boolean>(true);
     const account = useAppSelector((state) => state.auth.user);
     const navigate = useNavigate();
 
+    useEffect(() => {
+        setTimeout(() => {
+            setIsInitLoaded(false);
+        }, 0);
+    }, []);
+
     return (
-        <section className={isLoading ? 'profile-dls' : 'profile-dls profile-dls--loaded'}>
-            <div className={isLoading ? 'profile-dls__wrapper' : 'profile-dls__wrapper profile-dls__wrapper--loaded'}>
+        <section className={isInitLoaded ? 'profile-dls' : 'profile-dls profile-dls--loaded'}>
+            <div className={isInitLoaded ? 'profile-dls__wrapper' : 'profile-dls__wrapper profile-dls__wrapper--loaded'}>
                 {
                     account.id === user?.id &&
                     <button onClick={() => navigate('/settings/edit')} title='Edit your profile' aria-label='Edit Your Profile' className='profile-dls__btn profile-dls__btn--edit'>
                         <MdEdit aria-hidden={true} size={20} />
                     </button>
                 }
-                <figure className={isLoading ? 'profile-dls__figure' : 'profile-dls__figure profile-dls__figure--loaded'}>
+                <figure className={isInitLoaded ? 'profile-dls__figure' : 'profile-dls__figure profile-dls__figure--loaded'}>
                     <div className='profile-dls__btn-groups'>
                         <a aria-label='twitter profile' title='Open twitter profile in new tab' target='_blank' rel="noreferrer"
                             href={user?.profile.socialMedia!.twitter ? user?.profile.socialMedia.twitter : undefined} tabIndex={user?.profile.socialMedia!.twitter ? 0 : -1}
