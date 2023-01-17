@@ -66,11 +66,12 @@ const LeftMenu: FC = () => {
     return (
         <section className='lt-menu'>
             <div className='lt-menu__wrapper'>
-                {loading ? (
+                {loading && localStorage.getItem('auth') ? (
                     <>
                         <Skeleton
                             height={100}
-                            baseColor='#CCCCCC'
+                            baseColor='#D3DCE2'
+                            borderRadius={0}
                         />
                         <div className='lt-menu__fig-sk'>
                             <Skeleton
@@ -81,7 +82,7 @@ const LeftMenu: FC = () => {
                             />
                             <Skeleton
                                 height={25}
-                                baseColor='#CCCCCC'
+                                baseColor='#E3E3E3'
                                 style={{ marginTop: '0.4rem' }}
                             />
                         </div>
@@ -95,7 +96,7 @@ const LeftMenu: FC = () => {
                             <div>
                                 <img alt='profile avatar' src={!user?.profile.avatar ? default_avatar : user?.profile.avatar} />
                             </div>
-                            {user.id ? (
+                            {user.profile.username ? (
                                 <figcaption>
                                     {user?.profile.username}
                                 </figcaption>

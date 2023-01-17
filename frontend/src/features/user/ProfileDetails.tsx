@@ -33,7 +33,7 @@ const ProfileDetails: FC<Props> = ({ user, isLoading }: Props) => {
                 <figure className={isLoading ? 'profile-dls__figure' : 'profile-dls__figure profile-dls__figure--loaded'}>
                     <div className='profile-dls__btn-groups'>
                         <a aria-label='twitter profile' title='Open twitter profile in new tab' target='_blank' rel="noreferrer"
-                            href={user?.profile.socialMedia!.twitter ? user?.profile.socialMedia!.twitter : undefined} tabIndex={user?.profile.socialMedia!.twitter ? 0 : -1}
+                            href={user?.profile.socialMedia!.twitter ? user?.profile.socialMedia.twitter : undefined} tabIndex={user?.profile.socialMedia!.twitter ? 0 : -1}
                             className={user?.profile.socialMedia!.twitter
                                 ? 'profile-dls__btn profile-dls__btn--tw profile-dls__btn--tw-active'
                                 : 'profile-dls__btn profile-dls__btn--tw profile-dls__btn-disabled'

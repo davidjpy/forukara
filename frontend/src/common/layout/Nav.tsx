@@ -18,7 +18,7 @@ const Nav: FC = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const [logout,] = useLogoutMutation();
-    const [user, loading, authing] = useGetUser();
+    const [user, isLoading, isAuthing] = useGetUser();
 
     const handleSignUpFormMounted = (): void => {
         dispatch(toggleSignUpForm(true));
@@ -29,15 +29,13 @@ const Nav: FC = () => {
     }
 
     const handleLogout = async (): Promise<any> => {
-        await logout();
         handleNavigate('/');
+        await logout();
     }
 
     const handleNavigate = (page: string): void => {
         navigate(page);
     }
-
-    console.log(loading, authing)
 
     return (
         <>
@@ -47,25 +45,25 @@ const Nav: FC = () => {
                         <FaBlog className='nav__logo' />
                         <p className='nav__header'>Forukara</p>
                     </header>
-                    {(loading || authing) &&
+                    {(isLoading || isAuthing) &&
                         <div className='nav__wrapper' style={{ gap: 0 }}>
                             <Skeleton
                                 width={80}
                                 height={30}
-                                baseColor='#CCCCCC'
+                                baseColor='#E3E3E3'
                                 style={{ marginRight: '1.4rem' }}
                             />
                             <Skeleton
                                 circle
                                 height={40}
                                 width={40}
-                                baseColor='#CCCCCC'
+                                baseColor='#E3E3E3'
                             />
                         </div>
                     }
 
                     <div className='nav__wrapper'>
-                        {(user.profile.username && !loading) && (
+                        {(user.profile.username && !isLoading) && (
                             <>
                                 <p role='button' onClick={handleLogout} className='nav__txt nav__txt--btn nav__txt--link'>Logout</p>
                                 <figure onClick={() => handleNavigate(`profile/${user.profile.username}`)} aria-label='Profile'>
@@ -74,7 +72,7 @@ const Nav: FC = () => {
                             </>
                         )}
 
-                        {((!localStorage.getItem('auth')) && !authing) && (
+                        {((!localStorage.getItem('auth')) && !isAuthing) && (
                             <>
                                 <p role='button' onClick={handleLoginFormMounted} className='nav__txt nav__txt--btn nav__txt--link'>Login</p>
                                 <button onClick={handleSignUpFormMounted} className='nav__btn nav__btn--green-alien-light'>

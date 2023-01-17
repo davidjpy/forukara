@@ -17,7 +17,7 @@ const SplashNav: FC = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const [logout,] = useLogoutMutation();
-    const [user, loading, authing] = useGetUser();
+    const [user, isLoading, isAuthing] = useGetUser();
 
     const handleSignUpFormMounted = (): void => {
         dispatch(toggleSignUpForm(true));
@@ -43,12 +43,12 @@ const SplashNav: FC = () => {
                         <FaBlog className='sp-nav__logo' />
                         <h1>Forukara</h1>
                     </header>
-                    {(loading || authing) &&
+                    {(isLoading || isAuthing) &&
                         <div className='sp-nav__wrapper'>
                             <Skeleton
                                 width={100}
                                 height={35}
-                                baseColor='#CCCCCC'
+                                baseColor='#E3E3E3'
 
                                 style={{ marginRight: '1.4rem' }}
                             />
@@ -56,12 +56,12 @@ const SplashNav: FC = () => {
                                 circle
                                 height={50}
                                 width={50}
-                                baseColor='#CCCCCC'
+                                baseColor='#E3E3E3'
                             />
                         </div>
                     }
                     <div className='sp-nav__wrapper'>
-                        {(user.profile.username && !loading) && (
+                        {(user.profile.username && !isLoading) && (
                             <>
                                 <button onClick={handleLogout} className='sp-nav__btn-txt'>Logout</button>
                                 <figure onClick={() => handleNavigate(`profile/${user.profile.username}`)} aria-label='Profile'>
@@ -70,7 +70,7 @@ const SplashNav: FC = () => {
                             </>
                         )}
 
-                        {((!localStorage.getItem('auth')) && !authing) && (
+                        {((!localStorage.getItem('auth')) && !isAuthing) && (
                             <>
                                 <button onClick={handleLoginFormMounted} className='sp-nav__btn-txt'>Login</button>
                                 <button onClick={handleSignUpFormMounted} className='sp-nav__btn sp-nav__btn--slide'>&nbsp;</button>

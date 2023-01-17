@@ -7,9 +7,16 @@ type EditProfile = {
     data: FormData | ProfileBio;
 }
 
+interface CreateUser {
+    username: ProfileInfo['username'];
+    email: ProfileInfo['email'];
+    password: string;
+    confirmPassword: string;
+}
+
 export const userApiSlice = apiSlice.injectEndpoints({
     endpoints: builder => ({
-        createUser: builder.mutation<User, Partial<ProfileInfo>>({
+        createUser: builder.mutation<User, CreateUser>({
             query: ({ ...data }) => ({
                 url: '/users',
                 method: 'POST',

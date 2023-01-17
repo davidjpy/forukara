@@ -26,15 +26,24 @@ const initialState: AuthState = {
             preferredName: '',
             gender: '',
             location: '',
+            title: '',
             occupation: '',
             biography: {
+                summary: '',
                 about: '',
+                languages: [],
+                hashtag: [],
+                topics: [],
+                skills: []
             },
             socialMedia: {
                 twitter: '',
                 linkedin: '',
-                facebook: ''
-            }
+                facebook: '',
+                youtube: '',
+                instagram: ''
+            },
+            status: ''
         },
         discussions: [],
         connections: [],

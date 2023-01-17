@@ -11,7 +11,7 @@ export const useGetUser = (): [User, boolean, boolean] => {
     const [searchParams, setSearchParams] = useSearchParams();
     const [login, loginResult] = useLoginMutation();
     const user = useAppSelector(state => state.auth.user);
-    const [authing, setAuthing] = useState<boolean>(false);
+    const [isAuthing, setIsAuthing] = useState<boolean>(false);
 
     // Login user if the url contain the login token returned by OAuth
     useEffect(() => {
@@ -75,23 +75,23 @@ export const useGetUser = (): [User, boolean, boolean] => {
         const code = searchParams.get('code');
 
         if (code) {
-            setAuthing(true);
+            setIsAuthing(true);
         }
     }, []);
 
     // Set autheticating to false if successed
     useEffect(() => {
         if (loginResult.isSuccess) {
-            setAuthing(false);
+            setIsAuthing(false);
         }
     }, [loginResult]);
 
     // Create session id to prevent RTK default cache behavior from getting user info after logout
     useRefreshQuery({ sessionId: localStorage.getItem('session') as string }, { skip: !localStorage.getItem('session') });
-    const { isLoading, isFetching, isSuccess } = useGetAccountByIdQuery(user.id as string, { skip: !user.id });
+    const { isLoading: isUserLoading, isFetching: isUserFetching, isSuccess: isUserSuccess } = useGetAccountByIdQuery(user.id as string, { skip: !user.id });
 
     // Set loading to true if isLoading, isFetching and user is authenticated, and set loading to false if user info is fetched
-    const loading = Boolean((isLoading || isFetching || localStorage.getItem('auth')) && !isSuccess);
+    const isLoading = Boolean((isUserLoading || isUserFetching || localStorage.getItem('auth')) && !isUserSuccess);
 
-    return [user, loading, authing];
+    return [user, isLoading, isAuthing];
 }
