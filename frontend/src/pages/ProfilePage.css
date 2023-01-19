@@ -4,7 +4,7 @@
 
 .profile-page {
     min-height: 100vh;
-    padding-top: calc(var(--nav-height));
+    padding-top: var(--nav-height);
     max-width: var(--max-width);
     width: 100%;
     background-color: rgb(250, 250, 250);

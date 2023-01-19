@@ -23,7 +23,7 @@ const EditProfilePage: FC = () => {
 
     return (
         <div className='edt-profile'>
-            <header className='edt-form__header'>
+            <section className='edt-form__header'>
                 {isLoading ? (
                     <div style={{ padding: '2rem' }}>
                         <Skeleton
@@ -40,10 +40,10 @@ const EditProfilePage: FC = () => {
                     </div>
                 ) : (
                     <>
-                        <div className='edt-form__header--wrapper'>
+                        <header className='edt-form__header--wrapper'>
                             <h1>Edit Profile</h1>
                             <span>@{account.profile.username}</span>
-                        </div>
+                        </header>
                         <div className='edt-form__tablist'>
                             <p onClick={() => handleSwitchTab('account')}
                                 className={!searchParams.get('section') || searchParams.get('section') === 'account'
@@ -67,35 +67,25 @@ const EditProfilePage: FC = () => {
                         </div>
                     </>
                 )}
-            </header>
+            </section>
 
             {isLoading ? (
-                <>
-                    <div className='edt-profile-form__wrapper'>
-                        <Skeleton
-                            height={30}
-                            width='35%'
-                            baseColor='#E3E3E3'
-                        />
-                    </div>
-                </>
-            ) : (
                 <div style={{ padding: '2rem' }}>
                     <div className='edt-profile-form__wrapper' style={{ display: 'block', textAlign: 'center' }}>
                         <Skeleton
                             height={150}
                             width={150}
                             circle
-                            baseColor='#E3E3E3'
+                            baseColor='#D3DCE2'
                             style={{
-                                marginBottom: '1rem',
+                                marginBottom: '2rem',
                             }}
                         />
                         <div style={{ textAlign: 'start' }}>
                             <Skeleton
                                 height={20}
                                 baseColor='#E3E3E3'
-                                count={4}   
+                                count={4}
                                 style={{
                                     margin: '0.4rem 0'
                                 }}
@@ -111,14 +101,71 @@ const EditProfilePage: FC = () => {
                             />
                         </div>
                     </div>
+                    <div className='edt-profile-form__wrapper' style={{ display: 'block', textAlign: 'center' }}>
+                        <Skeleton
+                            height={300}
+                            baseColor='#D3DCE2'
+                            style={{
+                                marginBottom: '2rem',
+                            }}
+                        />
+                        <div style={{ textAlign: 'start' }}>
+                            <Skeleton
+                                height={20}
+                                baseColor='#E3E3E3'
+                                count={4}
+                                style={{
+                                    margin: '0.4rem 0'
+                                }}
+                            />
+                            <Skeleton
+                                height={20}
+                                baseColor='#E3E3E3'
+                                width='65%'
+                                style={{
+                                    margin: '0.4rem 0'
+
+                                }}
+                            />
+                        </div>
+                    </div>
+                    {Array.from(Array(2).keys()).map((item) =>
+                        <div key={item} className='edt-profile-form__wrapper' style={{ display: 'block' }}>
+                            <Skeleton
+                                height={35}
+                                width='45%'
+                                baseColor='#E3E3E3'
+                                style={{
+                                    marginBottom: '1rem',
+                                }}
+                            />
+                            <Skeleton
+                                height={20}
+                                baseColor='#E3E3E3'
+                                count={4}
+                                style={{
+                                    margin: '0.4rem 0'
+                                }}
+                            />
+                            <Skeleton
+                                height={20}
+                                baseColor='#E3E3E3'
+                                width='65%'
+                                style={{
+                                    margin: '0.4rem 0'
+                                }}
+                            />
+                        </div>
+                    )}
                 </div>
-                // searchParams.get('section') === 'biography'
-                //     ? <EditBio
-                //         account={account}
-                //     />
-                //     : <EditAccount
-                //         account={account}
-                //     />
+            ) : (
+                searchParams.get('section') === 'biography'
+                    ? <EditBio
+                        account={account}
+                    />
+                    : <EditAccount
+                        account={account}
+                    />
             )}
         </div>
     )

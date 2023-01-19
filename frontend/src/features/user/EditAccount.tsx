@@ -131,7 +131,6 @@ const EditAccount: FC<Props> = ({ account }: Props) => {
                 setBg({ name: profile.background, url: profile.background });
             }
         }
-        console.log(account)
     }, [account]);
 
     const handleNavigate = (url: string): void => {

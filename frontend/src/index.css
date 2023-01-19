@@ -33,14 +33,14 @@ a:focus {
     --gray-opacity-light: rgba(200, 200, 200, 0.3);
     --red-error: #cc0000;
     --blue-primary: #2684FF;
-    --nav-height: 60px;
-    --min-height: 500px;
-    --min-width: 300px;
-    --max-width: 750px;
-    --green-alien-focus: 2px solid #23ac83;
     --blue-ln: rgb(60, 90, 154);;
     --blue-tw: rgb(5, 132, 206);
     --blue-goog: rgb(53, 115, 216);
     --blue-fb: #1778F2;
     --red-yt: #FF0000;
+    --green-alien-focus: 2px solid #23ac83;
+    --nav-height: 60px;
+    --min-height: 500px;
+    --min-width: 300px;
+    --max-width: 750px;
 }

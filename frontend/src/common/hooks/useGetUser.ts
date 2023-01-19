@@ -6,7 +6,7 @@ import { useLoginMutation, useRefreshQuery } from '@features/auth/authApiSlice';
 import { useGetAccountByIdQuery } from '@features/user/userApiSlice';
 import { User, AuthProvider } from '@common/utilities/types';
 
-export const useGetUser = (): [User, boolean, boolean] => {
+export const useGetUser = (): [User, boolean] => {
 
     const [searchParams, setSearchParams] = useSearchParams();
     const [login, loginResult] = useLoginMutation();
@@ -88,10 +88,7 @@ export const useGetUser = (): [User, boolean, boolean] => {
 
     // Create session id to prevent RTK default cache behavior from getting user info after logout
     useRefreshQuery({ sessionId: localStorage.getItem('session') as string }, { skip: !localStorage.getItem('session') });
-    const { isLoading: isUserLoading, isFetching: isUserFetching, isSuccess: isUserSuccess } = useGetAccountByIdQuery(user.id as string, { skip: !user.id });
+    useGetAccountByIdQuery(user.id as string, { skip: !user.id });
 
-    // Set loading to true if isLoading, isFetching and user is authenticated, and set loading to false if user info is fetched
-    const isLoading = Boolean((isUserLoading || isUserFetching || localStorage.getItem('auth')) && !isUserSuccess);
-
-    return [user, isLoading, isAuthing];
+    return [user, isAuthing];
 }

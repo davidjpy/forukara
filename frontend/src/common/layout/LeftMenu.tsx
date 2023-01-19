@@ -21,7 +21,7 @@ const contentList = [
 const accountList = [
     { tab: 'user', icon: <FiUser style={{ marginBottom: '2px' }} />, navigate: 'profile' },
     { tab: 'notifications', icon: <IoMdNotificationsOutline style={{ marginBottom: '2px' }} />, navigate: 'notifications' },
-    { tab: 'settings', icon: <AiOutlineSetting style={{ marginBottom: '2px' }} />, navigate: 'settings' }
+    { tab: 'settings', icon: <AiOutlineSetting style={{ marginBottom: '2px' }} />, navigate: 'settings/edit' }
 ];
 
 const supportList = [
@@ -122,7 +122,10 @@ const LeftMenu: FC = () => {
                                 return (
                                     <li key={item.tab} role='tab' aria-controls={item.tab}
                                         onClick={() => handleNavigatePage(item.navigate, 'content')}
-                                        className={page === item.navigate ? 'lt-menu__li lt-menu__li lt-menu__li--active' : 'lt-menu__li'}
+                                        className={page === item.tab || item.tab.startsWith(page!)
+                                            ? 'lt-menu__li lt-menu__li--active'
+                                            : 'lt-menu__li'
+                                        }
                                     >
                                         {item.icon}{item.tab}
                                     </li>
@@ -140,7 +143,10 @@ const LeftMenu: FC = () => {
                                 return (
                                     <li key={item.tab} role='tab' aria-controls={item.tab}
                                         onClick={() => handleNavigatePage(item.navigate, 'account')}
-                                        className={page === item.navigate ? 'lt-menu__li lt-menu__li lt-menu__li--active' : 'lt-menu__li'}
+                                        className={page === item.navigate || item.tab.startsWith(page!)
+                                            ? 'lt-menu__li lt-menu__li--active'
+                                            : 'lt-menu__li'
+                                        }
                                     >
                                         {item.icon}{item.tab}
                                     </li>
@@ -158,7 +164,10 @@ const LeftMenu: FC = () => {
                                 return (
                                     <li key={item.tab} role='tab' aria-controls={item.tab}
                                         onClick={() => handleNavigatePage(item.navigate, 'support')}
-                                        className={page === item.navigate ? 'lt-menu__li lt-menu__li lt-menu__li--active' : 'lt-menu__li'}
+                                        className={page === item.navigate || item.tab.startsWith(page!)
+                                            ? 'lt-menu__li lt-menu__li--active'
+                                            : 'lt-menu__li'
+                                        }
                                     >
                                         {item.icon}{item.tab}
                                     </li>
