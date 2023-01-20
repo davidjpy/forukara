@@ -95,24 +95,17 @@
     background-color: rgba(128, 128, 128, 0.2);
 }
 
-.profile-bar__tab h1 {
+.profile-bar__tab p {
     color: rgb(230, 230, 230);
-    font-weight: 100;
     font-size: 1rem;
     padding: 0.4rem 0;
     text-align: center;
     transition: color 0.4s linear;
 }
 
-.profile-bar__tab--active h1 {
+.profile-bar__tab--active p {
     color: var(--green-alien-light);
     transition: color 0.4s linear;
-}
-
-.profile-bar__tab p {
-    color: rgb(160, 160, 160);
-    font-weight: 600;
-    font-size: 0.8rem;
 }
 
 .profile-bar__underline {
@@ -223,28 +216,50 @@
     color: var(--green-alien-light);
 }
 
-.profile-dls__at-wrapper {
-    background-color: var(--green-alien-light);
-    margin: 0 auto;
-    border-radius: 50%;
-    width: 140px;
-    height: 140px;
-}
-
 .profile-dls__figure img {
     margin: 2.5%;
     border-radius: 50%;
-    width: 95%;
-    height: 95%;
+    width: 135px;
+    height: 135px;
     object-fit: cover;
+    outline: 3px solid var(--green-alien-light);
 }
 
 .profile-dls__figure figcaption {
     color: var(--green-alien-light);
-    font-size: 1.4rem;
-    margin: 1rem 0;
+    font-size: 1.2rem;
+    margin: 0.4rem 0;
     letter-spacing: 2px;
     font-weight: 900;
+}
+
+.profile-dls__soc {
+    display: flex;
+    justify-content: center;
+    width: fit-content;
+    margin: 0 auto;
+    background-color: rgba(128, 128, 128, 0.2);
+    border-radius: 12px;
+}
+
+.profile-dls__soc-blk {
+    margin: 1rem;
+}
+
+.profile-dls__soc-blk h1 {
+    color: var(--green-alien-light);
+}
+
+.profile-dls__soc-blk p {
+    color: rgb(200, 200, 200);
+    font-size: 0.9rem;
+}
+
+.profile-dls__divider {
+    width: 1px;
+    height: 40px;
+    margin: auto;
+    background-color: rgb(100, 100, 100);
 }
 
 .profile-dls__ul {
@@ -272,7 +287,7 @@
     height: 120px;
     width: 235px;
     left: 50%;
-    top: -7.5%;
+    top: -4%;
     transform: translate(-50%, 0);
     z-index: 1;
 }
@@ -358,6 +373,7 @@
     outline: 1px solid var(--gray-light);
     background-color: rgb(245, 245, 245);
     border-left: 20px solid var(--green-dark);
+    border-radius: 6px;
 }
 
 .profile-bio__wrapper header {

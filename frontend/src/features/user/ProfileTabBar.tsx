@@ -17,21 +17,21 @@ const ProfileTabBar: FC = () => {
                         'profile-bar__tab profile-bar__tab--active' :
                         'profile-bar__tab'
                     }>
-                    <h1>Biography</h1>
+                    <p>Biography</p>
                 </li>
                 <li role='tab' aria-controls='discussions' onClick={() => handleSwitchTab('discussions')}
                     className={searchParams.get('search') === 'discussions' ?
                         'profile-bar__tab profile-bar__tab--active' :
                         'profile-bar__tab'
                     }>
-                    <h1>Discussions</h1>
+                    <p>Discussions</p>
                 </li>
                 <li role='tab' aria-controls='connections' onClick={() => handleSwitchTab('connections')}
                     className={searchParams.get('search') === 'connections' ?
                         'profile-bar__tab profile-bar__tab--active' :
                         'profile-bar__tab'
                     }>
-                    <h1>Connections</h1>
+                    <p>Connections</p>
                 </li>
                 <div
                     className={

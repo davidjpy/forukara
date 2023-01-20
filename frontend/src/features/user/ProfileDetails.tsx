@@ -1,9 +1,10 @@
 import { FC, useState, useEffect } from 'react';
-import { FaCalendarAlt, FaLinkedinIn, FaFacebookF, FaYoutube } from 'react-icons/fa';
+import { FaCalendarAlt, FaLinkedinIn, FaFacebookF, FaYoutube, FaUserFriends } from 'react-icons/fa';
 import { ImLocation2 } from 'react-icons/im'
 import { MdEdit, MdWork } from 'react-icons/md';
+import { RiDiscussFill } from 'react-icons/ri';
 import { AiOutlineTwitter, AiOutlineInstagram } from 'react-icons/ai';
-import moment from 'moment';
+// import moment from 'moment';
 
 import { User } from '@common/utilities/types';
 import default_avatar from '@media/images/default_avatar.webp';
@@ -84,9 +85,10 @@ const ProfileDetails: FC<Props> = ({ user }: Props) => {
                             <AiOutlineInstagram aria-hidden={true} size={28} />
                         </a>
                     </div>
-                    <div className='profile-dls__at-wrapper'>
-                        <img alt={!user?.profile.avatar ? default_avatar : user?.profile.avatar} src={!user?.profile.avatar ? default_avatar : user?.profile.avatar} />
-                    </div>
+                    <img
+                        alt={!user?.profile.avatar ? default_avatar : user?.profile.avatar}
+                        src={!user?.profile.avatar ? default_avatar : user?.profile.avatar}
+                    />
                     <figcaption>
                         {
                             user?.profile.preferredName
@@ -108,14 +110,29 @@ const ProfileDetails: FC<Props> = ({ user }: Props) => {
                                 {user?.profile.location}
                             </li>
                         }
-                        
-                        {user?.createdAt &&
+
+                        {/* {user?.createdAt &&
                             <li>
                                 <FaCalendarAlt aria-hidden={true} className='profile-dls__icon' />
                                 {user?.createdAt && moment(`${user.createdAt}`).format('Do MMM, YYYY')}
                             </li>
-                        }
+                        } */}
                     </ul>
+                    <div className='profile-dls__soc'>
+                        <div className='profile-dls__soc-blk'>
+                            <h1>{user?.discussions.length}</h1>
+                            <p>
+                                Discussions
+                            </p>
+                        </div>
+                        <div className='profile-dls__divider' />
+                        <div className='profile-dls__soc-blk'>
+                            <h1>{user?.connections.length}</h1>
+                            <p>
+                                Connections
+                            </p>
+                        </div>
+                    </div>
                 </figure>
                 <ProfileTabBar />
             </div>
