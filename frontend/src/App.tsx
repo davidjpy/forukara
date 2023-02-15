@@ -17,6 +17,7 @@ const SplashPage = lazy(() => import('@pages/SplashPage'));
 const HomePage = lazy(() => import('@pages/HomePage'));
 const ProfilePage = lazy(() => import('@pages/ProfilePage'));
 const EditProfilePage = lazy(() => import('@pages/EditProfilePage'));
+const CreateDiscussionPage = lazy(() => import('@pages/CreateDiscussionPage'))
 const ProtectedRoute = lazy(() => import('@pages/ProtectedRoute'));
 const NotFoundPage = lazy(() => import('@pages/NotFoundPage'));
 
@@ -33,6 +34,7 @@ function App() {
                     <Route path='settings' element={<ProtectedRoute redirect='/home' />}>
                         <Route path='edit' element={<EditProfilePage />} />
                     </Route>
+                    <Route path='discussion' element={<CreateDiscussionPage />} />
                 </Route>
                 <Route path='*' element={<NotFoundPage />} />
             </Routes>

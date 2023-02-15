@@ -1,17 +1,19 @@
 import { FC, useState, MutableRefObject, useRef } from 'react';
 import { HiPencilAlt } from 'react-icons/hi';
 import { AiFillCaretDown } from 'react-icons/ai';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import '@pages/HomePage.css';
 import { useAppSelector } from '@app/hooks';
 import default_avatar from '@media/images/default_avatar.webp';
 import { useClickOutside } from '@common/hooks/useClickOutside';
+import DiscussionList from '@features/discussion/DiscussionList';
 
 const HomePage: FC = () => {
 
     const [isMenuOpened, setIsMenuOpened] = useState<boolean>(false);
     const [searchParams, setSearchParams] = useSearchParams({ search: 'public' });
+    const navigate = useNavigate();
     const user = useAppSelector((state) => state.auth.user);
 
     const dropDownMenuBtnRef = useRef<HTMLSpanElement>(null);
@@ -28,7 +30,7 @@ const HomePage: FC = () => {
                 <figure>
                     <img src={user.profile.avatar ?? default_avatar} alt={user.profile.avatar ?? 'avatar'} />
                 </figure>
-                <div>
+                <div onClick={() => navigate('/discussion')}>
                     <HiPencilAlt aria-hidden={true} size={18} style={{ marginRight: '6px' }} />
                     <p>
                         What's on your mind ?
@@ -66,6 +68,7 @@ const HomePage: FC = () => {
                     </ul>
                 </div>
             </div>
+            <DiscussionList />
         </div>
     );
 }

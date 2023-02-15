@@ -118,18 +118,18 @@
     width: 100%;
 }
 
+.edt-profile-form__wrapper header h1 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: rgb(75, 75, 75);
+}
+
 .edt-profile-form__wrapper a {
     display: block;
     text-align: center;
     font-size: 0.9rem;
     width: fit-content;
     margin: 0 auto 1rem auto;
-}
-
-.edt-profile-form__wrapper header h1 {
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: rgb(75, 75, 75);
 }
 
 .edt-profile-form__bg {
