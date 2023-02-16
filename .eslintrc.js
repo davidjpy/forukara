@@ -4,30 +4,26 @@ module.exports = {
     extends: [
         'next/core-web-vitals',
         'plugin:@typescript-eslint/recommended',
+        'plugin:css-import-order/recommended',
         'prettier',
     ],
-    plugins: ['@typescript-eslint'],
-    parser: '@typescript-eslint/parser',
+    plugins: ['@typescript-eslint', 'css-import-order'],
     rules: {
         '@typescript-eslint/no-unused-vars': 'error',
         '@typescript-eslint/no-explicit-any': 'error',
-        '@typescript-eslint/consistent-type-imports': 'warn',
-        'react/self-closing-comp': 'warn',
+        '@typescript-eslint/consistent-type-imports': 'error',
+        'react/self-closing-comp': 'error',
         'import/order': [
-            'warn',
+            'error',
             {
-                groups: [
-                    'builtin',
-                    'external',
-                    'internal',
-                    'parent',
-                    'sibling',
-                    'index',
-                    'object',
-                    'type',
-                ],
                 'newlines-between': 'always',
-                alphabetize: { order: 'asc', caseInsensitive: true },
+                groups: [['external', 'builtin'], 'internal', 'type'],
+                pathGroups: [
+                    {
+                        pattern: '@/app/**',
+                        group: 'internal',
+                    },
+                ],
             },
         ],
         'no-restricted-imports': [

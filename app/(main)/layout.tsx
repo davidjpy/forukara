@@ -1,6 +1,6 @@
-import '@/app/globals.css';
-
 import { Montserrat } from '@next/font/google';
+
+import '@/app/globals.css';
 
 const montserrat = Montserrat({
     weight: ['400', '700'],
@@ -14,7 +14,7 @@ export default function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        <html lang="en">
+        <html lang='en'>
             <head />
             <body className={`${montserrat.className}`}>
                 <nav>

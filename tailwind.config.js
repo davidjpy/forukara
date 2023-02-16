@@ -11,8 +11,15 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
-                montserrat: ['var(--font-montserrat)'],
+                'montserrat': ['var(--font-montserrat)'],
             },
+            backgroundImage: {
+                'splash': "url('../app/(media)/splash_background.webp')",
+            },
+            colors: {
+                'black-rgba-90': 'rgba(0, 0, 0, 0.9)',
+                'black-rgba-25': 'rgba(0, 0, 0, 0.25)'
+            }
         },
     },
     plugins: [],
