@@ -1,24 +1,39 @@
 module.exports = {
     root: true,
     ignorePatterns: ['node_modules/*'],
+    parser: '@typescript-eslint/parser',
     extends: [
         'next/core-web-vitals',
+        'eslint:recommended',
         'plugin:@typescript-eslint/recommended',
-        'plugin:css-import-order/recommended',
+        'plugin:react-hooks/recommended',
+        'plugin:import/recommended',
+        'plugin:import/typescript',
         'prettier',
     ],
-    plugins: ['@typescript-eslint', 'css-import-order'],
+    plugins: ['import'],
+    settings: {
+        'import/extensions': ['.js', '.jsx'],
+        'import/resolver': {
+            typescript: true,
+            node: true,
+        },
+    },
     rules: {
-        '@typescript-eslint/no-unused-vars': 'error',
-        '@typescript-eslint/no-explicit-any': 'error',
-        '@typescript-eslint/consistent-type-imports': 'error',
         'react/self-closing-comp': 'error',
         'import/order': [
             'error',
             {
                 'newlines-between': 'always',
+                warnOnUnassignedImports: true,
                 groups: [['external', 'builtin'], 'internal', 'type'],
                 pathGroups: [
+                    {
+                        pattern: '*.css',
+                        group: 'internal',
+                        patternOptions: { matchBase: true },
+                        position: 'after',
+                    },
                     {
                         pattern: '@/app/**',
                         group: 'internal',
