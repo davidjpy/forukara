@@ -16,12 +16,7 @@ export default function RootLayout({
     return (
         <html lang='en'>
             <head />
-            <body className={`${montserrat.className}`}>
-                <nav>
-                    <h1>This is a main nav</h1>
-                </nav>
-                {children}
-            </body>
+            <body className={`${montserrat.className}`}>{children}</body>
         </html>
     );
 }

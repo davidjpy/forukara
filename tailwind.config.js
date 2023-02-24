@@ -14,7 +14,7 @@ module.exports = {
                 'montserrat': ['var(--font-montserrat)'],
             },
             backgroundImage: {
-                'splash': "url('../app/(media)/splash_background.webp')",
+                'splash': "url('/images/splash_background.webp')",
             },
             colors: {
                 'black-rgba-90': 'rgba(0, 0, 0, 0.9)',
