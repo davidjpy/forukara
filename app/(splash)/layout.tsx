@@ -15,8 +15,12 @@ export default function SplashLayout({
                     <h1>Forukara</h1>
                 </header>
                 <div className='flex items-center text-white'>
-                    <button className='mr-12 hover:underline'>Login</button>
-                    <button className={`${styles['sibling-btn']} relative h-12 w-32 overflow-hidden border-2 rounded-md`} />
+                    <button className='mr-12 hover:underline'>
+                        Login
+                    </button>
+                    <button
+                        className={`${styles['sibling-btn']} relative h-12 w-32 overflow-hidden border-2 rounded-md`}
+                    />
                 </div>
             </nav>
             {children}

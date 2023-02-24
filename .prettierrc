@@ -8,5 +8,5 @@
     "bracketSameLine": false,
     "arrowParens": "always",
     "useTabs": false,
-    "printWidth": 80
+    "printWidth": 40
 }
