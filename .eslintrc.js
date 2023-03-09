@@ -26,7 +26,7 @@ module.exports = {
             {
                 'newlines-between': 'always',
                 warnOnUnassignedImports: true,
-                groups: [['external', 'builtin'], 'internal', 'type'],
+                groups: ['builtin', 'external', 'internal', 'type'],
                 pathGroups: [
                     {
                         pattern: '*.css',
@@ -36,6 +36,10 @@ module.exports = {
                     },
                     {
                         pattern: '@/app/**',
+                        group: 'internal',
+                    },
+                    {
+                        pattern: '@/utils/**',
                         group: 'internal',
                     },
                 ],
