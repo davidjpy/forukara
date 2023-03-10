@@ -1,47 +1,23 @@
 @tailwind components;
 
 @layer components {
-    .sibling-btn::after {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        content: 'Join Now';
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        text-align: center;
-        transition: all 400ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    .sliding-btn {
+        @apply relative h-12 w-32 overflow-hidden rounded-md border-2 before:content-['Sign\00a0Up'] after:content-['Join\00a0Now'] hover:bg-black-alpha-4;
     }
 
-    .sibling-btn::before {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        content: 'Sign Up';
-        height: 100%;
-        width: 100%;
-        position: absolute;
-        top: 0;
-        left: -100%;
-        opacity: 0;
-        transition: all 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    .sliding-btn::after {
+        @apply absolute top-0 left-0 flex h-full w-full items-center justify-center text-center transition-all duration-[400ms] ease-[cubic-bezier(0.68,-0.55,0.265,1.55)];
     }
 
-    .sibling-btn:hover {
-        background: rgba(0, 0, 0, 0.4);
-        border: 2px solid white;
+    .sliding-btn::before {
+        @apply absolute top-0 -left-full flex h-full w-full items-center justify-center opacity-0 transition-all duration-500 ease-[cubic-bezier(0.68,-0.55,0.265,1.55)];
     }
 
-    .sibling-btn:hover::before {
-        left: 0;
-        opacity: 1;
-        color: white;
+    .sliding-btn:hover::before {
+        @apply left-0 opacity-100;
     }
 
-    .sibling-btn:hover::after {
-        left: 100%;
-        opacity: 0;
+    .sliding-btn:hover::after {
+        @apply left-full opacity-0;
     }
 }
